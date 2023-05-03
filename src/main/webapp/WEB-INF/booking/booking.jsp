@@ -20,6 +20,6 @@
     </style>
 </head>
 <body>
-이수연
+
 </body>
 </html>
