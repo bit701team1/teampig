@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class EnterController {
 
-    @GetMapping("/")
+    @GetMapping("/enter")
     public String enter(){
         return "/enter";
     }
+
 
 }

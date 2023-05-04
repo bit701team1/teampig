@@ -2,7 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,35 +17,9 @@
         body, body * {
             font-family: 'Jua'
         }
-        .header{
-            border: 3px solid black;
-            height: 150px;
-            width: 100%;
-        }
-        .main{
-            border: 3px solid black;
-            width: 1000px;
-            height: 500px;
-            margin: 50px auto;
-        }
-        .menu{
-            border: 3px solid black;
-            top: 400px;
-            width: 100%;
-        }
     </style>
 </head>
 <body>
-    <div class="mainlayout">
-        <header class="header">
-            <tiles:insertAttribute name="header"/>
-        </header>
-        <section class="menu">
-            <tiles:insertAttribute name="menu"/>
-        </section>
-        <section class="main">
-            <tiles:insertAttribute name="main"/>
-        </section>
-</div>
+    <h2>menu 자리</h2>
 </body>
 </html>

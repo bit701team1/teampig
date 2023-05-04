@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<!--tiles-definitions 이 자동으로 생성된다. -->
+<tiles-definitions>
+    <definition name="mainlayout" template="/WEB-INF/mainlayout/mainlayout.jsp">
+        <put-attribute name="header" value="/WEB-INF/mainlayout/header.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/mainlayout/menu.jsp"/>
+        <put-attribute name="main" value="/WEB-INF/mainlayout/main.jsp"/>
+    </definition>
+
+    <definition name="/main" extends="mainlayout">
+        <put-attribute name="main" value="/WEB-INF/mainlayout/main.jsp"/>
+    </definition>
+
+    <!--wild card macro-->
+    <definition name="/main/*/*" extends="mainlayout"> <!--애는 mainLayout이 적용되게 하겠다-->
+        <put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"/>
+    </definition>
+
+</tiles-definitions>
