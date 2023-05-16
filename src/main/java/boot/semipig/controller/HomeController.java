@@ -1,5 +1,6 @@
 package boot.semipig.controller;
 
+import boot.semipig.dto.DetailDto;
 import boot.semipig.dto.couponDto;
 import boot.semipig.service.MyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -15,11 +17,12 @@ public class HomeController {
     @Autowired
     private MyService myservice;
     @GetMapping({"/","/home1"})
-    public String home1(Model model) {
-        List<couponDto> list2 = myservice.couponall();
+    public String home1(Model model,HttpSession session) {
+        int userId = (int) session.getAttribute("loginidx");
+        DetailDto dto = myservice.foodlist(userId);
         int totalCount = myservice.getTotalCount();
+        model.addAttribute("dto",dto);
         model.addAttribute("totalCount", totalCount);
-        model.addAttribute("list2", list2);
         return "/main";
     }
     @RequestMapping(value = "/insertcoupon", method = {RequestMethod.GET, RequestMethod.POST}) //  main은 getmapping이 없어서 따로 이렇게 해줘야함

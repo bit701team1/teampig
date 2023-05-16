@@ -2,10 +2,7 @@ package boot.semipig.Mapper;
 import java.util.List;
 import java.util.Map;
 
-import boot.semipig.dto.ServiceDto;
-import boot.semipig.dto.couponDto;
-import boot.semipig.dto.qna3Dto;
-import boot.semipig.dto.ReviewDto;
+import boot.semipig.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -14,6 +11,7 @@ public interface ServiceMapper {
     public void insertt(ServiceDto dto);
     public List<ServiceDto> selectt();
     public void deletee(int num);
+    public DetailDto foodlist(int loginidx);
     public List<ServiceDto> getAll(Map<String, Object> map);
     public void updatee(ServiceDto dto);
     public List<couponDto> couponall();
