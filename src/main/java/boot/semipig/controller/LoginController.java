@@ -15,11 +15,11 @@ public class LoginController{
     LoginService loginService;
 
 
-    @GetMapping("/login")//로그인 페이지, 나중에 합친 후에 메인페이지로 맵핑 변경할 것.
+   /* @GetMapping("/login")//로그인 페이지, 나중에 합친 후에 메인페이지로 맵핑 변경할 것.
     public String login(){
 
         return "main/login";
-    }
+    }*/
 
     @PostMapping("/loginaction")//회원정보 확인 뒤 db에 있는 회원정보일 경우 session에 회원정보를 뿌려줌.
     @ResponseBody public int loginactino(Model model, String id, String password, @RequestParam(required=false) String saveid, HttpSession session){
@@ -48,7 +48,7 @@ public class LoginController{
     public String logout(HttpSession session)
     {
         session.removeAttribute("loginok");
-        return "redirect:login";
+        return "redirect:business";
     }
 
     @GetMapping("/joinformtest")
@@ -80,7 +80,7 @@ public class LoginController{
         session.setAttribute("loginid", dto.getId());
         session.setAttribute("loginidx", user_idx);
 
-        return "redirect:login";
+        return "redirect:business";//나중에 어디서든 할수있게 수정해야 함.
 
     }
     @GetMapping("/auth/naver/callback")
@@ -105,7 +105,7 @@ public class LoginController{
         session.setAttribute("loginid", dto.getId());
         session.setAttribute("loginidx", user_idx);
 
-        return "redirect:login";
+        return "redirect:business";//나중에 수정해야 됨
 
     }
 }
