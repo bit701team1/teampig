@@ -12,10 +12,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
           rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <style>
          body, body * {
-             font-family: 'Jua'
+             font-family: 'Gowun Batang'
          }
         div.RESTRT_NM{
             margin : 0px auto;
@@ -108,8 +109,12 @@
             align-items: center;
             position: relative;
         }
+         .detail_img img{
+             width: 100%;
+             height: 100%;
+         }
         .detail_thumb{
-            border: black solid 1px;
+            /*border: black solid 1px;*/
             width: 95%;
             margin: 10px auto;
             display: flex;
@@ -118,8 +123,8 @@
         }
 
         .thumbnail{
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             border: #cccccc 1px solid;
             border-radius: 10px;
             margin: 10px 10px 10px 10px;
@@ -194,32 +199,94 @@
              top: 440px;
              right: 50px;
          }
+         /*모달버튼*/
+         .modal {
+             display: none;
+             position: fixed;
+             z-index: 9999;
+             left: 0;
+             top: 0;
+             width: 100%;
+             height: 100%;
+             overflow: auto;
+             background-color: rgba(0, 0, 0, 0.5);
+         }
+
+         .modal-content {
+             position: fixed;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             width: 40%;
+             max-width: 800px;
+             height: auto;
+             max-height: 60vh;
+             background-color: #fff;
+             padding: 20px;
+             border-radius: 8px;
+             text-align: center;
+         }
+
+         .close {
+             color: #aaa;
+             float: right;
+             font-size: 28px;
+             font-weight: bold;
+             cursor: pointer;
+         }
+
+         .close:hover,
+         .close:focus {
+             color: black;
+             text-decoration: none;
+             cursor: pointer;
+         }
+
+         .video-wrapper {
+             position: relative;
+             padding-bottom: 56.25%;
+             height: 0;
+         }
+
+         .video-wrapper video {
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+         }
+         .thumbnail img{
+             width: 100%;
+             height: 100%;
+             border-radius: 10px;
+         }
     </style>
     <script>
         var currentImageIndex = 0;
         var imagePaths = [];
 
-        function prevImage() {
-            if (currentImageIndex > 0) {
-                currentImageIndex--;
-            } else {
-                currentImageIndex = imagePaths.length - 1;
-            }
-            changeImage(imagePaths[currentImageIndex]);
-        }
+        // function prevImage() {
+        //     if (currentImageIndex > 0) {
+        //         currentImageIndex--;
+        //     } else {
+        //         currentImageIndex = imagePaths.length - 1;
+        //     }
+        //     changeImage(imagePaths[currentImageIndex]);
+        // }
+        //
+        // function nextImage() {
+        //     if (currentImageIndex < imagePaths.length - 1) {
+        //         currentImageIndex++;
+        //     } else {
+        //         currentImageIndex = 0;
+        //     }
+        //     changeImage(imagePaths[currentImageIndex]);
+        // }
+        // Modify the changeImage() function
 
-        function nextImage() {
-            if (currentImageIndex < imagePaths.length - 1) {
-                currentImageIndex++;
-            } else {
-                currentImageIndex = 0;
-            }
-            changeImage(imagePaths[currentImageIndex]);
-        }
-
-        function changeImage(imagePath) {
-            document.getElementById('main-img').src = imagePath;
-        }
+        // function changeImage(imagePath) {
+        //     document.getElementById('main-img').src = imagePath;
+        // }
 
         $(function () {
             //업로드한 사진들과 데이타를 같이 묶어서 서버에 전송하기
@@ -256,7 +323,7 @@
                 form.append("holiday",holiday);
                 form.append("point",point);
                 form.append("food_idx",food_idx);
-
+                openModal();
                 console.log($("#photo")[0].files)
                 console.log($("#food_idx").val());
                 $.ajax({
@@ -281,6 +348,11 @@
                 });
             });
         });
+
+        function changeImage(imagePath) {
+            var mainImage = document.getElementById('main-img');
+            mainImage.src = imagePath;
+        }
 
         $(document).ready(function() {
             // Function to generate thumbnail with the uploaded photo
@@ -312,9 +384,6 @@
                 const firstImgSrc = firstThumb.attr("src");
                 $("#main-img").attr("src", firstImgSrc);
             });
-
-
-
 
             window.change_detail_img = function(photoname) {
                 currentImageIndex = imagePaths.indexOf(`http://kr.object.ncloudstorage.com/pig701-bucket/foodphoto/\${photoname}`);
@@ -383,7 +452,6 @@
                     }
                 });
             });
-
         });
     </script>
 </head>
@@ -394,8 +462,8 @@
 <div class="image-container">
     <div class="detail_img">
         <img id="main-img" src="" alt="Example Image" style="max-width: 100%; max-height: 100%;">
-        <div class="prev" onclick="prevImage()">&#10094;</div>
-        <div class="next" onclick="nextImage()">&#10095;</div>
+<%--        <div class="prev" onclick="prevImage()">&#10094;</div>--%>
+<%--        <div class="next" onclick="nextImage()">&#10095;</div>--%>
     </div>
     <!--상품 썸네일-->
     <div class="detail_thumb"></div>
@@ -500,5 +568,37 @@
     <button type="submit" id="sendprompt">전송</button>
     </form>
 </div>
+<!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span id="close" style="display: none;"class="close" onclick="closeModal()">&times;</span>
+        <div class="video-wrapper">
+            <video id="videoPlayer" controls>
+                <source src="../ad/ad.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+<script>
+    // Modal 이벤트
+    // Open Modal
+    function openModal() {
+        document.getElementById("modal").style.display = "block";
+        document.getElementById("videoPlayer").play();
+    }
+
+    // Close Modal
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+        document.getElementById("videoPlayer").pause();
+        document.getElementById("videoPlayer").currentTime = 0;
+    }
+    const videoPlayer = document.getElementById('videoPlayer');
+    const closeButton = document.getElementById('closeButton');
+
+    videoPlayer.addEventListener('ended', function() {
+        closeButton.style.display = 'block';
+    });
+</script>
 </body>
 </html>

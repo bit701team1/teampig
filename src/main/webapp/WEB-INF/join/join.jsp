@@ -84,8 +84,8 @@
             <td colspan="2"><input type="file" id="myfile" name="upload"></td>
         </tr>
         <tr>
-            <td><label for="shopname">가게 이름:</label></td>
-            <td colspan="2"><input type="text" id="shopname" name="shopname"></td>
+            <td><label for="email">이메일:</label></td>
+            <td colspan="2"><input type="text" id="email" name="email"></td>
         </tr>
         <tr>
             <td><label for="user_type">유저 타입:</label></td>
