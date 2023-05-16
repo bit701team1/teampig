@@ -9,11 +9,11 @@ import java.util.List;
 @Data
 @Alias("ReviewDto")
 public class ReviewDto {
-    private int review_idx;
+    private int Review_idx;
     private int user_idx;
     private int food_idx;
     private int score;
-    private String reviewtext;
+    private String Reviewtext;
     private List<ReviewPhotoDto> photoList;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
     private Timestamp write_day;
