@@ -18,8 +18,9 @@ public class HomeController {
     private MyService myservice;
     @GetMapping({"/","/home1"})
     public String home1(Model model,HttpSession session) {
-        int userId = (int) session.getAttribute("loginidx");
-        DetailDto dto = myservice.foodlist(userId);
+        String userId = String.valueOf(session.getAttribute("loginid"));
+        DetailDto dto = new DetailDto();
+        session.setAttribute("dto", dto);
         int totalCount = myservice.getTotalCount();
         model.addAttribute("dto",dto);
         model.addAttribute("totalCount", totalCount);

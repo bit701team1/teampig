@@ -1,4 +1,4 @@
-package boot.semipig.Mapper;
+package boot.semipig.mapper;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +11,6 @@ public interface ServiceMapper {
     public void insertt(ServiceDto dto);
     public List<ServiceDto> selectt();
     public void deletee(int num);
-    public DetailDto foodlist(int loginidx);
     public List<ServiceDto> getAll(Map<String, Object> map);
     public void updatee(ServiceDto dto);
     public List<couponDto> couponall();
