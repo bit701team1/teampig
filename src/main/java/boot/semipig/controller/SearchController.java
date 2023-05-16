@@ -32,11 +32,11 @@ public class SearchController {
     //임시 로그인
     @PostMapping("/temp_login")
     public String doLogin(String id,
-                          int user_idx,
+                          int loginidx,
                           HttpSession session) {
         // 아이디와 비밀번호를 검증한 후, 세션에 아이디를 저장한다.
         session.setAttribute("id", id);
-        session.setAttribute("user_idx", user_idx);
+        session.setAttribute("loginidx", loginidx);
         // 로그인 후에는 다른 페이지로 리다이렉트한다.
         return "redirect:/search";
     }
@@ -63,21 +63,6 @@ public class SearchController {
     public Map<String, Object> totallist(String list_type, String inputsearch,
                                      @RequestParam(defaultValue = "1") int currentPage,
                                          HttpSession session){
-
-
-    /*  session.setAttribute("list_type", list_type);
-        session.setAttribute("inputsearch", inputsearch);
-        session.setAttribute("currentPage", currentPage);
-
-        String cur_list_type = (String) session.getAttribute("list_type");
-        String cur_inputsearch = (String) session.getAttribute("inputsearch");
-        int cur_page = (int) session.getAttribute("currentPage");
-
-        System.out.println("cur_list_type=" + cur_list_type);
-        System.out.println("cur_inputsearch=" + cur_inputsearch);
-        System.out.println("cur_page=" + cur_page);*/
-
-
 
         List<SearchDto> list = new ArrayList<>();
 
