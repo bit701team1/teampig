@@ -6,14 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import boot.semipig.Mapper.ServiceMapper;
-import boot.semipig.dto.ReviewDto;
-import boot.semipig.dto.couponDto;
-import boot.semipig.dto.qnaDto;
+import boot.semipig.dto.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-import boot.semipig.dto.ServiceDto;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -61,7 +58,7 @@ public class MyService implements ServiceInter {
         serviceMapper.deletecoupon(num);
     }
     @Override
-    public List<qnaDto> qnalist(int startNum, int perPage){
+    public List<qna3Dto> qnalist(int startNum, int perPage){
         Map<String, Object> map = new HashMap<>();
         map.put("startNum", startNum);
         map.put("perPage", perPage);
@@ -73,6 +70,10 @@ public class MyService implements ServiceInter {
         map.put("startNum", startNum);
         map.put("perPage", perPage);
         return serviceMapper.reviewlist(map);
+    }
+    public DetailDto foodlist(int food_idx)
+    {
+        return serviceMapper.foodlist(food_idx);
     }
 
     public int getTotalCount() {

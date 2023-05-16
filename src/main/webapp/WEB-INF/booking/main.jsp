@@ -80,31 +80,43 @@
 <h2>가게정보</h2>
 <div class="y_myinfo">
     <div style="display: flex; margin-top: 10px;">
-        <img src='${root}/photo/food.gif' style="width: 300px" class="rounded" alt="Cinque Terre">
-<table class="table table-bordered" style="width: 650px; margin-left: 20px; ">
+        <img src='${root}/photo/food.gif' style="width: 450px; height:400px;" class="rounded" alt="Cinque Terre">
+<table class="table table-bordered" style="width: 500px; margin-left: 20px; height:400px; ">
     <tr>
         <td style="width: 100px; background: #F6F6F6;">이름 </td>
-        <td>마마마</td>
+        <td>${dto.RESTRT_NM}</td>
     </tr>
     <tr>
         <td style="width: 100px; background: #F6F6F6;">전화번호 </td>
-        <td>010-2222-3333</td>
+        <td>${dto.TASTFDPLC_TELNO}</td>
     </tr>
     <tr>
         <td style="width: 100px; background: #F6F6F6;">가격대 </td>
-        <td>2만원이상~3만원미만</td>
+        <td>${dto.food_price}</td>
     </tr>
     <tr>
-        <td style="width: 100px; background: #F6F6F6;">주 음식  </td>
-        <td>국밥</td>
+        <td style="width: 100px; background: #F6F6F6;">주 메뉴</td>
+        <td>${dto.food_type}</td>
     </tr>
     <tr>
         <td style="width: 100px; background: #F6F6F6;">주소  </td>
-        <td>서울시 강남구 역삼동</td>
+        <td>${dto.REFINE_ROADNM_ADDR}</td>
     </tr>
     <tr>
         <td style="width: 100px; background: #F6F6F6;"> 가게 포인트 </td>
-        <td>멋짐</td>
+        <td>${dto.point}</td>
+    </tr>
+    <tr>
+        <td style="width: 100px; background: #F6F6F6;"> 오픈 시간 </td>
+        <td>${dto.opentime}</td>
+    </tr>
+    <tr>
+        <td style="width: 100px; background: #F6F6F6;"> 닫는 시간 </td>
+        <td>${dto.closetime}</td>
+    </tr>
+    <tr>
+        <td style="width: 100px; background: #F6F6F6;">휴일</td>
+        <td>${dto.holiday}</td>
     </tr>
 </table>
 </div>
