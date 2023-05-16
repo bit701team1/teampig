@@ -1,8 +1,11 @@
 package boot.semipig.service;
 
+import boot.semipig.dto.DetailDto;
+
 import java.util.List;
 
 public interface DetailServiceInter {
+    public DetailDto selectFood(int food_idx);
     public void insertFoodHistory(int user_idx, String food_type, String food_list);
     public int getHistoryCount(int user_idx);
     public void autoHistoryDelete(int user_idx);
@@ -11,7 +14,5 @@ public interface DetailServiceInter {
 
     public void insertBookmark(int user_idx, int food_idx);
     public void deleteBookmark(int user_idx, int food_idx);
-
-    public String getFavoriteFood(int user_idx);
-    public List<Integer> getRecommandFood(String favoriteFood);
+    public List<DetailDto> nearbyStore(String SIGUN_NM);
 }

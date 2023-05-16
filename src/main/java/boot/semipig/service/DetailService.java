@@ -1,5 +1,6 @@
 package boot.semipig.service;
 
+import boot.semipig.dto.DetailDto;
 import boot.semipig.mapper.DetailMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,10 +11,13 @@ import java.util.Map;
 
 @Service
 public class DetailService implements DetailServiceInter{
-
     @Autowired
     DetailMapper detailMapper;
+    @Override
+    public DetailDto selectFood(int food_idx) {
 
+        return detailMapper.selectFood(food_idx);
+    }
     @Override
     public void insertFoodHistory(int user_idx, String food_type, String restrt_list) {
         Map<String, Object> map = new HashMap<>();
@@ -49,12 +53,9 @@ public class DetailService implements DetailServiceInter{
     }
 
     @Override
-    public String getFavoriteFood(int user_idx) {
-        return detailMapper.getFavoriteFood(user_idx);
+    public List<DetailDto> nearbyStore(String SIGUN_NM) {
+        List<DetailDto> list=detailMapper.nearbyStore(SIGUN_NM);
+        return list;
     }
 
-    @Override
-    public List<Integer> getRecommandFood(String favoriteFood) {
-        return detailMapper.getRecommandFood(favoriteFood);
-    }
 }

@@ -16,10 +16,15 @@ public class DetailDto {
     private String REPRSNT_FOOD_NM;
     private int REFINE_ZIPNO;
     private String food_type;
+    private String food_price;
     private String REFINE_ROADNM_ADDR;
     private String REFINE_LOTNO_ADDR;
     private String REFINE_WGS84_LAT;
     private String REFINE_WGS84_LOGT;
-    private int average;
+    private String GPT_content;
+    private String opentime;
+    private String closetime;
+    private String holiday;
+    private String point;
+    private String average;
 }
-

@@ -14,7 +14,7 @@ public class ReviewDto {
     private int food_idx;
     private int score;
     private String reviewtext;
-    /*private List<ReviewPhotoDto> photoList;*/
+    private List<ReviewPhotoDto> photoList;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm", timezone = "Asia/Seoul")
     private Timestamp write_day;
 

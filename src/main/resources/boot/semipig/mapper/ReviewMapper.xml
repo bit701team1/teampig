@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boot.semipig.mapper.ReviewMapper">
+    <insert id="insertReview" parameterType="ReviewDto">
+        insert into review (user_idx, food_idx, score, reviewtext) values (#{user_idx}, #{food_idx},#{score}, #{reviewtext})
+        <!--session id 받아서 db에 넣어줘야함-->
+        <!-- INSERT 후에 자동으로 들어간 guest_idx 값을 얻어서 dto 에 넣어준다 -->
+        <selectKey keyProperty="review_idx" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+    </insert>
+    <insert id="insertPhoto" parameterType="ReviewPhotoDto">
+        insert into review_photo (review_idx, photoname) value (#{review_idx}, #{photoname})
+    </insert>
+    <select id="getAllReview" parameterType="int" resultType="ReviewDto">
+        select * from review where food_idx=#{food_idx} order by review_idx desc
+    </select>
+    <select id="getPhotos" parameterType="int" resultType="ReviewPhotoDto">
+        select * from review_photo where review_idx=#{review_idx}
+    </select>
+    <select id="getUserNum" parameterType="int" resultType="int">
+        select user_idx from review where review_idx=#{review_idx}
+    </select>
+    <delete id="deleteReview" parameterType="int">
+        delete from review where review_idx=#{review_idx}
+    </delete>
+    <select id="getAllPhoto" parameterType="int" resultType="String">
+        select photoname from review_photo where review_idx=#{review_idx}
+    </select>
+    <select id="selectReview" parameterType="int" resultType="ReviewDto">
+        select * from review where review_idx=#{review_idx}
+    </select>
+
+
+    <update id="updateReview" parameterType="ReviewDto">
+        update  review set  score=#{score},  reviewtext=#{reviewtext} where review_idx=#{review_idx}
+
+    </update>
+    <update id="updatePhoto" parameterType="ReviewPhotoDto">
+        update review_photo set photoname=#{photoname} where review_idx=#{review_idx}
+    </update>
+
+</mapper>

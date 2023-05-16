@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boot.semipig.mapper.DetailMapper">
+    <select id="selectFood" parameterType="int" resultType="DetailDto">
+        select a.*, round(ifnull(avg(b.score), 0),1) average
+        from food_list a
+                 left join review b
+                           on a.food_idx =b.food_idx
+        where a.food_idx=#{food_idx}
+        group by a.food_idx
+
+    </select>
+
+    <select id="nearbyStore" parameterType="String" resultType="DetailDto">
+    select a.*, round(ifnull(avg(b.score), 0),1) average
+    from food_list a
+             left join review b
+                       on a.food_idx =b.food_idx
+    where a.SIGUN_NM=#{SIGUN_NM}
+    group by a.food_idx
+    order by average desc
+    </select>
+
     <insert id="insertFoodHistory" parameterType="map">
         INSERT INTO user_history (user_idx, food_type, restrt_list)
         VALUES (#{user_idx}, #{food_type}, #{restrt_list})
@@ -20,31 +40,11 @@
     </select>
 
     <select id="insertBookmark" parameterType="int">
-        INSERT INTO bookmark (user_idx, food_idx)
-        SELECT #{user_idx}, #{food_idx} FROM DUAL
-        WHERE NOT EXISTS (
-            SELECT * FROM bookmark WHERE user_idx=#{user_idx} AND food_idx=#{food_idx}
-        );
+        INSERT INTO bookmark (user_idx, food_idx) VALUES (#{user_idx}, #{food_idx})
+            ON DUPLICATE KEY UPDATE user_idx=${user_idx}, food_idx=#{food_idx}
     </select>
 
     <delete id="deleteBookmark" parameterType="int">
         delete from bookmark where user_idx = #{user_idx} and food_idx = #{food_idx}
     </delete>
-
-
-    <select id="getFavoriteFood" parameterType="int" resultType="String">
-        SELECT food_type
-        FROM user_history
-        WHERE user_idx = #{user_idx}
-        GROUP BY food_type
-        ORDER BY COUNT(*) DESC
-            LIMIT 1;
-    </select>
-    <select id="getRecommandFood" parameterType="String" resultType="int">
-        SELECT food_idx
-        FROM food_list
-        WHERE food_type = #{favoriteFood}
-        ORDER BY RAND()
-            LIMIT 3;
-    </select>
 </mapper>

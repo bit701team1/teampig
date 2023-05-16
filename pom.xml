@@ -16,6 +16,8 @@
     <description>BootMiniProject</description>
     <properties>
         <java.version>11</java.version>
+        <!--<spring.security.version>5.2.5.RELEASE</spring.security.version>
+-->
     </properties>
     <dependencies>
 
@@ -95,6 +97,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
 
     </dependencies>
 
