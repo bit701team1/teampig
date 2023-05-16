@@ -530,6 +530,7 @@
 
 
 
+
         //별점 마킹 모듈 프로토타입으로 생성
         function Rating(){};
         Rating.prototype.rate = 0;
@@ -668,20 +669,20 @@
                     <input type="hidden" id="u_user_idx" value="${sessionScope.loginidx}">
                     <input type="hidden" id="u_review_idx" value="">
 
-                    <input type="hidden" class="u_review_score" name="u_score" value="0">
+                    <input type="hidden" class="u_review_score" name="score" value="0">
                     <div class="u_review_rating">
 
                         <div class="u_rating">
                             <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
-                            <input type="checkbox" name="u_rating" id="u_rating1" value="1" class="u_rate_radio" title="1점">
+                            <input type="checkbox" name="rating" id="u_rating1" value="1" class="u_rate_radio" title="1점">
                             <label for="u_rating1"></label>
-                            <input type="checkbox" name="u_rating" id="u_rating2" value="2" class="u_rate_radio" title="2점">
+                            <input type="checkbox" name="rating" id="u_rating2" value="2" class="u_rate_radio" title="2점">
                             <label for="u_rating2"></label>
-                            <input type="checkbox" name="u_rating" id="u_rating3" value="3" class="u_rate_radio" title="3점" >
+                            <input type="checkbox" name="rating" id="u_rating3" value="3" class="u_rate_radio" title="3점" >
                             <label for="u_rating3"></label>
-                            <input type="checkbox" name="u_rating" id="u_rating4" value="4" class="u_rate_radio" title="4점">
+                            <input type="checkbox" name="rating" id="u_rating4" value="4" class="u_rate_radio" title="4점">
                             <label for="u_rating4"></label>
-                            <input type="checkbox" name="u_rating" id="u_rating5" value="5" class="u_rate_radio" title="5점">
+                            <input type="checkbox" name="rating" id="u_rating5" value="5" class="u_rate_radio" title="5점">
                             <label for="u_rating5"></label>
                         </div>
                     </div>
@@ -693,7 +694,7 @@
                     </div>
                     <div><input type="file" multiple="multiple" class="form-control" name="upload" id="u_myfile"></div>
                     <div>
-                        <div class="s_u_photosqure">
+                        <div class="s_photosqure">
                             <img src="" style="width: 100px; height: 100px;" id="s_u_photosqure">
                         </div>
                     </div>
@@ -701,7 +702,7 @@
                 </div>
             </div>
 
-            <!— Modal footer —>
+            <!-- Modal footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">수정하기</button>
             </div>
@@ -709,7 +710,6 @@
         </div>
     </div>
 </div>
-
 
 <!--review modal-->
 <!-- The Modal -->
