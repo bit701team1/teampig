@@ -45,4 +45,9 @@ public class HomeController {
         model.addAttribute("totalCount", totalCount);
         return "/header";
     }
+    @GetMapping("/home2")
+    public String home()
+    {
+        return "/main2";
+    }
 }
