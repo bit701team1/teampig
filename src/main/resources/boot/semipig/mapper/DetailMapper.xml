@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boot.semipig.mapper.DetailMapper">
+    <select id="selectFood" parameterType="int" resultType="DetailDto">
+        select a.*, round(ifnull(avg(b.score), 0),1) average
+        from food_list a
+                 left join review b
+                           on a.food_idx =b.food_idx
+        where a.food_idx=#{food_idx}
+        group by a.food_idx
+
+    </select>
+
+    <select id="nearbyStore" parameterType="String" resultType="DetailDto">
+    select a.*, round(ifnull(avg(b.score), 0),1) average
+    from food_list a
+             left join review b
+                       on a.food_idx =b.food_idx
+    where a.SIGUN_NM=#{SIGUN_NM}
+    group by a.food_idx
+    order by average desc
+    </select>
+
+    <insert id="insertFoodHistory" parameterType="map">
+        INSERT INTO user_history (user_idx, food_type, restrt_list)
+        VALUES (#{user_idx}, #{food_type}, #{restrt_list})
+    </insert>
+    <select id="getHistoryCount" parameterType="int" resultType="int">
+        select count(*) from user_history where user_idx=#{user_idx}
+    </select>
+    <delete id="autoHistoryDelete" parameterType="int">
+        DELETE uh1 FROM user_history uh1
+        INNER JOIN (
+            SELECT MIN(history_idx) AS history_idx FROM user_history where user_idx=#{user_idx}
+        ) uh2 ON uh1.history_idx = uh2.history_idx;
+    </delete>
+
+    <select id="getBookmarkCount" parameterType="Integer" resultType="int">
+        select count(*) from bookmark where user_idx = #{user_idx} and food_idx = #{food_idx}
+    </select>
+
+    <select id="insertBookmark" parameterType="int">
+        INSERT INTO bookmark (user_idx, food_idx) VALUES (#{user_idx}, #{food_idx})
+            ON DUPLICATE KEY UPDATE user_idx=${user_idx}, food_idx=#{food_idx}
+    </select>
+
+    <delete id="deleteBookmark" parameterType="int">
+        delete from bookmark where user_idx = #{user_idx} and food_idx = #{food_idx}
+    </delete>
+</mapper>

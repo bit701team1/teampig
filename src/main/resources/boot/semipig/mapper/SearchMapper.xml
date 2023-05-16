@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boot.semipig.mapper.SearchMapper">
+    <select id="getAllFood" resultType="SearchDto">
+        select a.*, ifnull(avg(b.score),null) average
+        from food_list a
+                 left join review b
+                           on a.food_idx =b.food_idx
+        group by a.food_idx
+    </select>
+    <select id="getHighScoreFood" resultType="SearchDto">
+        select a.*, ifnull(avg(b.score),null) average
+        from food_list a
+                 left join review b
+                    on a.food_idx =b.food_idx
+        group by a.food_idx
+        order by average desc
+    </select>
+    <select id="getManyReview" resultType="SearchDto">
+        SELECT a.*,ifnull(avg(b.score), null) as average, COUNT(b.food_idx)  AS review_count
+        FROM food_list a
+                 LEFT JOIN review b
+                        ON a.food_idx = b.food_idx
+        GROUP BY a.food_idx
+        ORDER BY review_count DESC
+    </select>
+
+
+
+
+</mapper>
