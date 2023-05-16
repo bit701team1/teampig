@@ -1,0 +1,19 @@
+
+#y_menu {
+    position: absolute;
+
+}
+
+#y_menu ul {
+    float: right;
+}
+
+#y_menu ul li {
+    float: left;
+    padding: 5px 10px;
+    border-right: 1px solid #ddd;
+}
+
+#y_menu ul li:last-child {
+    border-right: none;
+}

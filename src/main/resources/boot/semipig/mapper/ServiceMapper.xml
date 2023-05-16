@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boot.semipig.Mapper.ServiceMapper">
+    <insert id="insertt" parameterType="ServiceDto">
+        insert into calendar(start) values(#{start})
+    </insert>
+    <select id="selectt"  resultType="ServiceDto">
+        select * from calendar
+    </select>
+    <delete id="deletee" parameterType="int">
+        delete from calendar where num=#{num}
+    </delete>
+    <select id="getAll" parameterType="Map" resultType="ServiceDto">
+        select * from calendar where start >= #{currentDateTime} ORDER BY start ASC LIMIT #{startNum}, #{perPage}
+    </select>
+    <update id="updatee" parameterType="ServiceDto">
+    update calendar set start=#{start} where num=#{num}
+</update>
+    <select id="detail" resultType="ServiceDto">
+    select * from calendar where num=#{num}
+    </select>
+    <select id="couponall" resultType="couponDto">
+    select * from coupon order by num asc
+    </select>
+    <insert id="couponinsert" parameterType="couponDto">
+        insert into coupon(number,time) values(#{number},#{time})
+    </insert>
+    <delete id="deletecoupon" parameterType="int">
+        delete from coupon where num = #{num}
+    </delete>
+    <select id="getTotalCount" resultType="int">
+        select count(*) from calendar where start > NOW()
+    </select>
+    <select id="qnalist" parameterType="Map" resultType="qnaDto">
+        select * from qna  ORDER BY qna_idx desc LIMIT #{startNum}, #{perPage}
+    </select>
+    <select id="reviewlist" resultType="reviewDto">
+        select * from review ORDER BY review_idx desc LIMIT #{startNum}, #{perPage}
+    </select>
+    <select id="ReservationCount" resultType="int" parameterType="string">
+        SELECT COUNT(*) FROM calendar WHERE start = #{start}
+    </select>
+
+</mapper>
