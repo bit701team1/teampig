@@ -14,4 +14,5 @@ public class JoinDto {
     private String user_photo;
     private String shopname;
     private int user_type;
+    private String email;
 }

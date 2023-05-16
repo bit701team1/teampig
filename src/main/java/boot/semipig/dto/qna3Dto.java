@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 @Data
 @Alias("qnaDto")
-public class qnaDto {
+public class qna3Dto {
     private int qna_idx;
     private String qna_subject;
     private String qna_content;

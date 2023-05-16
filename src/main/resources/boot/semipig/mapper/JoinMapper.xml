@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boot.semipig.mapper.JoinMapper">
     <insert id="insertUser" parameterType="JoinDto">
-        insert into user (id,password,user_name,hp,user_photo,shopname,user_type)
-        values (#{id},#{password},#{user_name},#{hp},#{user_photo},#{shopname},#{user_type})
+        insert into user (id,password,user_name,user_type,email)
+        values (#{id},#{password},#{user_name},#{user_type},#{email})
     </insert>
 </mapper>

@@ -37,8 +37,10 @@ public class DetailController {
 
 
     @GetMapping("/detail")//디테일 페이지에서 가게 정보 띄우기
-    public String detail(Model model, int food_idx,HttpSession session)
+    public String detail(Model model, Integer food_idx, HttpSession session)
     {
+        System.out.println("Controller food_idx="+food_idx);
+
         DetailDto dto=detailService.selectFood(food_idx);
         model.addAttribute("dto", dto);
 
@@ -180,7 +182,7 @@ public class DetailController {
         //history 저장 과정
         //history 갯수 확인
         int historycount = detailService.getHistoryCount(user_idx);
-        //System.out.println(historycount);
+        System.out.println(historycount);
 
         //history 저장 갯수 설정
         if(historycount>=5){
@@ -190,13 +192,9 @@ public class DetailController {
         //db에 history 저장
         detailService.insertFoodHistory(user_idx, food_type, restrt_list);
 
-
-
-
-
         System.out.println("History saved");
 
-        return "redirect:/detail";
+        return "redirect:/detail?food_idx=" + food_idx;
     }
     @GetMapping("/isbookmark")
     @ResponseBody

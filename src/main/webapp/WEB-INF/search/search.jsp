@@ -16,6 +16,11 @@
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=wvbgxt3966"></script>
 
+    <link rel="import" href="https://www.polymer-project.org/0.5/components/paper-ripple/paper-ripple.html">
+    <link rel="import" href="http://www.polymer-project.org/components/core-icons/core-icons.html">
+    <link rel="import" href="http://www.polymer-project.org/components/font-roboto/roboto.html">
+
+
     <style>
         body, body * {
             font-family: 'Jua'
@@ -24,6 +29,66 @@
         .k_foodlist {
             cursor: pointer;
         }
+
+        .k_buttonarea{
+            margin-left: 20px;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            -webkit-touch-callout: none;
+        }
+
+        /* Button */
+        .button {
+            display: inline-block;
+            position: relative;
+            width: 120px;
+            height: 32px;
+            line-height: 32px;
+            border-radius: 2px;
+            font-size: 0.9em;
+            background-color: #fff;
+            color: #646464;
+        }
+
+        .button > paper-ripple {
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+
+        .button.raised {
+            transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition-delay: 0.2s;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+
+        }
+
+        .button.raised:hover {
+            background-color: rgba(199,199,199,0.3);
+            box-shadow: 4px 4px 8px 0 rgba(199,199,199,0.3);
+            transition-delay: 0s;
+            border: 1px solid rgba(100, 100, 100, 0.3);
+        }
+
+        .button-clicked {
+            box-shadow: 4px 4px 8px 0 rgba(199,199,199,0.3);
+            transition-delay: 0s;
+            border: 2px solid rgba(4,202,148,1);
+            color: rgba(4,202,148,1);
+        }
+        .center {
+            text-align: center;
+        }
+
+
     </style>
     <%
         int currentPage = 1;
@@ -138,10 +203,6 @@
                 })
                     .done(function(res) {
 
-                       /* var cur_list_type = sessionStorage.getItem("list_type");
-                        var cur_inputsearch = sessionStorage.getItem("inputsearch");
-                        var currentPage = sessionStorage.getItem("currentPage");*/
-
                         let s =`<br>`;
 
                         s+=`<b>\${res.inputsearch}에 대한 검색 결과입니다</b><br>`;
@@ -155,7 +216,7 @@
                         <td>
                             <div class="k_foodlist"
                                  food_idx="\${ele.food_idx}"
-                                 user_idx="${user_idx}"
+                                 loginidx="${loginidx}"
                                  restrt_list="\${ele.restrt_NM}"
                                  food_type="\${ele.food_type}">
                                 \${ele.restrt_NM}
@@ -223,7 +284,7 @@
             $(document).on('click', '.k_foodlist', function () {
 
                 var food_type = $(this).attr("food_type");
-                var user_idx = $(this).attr("user_idx");
+                var user_idx = $(this).attr("loginidx");
                 var restrt_list = $(this).attr("restrt_list");
                 var food_idx = $(this).attr("food_idx");
 
@@ -237,7 +298,7 @@
                         "food_idx": food_idx
                     },
                     success: function (res) {
-                        console.log("History saved!");
+                        console.log("ajax History saved!");
                         window.location.href = "/detail?food_idx=" + food_idx;
                     }
                 });
@@ -268,11 +329,32 @@
                 //$(".ajax-button[list_type='type_search']").trigger("click"); // 검색 버튼 자동 클릭
             });
 
+            //조건 버튼 이벤트
+      /*      $(".btn_condition").on('click',function(){
+
+                if ($(this).hasClass('button-clicked')) {
+                    $(this).removeClass('button-clicked');
+                } else {
+                    $(this).addClass('button-clicked');
+                }
+            });*/
+
+            $(".btn_condition").on('click', function() {
+                if ($(this).hasClass('button-clicked')) {
+                    $(this).removeClass('button-clicked');
+                } else {
+                    $(".btn_condition").removeClass('button-clicked');
+                    $(this).addClass('button-clicked');
+                }
+            });
+
+
+
             window.list(1);
         }); // $func end
 
         //지도 관련 메서드
-     /*   function initMap(){
+     function initMap(){
 
                $.ajax({
                    type: "get",
@@ -330,25 +412,19 @@
                        console.log("ajax 오류")
                    }
                });//ajax 끝
-           }//initMap function 끝*/
+           }//initMap function 끝
     </script>
 </head>
 <body>
 <h2>test</h2>
 <form action="/temp_login" method="post">
     <input type="text" name="id" value="testID">
-    <input type="int" name="user_idx" value="1">
+    <input type="int" name="loginidx" value="1">
     <input type="submit" value="임시로그인"> &nbsp;
     <button type="button" onclick="location.href='/temp_logout'">로그아웃</button>
 </form>
 <span><b>세션id: ${sessionScope.id}</b></span><br>
-<span><b>세션 user_idx: ${sessionScope.user_idx}</b></span><br>
-<%--<span><b>세션 cur_list_type: ${sessionScope.cur_list_type}</b></span><br>
-<span><b>세션 currentPage: ${sessionScope.currentPage}</b></span><br>
-<span><b>세션 cur_inputsearch: ${sessionScope.cur_inputsearch}</b></span><br>--%>
-
-
-
+<span><b>세션 loginidx: ${sessionScope.loginidx}</b></span><br>
 
 
 <div class="input-group">
@@ -356,17 +432,42 @@
     <button type="button" class="ajax-button searchbtn" list_type="type_search">검색</button>
 </div>
 
-<div id="map" style="width:800px; height:400px;"></div>
-
-<div class="s_tab">
-    <button type="button" class="ajax-button" id="s_highscore" list_type="type_1">평점순</button>
-    <button type="button" class="ajax-button" id="s_manyreview" list_type="type_2">리뷰많은순</button>
-    <button type="button" class="ajax-button" id="s_go" list_type="type_3">가고싶다순</button>
+<div id="map" style="width:800px; height:400px;"></div><br><br>
+<div class="k_buttonarea">
+    <div class="button raised btn_condition ajax-button" list_type="type_1">
+        <div class="center" fit>평점순</div>
+        <paper-ripple fit></paper-ripple>
+    </div>
+    <div class="button raised btn_condition ajax-button" list_type="type_2">
+        <div class="center" fit>리뷰많은순</div>
+        <paper-ripple fit></paper-ripple>
+    </div>
+    <div class="button raised btn_condition ajax-button" list_type="type_3">
+        <div class="center" fit>가고싶다순</div>
+        <paper-ripple fit></paper-ripple>
+    </div>
     <br>
-    <button type="button" class="ajax-button" id="k_priceone" list_type="1만원대">1만원대</button>
-    <button type="button" class="ajax-button" id="k_pricetwo" list_type="2만원대">2만원대</button>
-    <button type="button" class="ajax-button" id="k_pricethree" list_type="3만원대">3만원대</button>
-    <button type="button" class="ajax-button" id="k_priceover" list_type="4만원이상">4만원이상</button>
+    <br>
+    <div class="button raised btn_condition ajax-button" list_type="1만원대">
+        <div class="center" fit>1만원대</div>
+        <paper-ripple fit></paper-ripple>
+    </div>
+    <div class="button raised btn_condition ajax-button" list_type="2만원대">
+        <div class="center" fit>2만원대</div>
+        <paper-ripple fit></paper-ripple>
+    </div>
+    <div class="button raised btn_condition ajax-button" list_type="3만원대">
+        <div class="center" fit>3만원대</div>
+        <paper-ripple fit></paper-ripple>
+    </div>
+    <div class="button raised btn_condition ajax-button" list_type="4만원이상">
+        <div class="center" fit>4만원이상</div>
+        <paper-ripple fit></paper-ripple>
+    </div>
+</div>
+
+<br><br>
+
 </div>
 
 <div class="s_list">

@@ -180,7 +180,7 @@
                         var dateStr = info.event.startStr.split("T")[0];
                         var cells = document.querySelectorAll('.fc-day[data-date="' + dateStr + '"]');
                         cells.forEach(function(cell) {
-                            cell.style.backgroundImage = `url('${root}/photo/pig2.png')`;
+                            cell.style.backgroundImage = `url('${root}/photo/pig3.png')`;
                             cell.style.backgroundSize = '70%';
                             cell.style.backgroundRepeat = 'no-repeat';
                             cell.style.backgroundPosition = 'center';

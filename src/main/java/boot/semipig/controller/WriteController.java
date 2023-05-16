@@ -1,16 +1,13 @@
 package boot.semipig.controller;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import boot.semipig.dto.couponDto;
-import boot.semipig.dto.qnaDto;
-import boot.semipig.dto.ReviewDto;
+import boot.semipig.dto.*;
 import boot.semipig.service.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import boot.semipig.dto.ServiceDto;
 
 @Controller
 @RequestMapping("/write/")
@@ -136,7 +131,7 @@ public class WriteController {
         startNum = (currentPage - 1) * perPage;
         //각 글마다 출력할 글번호(예:10개일경우 1페이지: 10, 2페이지 : 20,
         no = totalCount - startNum;
-        List<qnaDto> list = myservice.qnalist(startNum, perPage);
+        List<qna3Dto> list = myservice.qnalist(startNum, perPage);
 
         response.put("totalCount", totalCount);
         response.put("list", list);
@@ -162,6 +157,5 @@ public class WriteController {
         model.addAttribute("totalCount", totalCount);
         return "/main/booking/infoupdate";
     }
-
 }
 

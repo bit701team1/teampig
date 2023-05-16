@@ -1,12 +1,8 @@
-package boot.semipig.Mapper;
-import java.time.LocalDateTime;
+package boot.semipig.mapper;
 import java.util.List;
 import java.util.Map;
 
-import boot.semipig.dto.ServiceDto;
-import boot.semipig.dto.couponDto;
-import boot.semipig.dto.qnaDto;
-import boot.semipig.dto.ReviewDto;
+import boot.semipig.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -21,7 +17,7 @@ public interface ServiceMapper {
     public void couponinsert(couponDto dto);
     public void deletecoupon(int num);
     public int getTotalCount();
-    public List<qnaDto> qnalist(Map<String, Object> map);
+    public List<qna3Dto> qnalist(Map<String, Object> map);
     public List<ReviewDto> reviewlist(Map<String, Object> map);
 
     int ReservationCount(String start);

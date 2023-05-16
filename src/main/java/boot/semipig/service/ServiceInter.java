@@ -2,12 +2,8 @@ package boot.semipig.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
-import boot.semipig.dto.ServiceDto;
-import boot.semipig.dto.couponDto;
-import boot.semipig.dto.qnaDto;
-import boot.semipig.dto.ReviewDto;
+import boot.semipig.dto.*;
 
 public interface ServiceInter {
     public void insertt(ServiceDto dto);
@@ -20,10 +16,9 @@ public interface ServiceInter {
     public List<couponDto> couponall();
     public void couponinsert(couponDto dto);
     public void deletecoupon(int num);
-
     public int getTotalCount();
 
-    List<qnaDto> qnalist(int startNum, int perPag);
+    List<qna3Dto> qnalist(int startNum, int perPag);
     public List<ReviewDto> reviewlist(int startNum, int perPage);
     int ReservationCount(String start);
 }
