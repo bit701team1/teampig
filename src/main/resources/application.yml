@@ -18,7 +18,8 @@ spring:
       suffix: .jsp
 
   #mybatis
+
 mybatis:
-  type-aliases-package: test.study.dto
+  type-aliases-package: boot.semipig.dto
   mapper-location:
     - /mapper/**/*.xml

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boot.semipig.mapper.UserpageMapper">
+    <select id="getFoodidx" parameterType="int" resultType="int">
+        select food_idx from bookmark where user_idx=#{useridx}
+    </select>
+    <select id="getFoodlist" parameterType="int" resultType="SearchDto">
+        select * from food_list where food_idx=#{food_idx}
+    </select>
+    <select id="getReviewlist" parameterType="int" resultType="ReviewDto">
+        SELECT r.*, f.RESTRT_NM
+        FROM review r
+                 LEFT JOIN food_list f ON r.FOOD_IDX = f.FOOD_IDX
+        WHERE r.USER_IDX = #{user_idx}
+        ORDER BY r.WRITE_DAY DESC
+    </select>
+</mapper>

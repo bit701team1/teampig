@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan({"boot.semipig.*","naver.cloud"})
-@MapperScan({"boot.semipig.mapper"})
+@MapperScan("boot.semipig.mapper")
 public class TeamoneApplication {
 
     public static void main(String[] args) {

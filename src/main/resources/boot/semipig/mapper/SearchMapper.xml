@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boot.semipig.mapper.SearchMapper">
+    <select id="getTotalCount" parameterType="int" resultType="int">
+        select count(*) from food_list
+    </select>
+    <select id="getHighScoreFood" parameterType="int" resultType="SearchDto">
+        SELECT *
+        FROM (
+                 SELECT a.*, IFNULL(AVG(b.score), 0) AS average
+                 FROM food_list a
+                          LEFT JOIN review b ON a.food_idx = b.food_idx
+                 GROUP BY a.food_idx
+             ) AS t
+        ORDER BY t.average DESC
+            LIMIT #{startNum}, #{perPage}
+    </select>
+    <select id="getManyReview" parameterType="int" resultType="SearchDto">
+        SELECT a.*, IFNULL(AVG(b.score), NULL) AS average, COUNT(b.food_idx) AS review_count
+        FROM food_list a
+                 LEFT JOIN review b ON a.food_idx = b.food_idx
+        GROUP BY a.food_idx
+        ORDER BY review_count DESC
+            LIMIT #{startNum}, #{perPage}
+    </select>
+    <select id="getBookmarkList" parameterType="int" resultType="SearchDto">
+        SELECT f.*, COUNT(b.user_idx) AS bookmark_count
+        FROM food_list AS f
+                 LEFT JOIN bookmark AS b ON f.food_idx = b.food_idx
+        GROUP BY f.food_idx
+        ORDER BY bookmark_count DESC
+            LIMIT #{startNum}, #{perPage}
+    </select>
+    <select id="getPriceFood" parameterType="map" resultType="SearchDto">
+        select * from food_list where food_price = #{food_price} limit #{startNum},#{perPage}
+    </select>
+
+    <select id="getSearchFood" parameterType="map" resultType="SearchDto">
+        SELECT * FROM food_list
+        WHERE RESTRT_NM LIKE CONCAT('%', #{search}, '%')
+           OR REPRSNT_FOOD_NM LIKE CONCAT('%', #{search}, '%')
+           OR food_type LIKE CONCAT('%', #{search}, '%')
+           OR REFINE_ROADNM_ADDR LIKE CONCAT('%', #{search}, '%')
+        ORDER BY food_idx
+        limit #{startNum},#{perPage}
+    </select>
+
+    <!--카운트를 위한 구간 -->
+    <select id="getHighScoreFoodCount" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+        FROM (
+                 SELECT a.*, IFNULL(AVG(b.score), 0) AS average
+                 FROM food_list a
+                          LEFT JOIN review b ON a.food_idx = b.food_idx
+                 GROUP BY a.food_idx
+             ) AS t
+    </select>
+    <select id="getManyReviewCount" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM (
+                                 SELECT a.*, IFNULL(AVG(b.score), 0) AS average, COUNT(b.food_idx) AS review_count
+                                 FROM food_list a
+                                          LEFT JOIN review b ON a.food_idx = b.food_idx
+                                 GROUP BY a.food_idx
+                             ) t
+    </select>
+    <select id="getSearchFoodCount" parameterType="map" resultType="int">
+        SELECT count(*) FROM food_list
+        WHERE RESTRT_NM LIKE CONCAT('%', #{search}, '%')
+           OR REPRSNT_FOOD_NM LIKE CONCAT('%', #{search}, '%')
+           OR food_type LIKE CONCAT('%', #{search}, '%')
+           OR REFINE_ROADNM_ADDR LIKE CONCAT('%', #{search}, '%')
+    </select>
+    <select id="getPriceFoodCount" parameterType="map" resultType="int">
+        select count(*) from food_list where food_price = #{food_price}
+    </select>
+    <select id="getBookmarkListCount" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+        FROM (
+                 SELECT f.*, COUNT(b.user_idx) AS bookmark_count
+                 FROM food_list AS f
+                          LEFT JOIN bookmark AS b ON f.food_idx = b.food_idx
+                 GROUP BY f.food_idx
+             ) AS subquery_alias;
+    </select>
+
+
+    <!--추천때 쓰는 메서드임, 메인페이지에 필요할듯함-->
+    <select id="getRecommandFood" parameterType="String" resultType="int">
+        SELECT food_idx
+        FROM food_list
+        WHERE food_type = #{favoriteFood}
+        ORDER BY RAND()
+            LIMIT 3
+    </select>
+</mapper>
