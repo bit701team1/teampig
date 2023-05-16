@@ -12,10 +12,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
           rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <style>
         body, body * {
-            font-family: 'Jua'
+            font-family: 'Gowun Batang'
         }
         div.shopname{
             margin : 0px auto;
@@ -46,7 +47,8 @@
         }
 
         .image-container img {
-            max-width: 100%;
+            width: 100%;
+            height: 100%;
         }
 
         .thumbnail-container {
@@ -80,6 +82,7 @@
         input[type="file"]
         {
             width: 90%;
+            height: 45px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -109,7 +112,7 @@
             position: relative;
         }
         .detail_thumb{
-            border: black solid 1px;
+            /*border: black solid 1px;*/
             width: 95%;
             margin: 10px auto;
             display: flex;
@@ -118,8 +121,8 @@
         }
 
         .thumbnail{
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             border: #cccccc 1px solid;
             border-radius: 10px;
             margin: 10px 10px 10px 10px;
@@ -212,8 +215,8 @@
             right: 50px;
         }
         .detail_img img{
-            max-width: 100%;
-            max-height: 100%;
+            width: 100%;
+            height: 100%;
         }
         /*모달버튼*/
         .modal {
@@ -271,37 +274,72 @@
             width: 100%;
             height: 100%;
         }
+        .thumbnail img{
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
     </style>
     </style>
     <script>
+        // var currentImageIndex = 0;
+        // var imagePaths = [];
+        //
+        // function prevImage() {
+        //     if (currentImageIndex > 0) {
+        //         currentImageIndex--;
+        //     } else {
+        //         currentImageIndex = imagePaths.length - 1;
+        //     }
+        //     changeImage(imagePaths[currentImageIndex]);
+        // }
+        //
+        // function nextImage() {
+        //     if (currentImageIndex < imagePaths.length - 1) {
+        //         currentImageIndex++;
+        //     } else {
+        //         currentImageIndex = 0;
+        //     }
+        //     changeImage(imagePaths[currentImageIndex]);
+        // }
+        //
+        // function changeImage(imagePath) {
+        //     document.getElementById('main-img').src = imagePath;
+        // }
         var currentImageIndex = 0;
         var imagePaths = [];
+        var thumbnailPaths = [];
 
-        function prevImage() {
-            if (currentImageIndex > 0) {
-                currentImageIndex--;
-            } else {
-                currentImageIndex = imagePaths.length - 1;
-            }
-            changeImage(imagePaths[currentImageIndex]);
-        }
+        // function prevImage() {
+        //     if (currentImageIndex > 0) {
+        //         currentImageIndex--;
+        //     } else {
+        //         currentImageIndex = imagePaths.length - 1;
+        //     }
+        //     changeImage(currentImageIndex);
+        // }
 
-        function nextImage() {
-            if (currentImageIndex < imagePaths.length - 1) {
-                currentImageIndex++;
-            } else {
-                currentImageIndex = 0;
-            }
-            changeImage(imagePaths[currentImageIndex]);
-        }
+        // function nextImage() {
+        //     if (currentImageIndex < imagePaths.length - 1) {
+        //         currentImageIndex++;
+        //     } else {
+        //         currentImageIndex = 0;
+        //     }
+        //     changeImage(currentImageIndex);
+        // }
 
-        function changeImage(imagePath) {
+        function changeImage(index) {
+            var imagePath = imagePaths[index];
+            var thumbnailPath = thumbnailPaths[index];
             document.getElementById('main-img').src = imagePath;
+            document.getElementById('thumbnail-img').src = thumbnailPath;
         }
+
 
         $(function () {
             //업로드한 사진들과 데이타를 같이 묶어서 서버에 전송하기
             $("#contentadd").click(function () {
+                // let user_idx=$("#user_idx").val();
                 let cnt=$("#photo")[0].files.length;
                 let RESTRT_NM=$("#RESTRT_NM").val();
                 let food_type=$("#food_type").val();
@@ -336,6 +374,7 @@
                 for(i=0;i<$("#photo")[0].files.length;i++){
                     form.append("upload",$("#photo")[0].files[i]);//선택한 사진 모두 추가
                 }
+                // form.append("user_idx",user_idx);
                 form.append("RESTRT_NM",RESTRT_NM);
                 form.append("food_type",food_type);
                 form.append("TASTFDPLC_TELNO",TASTFDPLC_TELNO);
@@ -367,24 +406,6 @@
                 });
             });
         });
-        // Open Modal
-        function openModal() {
-            document.getElementById("modal").style.display = "block";
-            document.getElementById("videoPlayer").play();
-        }
-
-        // Close Modal
-        function closeModal() {
-            document.getElementById("modal").style.display = "none";
-            document.getElementById("videoPlayer").pause();
-            document.getElementById("videoPlayer").currentTime = 0;
-        }
-        const videoPlayer = document.getElementById('videoPlayer');
-        const closeButton = document.getElementById('closeButton');
-
-        videoPlayer.addEventListener('ended', function() {
-            closeButton.style.display = 'block';
-        });
 
         $(document).ready(function() {
             $("#sendprompt").click(function (e) {
@@ -410,6 +431,7 @@
                 });
             });
 
+
             function changeImage(imagePath) {
                 var img = new Image();
                 img.onload = function () {
@@ -419,10 +441,11 @@
                 };
                 img.src = imagePath;
 
-                // main-img에 이미지 경로를 할당합니다.
+                // Declare mainImg before assigning the src property
                 var mainImg = document.querySelector('#main-img');
                 mainImg.src = imagePath;
             }
+
 
             document.querySelector('#photo').addEventListener('change', function(event) {
                 var reader = new FileReader();
@@ -470,6 +493,7 @@
     <div class="RESTRT_NM" >
         <h1>가게 등록</h1>
     </div>
+    <input type="hidden" id="user_idx" name="user_idx" value="${dto.user_idx}"><%--${sessionScope.loginidx}--%>
     <div class="image-container">
         <div class="detail_img" id="detail_img">
 <%--            <img id="main-img" src="" alt="main Image" style="max-width: 100%; max-height: 100%;">--%>
@@ -613,12 +637,10 @@
             <button type="submit" id="sendprompt">전송</button>
         </form>
     </div>
-    <!-- Modal Button -->
-    <button onclick="openModal()">Watch Video</button>
     <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-content">
-            <button id="closeButton" style="display: none;">&times;</button>
+            <button id="closeButton" style="display: none;"onclick="closeModal()" class="close" >&times;</button>
             <div class="video-wrapper">
                 <video id="videoPlayer" controls>
                     <source src="../ad/ad.mp4" type="video/mp4">
@@ -628,18 +650,25 @@
     </div>
 
     <script>
-            // // Open Modal
-            // function openModal() {
-            //     document.getElementById("modal").style.display = "block";
-            //     document.getElementById("videoPlayer").play();
-            // }
-            //
-            // // Close Modal
-            // function closeModal() {
-            //     document.getElementById("modal").style.display = "none";
-            //     document.getElementById("videoPlayer").pause();
-            //     document.getElementById("videoPlayer").currentTime = 0;
-            // }
+        // Modal 이벤트
+        // Open Modal
+        function openModal() {
+            document.getElementById("modal").style.display = "block";
+            document.getElementById("videoPlayer").play();
+        }
+
+        // Close Modal
+        function closeModal() {
+            document.getElementById("modal").style.display = "none";
+            document.getElementById("videoPlayer").pause();
+            document.getElementById("videoPlayer").currentTime = 0;
+        }
+        const videoPlayer = document.getElementById('videoPlayer');
+        const closeButton = document.getElementById('closeButton');
+
+        videoPlayer.addEventListener('ended', function() {
+            closeButton.style.display = 'block';
+        });
     </script>
 </body>
 </html>
