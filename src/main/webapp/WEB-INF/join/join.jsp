@@ -80,7 +80,7 @@
             <td><input type="text" id="user_name" name="user_name"></td>
         </tr>
         <tr>
-            <td><label for="user_photo">사진:</label></td>
+            <td><label for="myfile">사진:</label></td>
             <td colspan="2"><input type="file" id="myfile" name="upload"></td>
         </tr>
         <tr>
