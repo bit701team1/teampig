@@ -3,11 +3,15 @@
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <!--tiles-definitions 이 자동으로 생성된다. -->
+<!-- "/main" 경로에 대한 정의. "mainlayout"을 확장 -->
 <tiles-definitions>
     <definition name="mainlayout" template="/WEB-INF/mainlayout/mainlayout.jsp">
+        <!-- "main" 속성에 해당하는 값을 "/WEB-INF/mainlayout/main.jsp"로 설정 -->
         <put-attribute name="header" value="/WEB-INF/mainlayout/header.jsp"/>
         <put-attribute name="menu" value="/WEB-INF/mainlayout/menu.jsp"/>
         <put-attribute name="main" value="/WEB-INF/mainlayout/main.jsp"/>
+        <put-attribute name="chatbot" value="/WEB-INF/mainlayout/chatbot.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/mainlayout/footer.jsp"/>
     </definition>
 
     <definition name="/main" extends="mainlayout">
@@ -15,7 +19,11 @@
     </definition>
 
     <!--wild card macro-->
+    <!-- 와일드카드 매크로 -->
+    <!-- "/main/*/*" 패턴에 대한 정의. "mainlayout"을 확장 -->
     <definition name="/main/*/*" extends="mainlayout"> <!--애는 mainLayout이 적용되게 하겠다-->
+        <!-- "main" 속성에 해당하는 값을 "/WEB-INF/{1}/{2}.jsp"로 설정 -->
+        <!-- {1}과 {2}는 경로에 매칭되는 첫 번째와 두 번째 세그먼트 값을 나타냄 -->
         <put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"/>
     </definition>
 
