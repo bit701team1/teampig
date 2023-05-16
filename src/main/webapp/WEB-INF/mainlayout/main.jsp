@@ -20,6 +20,6 @@
     </style>
 </head>
 <body>
-    <h2>main자리</h2>
+
 </body>
 </html>

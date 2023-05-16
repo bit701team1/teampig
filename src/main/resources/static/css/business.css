@@ -1,0 +1,529 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+}
+ul {
+    list-style: none;
+}
+
+/*1. 전체 페이지 사이즈 영역입니다*/
+#container {
+    margin: 0 auto;
+    width: 1200px;
+}
+header {
+    width: 100%;
+    height: 100px;
+    /* background-color: #07c; */
+}
+#logo {
+    float: left;
+    width: 250px;
+    height: 100px;
+    /* background-color: indigo; */
+    line-height: 100px;
+    padding-left: 20px;
+}
+#logo > a > img {
+    width: 50%;
+    padding-top: 10px;
+}
+nav {
+    float: right;
+    width: 900px;
+    height: 100px;
+    /* background-color: green; */
+    padding-top: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#topMenu {
+    height: 60px;
+}
+#topMenu > li {
+    float: left;
+    position: relative;
+}
+#topMenu > li > a {
+    display: block;
+    color: #000;
+    font-weight: 600;
+    text-shadow: 0 1px #5C732C;
+    padding: 20px 60px;
+}
+#topMenu > li > a > span {
+    font-size: 0.5em;
+}
+#topMenu > li > a:hover {
+    color: #000;
+    text-shadow: 0 -1px #fff;
+}
+#topMenu > li > ul {
+    display: none;
+    position: absolute;
+    width: 160px;
+    background-color: rgba(255, 255, 255, 0.6);
+    left: 20px;
+    margin: 0;
+    padding-left: 10px;
+
+}
+#topMenu > li > ul > li {
+    padding: 10px 10px 10px 30px;
+}
+#topMenu > li > ul > li > a {
+    font-size: 14px;
+    padding: 10px;
+    color: #000;
+}
+#topMenu > li:hover > ul {
+    display: block;
+    z-index: 10;
+}
+#topMenu > li > ul >li > a:hover {
+    color: #5C732C;
+}
+
+/*2. 사진 슬라이드 쇼 영역입니다*/
+#slideShow {
+    clear: both;
+    width: 100%;
+    max-width: 100%;
+    height: 760px;
+    overflow: hidden;
+    position: relative;
+}
+#slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+#slides > img {
+    width: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    position: absolute;
+    top: 6px;
+    left: 0;
+}
+#slides img.active {
+    opacity: 1;
+}
+
+/*사장님 페이지 이미지 위에 버튼 기능을 활성화 하려면 해당 코드를 사용합니다!*/
+/* button {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    border: none;
+    padding: 20px;
+    background-color: transparent;
+    color: #000;
+    font-weight: 800;
+    font-size: 24px;
+    opacity: 0.5;
+}
+#prev {
+    left: 0;
+}
+#next {
+    right: 0;
+}
+button:hover {
+    background-color: #222;
+    color: #fff;
+    opacity: 0.6;
+    cursor: pointer;
+}
+button:focus {
+    outline: 0;
+} */
+
+/*3. 페이지에 출력된 타이틀 글씨 영역입니다*/
+#mainTitle {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: xx-large;
+    margin-top: 200px;
+}
+
+#mainTitle2 {
+    float: right;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: xx-large;
+    margin-top: 200px;
+}
+#mainTitle3 {
+    /* float: right; */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: xx-large;
+    margin-top: 400px;
+}
+
+#mainTitle4-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 추가된 부분 */
+    margin-top: 50px;
+    height: 100%; /* 추가된 부분 */
+    width: 100%; /* 추가된 부분 */
+}
+
+#mainTitle4 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: xx-large;
+}
+
+/*4. 각페이지 내 요소들에 대한 css입니다*/
+#section1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    /* border: 1px solid #000; */
+    margin-top: -100px;
+}
+
+#section1 > img {
+    height: auto;
+    max-height: 50%;
+    max-width: 50%;
+    padding: 10px;
+}
+#section1 .photo1 {
+    border-radius: 30px;
+    cursor: pointer;
+    margin-right: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+#section2 {
+    width: 100%;
+    height: 600px;
+    background-color: #dbdbdb;
+    margin-top: 400px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: 0;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+#section2 > div {
+    width: 1800px;
+    margin-left: 0;
+}
+
+#section2 .photo2 {
+    border-radius: 30px;
+    cursor: pointer;
+    margin-right: 20px;
+    display: inline-block;
+    margin-left: 48px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/*5.하단 탭 메뉴에 대한 css입니다*/
+#contents {
+    width: 1200px;
+    height: 360px;
+    margin-top: -10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#tabMenu {
+    float: left;
+    width: 600px;
+    height: 100%;
+    margin-top: 50px;
+    /* background-color: violet; */
+}
+#tabMenu input[type="radio"]{
+    display: none;
+}
+#tabMenu label {
+    display: inline-block;
+    margin: 0 0;
+    padding: 15px 25px;
+    font-weight: 600;
+    text-align: center;
+    color: #aaa;
+    border: 1px solid transparent;
+}
+#tabMenu label:hover {
+    color: #222;
+    cursor: pointer;
+}
+#tabMenu input:checked + label {
+    color: #2C4002;
+    border: 1px solid #ddd;
+    background-color: #eee;
+}
+.tabContent {
+    display: none;
+    padding: 20px 0 0;
+    border-top: 1px solid #ddd;
+}
+.tabContent h2 {
+    display: none;
+}
+#notice ul {
+    list-style: disc;
+    margin-left: 30px;
+}
+#notice ul li {
+    font-size: 16px;
+    line-height: 2.5;
+}
+#gallery ul li {
+    display: inline;
+}
+#tab1:checked ~ #notice,
+#tab2:checked ~ #gallery{
+    display: block;
+}
+
+/*6. 탭 메뉴와 함께 있는 링크 영역입니다*/
+#links {
+    float: right;
+    width: 600px;
+    height: 100%;
+    margin-top: 100px;
+    /* background-color: skyblue; */
+}
+#links ul {
+    padding: 0;
+    overflow: hidden;
+}
+#links ul li {
+    float: left;
+    width: 33%;
+    text-align: center;
+    margin: 10px 0;
+}
+#links ul li a span {
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    border: 1px solid #ddd;
+    line-height: 150px;
+}
+#quick-icon1 {
+    background-image: url('/photo/icon1.jpg');
+}
+#quick-icon2 {
+    background-image: url('/photo/icon2.jpg');
+}
+#quick-icon3 {
+    background-image: url('/photo/icon3.jpg');
+}
+#links ul li a p {
+    margin-top: 15px;
+    font-weight: 600;
+    color: #666;
+}
+
+footer {
+    clear: both;
+    width: 100%;
+    height: 100px;
+    border-top: 2px solid #222;
+    /* background-color: gray; */
+}
+#bottomMenu {
+    width: 100%;
+    height: 20px;
+    position: relative;
+}
+#sns {
+    position: absolute;
+    right: 0;
+}
+#sns ul li {
+    border: none;
+    padding: 5px;
+}
+#company {
+    clear: left;
+    margin-top: 25px;
+    margin-left: 20px;
+}
+p {
+
+    font-size: 14px;
+    color: #aaa;
+}
+#bottomMenu ul {
+    margin-top: 15px;
+}
+#bottomMenu ul li {
+    float: left;
+    padding: 5px 20px;
+    border-right: 1px solid #ddd;
+}
+#bottomMenu ul li:last-child {
+    border-right: none;
+}
+#bottomMenu ul li a, #bottomMenu ul li a:visited {
+    font-size: 15px;
+    color: #666;
+}
+
+/*7.최상단에 위치한 메뉴 버튼 영역입니다*/
+#highMenu ul {
+    margin-top: 15px;
+    float: right;
+    font-family: sans-serif;
+
+}
+#highMenu ul li {
+    float: left;
+    padding: 5px 10px;
+    border-right: 1px solid #ddd;
+}
+#highMenu ul li:last-child {
+    border-right: none;
+}
+#highMenu ul li a, #highMenu ul li a:visited {
+    font-size: 15px;
+    color: #666;
+}
+
+/* 8. 최하단 메인페이지 입장 버튼 영역입니다. */
+#submit {
+    width: 90%;
+    margin: 40px auto;
+    text-align: center;
+}
+button {
+    margin: 20px;
+}
+.custom-btn {
+    width: 260px; /* 수정된 부분 */
+    height: 80px; /* 수정된 부분 */
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+}
+.btn-3 {
+    background: rgb( 106,204,162);
+    background: linear-gradient(0deg, rgba( 106,204,162,1) 0%, rgba( 106,204,162,1) 100%);
+    width: 260px; /* 수정된 부분 */
+    height: 80px; /* 수정된 부분 */
+    line-height: 82px; /* 수정된 부분 */
+    padding: 0;
+    border: none;
+
+}
+.btn-3 span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: xx-large;
+}
+.btn-3:before,
+.btn-3:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
+    background: rgba(126,224,182,1);
+    transition: all 0.3s ease;
+}
+.btn-3:before {
+    height: 0%;
+    width: 2px;
+}
+.btn-3:after {
+    width: 0%;
+    height: 2px;
+}
+.btn-3:hover{
+    background: transparent;
+    box-shadow: none;
+}
+.btn-3:hover:before {
+    height: 100%;
+}
+.btn-3:hover:after {
+    width: 100%;
+}
+.btn-3 span:hover{
+    color: rgba( 106,204,162);
+}
+.btn-3 span:before,
+.btn-3 span:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    bottom: 0;
+    background: rgba(126,224,182,1);
+    transition: all 0.3s ease;
+}
+.btn-3 span:before {
+    width: 2px;
+    height: 0%;
+}
+.btn-3 span:after {
+    width: 0%;
+    height: 2px;
+}
+.btn-3 span:hover:before {
+    height: 100%;
+}
+.btn-3 span:hover:after {
+    width: 100%;
+}
+
+/*9. 웹페이지 사이드 영역에 있는 리모컨 css 영역입니다*/
+.remote {
+    position: fixed;
+    right: 10%;
+    top: 300px;
+    /* margin-right: 120px; */
+    text-align:center;
+    width: 120px;
+}
+.remote-btn{
+    width: 100px;
+    height: 35px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: rgb(126,224,182);
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    margin-top: 5px;
+}
+.remote-btn:hover {
+    background-color: #fff;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #000;
+    transform: translateY(-7px);
+}
+

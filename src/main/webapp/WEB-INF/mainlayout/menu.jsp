@@ -20,6 +20,6 @@
     </style>
 </head>
 <body>
-    <h2>menu 자리</h2>
+
 </body>
 </html>
