@@ -7,7 +7,7 @@ import java.util.Map;
 import boot.semipig.dto.ServiceDto;
 import boot.semipig.dto.couponDto;
 import boot.semipig.dto.qnaDto;
-import boot.semipig.dto.reviewDto;
+import boot.semipig.dto.ReviewDto;
 
 public interface ServiceInter {
     public void insertt(ServiceDto dto);
@@ -24,7 +24,7 @@ public interface ServiceInter {
     public int getTotalCount();
 
     List<qnaDto> qnalist(int startNum, int perPag);
-    public List<reviewDto> reviewlist(int startNum, int perPage);
+    public List<ReviewDto> reviewlist(int startNum, int perPage);
     int ReservationCount(String start);
 }
 

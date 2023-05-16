@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import boot.semipig.dto.couponDto;
 import boot.semipig.dto.qnaDto;
-import boot.semipig.dto.reviewDto;
+import boot.semipig.dto.ReviewDto;
 import boot.semipig.service.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -100,7 +100,7 @@ public class WriteController {
         startNum = (currentPage - 1) * perPage;
         //각 글마다 출력할 글번호(예:10개일경우 1페이지: 10, 2페이지 : 20,
         no = totalCount - startNum;
-        List<reviewDto> list = myservice.reviewlist(startNum, perPage);
+        List<ReviewDto> list = myservice.reviewlist(startNum, perPage);
 
         response.put("totalCount", totalCount);
         response.put("list", list);

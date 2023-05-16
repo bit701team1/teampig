@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import boot.semipig.Mapper.ServiceMapper;
+import boot.semipig.dto.ReviewDto;
 import boot.semipig.dto.couponDto;
 import boot.semipig.dto.qnaDto;
-import boot.semipig.dto.reviewDto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -67,7 +68,7 @@ public class MyService implements ServiceInter {
         return serviceMapper.qnalist(map);
     }
     @Override
-    public List<reviewDto> reviewlist(int startNum, int perPage){
+    public List<ReviewDto> reviewlist(int startNum, int perPage){
         Map<String, Object> map = new HashMap<>();
         map.put("startNum", startNum);
         map.put("perPage", perPage);

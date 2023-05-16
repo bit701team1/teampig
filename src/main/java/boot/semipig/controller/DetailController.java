@@ -53,14 +53,6 @@ public class DetailController {
         return "/detail/detail";
     }
 
-    @GetMapping("/reviewform")//디테일 페이지에서 리뷰쓰는 폼으로 페이지 전환
-    public String reviewform(Model model, int food_idx)
-    {
-        DetailDto fdto=detailService.selectFood(food_idx);
-        model.addAttribute("fdto", fdto);
-        return "/detail/reviewform";
-    }
-
     @PostMapping("/insertreview")//리뷰 업로드
     public String reviewInsert(ReviewDto dto, List<MultipartFile> upload)
     {

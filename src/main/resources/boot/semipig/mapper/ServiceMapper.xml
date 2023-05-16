@@ -34,7 +34,7 @@
     <select id="qnalist" parameterType="Map" resultType="qnaDto">
         select * from qna  ORDER BY qna_idx desc LIMIT #{startNum}, #{perPage}
     </select>
-    <select id="reviewlist" resultType="reviewDto">
+    <select id="reviewlist" resultType="ReviewDto">
         select * from review ORDER BY review_idx desc LIMIT #{startNum}, #{perPage}
     </select>
     <select id="ReservationCount" resultType="int" parameterType="string">

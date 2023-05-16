@@ -88,6 +88,7 @@
         input[type="time"],
         input[type="text"],
         input[type="file"] {
+            height: 40px;
             width: 90%;
             padding: 10px;
             border: 1px solid #ccc;
@@ -217,6 +218,9 @@
             position: absolute;
             top: 440px;
             right: 5px;
+        }
+        .y_info2{
+            font-size:17px;
         }
     </style>
 
@@ -417,7 +421,7 @@
 <h2>가게정보 관리</h2>
 <div class="y_updateinfo">
 <div class="RESTRT_NM" >
-    <h1>서울집</h1>
+    <h1>${dto.RESTRT_NM}</h1>
 </div>
     <div style="margin-left: 25px;">
     <h3  style=" font-weight: bold;">직접수정</h3>
@@ -439,7 +443,7 @@
         <table>
             <tr>
                 <td>
-                    <label for="TASTFDPLC_TELNO">전화번호 </label>
+                    <label for="TASTFDPLC_TELNO"><span class="y_info2">전화번호</span> </label>
                 </td>
                 <td>
                     <input type="tel" id="TASTFDPLC_TELNO" name="TASTFDPLC_TELNO" value=${dto.TASTFDPLC_TELNO}>
@@ -447,7 +451,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="REFINE_ROADNM_ADDR">주소</label>
+                    <label for="REFINE_ROADNM_ADDR"><span class="y_info2">주소</span></label>
                 </td>
                 <td>
                     <input type="text" id="REFINE_ROADNM_ADDR" name="REFINE_ROADNM_ADDR" value="${dto.REFINE_ROADNM_ADDR}">
@@ -455,7 +459,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="REPRSNT_FOOD_NM">주요메뉴</label>
+                    <label for="REPRSNT_FOOD_NM"><span class="y_info2">주요메뉴</span></label>
                 </td>
                 <td>
                     <input type="text" id="REPRSNT_FOOD_NM" name="REPRSNT_FOOD_NM" value="${dto.REPRSNT_FOOD_NM}">
@@ -463,7 +467,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="point">홍보 포인트</label>
+                    <label for="point"><span class="y_info2">홍보 포인트</span></label>
                 </td>
                 <td>
                     <input type="text" id="point" name="point" value="${dto.point}" placeholder="신선한, 주차장이 넓은 등">
@@ -471,7 +475,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="opentime">오픈시간</label>
+                    <label for="opentime"><span class="y_info2">오픈시간</span></label>
                 </td>
                 <td>
                     <input type="time" id="opentime" name="opentime" min="00:00" max="24:00" step="300" value="${dto.opentime}">
@@ -479,7 +483,7 @@
             </tr>
             <tr>
                 <td>
-                    <label for="closetime">종료시간</label>
+                    <label for="closetime"><span class="y_info2">종료시간</span></label>
                 </td>
                 <td>
                     <input type="time" id="closetime" name="closetime" min="00:00" max="24:00" step="300" value="${dto.closetime}">
@@ -487,10 +491,10 @@
             </tr>
             <tr>
                 <td>
-                    <label for="holiday">휴일</label>
+                    <label for="holiday" ><span class="y_info2">휴일</span></label>
                 </td>
                 <td>
-                    <select id="holiday" name="holiday" style="margin-left: 30px;">
+                    <select id="holiday" name="holiday" style="margin-left: 30px; height: 50px;" >
                         <option value="없음">없음</option>
                         <option value="일요일">일요일</option>
                         <option value="월요일">월요일</option>
@@ -505,16 +509,16 @@
             <tr>
                 <td>
                     <br>
-                    <label for="photo">사진 넣기</label>
+                    <label for="photo"><span class="y_info2">사진 넣기</span></label>
                 </td>
                 <td>
                     <br>
-                    <input type="file" id="photo" name="photo" multiple>
+                    <input type="file" id="photo" name="photo" multiple style="height: 50px;">
                 </td>
             </tr>
             <tr align="center">
                 <td colspan="2">
-                    <button type="submit"  style="margin-bottom: 10px; float:right;" id="contentadd">홍보글 작성</button>
+                    <button type="submit" style="margin-top:50px; float:right;" id="contentadd" >홍보글 작성</button>
                 </td>
             </tr>
         </table>
