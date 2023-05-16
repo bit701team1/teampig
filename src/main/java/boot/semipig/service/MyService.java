@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import boot.semipig.Mapper.ServiceMapper;
+import boot.semipig.mapper.ServiceMapper;
 import boot.semipig.dto.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,10 +70,6 @@ public class MyService implements ServiceInter {
         map.put("startNum", startNum);
         map.put("perPage", perPage);
         return serviceMapper.reviewlist(map);
-    }
-    public DetailDto foodlist(int food_idx)
-    {
-        return serviceMapper.foodlist(food_idx);
     }
 
     public int getTotalCount() {

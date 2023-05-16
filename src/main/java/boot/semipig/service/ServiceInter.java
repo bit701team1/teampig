@@ -16,7 +16,6 @@ public interface ServiceInter {
     public List<couponDto> couponall();
     public void couponinsert(couponDto dto);
     public void deletecoupon(int num);
-    public DetailDto foodlist(int loginidx);
     public int getTotalCount();
 
     List<qna3Dto> qnalist(int startNum, int perPag);
