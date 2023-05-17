@@ -9,8 +9,6 @@ public class EnterController {
 
     @GetMapping("/enter")
     public String enter(){
-        return "/enter";
+        return "/enter/enter";
     }
-
-
 }
