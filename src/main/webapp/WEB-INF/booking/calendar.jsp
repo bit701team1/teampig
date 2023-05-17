@@ -75,7 +75,9 @@
             position: relative;
             background-color: black;
         }
-
+        .table td {
+            border-bottom: 1px solid #5C732C;
+        }
         .table th::after {
             content: "";
             position: absolute;
@@ -83,7 +85,7 @@
             left: 0;
             right: 0;
             height:3px; /* 더 두껍게 보이도록 조절 */
-            background-color: black;
+            background-color: #5C732C;
         }
     </style>
     <script>
@@ -323,6 +325,9 @@
     const timeInput = document.getElementById('y_time');
     const dateInput = document.getElementById('y_date');
     const now = new Date();
+    // opentime과 closetime 값을 출력할 HTML 요소의 ID를 가리키는 변수를 설정합니다.
+    const openTime = '${dto.opentime}'; // 'opentime' 값으로 변경해야 합니다.
+    const closeTime = '${dto.closetime}'; // 'closetime' 값으로 변경해야 합니다.
 
     dateInput.min = now.toISOString().split('T')[0];
 
@@ -338,17 +343,15 @@
             }
         },
     });
-
     const timePicker = flatpickr(timeInput, {
         enableTime: true,
         noCalendar: true,
         dateFormat: 'H:i',
         time_24hr: true,
         minuteIncrement: 60,
-        minTime: now.getHours() + ':60', // 현재 시간부터 선택 가능
-        maxTime: '23:59', // 23:59까지 선택 가능
+        minTime: openTime, // 현재 시간부터 선택 가능
+        maxTime: closeTime, // 23:59까지 선택 가능
     });
-
 </script>
 
 <script>

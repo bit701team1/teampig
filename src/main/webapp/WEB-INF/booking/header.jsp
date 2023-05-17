@@ -37,7 +37,6 @@
 <span style="margin-left: 10px;">총 예약 :  ${totalCount}개</span>
 </div>
   <div  id="y_menu">
-  <span>
     <span class="y_store" style="margin-right: 10px;"><i class="bi bi-person-circle"></i> 서울집님</span>
   </div>
 

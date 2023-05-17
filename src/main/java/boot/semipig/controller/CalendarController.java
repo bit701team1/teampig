@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import boot.semipig.dto.OwnerpageDto;
+import boot.semipig.service.OwnerpageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,10 +31,12 @@ import boot.semipig.service.MyService;
 public class CalendarController {
     @Autowired
     private MyService myservice;
-
+    @Autowired
+    private OwnerpageService ownerpageService;
     @GetMapping("/calendar")
     public String calendar2(Model model) {
-
+        OwnerpageDto odto = ownerpageService.getData(3);
+        model.addAttribute("dto",odto);
         int totalCount = myservice.getTotalCount();
         model.addAttribute("totalCount", totalCount);
         return "/main/booking/calendar";

@@ -3,6 +3,7 @@ package boot.semipig.dto;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Data
@@ -24,4 +25,5 @@ public class OwnerpageDto {
     private String point;
     private String food_type;
     private List<FoodPhotoDto> photoList;
+
 }

@@ -30,36 +30,36 @@ public class OwnerpageService implements OwnerpageServiceInter {
     }
 
     @Override
-    public String openai(int food_idx) throws IOException, JSONException {
+    public String openai(int user_idx) throws IOException, JSONException {
         //data를 불러온다
-        OwnerpageDto odto = ownerpageMapper.getData(food_idx);
+        OwnerpageDto odto = ownerpageMapper.getData(user_idx);
         //data로 prompt 생성
         /*
-        * TODO
-        *  프롬프트 채워넣기
-        * */
+         * TODO
+         *  프롬프트 채워넣기
+         * */
 
-        String aiprompt = "너는 마케터야, 제공하는 정보로 홍보글 작성해줘 \n가게 이름: "+odto.getRESTRT_NM()+", 주요메뉴: "+odto.getREPRSNT_FOOD_NM()+", 주소: "+odto.getREFINE_ROADNM_ADDR()+", 전화번호: "+odto.getTASTFDPLC_TELNO()
-         +", 오픈시간: "+odto.getOpentime()+", 영업종료시간: "+odto.getClosetime()+", 휴일: "+odto.getHoliday()+", 가게 강점: "+odto.getPoint();
+        String aiprompt = "너는 마케터야, 제공하는 정보로 홍보글 작성해줘 \n가게 이름: " + odto.getRESTRT_NM() + ", 주요메뉴: " + odto.getREPRSNT_FOOD_NM() + ", 주소: " + odto.getREFINE_ROADNM_ADDR() + ", 전화번호: " + odto.getTASTFDPLC_TELNO()
+                + ", 오픈시간: " + odto.getOpentime() + ", 영업종료시간: " + odto.getClosetime() + ", 휴일: " + odto.getHoliday() + ", 가게 강점: " + odto.getPoint();
 
         //openai로 보낸다
         System.out.println("Prompt: " + aiprompt); // prompt 확인하기
         URL url = new URL("https://api.openai.com/v1/chat/completions");
-        HttpURLConnection con = (HttpURLConnection)url.openConnection();
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json"); // 데이터 타입이 무엇인가
-        con.setRequestProperty("Authorization","Bearer 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");//인증 ,openapi key
+        con.setRequestProperty("Authorization", "Bearer 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");//인증 ,openapi key
         con.setDoOutput(true);
 
         JSONObject data = new JSONObject();
         JSONArray message_arr = new JSONArray();
         JSONObject message = new JSONObject();
 
-        data.put("model","gpt-3.5-turbo");
-        message.put("role","user");
-        message.put("content",aiprompt);
+        data.put("model", "gpt-3.5-turbo");
+        message.put("role", "user");
+        message.put("content", aiprompt);
         message_arr.put(message);
-        data.put("messages",message_arr);
+        data.put("messages", message_arr);
 
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(con.getOutputStream()));
         bw.write(data.toString());
@@ -87,15 +87,16 @@ public class OwnerpageService implements OwnerpageServiceInter {
 
         JSONObject responseJson = new JSONObject(jsonResponse);
         JSONArray choicesArr = responseJson.getJSONArray("choices");
-        String generatedText = choicesArr.getJSONObject(0).getJSONObject("message").getString("content");;
+        String generatedText = choicesArr.getJSONObject(0).getJSONObject("message").getString("content");
+        ;
 
         return generatedText;
 
     }
 
     @Override
-    public OwnerpageDto getData(int food_idx) {
-        return ownerpageMapper.getData(food_idx);
+    public OwnerpageDto getData(int user_idx) {
+        return ownerpageMapper.getData(user_idx);
     }
 
     @Override
@@ -108,11 +109,6 @@ public class OwnerpageService implements OwnerpageServiceInter {
         ownerpageMapper.updatePrompt(dto);
     }
 
-    @Override
-    public int getFood_idx(int user_idx) {
-        int food_idx= ownerpageMapper.getFood_idx(user_idx);
-        return food_idx;
-    }
 
 //    @Override
 //    public String getSelectPhoto(int photo_idx) {
@@ -125,32 +121,32 @@ public class OwnerpageService implements OwnerpageServiceInter {
 //    }
 
     @Override
-    public List<FoodPhotoDto> getPhotos(int food_idx) {
-        return ownerpageMapper.getPhotos(food_idx);
+    public List<FoodPhotoDto> getPhotos(int user_idx) {
+        return ownerpageMapper.getPhotos(user_idx);
     }
 
-//    @Override
+    //    @Override
 //    public List<OwnerpageDto> getAllOwner() { return ownerpageMapper.getAllOwner();}
 //    @Override
-    public List<String> getAllPhoto(int food_idx) {
-        return ownerpageMapper.getAllPhoto(food_idx);
+    public List<String> getAllPhoto(int user_idx) {
+        return ownerpageMapper.getAllPhoto(user_idx);
     }
 
     @Override
-    public List<OwnerpageDto> getDataPhoto(int food_idx) {
-        return ownerpageMapper.getDataPhoto(food_idx);
+    public List<OwnerpageDto> getDataPhoto(int user_idx) {
+        return ownerpageMapper.getDataPhoto(user_idx);
     }
 
 
     @Override
-    public String removephotos(int food_idx) {
-        ownerpageMapper.removephotos(food_idx);
+    public String removephotos(int user_idx) {
+        ownerpageMapper.removephotos(user_idx);
         return "Success"; // Or any other appropriate result
     }
 
 
     @Override
-    public void removePhotos(int food_idx) {
-        ownerpageMapper.removephotos(food_idx);
+    public void removePhotos(int user_idx) {
+        ownerpageMapper.removephotos(user_idx);
     }
 }

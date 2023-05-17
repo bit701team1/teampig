@@ -36,12 +36,16 @@
             left: 0;
             right: 0;
             height:3px; /* 더 두껍게 보이도록 조절 */
-            background-color: black;
+            background-color:#5C732C;
         }
         #y_page2{
             display: flex;
             justify-content: center;
         }
+        .table td {
+            border-bottom: 1px solid #5C732C;
+        }
+
     </style>
 
 </head>

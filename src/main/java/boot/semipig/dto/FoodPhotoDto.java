@@ -7,6 +7,7 @@ import org.apache.ibatis.type.Alias;
 @Data
 @Alias("FoodPhotoDto")
 public class FoodPhotoDto {
+    private  int user_idx;
     private int food_idx;
     private int photo_idx;
     private String photoname;
