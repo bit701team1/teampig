@@ -18,7 +18,11 @@
     </style>
 </head>
 <body>
-    <div class="mainlayout">
+<%@ include file="header.jsp" %>
+<%@ include file="mainlist.jsp" %>
+<%@ include file="footer.jsp" %>
+<%@ include file="chatbot.jsp" %>
+   <%-- <div class="mainlayout">
         <header class="header">
             <tiles:insertAttribute name="header"/>
         </header>
@@ -34,6 +38,6 @@
         <section class="chatbot">
             <tiles:insertAttribute name="chatbot"/>
         </section>
-</div>
+    </div>--%>
 </body>
 </html>

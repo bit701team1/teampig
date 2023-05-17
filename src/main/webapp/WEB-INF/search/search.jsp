@@ -20,20 +20,36 @@
     <link rel="import" href="http://www.polymer-project.org/components/core-icons/core-icons.html">
     <link rel="import" href="http://www.polymer-project.org/components/font-roboto/roboto.html">
 
+    <%@ include file="../mainlayout/header.jsp" %>
+    <%@ include file="../mainlayout/mainlist.jsp" %>
+    <%@ include file="../mainlayout/footer.jsp" %>
+    <%@ include file="../mainlayout/chatbot.jsp" %>
 
     <style>
         body, body * {
             font-family: 'Jua'
         }
 
+        .mapinclude{
+            clear: both;
+            width: 100%;
+            height: 300px;
+            background-color: orange;
+            overflow: hidden;
+            margin-top: 50px;
+        }
+
         .k_foodlist {
-            cursor: pointer;
+            height: 40px;
+            padding-top: 5px;
+            font-size: 25px;
         }
 
         .k_buttonarea{
             margin-left: 20px;
         }
 
+        /*버튼*/
         body {
             background-color: #f9f9f9;
             font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
@@ -88,7 +104,50 @@
             text-align: center;
         }
 
+        .k_photoplace{
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            border-radius: 20px;
+        }
 
+        .k_searchlist{
+            width: 900px;
+            height: 300px;
+        }
+
+        .k_GPT_place {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 600px;
+        }
+
+        .content_container{
+            cursor: pointer;
+            float: left;
+            width:900px;
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .content_container:hover{
+            background-color: rgba(199,199,199,0.1);
+            box-shadow: 8px 8px 8px 0 rgba(211,255,206,0.3);
+
+        }
+        .bookmarkstar{
+            color: orange;
+        }
+
+        .k_foodtype{
+            color: #757575;
+        }
+
+        .k_innercontent_container{
+            margin-left: 10px;
+            font-size: ;
+        }
     </style>
     <%
         int currentPage = 1;
@@ -202,43 +261,36 @@
                     }
                 })
                     .done(function(res) {
-
+                        console.log(res);
                         let s =`<br>`;
 
                         s+=`<b>\${res.inputsearch}에 대한 검색 결과입니다</b><br>`;
 
-                        s += "<table class='table table-bordered'>";
+                        s += "<div class='k_searchlist'>";
                         $.each(res.list, function (idx, ele) {
 
-                            s += `<tr>
-                        <td rowspan='3'>사진
-                        </td>
-                        <td>
-                            <div class="k_foodlist"
-                                 food_idx="\${ele.food_idx}"
-                                 loginidx="${loginidx}"
-                                 restrt_list="\${ele.restrt_NM}"
-                                 food_type="\${ele.food_type}">
-                                \${ele.restrt_NM}
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>\${ele.food_type}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>\${ele.average}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan='2'>짤막한 홍보글?
-                        </td>
-                    </tr>`;
-                        }); //each
+                            s+=`
+                                <div class="content_container" food_idx="\${ele.food_idx}"
+                                         loginidx="${loginidx}"
+                                         restrt_list="\${ele.restrt_NM}"
+                                         food_type="\${ele.food_type}">
+                                    <div class="k_photoplace">사진</div>
+                                    <div class="k_innercontent_container">
+                                        <div class="k_foodlist">
+                                        \${ele.restrt_NM}
+                                        <div class="k_foodtype">#\${ele.food_type}</div>
+                                        <div>\${ele.average}점 | <i class="rating__icon rating__icon--star fa fa-star bookmarkstar"></i>
+                                                \${ele.bookmarkcount}</div>
+                                        <div>\${ele.food_price}</div>
+                                        <div class="k_GPT_place">\${ele.gpt_content}</div>
+                                    </div>
+                                </div>
 
-                        s += "</table>";
+                            `;
 
+                        s += "</div>";
+                        s+="<hr>";
+                        }); //each문 end
                         //처음으로
                         s += `
                     	<i class="bi bi-skip-start-fill" style="color:black;text-decoration:none;cursor: pointer;"
@@ -274,14 +326,14 @@
                         $("#inputsearch").val("");
                     }) //success
                 /*});*/ // click event
-            //});
+                //});
 
-        } // list end
+            } // list end
 
 
 
             //detail 진입시 히스토리 저장
-            $(document).on('click', '.k_foodlist', function () {
+            $(document).on('click', '.content_container', function () {
 
                 var food_type = $(this).attr("food_type");
                 var user_idx = $(this).attr("loginidx");
@@ -329,15 +381,6 @@
                 //$(".ajax-button[list_type='type_search']").trigger("click"); // 검색 버튼 자동 클릭
             });
 
-            //조건 버튼 이벤트
-      /*      $(".btn_condition").on('click',function(){
-
-                if ($(this).hasClass('button-clicked')) {
-                    $(this).removeClass('button-clicked');
-                } else {
-                    $(this).addClass('button-clicked');
-                }
-            });*/
 
             $(".btn_condition").on('click', function() {
                 if ($(this).hasClass('button-clicked')) {
@@ -348,71 +391,69 @@
                 }
             });
 
-
-
             window.list(1);
         }); // $func end
 
         //지도 관련 메서드
-     function initMap(){
+        function initMap(){
 
-               $.ajax({
-                   type: "get",
-                   url:"./totallist",
-                   dataType:"json",
-                   success:function(res){
-                       var map = new naver.maps.Map('map', {
-                           center: new naver.maps.LatLng(37.66995281, 126.8554586),
-                           zoom: 10
-                       });//지도 시작 시 중심 지점
+            $.ajax({
+                type: "get",
+                url:"./totallist",
+                dataType:"json",
+                success:function(res){
+                    var map = new naver.maps.Map('map', {
+                        center: new naver.maps.LatLng(37.66995281, 126.8554586),
+                        zoom: 10
+                    });//지도 시작 시 중심 지점
 
-                       let markers=new Array();//마커 정보를 담는 배열
-                       let infoWindows=new Array();//정보창을 담는 배열
+                    let markers=new Array();//마커 정보를 담는 배열
+                    let infoWindows=new Array();//정보창을 담는 배열
 
-                       //마커와 정보창 채우기
-                       $.each(res.list, function(idx, ele){
-                           var marker = new naver.maps.Marker({
-                               map: map,
-                               title: "ele.restrt_NM",
-                               position: new naver.maps.LatLng(ele.refine_WGS84_LAT, ele.refine_WGS84_LOGT)
-                           });
-                           //정보창
-                           var infoWindow =new naver.maps.InfoWindow({
-                               content: `<div style="width: 200px; text-align: center; padding:10px;"> <b>\${ele.restrt_NM}</b><br>-네이버 지도-</div>`
-                           });
+                    //마커와 정보창 채우기
+                    $.each(res.list, function(idx, ele){
+                        var marker = new naver.maps.Marker({
+                            map: map,
+                            title: "ele.restrt_NM",
+                            position: new naver.maps.LatLng(ele.refine_WGS84_LAT, ele.refine_WGS84_LOGT)
+                        });
+                        //정보창
+                        var infoWindow =new naver.maps.InfoWindow({
+                            content: `<div style="width: 200px; text-align: center; padding:10px;"> <b>\${ele.restrt_NM}</b><br>-네이버 지도-</div>`
+                        });
 
-                           markers.push(marker);//생성한 마커를 배열에 담음
-                           infoWindows.push(infoWindow); //생성한 정보창을 배열에 넣는다.
-                       })
+                        markers.push(marker);//생성한 마커를 배열에 담음
+                        infoWindows.push(infoWindow); //생성한 정보창을 배열에 넣는다.
+                    })
 
 
-                       console.log(infoWindows[0]);
-                       console.log(infoWindows[3]);
+                    console.log(infoWindows[0]);
+                    console.log(infoWindows[3]);
 
-                       function getClickHandler(seq){
-                           return function(e){//마커 클릭하는 부분, 이벤트 함수 반환
-                               var marker= markers[seq],//클릭한 마커의 시퀀스로 찾기
-                                   infoWindow=infoWindows[seq];
+                    function getClickHandler(seq){
+                        return function(e){//마커 클릭하는 부분, 이벤트 함수 반환
+                            var marker= markers[seq],//클릭한 마커의 시퀀스로 찾기
+                                infoWindow=infoWindows[seq];
 
-                               if(infoWindow.getMap()){
-                                   infoWindow.close();
+                            if(infoWindow.getMap()){
+                                infoWindow.close();
 
-                               }else{
-                                   infoWindow.open(map, marker);//표출
-                               }
-                           }
+                            }else{
+                                infoWindow.open(map, marker);//표출
+                            }
+                        }
 
-                       }
-                       for(var i=0, ii=markers.length; i<ii;i++){
-                           console.log(markers[i], getClickHandler(i));
-                           naver.maps.Event.addListener(markers[i], 'click',getClickHandler(i));//클릭한 마커 핸들러
-                       }
-                   },//success 끝
-                   error:function (){
-                       console.log("ajax 오류")
-                   }
-               });//ajax 끝
-           }//initMap function 끝
+                    }
+                    for(var i=0, ii=markers.length; i<ii;i++){
+                        console.log(markers[i], getClickHandler(i));
+                        naver.maps.Event.addListener(markers[i], 'click',getClickHandler(i));//클릭한 마커 핸들러
+                    }
+                },//success 끝
+                error:function (){
+                    console.log("ajax 오류")
+                }
+            });//ajax 끝
+        }//initMap function 끝
     </script>
 </head>
 <body>
@@ -432,7 +473,7 @@
     <button type="button" class="ajax-button searchbtn" list_type="type_search">검색</button>
 </div>
 
-<div id="map" style="width:800px; height:400px;"></div><br><br>
+<div id="map" class="mapinclude" style="width:800px; height:400px;"></div><br><br>
 <div class="k_buttonarea">
     <div class="button raised btn_condition ajax-button" list_type="type_1">
         <div class="center" fit>평점순</div>

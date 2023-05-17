@@ -104,4 +104,9 @@ public class SearchService implements SearchServiceInter {
     public int getBookmarkListCount(int startNum, int perPage) {
         return searchMapper.getBookmarkListCount(startNum,perPage);
     }
+
+    @Override
+    public int getOneBookmarkCount(int food_idx) {
+        return searchMapper.getOneBookmarkCount(food_idx);
+    }
 }

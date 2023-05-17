@@ -82,6 +82,9 @@
                  GROUP BY f.food_idx
              ) AS subquery_alias;
     </select>
+    <select id="getOneBookmarkCount" parameterType="int" resultType="int">
+        select count(*) from bookmark where food_idx = #{food_idx}
+    </select>
 
 
     <!--추천때 쓰는 메서드임, 메인페이지에 필요할듯함-->

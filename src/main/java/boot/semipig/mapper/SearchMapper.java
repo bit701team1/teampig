@@ -16,6 +16,7 @@ public interface SearchMapper {
     public List<SearchDto> getPriceFood(Map<String, Object> map);
 
     public List<SearchDto> getBookmarkList(int startNum, int perPage);
+    public int getOneBookmarkCount(int food_idx);
 
     //Count 메서드
     public int getTotalCount();

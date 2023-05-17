@@ -232,7 +232,10 @@
             border: dimgray 1px solid;
         }
 
-
+        /*가고싶다*/
+        .listbookmark{
+            cursor: pointer;
+        }
 
 
     </style>
@@ -421,12 +424,12 @@
                 success: function(res) {
 
                     if(res==1) {
-                        var s=`<button type='button' class="btn btn-success"><i class="bi bi-bookmark-star-fill listbookmark" style="cursor: pointer">가고싶다</i></button>`;
+                        var s=`<i class="rating__icon rating__icon--star fa fa-star listbookmark"
+                                style="color: orange"></i>`;
                     }
                     else{
-                        var s=`<button type='button' class="btn btn-success"><i class="bi bi-bookmark-star listbookmark" style="cursor: pointer">가고싶다</i></button>`;
+                        var s=`<i class="rating__icon rating__icon--star fa fa-star listbookmark"></i>`;
                     }
-
                     $("#k_iconplace").html(s);
                 }
             }); //ajax end
