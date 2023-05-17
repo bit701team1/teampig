@@ -40,4 +40,7 @@
     <select id="ReservationCount" resultType="int" parameterType="string">
         SELECT COUNT(*) FROM calendar WHERE start = #{start}
     </select>
+    <select id="getmypage" resultType="DetailDto" parameterType="int">
+        select * from food_list where user_idx=#{user_idx}
+    </select>
 </mapper>

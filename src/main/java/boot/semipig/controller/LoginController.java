@@ -1,5 +1,6 @@
 package boot.semipig.controller;
 
+import boot.semipig.dto.DetailDto;
 import boot.semipig.dto.LoginDto;
 import boot.semipig.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class LoginController{
             session.setAttribute("loginok", "yes");
             session.setAttribute("loginid", id);
             int user_idx=loginService.getUserIdx(id);
-            session.setAttribute("loginidx", user_idx);
+            session.setAttribute("user_idx", user_idx);
             session.setAttribute("saveid", saveid==null?"no":"yes");
 
             return 1;

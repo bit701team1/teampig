@@ -439,7 +439,7 @@
 
 <div class="right_input_section">
     <form action="update" method="post" enctype="multipart/form-data">
-        <input type="hidden" id="food_idx" name="food_idx" value="${dto.food_idx}">
+        <input type="hidden" id="user_idx" name="user_idx" value="${dto.user_idx}">
         <table>
             <tr>
                 <td>

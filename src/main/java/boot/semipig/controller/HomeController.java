@@ -1,7 +1,9 @@
 package boot.semipig.controller;
 
 import boot.semipig.dto.DetailDto;
+import boot.semipig.dto.JoinDto;
 import boot.semipig.dto.couponDto;
+import boot.semipig.mapper.ServiceMapper;
 import boot.semipig.service.MyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +18,23 @@ import java.util.List;
 public class HomeController {
     @Autowired
     private MyService myservice;
+    @Autowired
+    private ServiceMapper serviceMapper;
     @GetMapping({"/","/home1"})
-    public String home1(Model model,HttpSession session) {
-        String userId = String.valueOf(session.getAttribute("loginid"));
-        DetailDto dto = new DetailDto();
-        session.setAttribute("dto", dto);
+    public String home()
+    {
+        return "/mainlist";
+    }
+    @GetMapping("/home2")
+    public String home1(Model model, HttpSession session) {
+        int user_idx = (int) session.getAttribute("user_idx");
+        // DTO 객체를 생성하여 세션에서 가져온 정보를 저장
+        serviceMapper.getmypage(user_idx);
+        DetailDto dto =serviceMapper.getmypage(user_idx);
+        dto.setUser_idx(user_idx);
         int totalCount = myservice.getTotalCount();
-        model.addAttribute("dto",dto);
+        model.addAttribute("user_idx", user_idx);
+        model.addAttribute("dto", dto);
         model.addAttribute("totalCount", totalCount);
         return "/main";
     }
@@ -45,10 +57,5 @@ public class HomeController {
         int totalCount=myservice.getTotalCount();
         model.addAttribute("totalCount", totalCount);
         return "/header";
-    }
-    @GetMapping("/home2")
-    public String home()
-    {
-        return "/main2";
     }
 }

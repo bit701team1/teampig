@@ -21,4 +21,5 @@ public interface ServiceMapper {
     public List<ReviewDto> reviewlist(Map<String, Object> map);
 
     int ReservationCount(String start);
+    public DetailDto getmypage(int user_idx);
 }

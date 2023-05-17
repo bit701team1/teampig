@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import boot.semipig.dto.*;
+import boot.semipig.mapper.ServiceMapper;
 import boot.semipig.service.MyService;
+import boot.semipig.service.OwnerpageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +24,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class WriteController {
     @Autowired
     private MyService myservice;
+    @Autowired
+    private ServiceMapper serviceMapper;
+    @Autowired
+    private OwnerpageService ownerpageservice;
     @GetMapping("/form")
     public String coupon(Model model) {
         List<couponDto> list2 = myservice.couponall();
@@ -151,8 +158,14 @@ public class WriteController {
         return "/main/booking/qna";
     }
     @GetMapping("/infoupdate")
-    public String infoupdate(Model model)
+    public String infoupdate(Model model,  HttpSession session)
     {
+        int user_idx = (int) session.getAttribute("user_idx");
+        // DTO 객체를 생성하여 세션에서 가져온 정보를 저장
+        DetailDto dto =ownerpageservice.updateOwner(user_idx);
+        dto.setUser_idx(user_idx);
+        model.addAttribute("user_idx", user_idx);
+        model.addAttribute("dto", dto);
         int totalCount=myservice.getTotalCount();
         model.addAttribute("totalCount", totalCount);
         return "/main/booking/infoupdate";

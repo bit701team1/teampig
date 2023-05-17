@@ -19,7 +19,7 @@
     </select>
     <update id="updateOwner" parameterType="OwnerpageDto">
         update food_list set TASTFDPLC_TELNO=#{TASTFDPLC_TELNO},REFINE_ROADNM_ADDR=#{REFINE_ROADNM_ADDR},REPRSNT_FOOD_NM=#{REPRSNT_FOOD_NM}
-                       ,point=#{point},opentime=#{opentime},closetime=#{closetime},holiday=#{holiday},point=#{point} where food_idx=#{food_idx}
+                       ,point=#{point},opentime=#{opentime},closetime=#{closetime},holiday=#{holiday},point=#{point} where user_idx=#{user_idx}
     </update>
     <select id="getFood_idx" resultType="int" parameterType="int">
         select food_idx from food_list where user_idx=#{user_idx}
