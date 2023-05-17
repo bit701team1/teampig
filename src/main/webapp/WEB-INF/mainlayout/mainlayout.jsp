@@ -25,7 +25,7 @@
         .main{
             border: 3px solid black;
             width: 1000px;
-            height: 500px;
+            height: 1050px;
             margin: 50px auto;
         }
         .menu{
