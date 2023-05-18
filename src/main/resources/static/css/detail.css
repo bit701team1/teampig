@@ -1,0 +1,233 @@
+.s_delete, .s_update{
+    cursor:pointer;
+}
+.s_delete:hover, .s_update:hover{
+    color: gray;
+}
+.s_storename{
+    font-size: 30px;
+    border: 1px solid black;
+}
+.s_side{
+    position: relative;
+    top: 400px;
+    float: right;
+    border: 1px solid black;
+}
+.s_reviewphoto{
+    /*border: 1px solid black;*/
+    position: absolute;
+    height: 340px;
+    width: 100%;
+
+}
+.s_photolist{
+    height: 340px;
+    width:19%;
+}
+.s_info{
+    border:1px solid black;
+    position: absolute;
+    top: 400px;
+    left: 90px;
+    float:left;
+    width: 800px;
+}
+.s_storedetailinfo{
+    position:relative;
+    top: 20px;
+}
+.s_review{
+    border: 1px solid black;
+    position: relative;
+    top:100px;
+    width: 800px;
+}
+.s_button{
+    float: right;
+}
+
+pre{
+    white-space: pre-wrap;
+}
+tr{
+    border:1px solid black;
+}
+.s_review_table{
+    border: 1px solid black;
+    width: 800px;
+}
+.s_inner_table{
+    width: 800px;
+}
+.s_persontd{
+    width: 100px;
+}
+
+.s_photoreview{
+    border: 1px solid black;
+    white-space : nowrap;
+}
+.s_plist{
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+}
+.s_fontcolorapply{
+    color: #5C732C;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+a:hover{
+    color:#5C732C;
+}
+
+/*리뷰쓰는 폼 관련*/
+.rating .rate_radio + label {
+    position: relative;
+    display: inline-block;
+    margin-left: -4px;
+    z-index: 10;
+    width: 60px;
+    height: 60px;
+    background-image: url('../photo/pigstar.png');
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+.rating .rate_radio:checked + label {
+    background-color: #ff8;
+}
+/* 레이아웃 외곽 너비 400px 제한*/
+.wrap{
+    max-width: 480px;
+    margin: 0 auto; /* 화면 가운데로 */
+    background-color: #fff;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+
+}
+.reviewform textarea{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.rating .rate_radio {
+    position: relative;
+    display: inline-block;
+    z-index: 20;
+    opacity: 0.001;
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    cursor: pointer;
+    vertical-align: top;
+    display: none;
+}
+.rating .rate_radio + label {
+    position: relative;
+    display: inline-block;
+    margin-left: -4px;
+    z-index: 10;
+    width: 60px;
+    height: 60px;
+    background-image: url('../photo/pigstar.png');
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+.rating .rate_radio:checked + label {
+    background-color: #ff8;
+}
+.s_photosqure{
+    width: 100px;
+    height: 100px;
+    border: dimgray 1px solid;
+}
+.modal{
+    z-index: 20000;
+}
+
+/*수정*/
+         .u_rating .u_rate_radio + label {
+             position: relative;
+             display: inline-block;
+             margin-left: -4px;
+             z-index: 10;
+             width: 60px;
+             height: 60px;
+             background-image: url('../photo/pigstar.png');
+             background-repeat: no-repeat;
+             background-size: 60px 60px;
+             cursor: pointer;
+             background-color: #f0f0f0;
+         }
+.u_rating .u_rate_radio:checked + label {
+    background-color: #ff8;
+}
+/* 레이아웃 외곽 너비 400px 제한*/
+.u_wrap{
+    max-width: 480px;
+    margin: 0 auto; /* 화면 가운데로 */
+    background-color: #fff;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+
+}
+.u_reviewform textarea{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.u_rating .u_rate_radio {
+    position: relative;
+    display: inline-block;
+    z-index: 20;
+    opacity: 0.001;
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    cursor: pointer;
+    vertical-align: top;
+    display: none;
+}
+.u_rating .u_rate_radio + label {
+    position: relative;
+    display: inline-block;
+    margin-left: -4px;
+    z-index: 10;
+    width: 60px;
+    height: 60px;
+    background-image: url('../photo/pigstar.png');
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+.u_rating .u_rate_radio:checked + label {
+    background-color: #ff8;
+}
+.s_u_photosqure{
+    width: 100px;
+    height: 100px;
+    border: dimgray 1px solid;
+}
+.reviewformrestrt_nm{
+    font-size: 28px;
+}
+#file-input{
+    display:none;
+}
+#custom-button{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color:white;
+    cursor:pointer;
+}
