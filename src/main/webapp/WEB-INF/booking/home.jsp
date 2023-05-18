@@ -53,8 +53,8 @@
 	<section class="main">
 		<tiles:insertAttribute name="main"/>
 	</section>
-	<img src="${root}/photo/fruit.jpg" style="width: 1200px; height:1000px; position: fixed;">
 </div>
+<img src="${root}/photo/fruit.jpg" style="width: 1300px; height:800px; position: fixed; left:250px;margin-top: 1px; z-index: -10;">
 <div class="y_bosspage3">
 	<section class="menu">
 		<tiles:insertAttribute name="menu"/>

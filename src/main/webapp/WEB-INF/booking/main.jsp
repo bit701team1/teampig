@@ -251,7 +251,7 @@
         color: #333;
         line-height: 1.5;
         text-align: center;
-
+        margin-bottom: 100px;
         background-color:rgba(228, 247, 186, 0.3);
     }
 
