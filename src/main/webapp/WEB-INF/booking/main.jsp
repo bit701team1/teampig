@@ -251,7 +251,7 @@
         color: #333;
         line-height: 1.5;
         text-align: center;
-        margin-bottom: 80px;
+
         background-color:rgba(228, 247, 186, 0.3);
     }
 
@@ -281,6 +281,5 @@
         <p>${dto.GPT_content}</p>
     </div>
 </div>
-
 </body>
 </html>
