@@ -22,6 +22,7 @@
     <!--    식당리스트 출력 영역입니다.-->
     <definition name="mainlayout" template="/WEB-INF/mainlayout/mainlayout.jsp">
         <put-attribute name="header" value="/WEB-INF/mainlayout/header.jsp"/>
+        <put-attribute name="mainlist" value="/WEB-INF/mainlayout/mainlist.jsp"/>
         <put-attribute name="chatbot" value="/WEB-INF/mainlayout/chatbot.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/mainlayout/footer.jsp"/>
     </definition>

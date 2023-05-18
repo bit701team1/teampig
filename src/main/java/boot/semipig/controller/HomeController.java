@@ -33,11 +33,11 @@ public class HomeController {
     }
 
 
-
     @GetMapping("/home2")
     public String home1(Model model, HttpSession session) {
         int user_idx = (int) session.getAttribute("user_idx");
         // DTO 객체를 생성하여 세션에서 가져온 정보를 저장
+
         serviceMapper.getmypage(user_idx);
         DetailDto dto =serviceMapper.getmypage(user_idx);
         LoginDto dtos=loginService.getUserInfo(user_idx);
@@ -47,6 +47,9 @@ public class HomeController {
         model.addAttribute("logindto", dtos);
         model.addAttribute("dto", dto);
         model.addAttribute("user_idx", user_idx);
+
+        model.addAttribute("user_idx", user_idx);
+
         model.addAttribute("totalCount", totalCount);
         return "/main";
     }
@@ -73,7 +76,6 @@ public class HomeController {
         model.addAttribute("totalCount", totalCount);
         return "/header";
     }
-
 }
 
 

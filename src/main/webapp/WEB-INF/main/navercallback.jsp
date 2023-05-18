@@ -57,13 +57,16 @@
                             success: function (res) {
                                 if(res==0)
                                 {
-                                    window.location.href='../../joinformtest?email='+email+'&name='+name;
+                                    //alert("회원이 아닙니다. 회원가입해주세요.");
+                                    //String ss=(String)${sessionScope.previousUrl};
+                                    //console.log(ss);
+
+                                    var redirectUrl='../../business?n_email='+email+'&n_name='+name;
+                                    window.location.href=redirectUrl;
                                 }
                                 else{
-                                    window.location.href='../../snsloginaction?email='+email;
+                                    window.location.href='../../naverloginaction?email='+email;
                                 }
-
-
                             }//success function 끝
                         })
 
