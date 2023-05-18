@@ -17,14 +17,20 @@ public class HomeController {
     @Autowired
     private MyService myservice;
     @GetMapping({"/","/home1"})
+    public String home()
+    {
+        return "/main";
+    }
+    @GetMapping("/home2")
     public String home1(Model model,HttpSession session) {
         String userId = String.valueOf(session.getAttribute("loginid"));
         DetailDto dto = new DetailDto();
+        dto.setUser_idx(Integer.parseInt(userId));
         session.setAttribute("dto", dto);
         int totalCount = myservice.getTotalCount();
         model.addAttribute("dto",dto);
         model.addAttribute("totalCount", totalCount);
-        return "/main";
+        return "/main2";
     }
     @RequestMapping(value = "/insertcoupon", method = {RequestMethod.GET, RequestMethod.POST}) //  main은 getmapping이 없어서 따로 이렇게 해줘야함
     @ResponseBody
@@ -45,10 +51,5 @@ public class HomeController {
         int totalCount=myservice.getTotalCount();
         model.addAttribute("totalCount", totalCount);
         return "/header";
-    }
-    @GetMapping("/home2")
-    public String home()
-    {
-        return "/main2";
     }
 }

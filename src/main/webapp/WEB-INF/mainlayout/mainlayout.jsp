@@ -18,22 +18,27 @@
     </style>
 </head>
 <body>
+<%--<%@ include file="header.jsp" %>--%>
+<%@ include file="mainlist.jsp" %>
+<%--<%@ include file="/WEB-INF/search/search.jsp" %>--%>
+<%--<%@ include file="footer.jsp" %>--%>
+<%--<%@ include file="chatbot.jsp" %>--%>
     <div class="mainlayout">
         <header class="header">
             <tiles:insertAttribute name="header"/>
         </header>
-        <section class="mainlist">
-            <tiles:insertAttribute name="mainlist"/>
-        </section>
-        <section class="main">
-            <tiles:insertAttribute name="main"/>
-        </section>
+<%--        <section class="mainlist">--%>
+<%--            <tiles:insertAttribute name="mainlist"/>--%>
+<%--        </section>--%>
+<%--        <section class="main">--%>
+<%--            <tiles:insertAttribute name="main"/>--%>
+<%--        </section>--%>
         <section class="footer">
             <tiles:insertAttribute name="footer"/>
         </section>
         <section class="chatbot">
             <tiles:insertAttribute name="chatbot"/>
         </section>
-</div>
+    </div>
 </body>
 </html>
