@@ -1,30 +1,44 @@
 package boot.semipig.controller;
 
+import java.io.Console;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import boot.semipig.dto.*;
+import boot.semipig.mapper.ServiceMapper;
 import boot.semipig.service.MyService;
+import boot.semipig.service.OwnerpageService;
+import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/write/")
+@RequestMapping("/mypage/")
 public class WriteController {
     @Autowired
     private MyService myservice;
+    @Autowired
+    private ServiceMapper serviceMapper;
+    @Autowired
+    private OwnerpageService ownerpageService;
+    public NcpObjectStorageService storageService;
+    public String bucketName = "pig701-bucket";
+
     @GetMapping("/form")
     public String coupon(Model model) {
         List<couponDto> list2 = myservice.couponall();
-        int totalCount=myservice.getTotalCount();
+        int totalCount = myservice.getTotalCount();
+        OwnerpageDto odto = ownerpageService.getData(3);
+        model.addAttribute("dto",odto);
         model.addAttribute("totalCount", totalCount);
         model.addAttribute("list2", list2);
         return "/main/booking/booking";
@@ -32,45 +46,53 @@ public class WriteController {
 
     @PostMapping("/insert")
     @ResponseBody
-    void insertt(@RequestBody String jsondata, HttpServletResponse response) {
+    public void insertt(@RequestBody String jsondata, HttpSession session) {
+        System.out.println("jsondata=" + jsondata);
+        String id = (String) session.getAttribute("loginid");
         ObjectMapper mapper = new ObjectMapper();
-        System.out.println(jsondata);
         try {
             ServiceDto[] dtos = mapper.readValue(jsondata, ServiceDto[].class);
             for (ServiceDto dto : dtos) {
-                // 데이터베이스에 예약 정보를 조회합니다.
-                List<ServiceDto> eventList = myservice.selectt();
-                boolean isAvailable = true;
-                for (ServiceDto event : eventList) {
-                    if (event.getStart().equals(dto.getStart())) {
-                        // 이미 예약된 시간인 경우
-                        isAvailable = false;
-                        break;
-                    }
-                }
-                if (isAvailable) {
-                    // 예약 가능한 경우, 데이터베이스에 새로운 예약 정보를 추가합니다.
-                    myservice.insertt(dto);
-                } else {
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                }
+                dto.setUser_name(id);
+                myservice.insertt(dto);
             }
         } catch (IOException e) {
             // 예외 처리
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
+
     @GetMapping("/deletecoupon")
     public String deletecoupon(int num) {
         myservice.deletecoupon(num);
         return "redirect:form";
     }
+
     @GetMapping("/review")
-    public String review(Model model)
-    {
-        int totalCount=myservice.getTotalCount();
+    public String review(Model model) {
+        int totalCount = myservice.getTotalCount();
         model.addAttribute("totalCount", totalCount);
         return "/main/booking/review";
     }
+
     @GetMapping("/reviewajax")
     public @ResponseBody Map<String, Object> review2(@RequestParam(defaultValue = "1") int currentPage) {
         Map<String, Object> response = new HashMap<>();
@@ -107,6 +129,7 @@ public class WriteController {
 
         return response;
     }
+
     @GetMapping("/qnaajax")
     public @ResponseBody Map<String, Object> qna2(@RequestParam(defaultValue = "1") int currentPage) {
         Map<String, Object> response = new HashMap<>();
@@ -143,19 +166,106 @@ public class WriteController {
 
         return response;
     }
+
     @GetMapping("/qna")
-    public String qna(Model model)
-    {
-        int totalCount=myservice.getTotalCount();
+    public String qna(Model model) {
+        int totalCount = myservice.getTotalCount();
         model.addAttribute("totalCount", totalCount);
         return "/main/booking/qna";
     }
+
     @GetMapping("/infoupdate")
-    public String infoupdate(Model model)
-    {
-        int totalCount=myservice.getTotalCount();
+    public String infoupdate(Model model, HttpSession session) {
+        int totalCount = myservice.getTotalCount();
         model.addAttribute("totalCount", totalCount);
+        int user_idx = (int) session.getAttribute("user_idx");
+        OwnerpageDto dto = ownerpageService.getData(user_idx);
+
+        model.addAttribute("dto", dto);
         return "/main/booking/infoupdate";
+    }
+    @PostMapping("/U_updateprompt")
+    public String U_updateprompt(OwnerpageDto dto) {
+        ownerpageService.updatePrompt(dto);
+        System.out.println("Npdateprompt: " + dto.getGPT_content());
+
+        // Redirect to the writeform endpoint
+        return "redirect:./infoupdate";
+    }
+
+    @PostMapping("/W_updateprompt")
+    public String W_updateprompt(OwnerpageDto dto) {
+        ownerpageService.updatePrompt(dto);
+        System.out.println("updateprompt: " + dto.getGPT_content());
+
+        // Redirect to the writeform endpoint
+        return "redirect:./infoupdate";
+    }
+    @PostMapping("/update")
+    public String update(OwnerpageDto dto, List<MultipartFile> upload) throws JSONException, IOException {
+        //수정
+        ownerpageService.updateOwner(dto);
+
+        String openaiResult = ownerpageService.openai(dto.getUser_idx());
+        dto.setGPT_content(openaiResult);
+        ownerpageService.updatePrompt(dto);
+        System.out.println("update:"+openaiResult);
+        if (upload != null) {
+            System.out.println("size:" + upload.size());
+            System.out.println("upload.get(0).getOriginalFilename()=" + upload.get(0).getOriginalFilename());
+            for (MultipartFile file : upload) {
+                //스토리지에 업로드하기
+                String photoname = storageService.uploadFile(bucketName, "foodphoto", file);
+                //업로드한 파일명을 DB에 저장
+                FoodPhotoDto fdto = new FoodPhotoDto();
+                fdto.setUser_idx(dto.getUser_idx());
+                fdto.setPhotoname(photoname);
+                ownerpageService.insertPhoto(fdto);
+            }
+        }
+        //수정 후 내용보기로 이동
+        return "redirect:./infoupdate";
+    }
+    @GetMapping("/getphoto")
+    @ResponseBody
+    public List<OwnerpageDto> getphoto(@RequestParam Optional<Integer> user_idx) {
+        if (user_idx.isPresent()) {
+            List<OwnerpageDto> list = ownerpageService.getDataPhoto(user_idx.get());
+            for (OwnerpageDto dto : list) {
+                List<FoodPhotoDto> flist = ownerpageService.getPhotos(user_idx.get());
+                dto.setPhotoList(flist);
+                System.out.println("1flist:" + flist);
+            }
+            return list;
+        } else {
+            return new ArrayList<>(); // food_idx가 없을 경우 빈 리스트 반환
+        }
+    }
+    @RequestMapping(value = "/openai", method = RequestMethod.GET, params = "user_idx")
+    public String openai(@RequestParam("user_idx") int user_idx, Model model) throws JSONException, IOException {
+        String openaiResult = ownerpageService.openai(user_idx);
+        model.addAttribute("openaiResult", openaiResult);
+        System.out.println("openai:"+ownerpageService.openai(user_idx));
+        return "redirect:./infoupdate";
+    }
+    //기존 airesult
+    @RequestMapping(value = "/airesult", method = RequestMethod.GET, params= "user_idx")
+    public String airesult(Model model, @RequestParam int user_idx) throws IOException, JSONException {
+        OwnerpageDto dto = ownerpageService.getData(user_idx);
+        model.addAttribute("dto", dto);
+//        String aiprompt = ownerpageService.openai(food_idx);
+//        model.addAttribute("aiprompt", aiprompt);
+
+        String openaiResult = ownerpageService.openai(user_idx);
+//        System.out.println("airesult:"+ownerpageService.openai(food_idx));
+//        return openaiResult;
+        System.out.println("airesult: " + openaiResult);
+
+//        // Pass the openaiResult to the updateprompt endpoint
+        dto.setGPT_content(openaiResult);
+        // Redirect to the updateprompt endpoint
+        return "redirect:./infoupdate";
+//        return openaiResult;
     }
 }
 

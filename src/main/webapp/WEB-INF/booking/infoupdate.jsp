@@ -108,7 +108,7 @@
         }
 
         .image-container .detail_img {
-            background-color: #cccccc;
+            background-color: #EAEAEA;
             border-radius: 5px;
             width: 95%;
             height: 500px;
@@ -255,7 +255,7 @@
     $(function () {
         //업로드한 사진들과 데이타를 같이 묶어서 서버에 전송하기
         $("#contentadd").click(function () {
-            let food_idx=$("#food_idx").val();
+            let food_idx=$("#user_idx").val();
             let cnt=$("#photo")[0].files.length;
             let point=$("#point").val()
             let TASTFDPLC_TELNO=$("#TASTFDPLC_TELNO").val();
@@ -289,11 +289,11 @@
             form.append("food_idx",food_idx);
 
             console.log($("#photo")[0].files)
-            console.log($("#food_idx").val());
+            console.log($("#user_idx").val());
             $.ajax({
                 type: "get",
                 url: "./removephotos",
-                data: {food_idx: food_idx},
+                data: {user_idx: user_idx},
                 dataType: "text",
                 success: function () {
                     console.log("기존 사진이 삭제되었습니다.");
@@ -354,18 +354,18 @@
         }
 
 
-        function detail_thumb(food_idx) {
+        function detail_thumb(user_idx) {
             $.ajax({
                 type: "get",
                 url: "./getphoto",
-                data: { food_idx: food_idx }, // food_idx를 파라미터로 전달
+                data: { user_idx: user_idx }, // food_idx를 파라미터로 전달
                 dataType: "json",
                 success: function(res) {
                     let s = "";
                     $.each(res, function(idx, ele) {
                         $.each(ele.photoList, function(fidx, fele) {
                             // food_idx와 일치하는 사진만 출력
-                            if (ele.food_idx === fele.food_idx) {
+                            if (ele.user_idx === fele.user_idx) {
                                 console.log(fele)
                                 imagePaths.push(`http://kr.object.ncloudstorage.com/pig701-bucket/foodphoto/\${fele.photoname}`);
                                 var cphoto = "'" + fele.photoname + "'";
@@ -392,14 +392,14 @@
         }
 
         // food_idx 값을 가져와서 detail_thumb 함수 호출
-        const food_idx = $("#food_idx").val();
-        detail_thumb(food_idx);
+        const user_idx = $("#user_idx").val();
+        detail_thumb(user_idx);
 
         $("#sendprompt").click(function (e) {
             e.preventDefault();
 
             let content = $("#GPT_content").val();
-            let food_idx = $("#food_idx").val();
+            let food_idx = $("#user_idx").val();
 
             $.ajax({
                 type: "post",
@@ -407,7 +407,7 @@
                 url: "./U_updateprompt",
                 data: {
                     GPT_content: content,
-                    food_idx: food_idx
+                    user_idx: user_idx
                 },
                 success: function (res) {
                     console.log("결과"+res); // 응답값 출력
@@ -430,8 +430,6 @@
         <div class="image-container">
     <div class="detail_img">
         <img id="main-img" src="" alt="Example Image" style="max-width: 100%; max-height: 100%;">
-        <div class="prev" onclick="prevImage()">&#10094;</div>
-        <div class="next" onclick="nextImage()">&#10095;</div>
     </div>
     <!--상품 썸네일-->
     <div class="detail_thumb"></div>
@@ -439,7 +437,7 @@
 
 <div class="right_input_section">
     <form action="update" method="post" enctype="multipart/form-data">
-        <input type="hidden" id="food_idx" name="food_idx" value="${dto.food_idx}">
+        <input type="hidden" id="user_idx" name="user_idx" value="${dto.user_idx}">
         <table>
             <tr>
                 <td>
@@ -470,7 +468,7 @@
                     <label for="point"><span class="y_info2">홍보 포인트</span></label>
                 </td>
                 <td>
-                    <input type="text" id="point" name="point" value="${dto.point}" placeholder="신선한, 주차장이 넓은 등">
+                    <input type="text" id="point" name="point" value="${dto.point}" placeholder="신선한, 주차장이 넓은 등, 30자 제한" maxlength="30">
                 </td>
             </tr>
             <tr>
@@ -494,15 +492,15 @@
                     <label for="holiday" ><span class="y_info2">휴일</span></label>
                 </td>
                 <td>
-                    <select id="holiday" name="holiday" style="margin-left: 30px; height: 50px;" >
-                        <option value="없음">없음</option>
-                        <option value="일요일">일요일</option>
-                        <option value="월요일">월요일</option>
-                        <option value="화요일">화요일</option>
-                        <option value="수요일">수요일</option>
-                        <option value="목요일">목요일</option>
-                        <option value="금요일">금요일</option>
-                        <option value="토요일">토요일</option>
+                    <select id="holiday" name="holiday"  style="margin-left: 30px; height: 50px;">
+                        <option value="없음" ${dto.holiday == '없음' ? 'selected' : ''}>없음</option>
+                        <option value="일요일" ${dto.holiday == '일요일' ? 'selected' : ''}>일요일</option>
+                        <option value="월요일" ${dto.holiday == '월요일' ? 'selected' : ''}>월요일</option>
+                        <option value="화요일" ${dto.holiday == '화요일' ? 'selected' : ''}>화요일</option>
+                        <option value="수요일" ${dto.holiday == '수요일' ? 'selected' : ''}>수요일</option>
+                        <option value="목요일" ${dto.holiday == '목요일' ? 'selected' : ''}>목요일</option>
+                        <option value="금요일" ${dto.holiday == '금요일' ? 'selected' : ''}>금요일</option>
+                        <option value="토요일" ${dto.holiday == '토요일' ? 'selected' : ''}>토요일</option>
                     </select>
                 </td>
             </tr>
@@ -529,7 +527,7 @@
     <div class="outputarea_sub">
         <h3>AI 홍보글 작성</h3>
     </div>
-    <form action="updateprompt" method="post" enctype="multipart/form-data">
+    <form action="U_updateprompt" method="post" enctype="multipart/form-data">
         <div class="prompt" id="prompt">
             <textarea class="GPT_content" id="GPT_content" name="GPT_content" value="${dto.GPT_content}">
                 ${dto.GPT_content}

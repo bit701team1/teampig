@@ -9,34 +9,31 @@
         values (#{food_price},#{RESTRT_NM},#{TASTFDPLC_TELNO},#{REPRSNT_FOOD_NM},#{REFINE_ROADNM_ADDR},#{opentime},#{closetime},#{holiday},#{point},#{food_type})
     </insert>
     <insert id="insertPhoto" parameterType="FoodPhotoDto">
-        insert into food_photo (food_idx, photoname) values (#{food_idx},#{photoname})
+        insert into food_photo (user_idx, photoname) values (#{user_idx},#{photoname})
     </insert>
     <update id="updatePrompt" parameterType="OwnerpageDto">
-        update food_list set GPT_content=#{GPT_content} where food_idx=#{food_idx}
+        update food_list set GPT_content=#{GPT_content} where user_idx=#{user_idx}
     </update>
     <select id="getData" resultType="OwnerpageDto" parameterType="int">
-        select * from food_list where food_idx=#{food_idx}
+        select * from food_list where user_idx=#{user_idx}
     </select>
     <update id="updateOwner" parameterType="OwnerpageDto">
         update food_list set TASTFDPLC_TELNO=#{TASTFDPLC_TELNO},REFINE_ROADNM_ADDR=#{REFINE_ROADNM_ADDR},REPRSNT_FOOD_NM=#{REPRSNT_FOOD_NM}
-                       ,point=#{point},opentime=#{opentime},closetime=#{closetime},holiday=#{holiday},point=#{point} where food_idx=#{food_idx}
+                           ,point=#{point},opentime=#{opentime},closetime=#{closetime},holiday=#{holiday},point=#{point} where user_idx=#{user_idx}
     </update>
-    <select id="getFood_idx" resultType="int" parameterType="int">
-        select food_idx from food_list where user_idx=#{user_idx}
-    </select>
     <select id="getPhotos" parameterType="int" resultType="FoodPhotoDto">
-        select * from food_photo where food_idx=#{food_idx} order by food_idx asc
+        select * from food_photo where user_idx=#{user_idx} order by user_idx asc
     </select>
     <select id="getAllPhoto" parameterType="int" resultType="String">
-    select photoname from food_photo where food_idx=#{food_idx}
+        select photoname from food_photo where user_idx=#{user_idx}
     </select>
     <select id="getAllOwner" resultType="OwnerpageDto">
-        select * from food_list order by food_idx desc
+        select * from food_list order by user_idx desc
     </select>
     <select id="getDataPhoto" resultType="OwnerpageDto" parameterType="int">
-        select * from food_list where food_idx=#{food_idx}
+        select * from food_list where user_idx=#{user_idx}
     </select>
     <delete id="removephotos" parameterType="int">
-        delete from food_photo where food_idx=#{food_idx}
+        delete from food_photo where user_idx=#{user_idx}
     </delete>
 </mapper>

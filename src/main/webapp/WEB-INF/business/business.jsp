@@ -58,6 +58,9 @@
 
 </script>
 <body>
+
+<c:set var="root" value="<%=request.getContextPath() %>"/>
+
 <div id="container">
     <header>
         <div id="logo">
@@ -69,7 +72,7 @@
             <ul>
                 <li><a href="#">공지사항</a></li>
                 <li><a href="#">고객센터</a></li>
-                <li><a href="#">마이페이지</a></li>
+                <li><a href="${root}/home2">마이페이지</a></li>
                 <c:choose>
                     <c:when test="${sessionScope.loginok=='yes'}">
                         <li><a href="#"   onclick="location.href='./logout'">로그아웃</a></li>

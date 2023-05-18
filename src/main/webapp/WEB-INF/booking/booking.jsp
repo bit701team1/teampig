@@ -63,25 +63,7 @@
 <body>
 <div class="y_coupon">
     <h2 h2 style="font-weight: bold;">쿠폰 관리</h2>
-
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal">예약하기</button>
-    <script>
-        const timeInput2 = document.getElementById('y_ctime');
-        const dateInput2 = document.getElementById('y_cdate');
-        const now2 = new Date();
-        now2.setDate(now2.getDate() + 1);
-
-        dateInput2.min = now2.toISOString().split('T')[0];
-        flatpickr(timeInput2, {
-            enableTime: true,
-            noCalendar: true,
-            dateFormat: 'H:i',
-            time_24hr: true,
-            minuteIncrement: 1,
-            minTime: now2,
-            maxTime: '23:59', // 23:59까지 선택 가능
-        });
-    </script>
 <div style="width:450px;">
 
     <!-- The Modal -->
@@ -118,7 +100,9 @@
 
                 </div>
                 <!-- Modal footer -->
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="allSave()">예약하기</button>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-success" style="background-color:#5C732C;" data-bs-dismiss="modal" onclick="allSave()">예약하기</button>
+                </div>
             </div>
         </div>
     </div>
@@ -127,6 +111,9 @@
     const timeInput = document.getElementById('y_time');
     const dateInput = document.getElementById('y_date');
     const now = new Date();
+    // opentime과 closetime 값을 출력할 HTML 요소의 ID를 가리키는 변수를 설정합니다.
+    const openTime = '${dto.opentime}'; // 'opentime' 값으로 변경해야 합니다.
+    const closeTime = '${dto.closetime}'; // 'closetime' 값으로 변경해야 합니다.
 
     dateInput.min = now.toISOString().split('T')[0];
 
@@ -142,18 +129,15 @@
             }
         },
     });
-
     const timePicker = flatpickr(timeInput, {
         enableTime: true,
         noCalendar: true,
         dateFormat: 'H:i',
         time_24hr: true,
         minuteIncrement: 60,
-        minTime: now.getHours() + ':60', // 현재 시간부터 선택 가능
-        maxTime: '23:59', // 23:59까지 선택 가능
+        minTime: openTime, // 현재 시간부터 선택 가능
+        maxTime: closeTime, // 23:59까지 선택 가능
     });
-
-
 
 </script>
 <script>

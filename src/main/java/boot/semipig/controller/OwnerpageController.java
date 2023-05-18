@@ -302,26 +302,7 @@ public Map<String, Object> insertOwner(OwnerpageDto dto, List<MultipartFile> upl
         return "/ownerpage/updateform";
     }
 
-    @PostMapping("/temp_login")
-    public String doLogin(String id,
-                          int user_idx,
-                          HttpSession session) {
 
-        session.setAttribute("id", id);
-        session.setAttribute("user_idx", user_idx);
-
-        int food_idx= ownerpageService.getFood_idx(user_idx);
-
-        return "redirect:./promptview?food_idx="+food_idx;
-    }
-
-    @GetMapping("temp_logout")
-    public String logout(HttpSession session) {
-
-        session.removeAttribute("id");
-        session.removeAttribute("user_idx");
-        return "redirect:/home";
-    }
 
 //    @GetMapping("/getphoto")
 //    @ResponseBody public List<OwnerpageDto> getphoto()

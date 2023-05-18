@@ -75,7 +75,9 @@
             position: relative;
             background-color: black;
         }
-
+        .table td {
+            border-bottom: 1px solid #5C732C;
+        }
         .table th::after {
             content: "";
             position: absolute;
@@ -83,7 +85,7 @@
             left: 0;
             right: 0;
             height:3px; /* 더 두껍게 보이도록 조절 */
-            background-color: black;
+            background-color: #5C732C;
         }
     </style>
     <script>
@@ -237,7 +239,7 @@
                     $.each(data.list, function(index, dto) {
                         var reservationRow = '<tr>' +
                             '<td style="text-align: center;">'  + (index+1) + '</td>' +
-                            '<td>' + '님</td>' +
+                            '<td>' + dto.user_name + '</td>' +
                             '<td>' + dto.start.substring(0, 16) +
                             '<span style="float: right; font-size: 20px; cursor: pointer;" data-bs-toggle="modal" ' +
                             'data-bs-target="#calendarModal" onclick="openModal(' + dto.num + ', \'' + dto.start.substring(0, 10) + '\', \'' + dto.start.substring(11, 16) + '\')">' +
@@ -315,7 +317,9 @@
 
             </div>
             <!-- Modal footer -->
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="allupdate()">수정하기</button>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-success"  style="background-color:#5C732C;" data-bs-dismiss="modal" onclick="allupdate()">수정하기</button>
+            </div>
         </div>
     </div>
 </div>
@@ -323,6 +327,9 @@
     const timeInput = document.getElementById('y_time');
     const dateInput = document.getElementById('y_date');
     const now = new Date();
+    // opentime과 closetime 값을 출력할 HTML 요소의 ID를 가리키는 변수를 설정합니다.
+    const openTime = '${dto.opentime}'; // 'opentime' 값으로 변경해야 합니다.
+    const closeTime = '${dto.closetime}'; // 'closetime' 값으로 변경해야 합니다.
 
     dateInput.min = now.toISOString().split('T')[0];
 
@@ -338,17 +345,15 @@
             }
         },
     });
-
     const timePicker = flatpickr(timeInput, {
         enableTime: true,
         noCalendar: true,
         dateFormat: 'H:i',
         time_24hr: true,
         minuteIncrement: 60,
-        minTime: now.getHours() + ':60', // 현재 시간부터 선택 가능
-        maxTime: '23:59', // 23:59까지 선택 가능
+        minTime: openTime, // 현재 시간부터 선택 가능
+        maxTime: closeTime, // 23:59까지 선택 가능
     });
-
 </script>
 
 <script>

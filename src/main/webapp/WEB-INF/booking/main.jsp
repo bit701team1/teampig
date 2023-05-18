@@ -35,13 +35,14 @@
    .y_square {
        margin-top:10px;
        width: 1000px;
+       margin-bottom: 20px;
        height: 100px;
        border-radius: 15px;
        box-shadow: 1px 1px 10px 0 rgba(72, 75, 108, .08);
        border: solid 1px #e3e9ed;
        background-color: #fff;
        box-sizing: border-box;
-       position : absolute;
+       position: relative; /* 수정: position 값을 relative로 변경 */
        display: flex;
        justify-content: space-between;
    }
@@ -71,6 +72,9 @@
        justify-content: center;
        font-size: 18px;
        color: #5c667b;
+   }
+   .y_content:hover .y_coup {
+       color: black;
    }
 </style>
 
@@ -123,10 +127,9 @@
 </div>
 <div class="y_square">
     <div class="y_content">예약 총 ${totalCount} </div>
-    <div class="y_content" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#couponModal">쿠폰 등록</div>
+    <div class="y_content" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#couponModal"><span class="y_coup">쿠폰 등록</span></div>
     <div class="y_content">내 가게 리뷰 100개</div>
 </div>
-<div style="width:450px;">
 
     <!-- The Modal -->
     <div style="width: 450px;">
@@ -174,13 +177,12 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="applyCoupon()">등록</button>
+                        <button type="button" class="btn btn-success" style="background-color:#5C732C;" data-bs-dismiss="modal" onclick="applyCoupon()">등록</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <script>
     const timeInput2 = document.getElementById('y_ctime');
     const dateInput2 = document.getElementById('y_cdate');
@@ -239,5 +241,46 @@
         });
     }
 </script>
+<style>
+    .custom-div {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 18px;
+        color: #333;
+        line-height: 1.5;
+        text-align: center;
+        margin-bottom: 80px;
+        background-color:rgba(228, 247, 186, 0.3);
+    }
+
+    .custom-div h1 {
+        font-size: 24px;
+        margin-top: 0;
+    }
+    .custom-div2{
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 18px;
+        color: #333;
+        line-height: 1.5;
+        text-align: center;
+        background-color: white;
+    }
+    .custom-div p {
+        margin-bottom: 0;
+    }
+</style>
+
+<div class="custom-div">
+    <h1>< AI가 출력해주는 홍보글 ></h1>
+    <div class="custom-div2">
+        <p>${dto.GPT_content}</p>
+    </div>
+</div>
+
 </body>
 </html>

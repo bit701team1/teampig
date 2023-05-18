@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boot.semipig.mapper.ServiceMapper">
     <insert id="insertt" parameterType="ServiceDto">
-        insert into calendar(start) values(#{start})
+        INSERT INTO calendar (start, user_name) VALUES (#{start}, #{user_name})
     </insert>
     <select id="selectt"  resultType="ServiceDto">
         select * from calendar
@@ -39,5 +39,8 @@
     </select>
     <select id="ReservationCount" resultType="int" parameterType="string">
         SELECT COUNT(*) FROM calendar WHERE start = #{start}
+    </select>
+    <select id="getmypage" resultType="DetailDto" parameterType="int">
+        select * from food_list where user_idx=#{user_idx}
     </select>
 </mapper>

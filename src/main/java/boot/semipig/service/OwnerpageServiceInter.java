@@ -13,23 +13,22 @@ public interface OwnerpageServiceInter {
 
     public void insertPhoto(FoodPhotoDto dto);
 
-    public String openai(int food_idx) throws IOException, JSONException;
+    public String openai(int user_idx) throws IOException, JSONException;
 
-    public OwnerpageDto getData(int food_idx);
+    public OwnerpageDto getData(int user_idx);
     public void updateOwner(OwnerpageDto dto);
 
     public void updatePrompt(OwnerpageDto dto);
 
-    public int getFood_idx(int user_idx);
 
-    public List<FoodPhotoDto> getPhotos(int food_idx);
+    public List<FoodPhotoDto> getPhotos(int user_idx);
 
-    public List<OwnerpageDto> getDataPhoto(int food_idx);
+    public List<OwnerpageDto> getDataPhoto(int user_idx);
 
 
-    public List<String> getAllPhoto(int food_idx);
+    public List<String> getAllPhoto(int user_idx);
 
-    String removephotos(int food_idx);
+    String removephotos(int user_idx);
 
-    public void removePhotos(int food_idx);
+    public void removePhotos(int user_idx);
 }

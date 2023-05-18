@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import boot.semipig.dto.OwnerpageDto;
+import boot.semipig.service.OwnerpageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,16 +25,20 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import boot.semipig.dto.ServiceDto;
 import boot.semipig.service.MyService;
 
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/calendar")
 public class CalendarController {
     @Autowired
     private MyService myservice;
-
+    @Autowired
+    private OwnerpageService ownerpageService;
     @GetMapping("/calendar")
     public String calendar2(Model model) {
-
+        OwnerpageDto odto = ownerpageService.getData(3);
+        model.addAttribute("dto",odto);
         int totalCount = myservice.getTotalCount();
         model.addAttribute("totalCount", totalCount);
         return "/main/booking/calendar";
@@ -75,18 +81,6 @@ public class CalendarController {
         return response;
     }
 
-    @PostMapping("/insert")
-    @ResponseBody void insertt(@RequestBody String jsondata) {
-        System.out.println("jsondata="+jsondata);
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            ServiceDto[] dtos = mapper.readValue(jsondata, ServiceDto[].class);
-            for (ServiceDto dto : dtos) {
-                myservice.insertt(dto);
-            }
-        } catch (IOException e) {
-        }
-    }
 
     @GetMapping("/list")
     @ResponseBody
