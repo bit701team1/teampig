@@ -46,7 +46,6 @@ public class HomeController {
         model.addAttribute("user_idx", user_idx);
         model.addAttribute("logindto", dtos);
         model.addAttribute("dto", dto);
-
         model.addAttribute("totalCount", totalCount);
         return "/main";
     }
