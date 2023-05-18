@@ -58,7 +58,7 @@ public class MyService implements ServiceInter {
         serviceMapper.deletecoupon(num);
     }
     @Override
-    public List<qna3Dto> qnalist(int startNum, int perPage){
+    public List<QnaDto> qnalist(int startNum, int perPage){
         Map<String, Object> map = new HashMap<>();
         map.put("startNum", startNum);
         map.put("perPage", perPage);
