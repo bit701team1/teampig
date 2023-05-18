@@ -207,9 +207,6 @@ public class SearchController {
             resultMap.put("list_type", list_type);
             resultMap.put("inputsearch",inputsearch);
 
-           //System.out.println("totalPage = "+totalPage);
-        //System.out.println("====================================");
-
         return resultMap;
     }
 }

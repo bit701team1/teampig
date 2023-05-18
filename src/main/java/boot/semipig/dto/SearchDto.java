@@ -19,8 +19,8 @@ public class SearchDto {
     private String REFINE_LOTNO_ADDR;
     private String REFINE_WGS84_LAT;
     private String REFINE_WGS84_LOGT;
-    private int average;
     private String GPT_content;
     private int bookmarkcount;
     private String food_price;
+    private double average;
 }

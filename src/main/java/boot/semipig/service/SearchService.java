@@ -15,10 +15,6 @@ public class SearchService implements SearchServiceInter {
     @Autowired
     SearchMapper searchMapper;
 
-/*    @Override
-    public List<SearchDto> getAllFood() {
-        return searchMapper.getAllFood();
-    }*/
 
     @Override
     public List<SearchDto> getHighScoreFood(int startNum, int perPage) {

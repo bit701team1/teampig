@@ -24,25 +24,37 @@
             LIMIT #{startNum}, #{perPage}
     </select>
     <select id="getBookmarkList" parameterType="int" resultType="SearchDto">
-        SELECT f.*, COUNT(b.user_idx) AS bookmark_count
+        SELECT f.*, COUNT(DISTINCT b.user_idx) AS bookmark_count, IFNULL(AVG(r.score), 0) AS average
         FROM food_list AS f
                  LEFT JOIN bookmark AS b ON f.food_idx = b.food_idx
+                 LEFT JOIN review AS r ON f.food_idx = r.food_idx
         GROUP BY f.food_idx
         ORDER BY bookmark_count DESC
             LIMIT #{startNum}, #{perPage}
     </select>
     <select id="getPriceFood" parameterType="map" resultType="SearchDto">
-        select * from food_list where food_price = #{food_price} limit #{startNum},#{perPage}
+        SELECT *
+        FROM (
+                 SELECT f.*, COUNT(b.user_idx) AS bookmark_count, IFNULL(AVG(r.score), 0) AS average
+                 FROM food_list AS f
+                          LEFT JOIN bookmark AS b ON f.food_idx = b.food_idx
+                          LEFT JOIN review AS r ON f.food_idx = r.food_idx
+                 WHERE f.food_price = #{food_price}
+                 GROUP BY f.food_idx
+             ) AS t
+        ORDER BY t.bookmark_count DESC
+            LIMIT #{startNum}, #{perPage};
     </select>
 
     <select id="getSearchFood" parameterType="map" resultType="SearchDto">
-        SELECT * FROM food_list
+        SELECT *, IFNULL((SELECT AVG(score) FROM review WHERE food_list.food_idx = review.food_idx), 0) AS average
+        FROM food_list
         WHERE RESTRT_NM LIKE CONCAT('%', #{search}, '%')
            OR REPRSNT_FOOD_NM LIKE CONCAT('%', #{search}, '%')
            OR food_type LIKE CONCAT('%', #{search}, '%')
            OR REFINE_ROADNM_ADDR LIKE CONCAT('%', #{search}, '%')
         ORDER BY food_idx
-        limit #{startNum},#{perPage}
+            LIMIT #{startNum}, #{perPage};
     </select>
 
     <!--카운트를 위한 구간 -->

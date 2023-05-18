@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -200,10 +201,10 @@ public class DetailController {
     @ResponseBody
     public int isbookmark(Integer food_idx, HttpSession session){
 
-        Integer user_idx= (Integer)session.getAttribute("user_idx");
+        Integer loginidx= (Integer)session.getAttribute("loginidx");
         System.out.println("food_idx="+food_idx);
-        System.out.println("user_idx="+user_idx);
-        int count = detailService.getBookmarkCount(user_idx,food_idx);
+        System.out.println("loginidx="+loginidx);
+        int count = detailService.getBookmarkCount(loginidx,food_idx);
         System.out.println("count="+count);
 
         return count;
@@ -211,8 +212,17 @@ public class DetailController {
 
     @GetMapping("/insertBookmark")
     @ResponseBody
-    public void insertBookmark(int user_idx, int food_idx){
-        detailService.insertBookmark(user_idx,food_idx);
+    public Map<String, Object> insertBookmark(int user_idx, int food_idx){
+        Map<String, Object> result = new HashMap<>();
+        try {
+            detailService.insertBookmark(user_idx, food_idx);
+            result.put("success", true);
+            result.put("message", "Bookmark inserted successfully");
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "Failed to insert bookmark");
+        }
+        return result;
     }
 
     @GetMapping("/deleteBookmark")

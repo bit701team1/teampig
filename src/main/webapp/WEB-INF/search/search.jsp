@@ -20,14 +20,80 @@
     <link rel="import" href="http://www.polymer-project.org/components/core-icons/core-icons.html">
     <link rel="import" href="http://www.polymer-project.org/components/font-roboto/roboto.html">
 
-    <%@ include file="../mainlayout/header.jsp" %>
-    <%@ include file="../mainlayout/mainlist.jsp" %>
-    <%@ include file="../mainlayout/footer.jsp" %>
-    <%@ include file="../mainlayout/chatbot.jsp" %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <%--<%@ include file="../mainlayout/header.jsp" %>
+    &lt;%&ndash;<%@ include file="../mainlayout/mainlist.jsp" %>&ndash;%&gt;
+    &lt;%&ndash;<%@ include file="../mainlayout/footer.jsp" %>&ndash;%&gt;
+    <%@ include file="../mainlayout/chatbot.jsp" %>--%>
 
     <style>
         body, body * {
             font-family: 'Jua'
+        }
+
+        .page_num{
+            text-align: center;
+            height: 35px;
+            width: 35px;
+            font-size: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .page_cur_num{
+            text-align: center;
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            font-size: 27px;
+            border-radius: 5px;
+        }
+
+        .page_cur_num, .page_nor_num{
+            margin-left: 3px;
+            margin-right: 3px;
+        }
+
+        .page_last{
+            font-size: 25px;
+            vertical-align: middle;
+            line-height: 10px;
+            margin-top: -5px;
+        }
+        .page_first{
+            font-size: 25px;
+            vertical-align: middle;
+            line-height: 10px;
+            margin-top: -5px;
+        }
+
+        .page_num{
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            border-radius: 5px;
+        }
+        .page_num:hover{
+            background-color: #7ee0b6;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .page_num a{
+            font-family: "Nanum Gothic";
+            font-weight: bold;
+        }
+
+        .page_previous{
+            margin-right: 5px;
+        }
+        .starimage{
+            width: 26px;
+            height: 26px;
+            margin-bottom: 6px;
         }
 
         .mapinclude{
@@ -62,7 +128,7 @@
         }
 
         /* Button */
-        .button {
+        .btn_condition {
             display: inline-block;
             position: relative;
             width: 120px;
@@ -146,7 +212,7 @@
 
         .k_innercontent_container{
             margin-left: 10px;
-            font-size: ;
+            font-size: 15px ;
         }
     </style>
     <%
@@ -261,11 +327,13 @@
                     }
                 })
                     .done(function(res) {
-                        console.log(res);
+                        //console.log(res);
                         let s =`<br>`;
+                        if(inputsearch !="")
+                            s+=`<b>\${res.inputsearch}에 대한 검색 결과입니다</b><br>`;
 
-                        s+=`<b>\${res.inputsearch}에 대한 검색 결과입니다</b><br>`;
-
+                        var average ="";
+                        var fixed_average ="";
                         s += "<div class='k_searchlist'>";
                         $.each(res.list, function (idx, ele) {
 
@@ -279,7 +347,7 @@
                                         <div class="k_foodlist">
                                         \${ele.restrt_NM}
                                         <div class="k_foodtype">#\${ele.food_type}</div>
-                                        <div>\${ele.average}점 | <i class="rating__icon rating__icon--star fa fa-star bookmarkstar"></i>
+                                        <div>\${ele.average.toFixed(1)}점 | <img src="bookmark/filledstar.png" class="starimage">
                                                 \${ele.bookmarkcount}</div>
                                         <div>\${ele.food_price}</div>
                                         <div class="k_GPT_place">\${ele.gpt_content}</div>
@@ -288,39 +356,43 @@
 
                             `;
 
-                        s += "</div>";
-                        s+="<hr>";
+                            s += "</div>";
+
                         }); //each문 end
-                        //처음으로
-                        s += `
-                    	<i class="bi bi-skip-start-fill" style="color:black;text-decoration:none;cursor: pointer;"
-                        onclick="list(1, '\${res.list_type}');"></i>
-                        &nbsp;&nbsp;`;
+
+
+                        s += `<br><br><div style="display: inline">
+                        <!-- 처음으로 -->
+                    	<span class="page_num page_first" num_type='\${res.list_type}'><i class="bi bi-skip-start-fill" style="color:black;text-decoration:none;cursor: pointer;"
+                        onclick="list(1, '\${res.list_type}');"></i></span>
+                        `;
                         <!-- 이전 -->
                         if(res.startPage>1){
-                            s += `<a style="color: black; text-decoration: none; cursor: pointer;"
-                            onclick="list(\${res.startPage-1}, '\${res.list_type}');">이전</a>&nbsp&nbsp`;
+                            s += `<span class="page_num page_previous" num_type="\${res.list_type}" startpage="\${res.startPage-1}"><a style="color: black; text-decoration: none; cursor: pointer;"
+                            onclick="list(\${res.startPage-1}, '\${res.list_type}');"><i class="bi bi-caret-left-fill"></i></a></span>`;
                         }
-
+                        //현재 번호
                         for (var i = res.startPage; i <= res.endPage; i++) {
                             if (i == res.currentPage) {
-                                s += `<a style="color: green; text-decoration: none; cursor: pointer;"
-                                onclick="list(\${i}, '\${res.list_type}');" id="currentPage">\${i}</a>&nbsp `;
+                                s += `<span class="page_cur_num" num_type="\${res.list_type}" for_idx="\${i}"><a style="color: #7ee0b6; text-decoration: none; cursor: pointer;border-bottom: 3px solid #7ee0b6;"
+                                onclick="list(\${i}, '\${res.list_type}');" id="currentPage">\${i}</a></span>`;
                             } else {
-                                s += `<a style="color: black; text-decoration: none; cursor: pointer;"
-                                onclick="list(\${i}, '\${res.list_type}');" id="currentPage">\${i}</a>&nbsp `;
+                                s += `<span class="page_num page_nor_num" num_type="\${res.list_type}" for_idx="\${i}"><a style="color: black; text-decoration: none; cursor: pointer; num_type='\${res.list_type}'"
+                                id="currentPage" onclick="list(\${i}, '\${res.list_type}')">\${i}</a></span>`;
+
                             }
                         }
+                        <!-- 다음 -->
                         if (res.endPage < res.totalPage) {
-                            s += `<a style="color: black; text-decoration: none; cursor: pointer;"
-                            onclick="list(\${res.endPage + 1}, '\${res.list_type}');">다음</a>&nbsp&nbsp`;
+                            s += `<span class="page_num page_next" num_type="\${res.list_type}" endpage="\${res.endPage + 1}"><a style="color: black; text-decoration: none; cursor: pointer;"
+                            onclick="list(\${res.endPage + 1}, '\${res.list_type}');"><i class="bi bi-caret-right-fill"></i></a></span>`;
                         }
 
                         <!-- 마지막 페이지 -->
-                        s+=`<i class="bi bi-skip-end-fill"
+                        s+=`<span class="page_num page_last" num_type="\${res.list_type}" totalpage="\${res.totalPage}"><i class="bi bi-skip-end-fill"
                            style="color:black;text-decoration:none;cursor: pointer;"
                             onclick="list(\${res.totalPage}, '\${res.list_type}');"></i>
-                            `;
+                            </div></span><br><br><br>`;
 
                         $("div.s_list").html(s);
                         $("#inputsearch").val("");
@@ -330,6 +402,30 @@
 
             } // list end
 
+            $(document).on('click','.page_num', function(){
+
+                if($(this).hasClass("page_first")){
+                    var e_list_type = $(this).attr("num_type");
+                    list(1,e_list_type);
+                } else if($(this).hasClass("page_previous")) {
+                    var e_list_type = $(this).attr("num_type");
+                    var startPage = $(this).attr("startpage");
+                    list(startPage,e_list_type);
+                } else if($(this).hasClass("page_next")) {
+                    var e_list_type = $(this).attr("num_type");
+                    var endPage = $(this).attr("endpage");
+                    list(endPage,e_list_type);
+                } else if($(this).hasClass("page_last")){
+                    var e_list_type = $(this).attr("num_type");
+                    var totalPage = $(this).attr("totalpage");
+                    list(totalPage,e_list_type);
+                } else {
+                    var e_list_type = $(this).attr("num_type");
+                    var idx = $(this).attr("for_idx");
+                    list(idx,e_list_type);
+                }
+
+            });
 
 
             //detail 진입시 히스토리 저장
@@ -511,9 +607,10 @@
 
 </div>
 
+
 <div class="s_list">
 </div>
-
+<br><br><br>
 
 <script>
 </script>

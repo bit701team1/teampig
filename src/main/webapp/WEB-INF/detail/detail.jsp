@@ -19,6 +19,11 @@
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=wvbgxt3966"></script>
 
+    <link rel="import" href="https://www.polymer-project.org/0.5/components/paper-ripple/paper-ripple.html">
+    <link rel="import" href="http://www.polymer-project.org/components/core-icons/core-icons.html">
+    <link rel="import" href="http://www.polymer-project.org/components/font-roboto/roboto.html">
+
+
     <style>
         .s_delete, .s_update{
             cursor:pointer;
@@ -233,10 +238,13 @@
         }
 
         /*가고싶다*/
-        .listbookmark{
+        img.starimage{
+            width: 26px;
+            height: 26px;
             cursor: pointer;
+            z-index: 1;
+            position: relative;
         }
-
 
     </style>
     <script type="text/javascript">
@@ -246,7 +254,7 @@
             printicon();
             nearbystore();
             //리뷰작성 버튼
-           $("#s_reviewform").click(function(){
+            $("#s_reviewform").click(function(){
                 //로그인 한 사람만 리뷰쓸 수 있음
                 if('${sessionScope.loginok}'!='yes')
                 {
@@ -255,23 +263,23 @@
             })//review 작성 버튼
 
             //리뷰 목록에서 리뷰 삭제 버튼
-           $(document).on("click", ".s_delete", function(e){
-               let b=confirm("해당 리뷰 삭제하시겠습니까?");
-               if(b){
-                   let review_idx=$(this).attr("review_idx");
+            $(document).on("click", ".s_delete", function(e){
+                let b=confirm("해당 리뷰 삭제하시겠습니까?");
+                if(b){
+                    let review_idx=$(this).attr("review_idx");
                     console.log(review_idx);
-                   $.ajax({
-                       type:"get",
-                       url:"./delete",
-                       data:{"review_idx":review_idx},
-                       success:function(){
-                           alert("삭제되었습니다");
-                           //목록 다시 호출
-                           reviewlist();
-                       }
-                   });
-               }
-           });
+                    $.ajax({
+                        type:"get",
+                        url:"./delete",
+                        data:{"review_idx":review_idx},
+                        success:function(){
+                            alert("삭제되었습니다");
+                            //목록 다시 호출
+                            reviewlist();
+                        }
+                    });
+                }
+            });
             //리뷰 모달 저장 버튼
             $(document).on("click", ".s_reviewsave", function(e){
                 let reviewtext=$("#reviewtext").val();
@@ -303,8 +311,8 @@
                     data:form,
                     success:function(res){
                         location.reload();
-            }
-            })
+                    }
+                })
             })
 
             //지도
@@ -318,14 +326,13 @@
                 position: new naver.maps.LatLng(${dto.REFINE_WGS84_LAT}, ${dto.REFINE_WGS84_LOGT})
             });
             //추가
-            $(document).on('click','.listbookmark',function(){
+            $(document).on('click','.starimage',function(){
                 var icon = $(this);
 
                 if("${sessionScope.loginok}"=="no"||null)
                 {
                     alert("로그인해주세요");
                 }else{
-
                     toggleIcon(icon);
                 }
             });
@@ -368,45 +375,45 @@
                 url:"./showreview?food_idx="+${dto.food_idx},
                 dataType:"json",
                 success:function(res){
-                   let s="<span style='color:gray'>&nbsp;리뷰 ("+res.length+")</span>";
+                    let s="<span style='color:gray'>&nbsp;리뷰 ("+res.length+")</span>";
 
-                   $.each(res, function(idx, ele){
+                    $.each(res, function(idx, ele){
 
-                       s+=`<div class='s_reviewtable'><table>
+                        s+=`<div class='s_reviewtable'><table>
                            <tr>
                            <td rowspan='3'>`;
 
-                       if(ele.user_photo!=null){
-                           s+=`
+                        if(ele.user_photo!=null){
+                            s+=`
         <img src="https://${imageUrl}/join/\${ele.user_photo}" style="width: 80px; height: 80px;border-radius: 100%;">
         <br>&nbsp;<span style="color:gray">\${ele.user_name}</span>`;
-                       }else{
-                           s+=`
+                        }else{
+                            s+=`
         <img src="../../save/pigperson.png" style="width: 80px; height: 80px; border-radius: 100%;" >
          <br>&nbsp;<span style="color:gray">\${ele.user_name}</span>
         `
-                       }
-                       s+=`</td>
+                        }
+                        s+=`</td>
                        <td>\${ele.write_day}`;
-                       if(ele.user_id=='${sessionScope.loginid}')
-                       {s+=`<span class="s_update" review_idx="\${ele.review_idx}" data-bs-toggle="modal" data-bs-target="#reviewupdateModal">수정</span>|<span class="s_delete" review_idx="\${ele.review_idx}">삭제</span>`}
-                           s+=`</td></tr>
+                        if(ele.user_id=='${sessionScope.loginid}')
+                        {s+=`<span class="s_update" review_idx="\${ele.review_idx}" data-bs-toggle="modal" data-bs-target="#reviewupdateModal">수정</span>|<span class="s_delete" review_idx="\${ele.review_idx}">삭제</span>`}
+                        s+=`</td></tr>
                        <tr>
                            <td><pre>\${ele.reviewtext}</pre></td>
                        </tr><tr><td>`;
 
 
-                      if(ele.photoList!="")
-                       {
-                           s+="<div class='s_photoreview'>";
-                           $.each(ele.photoList, function(i, e){
-                               s+=`<div style="background-image: url(https://${imageUrl}/review/\${e.photoname}); height: 100px; width: 100px; border: 1px solid black;" class="s_plist"></div>
+                        if(ele.photoList!="")
+                        {
+                            s+="<div class='s_photoreview'>";
+                            $.each(ele.photoList, function(i, e){
+                                s+=`<div style="background-image: url(https://${imageUrl}/review/\${e.photoname}); height: 100px; width: 100px; border: 1px solid black;" class="s_plist"></div>
 `;
-                           })
-                           s+='</div>';
-                       }
-                       s+='</td></table></div>';
-                   })
+                            })
+                            s+='</div>';
+                        }
+                        s+='</td></table></div>';
+                    })
 
                     $("div.s_review").html(s);
                 }
@@ -416,23 +423,24 @@
 
             var food_idx = ${dto.food_idx}
 
-            $.ajax({
-                type:"get",
-                url:"./isbookmark",
-                dataType:"json",
-                data:{"food_idx":food_idx},
-                success: function(res) {
+                $.ajax({
+                    type:"get",
+                    url:"./isbookmark",
+                    dataType:"json",
+                    data:{"food_idx":food_idx},
+                    success: function(res) {
+                        var s="";
 
-                    if(res==1) {
-                        var s=`<i class="rating__icon rating__icon--star fa fa-star listbookmark"
-                                style="color: orange"></i>`;
+                        if(res==1) {
+                            s=`<img src="bookmark/filledstar.png" class="starimage starfilling">`;
+                        }
+                        else{
+                            s=`<img src="bookmark/star.png" class="starimage starempty">`;
+                        }
+
+                        $("#k_iconplace").html(s);
                     }
-                    else{
-                        var s=`<i class="rating__icon rating__icon--star fa fa-star listbookmark"></i>`;
-                    }
-                    $("#k_iconplace").html(s);
-                }
-            }); //ajax end
+                }); //ajax end
         } //printicon() end
         function toggleIcon(icon) {
 
@@ -441,26 +449,29 @@
             food_idx = ${dto.food_idx};
 
 
-            if (icon.hasClass("bi-bookmark-star")) {
-                icon.removeClass("bi-bookmark-star").addClass("bi-bookmark-star-fill");
+            if (icon.hasClass("starempty")) {
+                icon.removeClass("starempty").addClass("starfilling");
                 // insert data하고 icon 영역 다시 출력
                 $.ajax({
                     type:"get",
                     url:"./insertBookmark",
                     dataType:"json",
-                    data:{"food_idx":food_idx,"user_idx":user_idx},
-                    success: function() {
+                    data:{"food_idx":food_idx,"user_idx":user_idx}
+                }) //ajax end
+                    .done(function() {
                         printicon();
-                    }
-                }); //ajax end
+                    })
+                    .fail(function(xhr, status, error) {
+                        console.log("오류 발생:", error);
+                    });
 
             } else {
-                icon.removeClass("bi-bookmark-star-fill").addClass("bi-bookmark-star");
+                icon.removeClass("starfilling").addClass("starempty");
                 //delete data하고 icon 영역 다시 출력
+
                 $.ajax({
                     type:"get",
                     url:"deleteBookmark",
-
                     data:{"food_idx":food_idx,"user_idx":user_idx},
                     success: function() {
                         printicon();
@@ -580,7 +591,7 @@
                 <span>리뷰쓰기</span></button>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal"> <i class="bi bi-calendar-check-fill"></i>
                 <span>예약하기</span></button>
-            <div id="k_iconplace"></div>
+            <div id="k_iconplace"><i class="fa fa-star bookmarkstar"></i></div>
         </div>
     </div>
     <div class="s_storedetailinfo">
@@ -770,37 +781,37 @@
 
                 </div>
 
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger s_reviewsave" data-bs-dismiss="modal" >리뷰저장</button>
-            </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger s_reviewsave" data-bs-dismiss="modal" >리뷰저장</button>
+                </div>
 
+            </div>
         </div>
     </div>
-</div>
 
 
     <script type="text/javascript">
-    $("#myfile").change(function(){
-        console.log("1:"+$(this)[0].files.length);
-        console.log("2:"+$(this)[0].files[0]);
-        //정규표현식
-        var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
-        var f=$(this)[0].files[0];//현재 선택한 파일
-        if(!f.type.match(reg)){
-            alert("확장자가 이미지파일이 아닙니다");
-            return;
-        }
-        if($(this)[0].files[0]){
-            var reader=new FileReader();
-            reader.onload=function(e){
-                $("#s_photosqure").attr("src",e.target.result);
+        $("#myfile").change(function(){
+            console.log("1:"+$(this)[0].files.length);
+            console.log("2:"+$(this)[0].files[0]);
+            //정규표현식
+            var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+            var f=$(this)[0].files[0];//현재 선택한 파일
+            if(!f.type.match(reg)){
+                alert("확장자가 이미지파일이 아닙니다");
+                return;
             }
-            reader.readAsDataURL($(this)[0].files[0]);
-        }
-    });
-</script>
+            if($(this)[0].files[0]){
+                var reader=new FileReader();
+                reader.onload=function(e){
+                    $("#s_photosqure").attr("src",e.target.result);
+                }
+                reader.readAsDataURL($(this)[0].files[0]);
+            }
+        });
+    </script>
 
-
+</div>
 </body>
 </html>

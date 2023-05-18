@@ -31,7 +31,7 @@ public class LoginController{
             System.out.println("로그인 실패");
             return 0;
         }else{
-            session.setMaxInactiveInterval(60*5);//5분동안 세션 유지
+            session.setMaxInactiveInterval(60*60);//60분동안 세션 유지
             System.out.println("로그인 성공"+id);
             //로그인 성공시 세션에 저장하기
             session.setAttribute("loginok", "yes");
