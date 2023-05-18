@@ -17,7 +17,7 @@ public interface ServiceMapper {
     public void couponinsert(couponDto dto);
     public void deletecoupon(int num);
     public int getTotalCount();
-    
+
     public List<QnaDto> qnalist(Map<String, Object> map);
 
     public List<ReviewDto> reviewlist(Map<String, Object> map);
