@@ -20,4 +20,5 @@ public interface ReviewMapper {
 
     public void updateReview(ReviewDto dto);
     public void updatePhoto(ReviewPhotoDto pdto);
+    public void deletePhoto(int review_idx);
 }

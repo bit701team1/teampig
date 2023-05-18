@@ -14,26 +14,23 @@
           rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <style>
-
     </style>
 </head>
 <body>
+<%@ include file="mainlist.jsp" %>
     <div class="mainlayout">
+
         <header class="header">
             <tiles:insertAttribute name="header"/>
         </header>
-        <section class="mainlist">
-            <tiles:insertAttribute name="mainlist"/>
-        </section>
-        <section class="main">
-            <tiles:insertAttribute name="main"/>
-        </section>
+
         <section class="footer">
             <tiles:insertAttribute name="footer"/>
         </section>
         <section class="chatbot">
             <tiles:insertAttribute name="chatbot"/>
         </section>
-</div>
+    </div>
+
 </body>
 </html>

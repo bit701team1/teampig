@@ -13,4 +13,16 @@ public class JoinService implements JoinServiceInter{
     public void insertUser(JoinDto dto) {
         joinMapper.insertUser(dto);
     }
+
+    @Override
+    public int isIdAvailable(JoinDto dto) {
+        int idAvailable=joinMapper.isIdAvailable(dto);
+        if(idAvailable == 1)
+        {
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
 }

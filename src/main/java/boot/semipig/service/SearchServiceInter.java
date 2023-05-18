@@ -12,6 +12,7 @@ public interface SearchServiceInter {
     public  List<SearchDto> getSearchFood(String search,Integer  startNum,Integer  perPage);
     public List<SearchDto> getPriceFood(String food_price,Integer startNum, Integer perPage);
     public List<SearchDto> getBookmarkList(int startNum, int perPage);
+    public int getOneBookmarkCount(int food_idx);
 
     //Count
     public int getHighScoreFoodCount(int startNum, int perPage);

@@ -21,7 +21,7 @@
             z-index: 10;
             width: 60px;
             height: 60px;
-            background-image: url('../../save/pigstar1.png');
+            background-image: url('pigstar.png');
             background-repeat: no-repeat;
             background-size: 60px 60px;
             cursor: pointer;
@@ -64,7 +64,7 @@
             z-index: 10;
             width: 60px;
             height: 60px;
-            background-image: url('../../save/pigstar1.png');
+            background-image: url('pigstar.png');
             background-repeat: no-repeat;
             background-size: 60px 60px;
             cursor: pointer;

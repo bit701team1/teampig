@@ -6,4 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface JoinMapper {
     public void insertUser(JoinDto dto);
+    public int isIdAvailable(JoinDto dto);
 }

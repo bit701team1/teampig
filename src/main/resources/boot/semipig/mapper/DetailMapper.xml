@@ -41,9 +41,9 @@
 
     <select id="insertBookmark" parameterType="int">
         INSERT INTO bookmark (user_idx, food_idx)
-        SELECT 1, 2 FROM DUAL
+        SELECT #{user_idx} AS user_idx, #{food_idx} AS food_idx FROM DUAL
         WHERE NOT EXISTS (
-            SELECT * FROM bookmark WHERE user_idx=#{user_idx} AND food_idx=#{food_idx}
+            SELECT * FROM bookmark WHERE user_idx = #{user_idx} AND food_idx = #{food_idx}
         );
     </select>
 

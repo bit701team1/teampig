@@ -24,6 +24,7 @@
 
     </style>
 </head>
+<c:set var="root" value="<%=request.getContextPath() %>"/>
 <script type="text/javascript">
     $(function(){
         $("#s_login").click(function(){
@@ -51,14 +52,91 @@
                 }//success function 끝
             })//ajax 끝
         })//로그인버튼 끝
+    });
 
-    })
 
-    console.log(${sessionScope.loginok});
+    $(function (){
+        $("#signup").click(function(){
+            let email = $("#email").val();
+            let id = $("#id").val();
+            let password = $("#password").val();
+            let user_name = $("#user_name").val();
+            let user_type = $("#user_type").val();
+
+            var formData = {
+                "email": email,
+                "id": id,
+                "password": password,
+                "user_name": user_name,
+                "user_type": user_type
+            };
+            $.ajax({
+                type: "GET",
+                url: "/isIdAvailable",
+                data: {id: id},
+                success: function (isAvailable) {
+                    if(isAvailable==1){
+                        alert("이미 가입된 아이디입니다");
+                        return false;
+                    }else{
+                        //Display confirmation dialog
+                        if (confirm("회원가입하시겠습니까?")) {
+                            // User clicked "OK" - proceed with form submission
+                            $.ajax({
+                                type: "post",
+                                url: "./insert",
+                                data: {"email":email,"id":id,"password":password,"user_name":user_name,"user_type":user_type},
+                                dataType: "text",
+                                success: function(res) {
+                                    console.log("회원가입 완료");
+
+                                    // 회원가입이 성공적으로 처리되면 원하는 작업을 수행할 수 있습니다.
+                                    location.reload();
+                                },
+                                error: function(xhr, status, error) {
+                                    console.log("회원가입 오류");
+                                    console.log("Status:"+status);
+                                    console.log("error:"+error);
+                                    console.log(xhr.responseText);
+                                }
+                            });
+                        } else {
+                            // User clicked "Cancel" - refresh the page
+                            location.reload();
+                        }
+                    }
+                }
+            });
+            // Display confirmation dialog
+            // if (confirm("Are you sure you want to submit the form?")) {
+            //     // User clicked "OK" - proceed with form submission
+            //     $.ajax({
+            //         type: "post",
+            //         url: "./insert",
+            //         data: {"email":email,"id":id,"password":password,"user_name":user_name,"user_type":user_type},
+            //         dataType: "text",
+            //         success: function(res) {
+            //             console.log("회원가입 완료");
+            //
+            //             // 회원가입이 성공적으로 처리되면 원하는 작업을 수행할 수 있습니다.
+            //             location.reload();
+            //         },
+            //         error: function(xhr, status, error) {
+            //             console.log("회원가입 오류");
+            //             console.log("Status:"+status);
+            //             console.log("error:"+error);
+            //             console.log(xhr.responseText);
+            //         }
+            //     });
+            // } else {
+            //     // User clicked "Cancel" - refresh the page
+            //     location.reload();
+            // }
+        });
+    });
 
 </script>
 <body>
-<c:set var="root" value="<%=request.getContextPath() %>"/>
 <div id="container">
     <header>
         <div id="logo">
@@ -316,22 +394,24 @@
                                                 <input type="hidden" name="img"/>
                                             </form>
                                         </div>
-
                                         <div class="cont_form_sign_up">
                                             <a href="#" onclick="hidden_login_and_sign_up()"><i class="bi bi-x-lg" style=
                                                     "position: relative; bottom:50px;"></i></a>
+
                                             <h2>SIGN UP</h2>
-                                            <input type="text" placeholder="Email" />
-                                            <input type="text" placeholder="id" />
-                                            <input type="password" placeholder="Password" />
-                                            <input type="text" placeholder="name" />
+                                            <input type="text" name="email" id="email" placeholder="Email"/>
+                                            <input type="text" name="id" id="id" placeholder="id" />
+                                            <input type="password" name="password" id="password" placeholder="Password" />
+                                            <input type="text" name="user_name" id="user_name" placeholder="name" />
+
                                             <br>
-                                            <select class="form-select">
-                                                <option value="일반사용자">일반 사용자</option>
-                                                <option value="사장님">사장님</option>
-                                                <option value="관리자">관리자</option>
+                                            <select class="form-select" name="user_type" id="user_type">
+                                                <option value="" selected disabled>선택</option>
+                                                <option value="1">일반 사용자</option>
+                                                <option value="2">사장님</option>
+                                                <option value="3">관리자</option>
                                             </select>
-                                            <button class="btn_sign_up" onclick="change_to_sign_up()">SIGN UP</button>
+                                            <button class="btn_sign_up" type="button" id="signup">SIGN UP</button>
                                         </div>
                                     </div>
                                 </div>
@@ -382,7 +462,9 @@
 
     }
 
+
     const time_to_hidden_all = 500;
+
 
     function hidden_login_and_sign_up() {
 
@@ -423,12 +505,19 @@
                                 if(res==0)
                                 {
                                     alert("회원이 아닙니다. 회원가입해주세요!");
-                                    //window.location.href='joinformtest?email='+kakao_account.email+'&name='+kakao_account.profile.nickname;
+
+                                    $("#s_signup").html("추가정보를 입력해주세요");
+                                    $("#email").val(kakao_account.email);
+                                    $("#email").attr("readonly", true);
+                                    console.log(kakao_account.profile.nickname);
+                                    $("#name").val(kakao_account.profile.nickname);
+                                    $("#name").attr("readonly", true);
+                                    change_to_sign_up();
+
                                 }
                                 else{
                                     window.location.href='snsloginaction?email='+kakao_account.email;
                                 }
-
 
                             }//success function 끝
                         });//ajax 끝
@@ -444,12 +533,35 @@
         clientId:"KMw1CKJNqR_tTHgOY5np",
         callbackUrl: "http://localhost:9000/auth/naver/callback", //callback ur
         loginButton: {color: "green", type:2, height: 40},//로그인 버튼의 타입 지정
+        //isPopup: true,
         callbackHandle: true//callback 페이지가 분리되었을 경우 콜백 페이지에서는 콜백 처리를 바꿀 수있도록 설정
     });
 
     naverLogin.init();//설정정보 초기화 연ㄷ동 준비
 
     //이 페이지가 정상적으로 다 로드되었을 때 해당 함수를 실행할 것.
+
+
+    // 모달 표시 함수
+    function showLoginModal() {
+        const modal = new bootstrap.Modal(document.getElementById('loginModal'));
+        modal.show();
+    }
+    var urlParams=new URLSearchParams(window.location.search);
+    var n_email=urlParams.get('n_email');
+    var n_name=urlParams.get('n_name');
+    //받아온 이메일과 네임 값이 존재할 경우 모달을 띄우고 change to sign up 함수 호출
+    if(n_email&&n_name){
+        //모달 띄우기
+        showLoginModal();
+        change_to_sign_up();
+        $("#s_signup").html("추가정보를 입력해주세요");
+        $("#email").val(n_email);
+        $("#email").attr("readonly", true);
+        $("#name").val(n_name);
+        $("#name").attr("readonly", true);
+        change_to_sign_up();
+    }
 </script>
 </body>
-</h
+</html>

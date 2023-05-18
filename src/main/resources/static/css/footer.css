@@ -4,7 +4,7 @@
     100% { transform: translateX(-100%); }
 }
 #m_footer{
-    position: fixed;
+    /*position: relative;*/
     bottom: 0;
     left: 0;
     width: 100%;

@@ -18,6 +18,9 @@ public class QnaDto {
     private String qna_subject;
     private String qna_content;
 
+    private List<QnaAnswerDto> qna_answer;
+
+
     private int qna_readcount;
     private int qna_ref;
     private int qna_step;
@@ -27,3 +30,4 @@ public class QnaDto {
     private boolean qna_ispass;
     private Timestamp qna_writeday;
 }
+

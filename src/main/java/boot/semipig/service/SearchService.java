@@ -15,10 +15,6 @@ public class SearchService implements SearchServiceInter {
     @Autowired
     SearchMapper searchMapper;
 
-/*    @Override
-    public List<SearchDto> getAllFood() {
-        return searchMapper.getAllFood();
-    }*/
 
     @Override
     public List<SearchDto> getHighScoreFood(int startNum, int perPage) {
@@ -103,5 +99,10 @@ public class SearchService implements SearchServiceInter {
     @Override
     public int getBookmarkListCount(int startNum, int perPage) {
         return searchMapper.getBookmarkListCount(startNum,perPage);
+    }
+
+    @Override
+    public int getOneBookmarkCount(int food_idx) {
+        return searchMapper.getOneBookmarkCount(food_idx);
     }
 }

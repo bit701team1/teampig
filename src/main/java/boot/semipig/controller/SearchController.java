@@ -79,8 +79,8 @@ public class SearchController {
             //각 페이지의 시작번호(1페이지:0, 2페이지:3, 3페이지: 6 ...)
             startNum=(currentPage-1)*perPage;
 
-            System.out.println("startNum="+startNum);
-            System.out.println("inputsearch="+inputsearch);
+           // System.out.println("startNum="+startNum);
+           // System.out.println("inputsearch="+inputsearch);
 
             if( inputsearch == null || inputsearch == "") {
                 if((list_type).equals("type_1")){
@@ -111,7 +111,7 @@ public class SearchController {
                 totalCount=searchService.getSearchFoodCount(inputsearch,startNum, perPage);
             }
 
-        System.out.println("totalCount="+totalCount);
+        //System.out.println("totalCount="+totalCount);
 
         //총 페이지 수
             //나머지가 있으면 1 추가(자바에서는 int에 저장시 소수점이 절삭되서 이런과정이 필요함)
@@ -132,41 +132,70 @@ public class SearchController {
 
             if( inputsearch == null || inputsearch == "") {
                 if((list_type).equals("type_1")){
-                    //평점순
-                    System.out.println("평점");
                     list=searchService.getHighScoreFood(startNum, perPage);
-
+                    for (SearchDto searchDto : list) {
+                        int foodIdx = searchDto.getFood_idx();
+                        int bookmarkCount = searchService.getOneBookmarkCount(foodIdx);
+                        searchDto.setBookmarkcount(bookmarkCount);
+                    }
                 } else if((list_type).equals("type_2")){
-                    System.out.println("리뷰");
-                    //리뷰
                     list=searchService.getManyReview(startNum, perPage);
+                    for (SearchDto searchDto : list) {
+                        int foodIdx = searchDto.getFood_idx();
+                        int bookmarkCount = searchService.getOneBookmarkCount(foodIdx);
+                        searchDto.setBookmarkcount(bookmarkCount);
+                    }
                 } else if((list_type).equals("type_3")){
-                    System.out.println("즐찾");
-                    //즐찾순 만들어야함
                     list=searchService.getBookmarkList(startNum, perPage);
+
+                    for (SearchDto searchDto : list) {
+                        int foodIdx = searchDto.getFood_idx();
+                        int bookmarkCount = searchService.getOneBookmarkCount(foodIdx);
+                        searchDto.setBookmarkcount(bookmarkCount);
+                    }
                 } else if((list_type).equals("1만원대")){
-                    System.out.println("1만원진입");
-                    //가격1
                     list = searchService.getPriceFood(list_type,startNum, perPage);
+                    for (SearchDto searchDto : list) {
+                        int foodIdx = searchDto.getFood_idx();
+                        int bookmarkCount = searchService.getOneBookmarkCount(foodIdx);
+                        searchDto.setBookmarkcount(bookmarkCount);
+                    }
                 } else if((list_type).equals("2만원대")){
-                    System.out.println("2만원진입");
-                    //가격2
                     list = searchService.getPriceFood(list_type,startNum, perPage);
+                    for (SearchDto searchDto : list) {
+                        int foodIdx = searchDto.getFood_idx();
+                        int bookmarkCount = searchService.getOneBookmarkCount(foodIdx);
+                        searchDto.setBookmarkcount(bookmarkCount);
+                    }
                 } else if((list_type).equals("3만원대")){
-                    System.out.println("3만원진입");
-                    //가격3
                     list = searchService.getPriceFood(list_type,startNum, perPage);
+                    for (SearchDto searchDto : list) {
+                        int foodIdx = searchDto.getFood_idx();
+                        int bookmarkCount = searchService.getOneBookmarkCount(foodIdx);
+                        searchDto.setBookmarkcount(bookmarkCount);
+                    }
                 } else if((list_type).equals("4만원이상")){
-                    System.out.println("4만원이상진입");
-                    //가격3 over
                     list = searchService.getPriceFood(list_type,startNum, perPage);
+                    for (SearchDto searchDto : list) {
+                        int foodIdx = searchDto.getFood_idx();
+                        int bookmarkCount = searchService.getOneBookmarkCount(foodIdx);
+                        searchDto.setBookmarkcount(bookmarkCount);
+                    }
                 } else {
-                    System.out.println("기본");
                     list=searchService.getSearchFood(inputsearch,startNum, perPage);
+                    for (SearchDto searchDto : list) {
+                        int foodIdx = searchDto.getFood_idx();
+                        int bookmarkCount = searchService.getOneBookmarkCount(foodIdx);
+                        searchDto.setBookmarkcount(bookmarkCount);
+                    }
                 }
             } else {
-                System.out.println("서치");
                 list=searchService.getSearchFood(inputsearch,startNum, perPage);
+                for (SearchDto searchDto : list) {
+                    int foodIdx = searchDto.getFood_idx();
+                    int bookmarkCount = searchService.getOneBookmarkCount(foodIdx);
+                    searchDto.setBookmarkcount(bookmarkCount);
+                }
             }
 
             Map<String, Object> resultMap = new HashMap<>();
@@ -177,9 +206,6 @@ public class SearchController {
             resultMap.put("list", list);
             resultMap.put("list_type", list_type);
             resultMap.put("inputsearch",inputsearch);
-
-           System.out.println("totalPage = "+totalPage);
-        System.out.println("====================================");
 
         return resultMap;
     }

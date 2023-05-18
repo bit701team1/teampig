@@ -8,7 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.net.http.HttpHeaders;
 
 @Controller
 public class LoginController{
@@ -23,8 +25,10 @@ public class LoginController{
     }*/
 
     @PostMapping("/loginaction")//회원정보 확인 뒤 db에 있는 회원정보일 경우 session에 회원정보를 뿌려줌.
-    @ResponseBody public int loginactino(Model model, String id, String password, @RequestParam(required=false) String saveid, HttpSession session){
+    @ResponseBody public int loginactino
+            (Model model, String id, String password, @RequestParam(required=false) String saveid, HttpSession session){
 
+        //System.out.println((String)request.getHeader("Referer"));
         int count=loginService.isEqualIdPass(id, password);
         System.out.println(id+","+count);
         if(count==0)
@@ -32,7 +36,7 @@ public class LoginController{
             System.out.println("로그인 실패");
             return 0;
         }else{
-            session.setMaxInactiveInterval(60*5);//5분동안 세션 유지
+            session.setMaxInactiveInterval(60*60);//60분동안 세션 유지
             System.out.println("로그인 성공"+id);
             //로그인 성공시 세션에 저장하기
             session.setAttribute("loginok", "yes");
@@ -46,19 +50,20 @@ public class LoginController{
 
     }
     @GetMapping("/logout")
-    public String logout(HttpSession session)
+    public String logout(HttpSession session, HttpServletRequest request)
     {
+        String referer = request.getHeader("Referer");
         session.removeAttribute("loginok");
-        return "redirect:business";
+        return "redirect:"+referer;
     }
 
-    @GetMapping("/joinformtest")
+   /* @GetMapping("/joinformtest")
     public String logintest(Model model, String email, String name)
     {
         model.addAttribute("email", email);
         model.addAttribute("name", name);
         return "main/joinformtest";
-    }
+    }*/
     @PostMapping("/emailcheck")
     @ResponseBody public int emailCheck(String email){
         return loginService.doublecheck(email);
@@ -81,32 +86,24 @@ public class LoginController{
         session.setAttribute("loginid", dto.getId());
         session.setAttribute("loginidx", user_idx);
 
-        return "redirect:business";//나중에 어디서든 할수있게 수정해야 함.
+        // 이전 페이지 URL 가져오기
+        String previousUrl = (String) session.getAttribute("previousUrl");
+        session.removeAttribute("previousUrl");
+
+        if (previousUrl != null) {
+            return "redirect:" + previousUrl;
+        } else {
+            // 이전 페이지 URL이 없는 경우에 대한 처리 (예: 기본 페이지로 리다이렉트)
+            return "redirect:/";
+        }
 
     }
+
+
     @GetMapping("/auth/naver/callback")
     public String naverCallback()
     {
         return "main/navercallback";
     }
-    @GetMapping("/naverloginaction")
-    public String naverlogin(String email, HttpSession session)
-    {
-        System.out.println("test");
-        //이메일확인되면 로그인되고, 세션에 넣어주기
-        session.setMaxInactiveInterval(60*5);//5분동안 세션 유지
-        //회원정보 불러오기
-        int user_idx=loginService.getUserIdxByEmail(email);
-        LoginDto dto=loginService.getUserInfo(user_idx);
-        System.out.println(user_idx);
 
-        System.out.println(dto.getId());
-        //로그인 성공시 세션에 저장하기
-        session.setAttribute("loginok", "yes");
-        session.setAttribute("loginid", dto.getId());
-        session.setAttribute("loginidx", user_idx);
-
-        return "redirect:business";//나중에 수정해야 됨
-
-    }
 }
