@@ -24,6 +24,7 @@
 
     </style>
 </head>
+<c:set var="root" value="<%=request.getContextPath() %>"/>
 <script type="text/javascript">
     $(function(){
         $("#s_login").click(function(){
@@ -58,9 +59,7 @@
 
 </script>
 <body>
-
 <c:set var="root" value="<%=request.getContextPath() %>"/>
-
 <div id="container">
     <header>
         <div id="logo">

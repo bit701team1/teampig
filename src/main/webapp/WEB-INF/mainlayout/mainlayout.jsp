@@ -14,50 +14,23 @@
           rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <style>
-
-        body, body * {
-            font-family: 'Jua'
-        }
-        .header{
-            border: 3px solid black;
-            height: 150px;
-            width: 100%;
-        }
-        .main{
-            border: 3px solid black;
-            width: 1000px;
-            height: 1050px;
-            margin: 50px auto;
-        }
-        .menu{
-            border: 3px solid black;
-            top: 400px;
-            width: 100%;
-        }
-
     </style>
 </head>
 <body>
-<%@ include file="header.jsp" %>
 <%@ include file="mainlist.jsp" %>
-<%@ include file="footer.jsp" %>
-<%@ include file="chatbot.jsp" %>
-   <%-- <div class="mainlayout">
+    <div class="mainlayout">
+
         <header class="header">
             <tiles:insertAttribute name="header"/>
         </header>
-        <section class="mainlist">
-            <tiles:insertAttribute name="mainlist"/>
-        </section>
-        <section class="main">
-            <tiles:insertAttribute name="main"/>
-        </section>
+
         <section class="footer">
             <tiles:insertAttribute name="footer"/>
         </section>
         <section class="chatbot">
             <tiles:insertAttribute name="chatbot"/>
         </section>
-    </div>--%>
+    </div>
+
 </body>
 </html>

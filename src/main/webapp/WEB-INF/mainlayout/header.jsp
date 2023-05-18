@@ -13,6 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="css/header.css">
+
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
@@ -20,6 +23,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="css/login.css">
+
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap"
@@ -187,7 +191,7 @@
 
 
 <%--HTML 영역--%>
-<div id="m_container">
+<div id="m_header">
     <!-- 1.상단 메뉴바 영역 - 아마 tiles 쓸 수도 있음 -->
     <header>
         <div id="m_logo">
@@ -204,7 +208,7 @@
                 <li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
             </ul>
         </div>
-        <nav>
+        <nav>f
             <div class="container">
                 <form autocomplete="off">
                     <div class="finder">
@@ -224,6 +228,6 @@
         </nav>
     </header>
 </div>
-    <script src="js/mainlayout.js"></script>
+    <script src="js/header.js"></script>
 </body>
 </html>

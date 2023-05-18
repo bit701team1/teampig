@@ -15,20 +15,19 @@
         <put-attribute name="main" value="/WEB-INF/booking/main.jsp"/>
     </definition>
 
-    <definition name="/main/*/*" extends="booking">
-        <put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"></put-attribute>
+    <definition name="/main2/*/*" extends="booking">
+        <put-attribute name="main2" value="/WEB-INF/{1}/{2}.jsp"></put-attribute>
     </definition>
 
     <!--    식당리스트 출력 영역입니다.-->
     <definition name="mainlayout" template="/WEB-INF/mainlayout/mainlayout.jsp">
         <put-attribute name="header" value="/WEB-INF/mainlayout/header.jsp"/>
-        <put-attribute name="mainlist" value="/WEB-INF/mainlayout/mainlist.jsp"/>
         <put-attribute name="chatbot" value="/WEB-INF/mainlayout/chatbot.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/mainlayout/footer.jsp"/>
     </definition>
 
-    <definition name="/mainlist" extends="mainlayout">
-        <put-attribute name="mainlist" value="/WEB-INF/mainlayout/mainlist.jsp"/>
+    <definition name="/main" extends="mainlayout">
+        <put-attribute name="main" value="/WEB-INF/mainlayout/mainlist.jsp"/>
     </definition>
 
     <!--wild card macro-->
