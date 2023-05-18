@@ -562,6 +562,7 @@
 </form>
 <span><b>세션id: ${sessionScope.id}</b></span><br>
 <span><b>세션 loginidx: ${sessionScope.loginidx}</b></span><br>
+<span><b>세션 user_idx: ${sessionScope.user_idx}</b></span><br>
 
 
 <div class="input-group">

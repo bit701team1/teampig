@@ -14,10 +14,20 @@
     <definition name="/main" extends="booking">
         <put-attribute name="main" value="/WEB-INF/booking/main.jsp"/>
     </definition>
+   <!-- &lt;!&ndash;K : userpage &ndash;&gt;
+    <definition name="/userpage" extends="booking">
+        <put-attribute name="main" value="/WEB-INF/userpage/myuserpage.jsp"/>
+    </definition>
+    <definition name="/userpage/*/*" extends="booking">
+        <put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"></put-attribute>
+    </definition>-->
+
 
     <definition name="/main/*/*" extends="booking">
         <put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"></put-attribute>
     </definition>
+
+
 
     <!--    식당리스트 출력 영역입니다.-->
     <definition name="mainlayout" template="/WEB-INF/mainlayout/mainlayout.jsp">

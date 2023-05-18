@@ -196,6 +196,7 @@ public class DetailController {
                            String food_type,
                            String restrt_list,
                            int user_idx){
+
         //history 저장 과정
         //history 갯수 확인
         int historycount = detailService.getHistoryCount(user_idx);

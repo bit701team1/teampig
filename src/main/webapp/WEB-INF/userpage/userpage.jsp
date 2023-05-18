@@ -1,134 +1,120 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<meta charset="utf-8">
+<meta id="ch-new-plugin-theme" name="theme-color" content="#686868">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
-          rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-    <style>
-        body, body * {
-            font-family: 'Jua'
-        }
-        td.k_reviewtext {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 300px;
-        }
-        #userpage_container{
-            margin: 20px;
-        }
-
-    </style>
-    <script>
-     $(function (){
-         wishlist();
-         reviewlist();
-
-         $(document).on('click', '.k_mybookmark', function() {
-
-             var user_idx = ${user_idx};
-             var food_idx = $(this).attr("food_idx");
-
-             $.ajax({
-                 type: "get",
-                 url: "deleteBookmark",
-                 data: {"food_idx": food_idx, "user_idx": user_idx},
-                 success: function() {
-                     alert("삭제되었습니다");
-                     list();
-                 },
-                 error: function(xhr, status, error) {
-                     console.error("Error: " + error);
-                 }
-             });
-
-         }); // click event
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<style type="text/css">
 
 
-     }); // $func end
 
-        function wishlist(){
-            var user_idx =${sessionScope.user_idx}
-            $.ajax({
-                type:"get",
-                url:"bookmarklist",
-                dataType:"json",
-                data:{"user_idx": user_idx},
-                success: function(res) {
-                    var s = "";
-                    s+=`<table class="table table-bordered" style="width: 430px">`;
+</style>
 
-                    $.each(res, function (idx, ele) {
-                        s+=`
-                            <tr>
-                                <td width="300px">\${ele.restrt_NM}</td>
-                                <td width="100px">\${ele.food_type}</td>
-                                <td width="30px"><i class="bi bi-bookmark-star-fill k_mybookmark" food_idx ='\${ele.food_idx}' style="cursor: pointer"></i></td>
-                            </tr>
-                        `;
-                    }); //each end
-
-                    s+=`</table>`;
-                    $("div#k_wishlist").html(s);
-                }
-            }); //ajax end
-
-        } //wishlist() end
-
-     function reviewlist(){
-         var user_idx =${sessionScope.user_idx}
-             $.ajax({
-                 type:"get",
-                 url:"reviewlist",
-                 dataType:"json",
-                 data:{"user_idx": user_idx},
-                 success: function(res) {
-                     var s = "";
-                     s+=`<table class="table table-bordered" style="width: 850px">`;
-
-                     $.each(res, function (idx, ele) {
-                         s+=`
-                            <tr>
-                                <td>\${ele.food_idx}</td>
-                                <td style="width: 200px">\${ele.restrt_NM}</td>
-                                <td class="k_reviewtext">\${ele['reviewtext']}</td>
-                                <td width="150px">\${ele['write_day']}</td>
-                            </tr>
-                        `;
-                     }); //each end
-
-                     s+=`</table>`;
-                     $("div#k_reviewlist").html(s);
-                 }
-             }); //ajax end
-
-     } //reviewlist() end
-    </script>
 </head>
 <body>
-<div id="userpage_container">
-    <h1>userpage</h1><div>user_idx =${sessionScope.user_idx} 에 로그인중</div>
-
-<pre><h2>
-    <찜목록>
-</h2></pre>
-<div id="k_wishlist" style="margin-left: 30px"></div>
-<br><br>
-
-<pre><h2>
-    <작성한 리뷰>
-</h2><h4>          수정,삭제로 연결할 필요</h4></pre>
-<div id="k_reviewlist" style="margin-left: 30px">
+<c:set var="root" value="<%=request.getContextPath() %>"/>
+<h2>가게정보</h2>
+<div class="y_myinfo">
+    <div style="display: flex; margin-top: 10px;">
+        <img src='${root}/photo/food.gif' style="width: 450px; height:400px;" class="rounded" alt="Cinque Terre">
+<table class="table table-bordered" style="width: 500px; margin-left: 20px; height:400px; ">
+    <tr>
+        <td style="width: 100px; background: #F6F6F6;">이름 </td>
+        <td>${dto.RESTRT_NM}</td>
+    </tr>
+    <tr>
+        <td style="width: 100px; background: #F6F6F6;">전화번호 </td>
+        <td>${dto.TASTFDPLC_TELNO}</td>
+    </tr>
+    <tr>
+        <td style="width: 100px; background: #F6F6F6;">가격대 </td>
+        <td>${dto.food_price}</td>
+    </tr>
+    <tr>
+        <td style="width: 100px; background: #F6F6F6;">주 메뉴</td>
+        <td>${dto.food_type}</td>
+    </tr>
+    <tr>
+        <td style="width: 100px; background: #F6F6F6;">주소  </td>
+        <td>${dto.REFINE_ROADNM_ADDR}</td>
+    </tr>
+    <tr>
+        <td style="width: 100px; background: #F6F6F6;"> 가게 포인트 </td>
+        <td>${dto.point}</td>
+    </tr>
+    <tr>
+        <td style="width: 100px; background: #F6F6F6;"> 오픈 시간 </td>
+        <td>${dto.opentime}</td>
+    </tr>
+    <tr>
+        <td style="width: 100px; background: #F6F6F6;"> 닫는 시간 </td>
+        <td>${dto.closetime}</td>
+    </tr>
+    <tr>
+        <td style="width: 100px; background: #F6F6F6;">휴일</td>
+        <td>${dto.holiday}</td>
+    </tr>
+</table>
 </div>
 </div>
+<div class="y_square">
+    <div class="y_content">예약 총 ${totalCount} </div>
+    <div class="y_content" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#couponModal"><span class="y_coup">쿠폰 등록</span></div>
+    <div class="y_content">내 가게 리뷰 100개</div>
+</div>
+
+<script>
+    const timeInput2 = document.getElementById('y_ctime');
+    const dateInput2 = document.getElementById('y_cdate');
+    const now2 = new Date();
+</script>
+<style>
+    .custom-div {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 18px;
+        color: #333;
+        line-height: 1.5;
+        text-align: center;
+
+        background-color:rgba(228, 247, 186, 0.3);
+    }
+
+    .custom-div h1 {
+        font-size: 24px;
+        margin-top: 0;
+    }
+    .custom-div2{
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        font-size: 18px;
+        color: #333;
+        line-height: 1.5;
+        text-align: center;
+        background-color: white;
+    }
+    .custom-div p {
+        margin-bottom: 0;
+    }
+</style>
+
+
 </body>
 </html>
