@@ -59,9 +59,5 @@ public class HomeController {
             e.printStackTrace();
         }
     }
-    public String total(Model model){
-        int totalCount=myservice.getTotalCount();
-        model.addAttribute("totalCount", totalCount);
-        return "/header";
-    }
+
 }

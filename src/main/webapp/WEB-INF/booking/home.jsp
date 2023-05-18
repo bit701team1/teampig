@@ -41,23 +41,24 @@
 		"pluginKey": "708c4779-dafe-4260-abe0-c76183c1b24a"
 	});
 </script>
+<c:set var="root" value="<%=request.getContextPath() %>"/>
 <body>
 <div class="y_bosspage1">
 	<section class="header">
 		<tiles:insertAttribute name="header"/>
 	</section>
+
 </div>
 <div class="y_bosspage2">
 	<section class="main">
 		<tiles:insertAttribute name="main"/>
 	</section>
+	<img src="${root}/photo/fruit.jpg" style="width: 1200px; height:1000px; position: fixed;">
 </div>
 <div class="y_bosspage3">
 	<section class="menu">
 		<tiles:insertAttribute name="menu"/>
 	</section>
 </div>
-
-
 </body>
 </html>

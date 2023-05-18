@@ -17,7 +17,6 @@ public class QnaDto {
     private String qna_pass;
     private String qna_subject;
     private String qna_content;
-    private List<QnaAnswerDto> qna_answer;
 
     private int qna_readcount;
     private int qna_ref;
