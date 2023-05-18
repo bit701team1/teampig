@@ -46,25 +46,38 @@ public class WriteController {
 
     @PostMapping("/insert")
     @ResponseBody
-    void insertt(@RequestBody String jsondata, HttpServletResponse response,Model model) {
+    public void insertt(@RequestBody String jsondata, HttpSession session) {
+        System.out.println("jsondata=" + jsondata);
+        String id = (String) session.getAttribute("loginid");
         ObjectMapper mapper = new ObjectMapper();
-        System.out.println(jsondata);
         try {
             ServiceDto[] dtos = mapper.readValue(jsondata, ServiceDto[].class);
             for (ServiceDto dto : dtos) {
-                // 데이터베이스에 예약 정보를 조회합니다.
-                List<ServiceDto> eventList = myservice.selectt();
-                boolean isAvailable = true;
-                if (isAvailable) {
-                    // 예약 가능한 경우, 데이터베이스에 새로운 예약 정보를 추가합니다.
-                    myservice.insertt(dto);
-                } else {
-                    response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-                }
+                dto.setUser_name(id);
+                myservice.insertt(dto);
             }
         } catch (IOException e) {
             // 예외 처리
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     @GetMapping("/deletecoupon")

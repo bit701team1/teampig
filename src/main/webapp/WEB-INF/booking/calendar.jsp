@@ -239,7 +239,7 @@
                     $.each(data.list, function(index, dto) {
                         var reservationRow = '<tr>' +
                             '<td style="text-align: center;">'  + (index+1) + '</td>' +
-                            '<td>' + '님</td>' +
+                            '<td>' + dto.user_name + '</td>' +
                             '<td>' + dto.start.substring(0, 16) +
                             '<span style="float: right; font-size: 20px; cursor: pointer;" data-bs-toggle="modal" ' +
                             'data-bs-target="#calendarModal" onclick="openModal(' + dto.num + ', \'' + dto.start.substring(0, 10) + '\', \'' + dto.start.substring(11, 16) + '\')">' +
@@ -317,7 +317,9 @@
 
             </div>
             <!-- Modal footer -->
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="allupdate()">수정하기</button>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-success"  style="background-color:#5C732C;" data-bs-dismiss="modal" onclick="allupdate()">수정하기</button>
+            </div>
         </div>
     </div>
 </div>

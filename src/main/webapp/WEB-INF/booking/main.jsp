@@ -73,6 +73,9 @@
        font-size: 18px;
        color: #5c667b;
    }
+   .y_content:hover .y_coup {
+       color: black;
+   }
 </style>
 
 </head>
@@ -124,7 +127,7 @@
 </div>
 <div class="y_square">
     <div class="y_content">예약 총 ${totalCount} </div>
-    <div class="y_content" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#couponModal">쿠폰 등록</div>
+    <div class="y_content" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#couponModal"><span class="y_coup">쿠폰 등록</span></div>
     <div class="y_content">내 가게 리뷰 100개</div>
 </div>
 
@@ -174,7 +177,7 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="applyCoupon()">등록</button>
+                        <button type="button" class="btn btn-success" style="background-color:#5C732C;" data-bs-dismiss="modal" onclick="applyCoupon()">등록</button>
                     </div>
                 </div>
             </div>
@@ -249,7 +252,7 @@
         line-height: 1.5;
         text-align: center;
         margin-bottom: 80px;
-        background-color:rgba(188, 229, 92, 0.3);
+        background-color:rgba(228, 247, 186, 0.3);
     }
 
     .custom-div h1 {

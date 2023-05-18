@@ -468,7 +468,7 @@
                     <label for="point"><span class="y_info2">홍보 포인트</span></label>
                 </td>
                 <td>
-                    <input type="text" id="point" name="point" value="${dto.point}" placeholder="신선한, 주차장이 넓은 등">
+                    <input type="text" id="point" name="point" value="${dto.point}" placeholder="신선한, 주차장이 넓은 등, 30자 제한" maxlength="30">
                 </td>
             </tr>
             <tr>

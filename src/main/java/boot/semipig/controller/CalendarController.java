@@ -25,6 +25,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import boot.semipig.dto.ServiceDto;
 import boot.semipig.service.MyService;
 
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/calendar")
@@ -79,18 +81,6 @@ public class CalendarController {
         return response;
     }
 
-    @PostMapping("/insert")
-    @ResponseBody void insertt(@RequestBody String jsondata) {
-        System.out.println("jsondata="+jsondata);
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            ServiceDto[] dtos = mapper.readValue(jsondata, ServiceDto[].class);
-            for (ServiceDto dto : dtos) {
-                myservice.insertt(dto);
-            }
-        } catch (IOException e) {
-        }
-    }
 
     @GetMapping("/list")
     @ResponseBody

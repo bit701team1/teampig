@@ -100,7 +100,9 @@
 
                 </div>
                 <!-- Modal footer -->
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="allSave()">예약하기</button>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-success" style="background-color:#5C732C;" data-bs-dismiss="modal" onclick="allSave()">예약하기</button>
+                </div>
             </div>
         </div>
     </div>

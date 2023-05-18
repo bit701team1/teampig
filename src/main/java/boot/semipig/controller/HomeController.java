@@ -1,8 +1,10 @@
 package boot.semipig.controller;
 
 import boot.semipig.dto.DetailDto;
+import boot.semipig.dto.LoginDto;
 import boot.semipig.dto.couponDto;
 import boot.semipig.mapper.ServiceMapper;
+import boot.semipig.service.LoginService;
 import boot.semipig.service.MyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import naver.cloud.NcpObjectStorageService;
@@ -20,6 +22,8 @@ public class HomeController {
     private MyService myservice;
     @Autowired
     private ServiceMapper serviceMapper;
+    @Autowired
+    private LoginService loginService;
     @GetMapping({"/","/home1"})
     public String home()
     {
@@ -31,9 +35,11 @@ public class HomeController {
         // DTO 객체를 생성하여 세션에서 가져온 정보를 저장
         serviceMapper.getmypage(user_idx);
         DetailDto dto =serviceMapper.getmypage(user_idx);
+        LoginDto dtos=loginService.getUserInfo(user_idx);
         dto.setUser_idx(user_idx);
         int totalCount = myservice.getTotalCount();
         model.addAttribute("user_idx", user_idx);
+        model.addAttribute("logindto", dtos);
         model.addAttribute("dto", dto);
         model.addAttribute("totalCount", totalCount);
         return "/main";

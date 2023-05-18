@@ -8,5 +8,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("ServiceDto")
 public class ServiceDto {
     private String num;
+    private int user_idx;
+    private String user_name;
     private String start;
 }

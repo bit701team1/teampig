@@ -48,7 +48,7 @@ public class OwnerpageService implements OwnerpageServiceInter {
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json"); // 데이터 타입이 무엇인가
-        con.setRequestProperty("Authorization", "Bearer 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");//인증 ,openapi key
+        con.setRequestProperty("Authorization", "Bearer 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");//인증 ,openapi key
         con.setDoOutput(true);
 
         JSONObject data = new JSONObject();
