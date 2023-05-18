@@ -13,6 +13,9 @@ import boot.semipig.service.BusinessService;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class BusinessController {
 
@@ -23,8 +26,11 @@ public class BusinessController {
     BusinessService businessService;
 
     @GetMapping("/business")
-    public String business()
+    public String business(HttpSession session, HttpServletRequest request)
     {
+        String previousUrl = request.getHeader("Referer");
+        session.setAttribute("previousUrl", previousUrl);
+
         return "/business/business";
     }
     @PostMapping("/insert")

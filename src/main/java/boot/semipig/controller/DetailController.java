@@ -66,7 +66,7 @@ public class DetailController {
         System.out.println("review_idx:"+dto.getReview_idx());
 
         System.out.println(upload);
-        if(!upload.get(0).getOriginalFilename().equals(""))//null값인 경우 사진은 업로드하지 않음.
+        if(upload!=null&&!upload.get(0).getOriginalFilename().equals(""))//null값인 경우 사진은 업로드하지 않음.
         {
 
             for(MultipartFile mfile:upload)
@@ -79,7 +79,6 @@ public class DetailController {
                 pdto.setPhotoname(photoname);
                 reviewService.insertPhoto(pdto);
             }
-
         }
         return "redirect:detail?food_idx="+dto.getFood_idx();
     }
@@ -119,7 +118,7 @@ public class DetailController {
         //on delete cacade 설정시 외부키로 연결된 데이타들은 자동으로 삭제된다
         reviewService.deleteReview(review_idx);
     }
-    @GetMapping("/updateform")//리뷰 수정 페이지
+   /* @GetMapping("/updateform")//리뷰 수정 페이지
     public String updateform(Model model, int food_idx, int review_idx)
     {
         DetailDto fdto=detailService.selectFood(food_idx);
@@ -130,19 +129,26 @@ public class DetailController {
         model.addAttribute("rdto", rdto);
         return "/detail/updateform";
     }
-
+*/
+    @GetMapping("/selectonereview")
+    @ResponseBody public ReviewDto selectOneReview(Model model, int review_idx){
+        ReviewDto dto=reviewService.selectReview(review_idx);
+        List<ReviewPhotoDto> photolist=reviewService.getPhotos(review_idx);
+        dto.setPhotoList(photolist);
+        return dto;
+    }
     @PostMapping("/updatereview")//리뷰 수정한 것 업로드
     public String reviewUpdate(ReviewDto dto, List<MultipartFile> upload)
     {
         //어느 시점에 스토리지에 있는걸 삭제해야할지..
-        System.out.println("여기까지는 된당");
+        System.out.println("모달 업데이트 테스트");
         reviewService.updateReview(dto);
         System.out.println("score: "+dto.getScore());
         System.out.println("review_idx:"+dto.getReview_idx());
-
+        System.out.println("reviewtext:"+dto.getReviewtext());
 
         System.out.println(upload);
-        if(!upload.get(0).getOriginalFilename().equals(""))//null값인 경우 사진은 업로드하지 않음.
+        if(upload!=null&&!upload.get(0).getOriginalFilename().equals(""))//null값인 경우 사진은 업로드하지 않음.
         {
             System.out.println("여기 나오나?");
 
@@ -158,6 +164,16 @@ public class DetailController {
             }
 
 
+        }else{
+            //아무것도 사진 없다고 할떄 사진 삭제하기
+            reviewService.deletePhoto(dto.getReview_idx());
+
+        }
+        //스토리지에 사진 지우기
+        List<String> photoList=reviewService.getAllPhoto(dto.getReview_idx());
+        for(String photoname:photoList)
+        {
+            storageService.deleteFile(bucketName, "review", photoname);
         }
 
         return "redirect:detail?food_idx="+dto.getFood_idx();
@@ -193,7 +209,7 @@ public class DetailController {
         //db에 history 저장
         detailService.insertFoodHistory(user_idx, food_type, restrt_list);
 
-        System.out.println("History saved");
+        //System.out.println("History saved");
 
         return "redirect:/detail?food_idx=" + food_idx;
     }
@@ -201,11 +217,13 @@ public class DetailController {
     @ResponseBody
     public int isbookmark(Integer food_idx, HttpSession session){
 
+
         Integer loginidx= (Integer)session.getAttribute("loginidx");
         System.out.println("food_idx="+food_idx);
         System.out.println("loginidx="+loginidx);
         int count = detailService.getBookmarkCount(loginidx,food_idx);
         System.out.println("count="+count);
+
 
         return count;
     }

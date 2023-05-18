@@ -65,5 +65,10 @@ public class ReviewService implements ReviewServiceInter{
         reviewMapper.updatePhoto(pdto);
     }
 
+    @Override
+    public void deletePhoto(int review_idx) {
+        reviewMapper.deletePhoto(review_idx);
+    }
+
 
 }

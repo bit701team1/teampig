@@ -54,7 +54,6 @@
         })//로그인버튼 끝
     });
 
-    console.log(${sessionScope.loginok});
 
     $(function (){
         $("#signup").click(function(){
@@ -398,11 +397,13 @@
                                         <div class="cont_form_sign_up">
                                             <a href="#" onclick="hidden_login_and_sign_up()"><i class="bi bi-x-lg" style=
                                                     "position: relative; bottom:50px;"></i></a>
+
                                             <h2>SIGN UP</h2>
                                             <input type="text" name="email" id="email" placeholder="Email"/>
                                             <input type="text" name="id" id="id" placeholder="id" />
                                             <input type="password" name="password" id="password" placeholder="Password" />
                                             <input type="text" name="user_name" id="user_name" placeholder="name" />
+
                                             <br>
                                             <select class="form-select" name="user_type" id="user_type">
                                                 <option value="" selected disabled>선택</option>
@@ -461,7 +462,9 @@
 
     }
 
+
     const time_to_hidden_all = 500;
+
 
     function hidden_login_and_sign_up() {
 
@@ -503,9 +506,14 @@
                                 {
                                     alert("회원이 아닙니다. 회원가입해주세요!");
 
+                                    $("#s_signup").html("추가정보를 입력해주세요");
                                     $("#email").val(kakao_account.email);
-                                    $("#user_name").val(kakao_account.profile.nickname);
+                                    $("#email").attr("readonly", true);
+                                    console.log(kakao_account.profile.nickname);
+                                    $("#name").val(kakao_account.profile.nickname);
+                                    $("#name").attr("readonly", true);
                                     change_to_sign_up();
+
                                 }
                                 else{
                                     window.location.href='snsloginaction?email='+kakao_account.email;
@@ -518,6 +526,7 @@
             }
         })
     }
+
     //네이버 관련
     //네이버 아이디로그인 초기화 script
     var naverLogin =new naver.LoginWithNaverId({
@@ -531,6 +540,7 @@
     naverLogin.init();//설정정보 초기화 연ㄷ동 준비
 
     //이 페이지가 정상적으로 다 로드되었을 때 해당 함수를 실행할 것.
+
 
     // 모달 표시 함수
     function showLoginModal() {
