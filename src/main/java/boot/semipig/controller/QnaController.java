@@ -92,7 +92,7 @@ public class QnaController {
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("no", no);
 
-        return "/main/qna/qnalist";
+        return "/qna/qnalist";
     }
 
     //글쓰기 폼
@@ -112,7 +112,7 @@ public class QnaController {
         model.addAttribute("qna_step", qna_step);
         model.addAttribute("qna_depth", qna_depth);
 
-        return "/main/qna/qnawriteform";
+        return "/qna/qnawriteform";
     }
 
     //공지글 또는 질문 인서트
