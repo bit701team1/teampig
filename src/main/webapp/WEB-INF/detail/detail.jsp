@@ -18,223 +18,9 @@
 
     <script type="text/javascript"
             src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=wvbgxt3966"></script>
+    <link rel="stylesheet" href="/css/detail.css">
 
     <style>
-        .s_delete, .s_update{
-            cursor:pointer;
-        }
-        .s_delete:hover, .s_update:hover{
-            color: gray;
-        }
-        .s_storename{
-            font-size: 30px;
-            border: 1px solid black;
-        }
-        .s_side{
-            position: relative;
-            top: 400px;
-            float: right;
-            border: 1px solid black;
-        }
-        .s_reviewphoto{
-            /*border: 1px solid black;*/
-            position: absolute;
-            height: 340px;
-            width: 100%;
-
-        }
-        .s_photolist{
-            height: 340px;
-            width:19%;
-        }
-        .s_info{
-            border:1px solid black;
-            position: absolute;
-            top: 400px;
-            left: 90px;
-            float:left;
-            width: 800px;
-        }
-        .s_storedetailinfo{
-            position:relative;
-            top: 20px;
-        }
-        .s_review{
-            border: 1px solid black;
-            position: relative;
-            top:100px;
-        }
-        .s_button{
-            float: right;
-        }
-
-        pre{
-            white-space: pre-wrap;
-        }
-        tr{
-            border:1px solid black;
-        }
-        .s_review_table{
-            border: 1px solid black;
-        }
-        .s_photoreview{
-            border: 1px solid black;
-            white-space : nowrap;
-        }
-        .s_plist{
-            width: 100px;
-            height: 100px;
-            display: inline-block;
-        }
-        .s_fontcolorapply{
-            color: #5C732C;
-        }
-        a{
-            text-decoration: none;
-            color: black;
-        }
-        a:hover{
-            color:#5C732C;
-        }
-
-        <%--리뷰쓰는 폼 관련--%>
-        .rating .rate_radio + label {
-            position: relative;
-            display: inline-block;
-            margin-left: -4px;
-            z-index: 10;
-            width: 60px;
-            height: 60px;
-            background-image: url('../../save/pigstar1.png');
-            background-repeat: no-repeat;
-            background-size: 60px 60px;
-            cursor: pointer;
-            background-color: #f0f0f0;
-        }
-        .rating .rate_radio:checked + label {
-            background-color: #ff8;
-        }
-        /* 레이아웃 외곽 너비 400px 제한*/
-        .wrap{
-            max-width: 480px;
-            margin: 0 auto; /* 화면 가운데로 */
-            background-color: #fff;
-            height: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-
-        }
-        .reviewform textarea{
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-        .rating .rate_radio {
-            position: relative;
-            display: inline-block;
-            z-index: 20;
-            opacity: 0.001;
-            width: 60px;
-            height: 60px;
-            background-color: #fff;
-            cursor: pointer;
-            vertical-align: top;
-            display: none;
-        }
-        .rating .rate_radio + label {
-            position: relative;
-            display: inline-block;
-            margin-left: -4px;
-            z-index: 10;
-            width: 60px;
-            height: 60px;
-            background-image: url('../../save/pigstar1.png');
-            background-repeat: no-repeat;
-            background-size: 60px 60px;
-            cursor: pointer;
-            background-color: #f0f0f0;
-        }
-        .rating .rate_radio:checked + label {
-            background-color: #ff8;
-        }
-        .s_photosqure{
-            width: 100px;
-            height: 100px;
-            border: dimgray 1px solid;
-        }
-        .modal{
-            z-index: 20000;
-        }
-
-        <%--수정--%>
-        .u_rating .u_rate_radio + label {
-            position: relative;
-            display: inline-block;
-            margin-left: -4px;
-            z-index: 10;
-            width: 60px;
-            height: 60px;
-            background-image: url('../../save/pigstar1.png');
-            background-repeat: no-repeat;
-            background-size: 60px 60px;
-            cursor: pointer;
-            background-color: #f0f0f0;
-        }
-        .u_rating .u_rate_radio:checked + label {
-            background-color: #ff8;
-        }
-        /* 레이아웃 외곽 너비 400px 제한*/
-        .u_wrap{
-            max-width: 480px;
-            margin: 0 auto; /* 화면 가운데로 */
-            background-color: #fff;
-            height: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-
-        }
-        .u_reviewform textarea{
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-        .u_rating .u_rate_radio {
-            position: relative;
-            display: inline-block;
-            z-index: 20;
-            opacity: 0.001;
-            width: 60px;
-            height: 60px;
-            background-color: #fff;
-            cursor: pointer;
-            vertical-align: top;
-            display: none;
-        }
-        .u_rating .u_rate_radio + label {
-            position: relative;
-            display: inline-block;
-            margin-left: -4px;
-            z-index: 10;
-            width: 60px;
-            height: 60px;
-            background-image: url('../../save/pigstar1.png');
-            background-repeat: no-repeat;
-            background-size: 60px 60px;
-            cursor: pointer;
-            background-color: #f0f0f0;
-        }
-        .u_rating .u_rate_radio:checked + label {
-            background-color: #ff8;
-        }
-        .s_u_photosqure{
-            width: 100px;
-            height: 100px;
-            border: dimgray 1px solid;
-        }
-
-
-
-
     </style>
     <script type="text/javascript">
         $(function(){
@@ -303,6 +89,76 @@
             }
             })
             })
+            var reviewIdx="";
+            //리뷰 수정시 모달에 review_idx 값 넣어주기
+            $(document).on("click",".s_update", function(e){
+                reviewIdx = $(this).attr('review_idx');
+                //$('#u_review_idx').val(reviewIdx);
+                console.log(reviewIdx);
+                //값 받아와서 수정 모달에 띄워주기
+                $.ajax({
+                    type:"get",
+                    url:"/selectonereview",
+                    data: { "review_idx": reviewIdx},
+                    dataType:"json",
+                    success:function(res){
+                        console.log(res.reviewtext);
+                        $("#u_reviewtext").val(res.reviewtext);
+                        $("#u_score").val(res.score);
+                        let items = document.querySelectorAll('.u_rate_radio');
+                        items.forEach(function(item, idx){
+                            if(idx < res.score){
+                                item.checked = true;
+                            }else{
+                                item.checked = false;
+                            }
+                        });
+                        $.each(res.photoList, function(i, e){
+                            $("#u_myfile").val(e);
+                        })
+                    }
+
+
+            });
+            })
+//리뷰 수정 모달 저장 버튼
+            $(document).on("click", ".s_updatebtn", function(e){
+                let review_idx=reviewIdx;
+                console.log("test"+review_idx);
+                let reviewtext=$("#u_reviewtext").val();
+                let user_idx=$("#u_user_idx").val();
+                let food_idx=$("#u_food_idx").val();
+                let score=$("#u_score").val();
+
+                if(u_reviewtext.length==0){
+                    alert("내용을 입력해주세요");
+                    return false;
+                }
+
+                var form=new FormData();
+                for(i=0;i<$("#u_myfile")[0].files.length;i++){
+                    form.append("upload",$("#u_myfile")[0].files[i]);//선택한 사진 모두 추가
+                }
+
+                form.append("reviewtext",reviewtext);
+                form.append("user_idx",user_idx);
+                form.append("review_idx", review_idx);
+                form.append("food_idx", food_idx);
+                form.append("score", score);
+
+                $.ajax({
+                    type:"post",
+                    url:"./updatereview",
+                    processData: false, // FormData 처리를 jQuery가 자동으로 하지 않도록 설정
+                    contentType: false, // 컨텐츠 타입을 설정하지 않도록 설정
+                    data:form,
+                    success:function(res){
+                        //console.log(review_idx);xw
+                        location.reload();
+                    }
+                })//ajax 끝
+
+            })
 
             //지도
             var map = new naver.maps.Map('map', {
@@ -369,9 +225,9 @@
 
                    $.each(res, function(idx, ele){
 
-                       s+=`<div class='s_reviewtable'><table>
+                       s+=`<div class='s_reviewtable'><table class="s_inner_table">
                            <tr>
-                           <td rowspan='3'>`;
+                           <td rowspan='3'class="s_persontd">`;
 
                        if(ele.user_photo!=null){
                            s+=`
@@ -386,7 +242,7 @@
                        s+=`</td>
                        <td>\${ele.write_day}`;
                        if(ele.user_id=='${sessionScope.loginid}')
-                       {s+=`<span class="s_update" review_idx="\${ele.review_idx}" data-bs-toggle="modal" data-bs-target="#reviewupdateModal">수정</span>|<span class="s_delete" review_idx="\${ele.review_idx}">삭제</span>`}
+                       {s+=`<span class="s_update" review_idx="\${ele.review_idx}" data-bs-toggle="modal" data-bs-target="#reviewupdateModal" >수정</span>|<span class="s_delete" review_idx="\${ele.review_idx}">삭제</span>`}
                            s+=`</td></tr>
                        <tr>
                            <td><pre>\${ele.reviewtext}</pre></td>
@@ -571,7 +427,7 @@
     <div id="s_nearby"></div><!--주변 인기 식당-->
 </div>
 <div class="s_info">
-    <div class="s_storename">${dto.RESTRT_NM} <span class="s_fontcolorapply">${dto.average}</span>
+    <div class="s_storename ">${dto.RESTRT_NM} <span class="s_fontcolorapply">${dto.average}</span>
         <div class="s_button">
             <button id="s_reviewform" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reviewModal"><i class="bi bi-pencil-fill"></i>
                 <span>리뷰쓰기</span></button>
@@ -669,7 +525,7 @@
                     <input type="hidden" id="u_user_idx" value="${sessionScope.loginidx}">
                     <input type="hidden" id="u_review_idx" value="">
 
-                    <input type="hidden" class="u_review_score" name="score" value="0">
+                    <input type="hidden" class="u_review_score" id="u_score" value="0">
                     <div class="u_review_rating">
 
                         <div class="u_rating">
@@ -690,7 +546,7 @@
                     <div class="u_review_contents">
             <textarea rows="10" class="u_review_textarea form-control"
                       placeholder="${sessionScope.loginid}님, 주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!
-            " name="reviewtext" ></textarea>
+            " id="u_reviewtext" ></textarea>
                     </div>
                     <div><input type="file" multiple="multiple" class="form-control" name="upload" id="u_myfile"></div>
                     <div>
@@ -704,16 +560,16 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">수정하기</button>
+                <button type="button" class="btn btn-danger s_updatebtn" data-bs-dismiss="modal" >수정하기</button>
             </div>
 
         </div>
     </div>
 </div>
-
+<div style="width: 450px;">
 <!--review modal-->
 <!-- The Modal -->
-<div class="modal" id="reviewModal">
+<div class="modal fade" id="reviewModal">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -726,7 +582,7 @@
             <!-- Modal body -->
             <div class="modal-body">
                 <div class="wrap">
-                    <h1>${dto.RESTRT_NM}에 대한 솔직한 리뷰를 써주세요.</h1>
+                    <div><b class="reviewformrestrt_nm s_fontcolorapply">${dto.RESTRT_NM}</b><span>에 대한 솔직한 리뷰를 써주세요.</span></div>
                     <form  method="post" action="insertreview" enctype="multipart/form-data">
 
                         <input type="hidden" id="user_idx" value="${sessionScope.loginidx}">
@@ -775,6 +631,7 @@
         </div>
     </div>
 </div>
+</div>
 
 
     <script type="text/javascript">
@@ -796,8 +653,25 @@
             reader.readAsDataURL($(this)[0].files[0]);
         }
     });
+    $("#u_myfile").change(function(){
+        console.log("1:"+$(this)[0].files.length);
+        console.log("2:"+$(this)[0].files[0]);
+        //정규표현식
+        var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+        var f=$(this)[0].files[0];//현재 선택한 파일
+        if(!f.type.match(reg)){
+            alert("확장자가 이미지파일이 아닙니다");
+            return;
+        }
+        if($(this)[0].files[0]){
+            var reader=new FileReader();
+            reader.onload=function(e){
+                $("#s_u_photosqure").attr("src",e.target.result);
+            }
+            reader.readAsDataURL($(this)[0].files[0]);
+        }
+    });
 </script>
-
 
 </body>
 </html>
