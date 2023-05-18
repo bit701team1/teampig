@@ -49,7 +49,7 @@
         <img class="bg_r_img" src="/photo/j_enter_oner_3.png">
         <img class="bg_r_img" src="/photo/j_enter_oner_4.png">
         <button type="button" class="btn btn-secondary btn-sm j_enter_welcome_btn"
-                onclick="location.href='ownermenual'">싸좡님은 요기 클릭해</button>
+                onclick="location.href='/business'">싸좡님은 요기 클릭해</button>
     </div>
 
     <div class="j_enter_bg_l_img">
@@ -62,7 +62,7 @@
         <img class="bg_l_img" src="/photo/j_enter_user_3.png">
         <img class="bg_l_img" src="/photo/j_enter_user_4.png">
         <button type="button" class="btn btn-secondary btn-sm j_enter_ownermenual_btn"
-                onclick="location.href='qnalist'">Welcome Koera Food</button>
+                onclick="location.href='/home1'">Welcome Koera Food</button>
     </div>
 </header>
 

@@ -5,16 +5,18 @@ import boot.semipig.dto.LoginDto;
 import boot.semipig.dto.couponDto;
 import boot.semipig.mapper.ServiceMapper;
 import boot.semipig.service.LoginService;
+
+
 import boot.semipig.service.MyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import naver.cloud.NcpObjectStorageService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
+
 
 @Controller
 public class HomeController {
@@ -30,6 +32,8 @@ public class HomeController {
         return "/mainlist";
     }
 
+
+
     @GetMapping("/home2")
     public String home1(Model model, HttpSession session) {
         int user_idx = (int) session.getAttribute("user_idx");
@@ -42,6 +46,7 @@ public class HomeController {
         model.addAttribute("user_idx", user_idx);
         model.addAttribute("logindto", dtos);
         model.addAttribute("dto", dto);
+        model.addAttribute("user_idx", user_idx);
         model.addAttribute("totalCount", totalCount);
         return "/main";
     }
@@ -68,4 +73,7 @@ public class HomeController {
         model.addAttribute("totalCount", totalCount);
         return "/header";
     }
+
 }
+
+

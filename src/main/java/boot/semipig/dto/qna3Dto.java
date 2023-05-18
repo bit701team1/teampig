@@ -6,7 +6,10 @@ import org.apache.ibatis.type.Alias;
 import java.sql.Timestamp;
 
 @Data
-@Alias("qnaDto3")
+
+
+@Alias("qna3Dto")
+
 public class qna3Dto {
     private int qna_idx;
     private String qna_subject;
