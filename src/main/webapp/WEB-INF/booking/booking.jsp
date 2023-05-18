@@ -212,7 +212,8 @@
         const timeDiff${i.index} = endDate${i.index}.getTime() - Date.now();
         if (timeDiff${i.index} <= 0) {
             clearInterval(timeinterval${i.index});
-            alert("${dto.number}% 할인 쿠폰의 유효기간이 끝났습니다.");
+            const countdownEl${i.index} = document.querySelector("#countdown-${i.index}");
+            countdownEl${i.index}.innerHTML = "<p>쿠폰의 유효기간이 끝났습니다.</p>";
             return;
         }
         // 남은 시간을 일, 시간, 분, 초 단위로 계산합니다.

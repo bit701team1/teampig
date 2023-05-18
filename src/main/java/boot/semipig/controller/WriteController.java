@@ -53,31 +53,12 @@ public class WriteController {
         try {
             ServiceDto[] dtos = mapper.readValue(jsondata, ServiceDto[].class);
             for (ServiceDto dto : dtos) {
-                dto.setUser_name(id);
+                dto.setUser_id(id);
                 myservice.insertt(dto);
             }
         } catch (IOException e) {
             // 예외 처리
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     @GetMapping("/deletecoupon")
@@ -154,7 +135,7 @@ public class WriteController {
         startNum = (currentPage - 1) * perPage;
         //각 글마다 출력할 글번호(예:10개일경우 1페이지: 10, 2페이지 : 20,
         no = totalCount - startNum;
-        List<qna3Dto> list = myservice.qnalist(startNum, perPage);
+        List<QnaDto> list = myservice.qnalist(startNum, perPage);
 
         response.put("totalCount", totalCount);
         response.put("list", list);

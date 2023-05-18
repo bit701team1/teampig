@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boot.semipig.mapper.ServiceMapper">
     <insert id="insertt" parameterType="ServiceDto">
-        INSERT INTO calendar (start, user_name) VALUES (#{start}, #{user_name})
+        INSERT INTO calendar (start, user_id) VALUES (#{start}, #{user_id})
     </insert>
     <select id="selectt"  resultType="ServiceDto">
         select * from calendar
