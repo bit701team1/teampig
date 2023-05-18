@@ -2,20 +2,21 @@ package boot.semipig.controller;
 
 import boot.semipig.dto.JoinDto;
 import boot.semipig.service.JoinService;
+import boot.semipig.service.OwnerpageService;
 import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/join")
 public class JoinController {
     @Autowired
     JoinService joinService;
+    @Autowired
+    OwnerpageService ownerpageService;
 
     @Autowired
     public NcpObjectStorageService storageService;
@@ -23,7 +24,9 @@ public class JoinController {
     public String bucketName="pig701-bucket";
 
     @GetMapping("/join")
-    public String join(){
+    public String join()
+    {
+
         return "/join/join";
     }
 

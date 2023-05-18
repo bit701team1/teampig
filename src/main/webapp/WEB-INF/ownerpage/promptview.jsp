@@ -559,7 +559,7 @@
     <div class="outputarea_sub">
         <h3 style="position: absolute; padding: 5px 10px">AI 홍보글 작성</h3>
     </div>
-    <form action="updateprompt" method="post" enctype="multipart/form-data">
+    <form action="U_updateprompt" method="post" enctype="multipart/form-data">
         <div class="prompt" id="prompt">
             <textarea class="GPT_content" id="GPT_content" name="GPT_content" value="${dto.GPT_content}">
                 ${dto.GPT_content}

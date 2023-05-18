@@ -2,7 +2,6 @@ package boot.semipig.service;
 
 import boot.semipig.dto.JoinDto;
 
-public interface JoinServiceInter {
+public interface BusinessServiceInter {
     public void insertUser(JoinDto dto);
-    public int isIdAvailable(JoinDto dto);
 }

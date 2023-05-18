@@ -45,7 +45,7 @@ public class OwnerpageController {
 
     @GetMapping("/writeform2")
     public String writeform2() {
-        return "/ownerpage/writeform";
+        return "ownerpage/writeform";
     }
 
     @PostMapping("/upload")
@@ -168,7 +168,7 @@ public Map<String, Object> insertOwner(OwnerpageDto dto, List<MultipartFile> upl
     @GetMapping("/writeform")
     public String insert()
     {
-        return "/ownerpage/writeform";
+        return "/main/ownerpage/writeform";
     }
 
     @RequestMapping(value = "/openai", method = RequestMethod.GET, params = "food_idx")

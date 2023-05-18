@@ -7,36 +7,36 @@
 <tiles-definitions>
     <definition name="booking" template="/WEB-INF/booking/home.jsp">
         <put-attribute name="header" value="/WEB-INF/booking/header.jsp"/>
-        <put-attribute name="main2" value="/WEB-INF/booking/main.jsp"/>
+        <put-attribute name="main" value="/WEB-INF/booking/main.jsp"/>
         <put-attribute name="menu" value="/WEB-INF/booking/menu.jsp"/>
     </definition>
     <!-- main페이지는 따로 설정해도됨 -->
-    <definition name="/main2" extends="booking">
-        <put-attribute name="main2" value="/WEB-INF/booking/main.jsp"/>
+    <definition name="/main" extends="booking">
+        <put-attribute name="main" value="/WEB-INF/booking/main.jsp"/>
     </definition>
 
     <definition name="/main/*/*" extends="booking">
-        <put-attribute name="main2" value="/WEB-INF/{1}/{2}.jsp"></put-attribute>
+        <put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"></put-attribute>
     </definition>
 
-<!--    식당리스트 출력 영역입니다.-->
+    <!--    식당리스트 출력 영역입니다.-->
     <definition name="mainlayout" template="/WEB-INF/mainlayout/mainlayout.jsp">
         <put-attribute name="header" value="/WEB-INF/mainlayout/header.jsp"/>
-<!--        <put-attribute name="mainlist" value="/WEB-INF/mainlayout/mainlist.jsp"/>-->
+        <put-attribute name="mainlist" value="/WEB-INF/mainlayout/mainlist.jsp"/>
         <put-attribute name="chatbot" value="/WEB-INF/mainlayout/chatbot.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/mainlayout/footer.jsp"/>
     </definition>
 
-    <definition name="/main" extends="mainlayout">
-        <put-attribute name="main" value="/WEB-INF/mainlayout/main.jsp"/>
+    <definition name="/mainlist" extends="mainlayout">
+        <put-attribute name="mainlist" value="/WEB-INF/mainlayout/mainlist.jsp"/>
     </definition>
 
     <!--wild card macro-->
     <!-- 와일드카드 매크로 -->
     <!-- "/main/*/*" 패턴에 대한 정의. "mainlayout"을 확장 -->
-    <definition name="/main/*/*" extends="mainlayout"> <!--애는 mainLayout이 적용되게 하겠다-->
+    <definition name="/mainlist/*/*" extends="mainlayout"> <!--애는 mainLayout이 적용되게 하겠다-->
         <!-- "main" 속성에 해당하는 값을 "/WEB-INF/{1}/{2}.jsp"로 설정 -->
         <!-- {1}과 {2}는 경로에 매칭되는 첫 번째와 두 번째 세그먼트 값을 나타냄 -->
-        <put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"/>
+        <put-attribute name="mainlist" value="/WEB-INF/{1}/{2}.jsp"/>
     </definition>
 </tiles-definitions>

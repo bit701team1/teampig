@@ -5,4 +5,7 @@
         insert into user (id,password,user_name,user_type,email)
         values (#{id},#{password},#{user_name},#{user_type},#{email})
     </insert>
+    <select id="isIdAvailable" parameterType="JoinDto" resultType="int">
+        select exists (select * from user where id = #{id})
+    </select>
 </mapper>
