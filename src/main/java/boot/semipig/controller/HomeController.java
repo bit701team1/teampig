@@ -76,6 +76,7 @@ public class HomeController {
         model.addAttribute("totalCount", totalCount);
         return "/header";
     }
+
 }
 
 

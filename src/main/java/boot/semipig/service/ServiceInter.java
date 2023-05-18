@@ -18,7 +18,7 @@ public interface ServiceInter {
     public void deletecoupon(int num);
     public int getTotalCount();
 
-    List<qna3Dto> qnalist(int startNum, int perPag);
+    List<QnaDto> qnalist(int startNum, int perPag);
     public List<ReviewDto> reviewlist(int startNum, int perPage);
     int ReservationCount(String start);
 }
