@@ -13,6 +13,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/qnalist.css" />
+    <link rel="stylesheet" href="/css/footer.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="/js/qnalist.js"> </script>
+    <script src="/js/qnafooter.js"></script>
     <style>
         body, body * {
             font-family: 'Jua'
@@ -20,7 +25,6 @@
     </style>
 </head>
 <body>
-
 <div style="width: 450px;">
     <form action="insert" method="post" >
         <%-- hidden --%>
@@ -106,16 +110,11 @@
         </table>
     </form>
 </div>
+<footer style="margin-top: 200px;">
+    <%@ include file="qnafooter.jsp" %>
+</footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    // $('input[name="qnapublic"]').on('click', function() {
-    //     if ($(this).val() == 'closeqna') {
-    //         $('#pwfield').show();
-    //     } else {
-    //         $('#pwfield').hide();
-    //     }
-    // });
-
     $('input[name="qna_ispass"]').on('click', function() {
         if ($(this).val() == 'true') {
             $('#pwfield').show();
