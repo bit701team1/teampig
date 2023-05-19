@@ -128,7 +128,6 @@ public class WriteController {
         //각 글마다 출력할 글번호(예:10개일경우 1페이지: 10, 2페이지 : 20,
         no = totalCount - startNum;
         List<ReviewDto> list = myservice.reviewlist(startNum, perPage, food_idx);
-
         response.put("totalCount", totalCount);
         response.put("list", list);
         response.put("startPage", startPage);

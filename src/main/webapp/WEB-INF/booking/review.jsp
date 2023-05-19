@@ -97,7 +97,7 @@
                         }
                         var reservationRow = '<tr>' +
                             '<td style="text-align: center;">' + ((currentPage - 1) * 10 + index + 1) + '</td>' +
-                            '<td>' + '쑤' + '</td>' +
+                            '<td>' + dto.user_name+ '</td>' +
                             '<td style="cursor: pointer;">' + reviewText + '</td>' +
                             '<td>' + new Date(dto.write_day).toLocaleString("en-US", {
                                 year: 'numeric',
