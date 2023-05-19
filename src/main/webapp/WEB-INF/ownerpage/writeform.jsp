@@ -14,6 +14,7 @@
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=fqj2esytz9&submodules=geocoder"></script>
     <style type="text/css">
         body,
         body * {
@@ -306,7 +307,8 @@
         .video-wrapper {
             position: relative;
             padding-bottom: 56.25%;
-            height: 0;
+            height: 70%;
+
         }
 
         .video-wrapper video {
@@ -322,95 +324,215 @@
         var imagePaths = [];
         var thumbnailPaths = [];
 
+        <%--$(function () {--%>
+        <%--    //업로드한 사진들과 데이타를 같이 묶어서 서버에 전송하기--%>
+        <%--    $("#contentadd").click(function () {--%>
+        <%--        let user_idx=${user_idx};--%>
+        <%--        let cnt=$("#photo")[0].files.length;--%>
+        <%--        let RESTRT_NM=$("#RESTRT_NM").val();--%>
+        <%--        let food_type=$("#food_type").val();--%>
+        <%--        let TASTFDPLC_TELNO=$("#TASTFDPLC_TELNO").val();--%>
+        <%--        let REPRSNT_FOOD_NM=$("#REPRSNT_FOOD_NM").val();--%>
+        <%--        let REFINE_ROADNM_ADDR=$("#REFINE_ROADNM_ADDR").val();--%>
+        <%--        let opentime=$("#opentime").val();--%>
+        <%--        let closetime=$("#closetime").val();--%>
+        <%--        let food_price=$("#food_price").val();--%>
+        <%--        let holiday=$("#holiday").val();--%>
+        <%--        let point=$("#point").val();--%>
+        <%--        let REFINE_WGS84_LAT="";--%>
+        <%--        let REFINE_WGS84_LOGT="";--%>
+        <%--        {--%>
+        <%--            if (RESTRT_NM.length == 0){--%>
+        <%--                alert("가게이름을 입력해주세요")--%>
+        <%--                return false;--%>
+        <%--            }--%>
+        <%--            if (TASTFDPLC_TELNO.length == 0){--%>
+        <%--                alert("전화번호를 입력해주세요")--%>
+        <%--                return false;--%>
+        <%--            }--%>
+        <%--            if (REFINE_ROADNM_ADDR.length == 0){--%>
+        <%--                alert("주소를 입력해주세요")--%>
+        <%--                return false;--%>
+        <%--            }--%>
+        <%--            if (TASTFDPLC_TELNO.length == 0){--%>
+        <%--                alert("전화번호를 입력해주세요")--%>
+        <%--                return false;--%>
+        <%--            }--%>
+        <%--            if (REPRSNT_FOOD_NM.length==0){--%>
+        <%--                alert("주요메뉴를 입력해주세요")--%>
+        <%--                return false;--%>
+        <%--            }--%>
+        <%--            if (opentime.length==0){--%>
+        <%--                alert("오픈시간을 입력해주세요")--%>
+        <%--                return false;--%>
+        <%--            }--%>
+        <%--            if (closetime.length==0){--%>
+        <%--                alert("영업종료시간을 입력해주세요")--%>
+        <%--                return false;--%>
+        <%--            }--%>
+        <%--        }--%>
+        <%--        naver.maps.Service.fromAddrToCoord({address: $("#REFINE_ROADNM_ADDR").val()}, function (status, response) {--%>
+        <%--            if (status === naver.maps.Service.Status.ERROR) {--%>
+        <%--                return alert('Something wrong!');--%>
+        <%--            }--%>
+        <%--            REFINE_WGS84_LAT=response.result.items[0].point.y;--%>
+        <%--            REFINE_WGS84_LOGT=response.result.items[0].point.x;--%>
+        <%--            // 성공 시의 response 처리--%>
+        <%--            console.log("위도경도"+REFINE_WGS84_LAT);--%>
+        <%--            console.log(user_idx);--%>
+        <%--        });--%>
+
+        <%--        var form=new FormData();--%>
+        <%--        for(i=0;i<$("#photo")[0].files.length;i++){--%>
+        <%--            form.append("upload",$("#photo")[0].files[i]);//선택한 사진 모두 추가--%>
+        <%--        }--%>
+
+        <%--        form.append("user_idx",user_idx);--%>
+        <%--        form.append("RESTRT_NM",RESTRT_NM);--%>
+        <%--        form.append("food_type",food_type);--%>
+        <%--        form.append("TASTFDPLC_TELNO",TASTFDPLC_TELNO);--%>
+        <%--        form.append("REFINE_ROADNM_ADDR",REFINE_ROADNM_ADDR);--%>
+        <%--        form.append("REPRSNT_FOOD_NM",REPRSNT_FOOD_NM);--%>
+        <%--        form.append("opentime",opentime);--%>
+        <%--        form.append("closetime",closetime);--%>
+        <%--        form.append("food_price",food_price);--%>
+        <%--        form.append("holiday",holiday);--%>
+        <%--        form.append("point",point);--%>
+        <%--        form.append("REFINE_WGS84_LAT",REFINE_WGS84_LAT);--%>
+        <%--        form.append("REFINE_WGS84_LOGT",REFINE_WGS84_LOGT);--%>
+        <%--        openModal()--%>
+        <%--        $.ajax({--%>
+        <%--            type: "post",--%>
+        <%--            dataType: "json", // Set the dataType to "json" to receive a JSON response--%>
+        <%--            url: "./insertinfo",--%>
+        <%--            processData: false,--%>
+        <%--            contentType: false,--%>
+        <%--            data: form,--%>
+        <%--            success: function(response) {--%>
+
+        <%--                // console.log("Response : " + response)--%>
+
+        <%--                $("#GPT_content").val(response.openaiResult);--%>
+
+        <%--                // // Pass the food_idx value to the sendprompt button--%>
+        <%--                $("#sendprompt").data("user_idx", response.user_idx);--%>
+        <%--                // alert("ai 홍보글 작성중입니다. 잠시만 기다려주시기 바랍니다 \n 20~30초정도 소요됩니다.")--%>
+        <%--            },--%>
+        <%--            error: function(xhr, status, error) {--%>
+        <%--                console.log("에러 발생");--%>
+        <%--            }--%>
+        <%--        });--%>
+        <%--    });--%>
+        <%--});--%>
+
         $(function () {
-            //업로드한 사진들과 데이타를 같이 묶어서 서버에 전송하기
+            // 업로드한 사진들과 데이터를 같이 묶어서 서버에 전송하기
             $("#contentadd").click(function () {
-                // let user_idx=$("#user_idx").val();
-                let cnt=$("#photo")[0].files.length;
-                let RESTRT_NM=$("#RESTRT_NM").val();
-                let food_type=$("#food_type").val();
-                let TASTFDPLC_TELNO=$("#TASTFDPLC_TELNO").val();
-                let REPRSNT_FOOD_NM=$("#REPRSNT_FOOD_NM").val();
-                let REFINE_ROADNM_ADDR=$("#REFINE_ROADNM_ADDR").val();
-                let opentime=$("#opentime").val();
-                let closetime=$("#closetime").val();
-                let food_price=$("#food_price").val();
-                let holiday=$("#holiday").val();
-                let point=$("#point").val();
-                {
-                    if (RESTRT_NM.length == 0){
-                        alert("가게이름을 입력해주세요")
-                        return false;
-                    }
-                    if (TASTFDPLC_TELNO.length == 0){
-                        alert("전화번호를 입력해주세요")
-                        return false;
-                    }
-                    if (REFINE_ROADNM_ADDR.length == 0){
-                        alert("주소를 입력해주세요")
-                        return false;
-                    }
-                    if (TASTFDPLC_TELNO.length == 0){
-                        alert("전화번호를 입력해주세요")
-                        return false;
-                    }
-                    if (REPRSNT_FOOD_NM.length==0){
-                        alert("주요메뉴를 입력해주세요")
-                        return false;
-                    }
-                    if (opentime.length==0){
-                        alert("오픈시간을 입력해주세요")
-                        return false;
-                    }
-                    if (closetime.length==0){
-                        alert("영업종료시간을 입력해주세요")
-                        return false;
-                    }
+                let user_idx = ${user_idx};
+                let cnt = $("#photo")[0].files.length;
+                let RESTRT_NM = $("#RESTRT_NM").val();
+                let food_type = $("#food_type").val();
+                let TASTFDPLC_TELNO = $("#TASTFDPLC_TELNO").val();
+                let REPRSNT_FOOD_NM = $("#REPRSNT_FOOD_NM").val();
+                let REFINE_ROADNM_ADDR = $("#REFINE_ROADNM_ADDR").val();
+                let opentime = $("#opentime").val();
+                let closetime = $("#closetime").val();
+                let food_price = $("#food_price").val();
+                let holiday = $("#holiday").val();
+                let point = $("#point").val();
+                let REFINE_WGS84_LAT = "";
+                let REFINE_WGS84_LOGT = "";
+
+                // 유효성 검사
+                if (RESTRT_NM.length == 0) {
+                    alert("가게이름을 입력해주세요");
+                    return false;
+                }
+                if (TASTFDPLC_TELNO.length == 0) {
+                    alert("전화번호를 입력해주세요");
+                    return false;
+                }
+                if (REFINE_ROADNM_ADDR.length == 0) {
+                    alert("주소를 입력해주세요");
+                    return false;
+                }
+                if (REPRSNT_FOOD_NM.length == 0) {
+                    alert("주요메뉴를 입력해주세요");
+                    return false;
+                }
+                if (opentime.length == 0) {
+                    alert("오픈시간을 입력해주세요");
+                    return false;
+                }
+                if (closetime.length == 0) {
+                    alert("영업종료시간을 입력해주세요");
+                    return false;
                 }
 
-                var form=new FormData();
-                for(i=0;i<$("#photo")[0].files.length;i++){
-                    form.append("upload",$("#photo")[0].files[i]);//선택한 사진 모두 추가
-                }
-                // form.append("user_idx",user_idx);
-                form.append("RESTRT_NM",RESTRT_NM);
-                form.append("food_type",food_type);
-                form.append("TASTFDPLC_TELNO",TASTFDPLC_TELNO);
-                form.append("REFINE_ROADNM_ADDR",REFINE_ROADNM_ADDR);
-                form.append("REPRSNT_FOOD_NM",REPRSNT_FOOD_NM);
-                form.append("opentime",opentime);
-                form.append("closetime",closetime);
-                form.append("food_price",food_price);
-                form.append("holiday",holiday);
-                form.append("point",point);
-                openModal()
-                $.ajax({
-                    type: "post",
-                    dataType: "json", // Set the dataType to "json" to receive a JSON response
-                    url: "./insert",
-                    processData: false,
-                    contentType: false,
-                    data: form,
-                    success: function(response) {
-                        console.log("food_idx: " + response.food_idx);
-                        console.log("openaiResult: " + response.openaiResult);
-
-                        $("#GPT_content").val(response.openaiResult);
-
-                        // Pass the food_idx value to the sendprompt button
-                        $("#sendprompt").data("food_idx", response.food_idx);
-                        // alert("ai 홍보글 작성중입니다. 잠시만 기다려주시기 바랍니다 \n 20~30초정도 소요됩니다.")
+                naver.maps.Service.fromAddrToCoord({ address: $("#REFINE_ROADNM_ADDR").val() }, function (
+                    status,
+                    response
+                ) {
+                    if (status === naver.maps.Service.Status.ERROR) {
+                        return alert("Something wrong!");
                     }
+                    REFINE_WGS84_LAT = response.result.items[0].point.y;
+                    REFINE_WGS84_LOGT = response.result.items[0].point.x;
+                    // 성공 시의 response 처리
+                    console.log("위도경도" + REFINE_WGS84_LAT);
+                    console.log(user_idx);
+
+                    var form = new FormData();
+                    for (i = 0; i < $("#photo")[0].files.length; i++) {
+                        form.append("upload", $("#photo")[0].files[i]); // 선택한 사진 모두 추가
+                    }
+
+                    form.append("user_idx", user_idx);
+                    form.append("RESTRT_NM", RESTRT_NM);
+                    form.append("food_type", food_type);
+                    form.append("TASTFDPLC_TELNO", TASTFDPLC_TELNO);
+                    form.append("REFINE_ROADNM_ADDR", REFINE_ROADNM_ADDR);
+                    form.append("REPRSNT_FOOD_NM", REPRSNT_FOOD_NM);
+                    form.append("opentime", opentime);
+                    form.append("closetime", closetime);
+                    form.append("food_price", food_price);
+                    form.append("holiday", holiday);
+                    form.append("point", point);
+                    form.append("REFINE_WGS84_LAT", REFINE_WGS84_LAT);
+                    form.append("REFINE_WGS84_LOGT", REFINE_WGS84_LOGT);
+
+                    openModal();
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: "./insertinfo",
+                        processData: false,
+                        contentType: false,
+                        data: form,
+                        success: function (response) {
+                            // console.log("Response : " + response)
+
+                            $("#GPT_content").val(response.openaiResult);
+
+                            // // Pass the food_idx value to the sendprompt button
+                            $("#sendprompt").data("user_idx", response.user_idx);
+                            // alert("ai 홍보글 작성중입니다. 잠시만 기다려주시기 바랍니다 \n 20~30초정도 소요됩니다.")
+                        },
+                        error: function (xhr, status, error) {
+                            console.log("에러 발생");
+                        },
+                    });
                 });
             });
         });
+
 
         $(document).ready(function() {
             $("#sendprompt").click(function (e) {
                 e.preventDefault();
 
                 let content = $("#GPT_content").val();
-                let food_idx = $("#sendprompt").data("food_idx"); // Retrieve the stored food_idx value
+                let user_idx = $("#sendprompt").data("user_idx"); // Retrieve the stored food_idx value
 
                 $.ajax({
                     type: "post",
@@ -418,12 +540,12 @@
                     url: "./W_updateprompt",
                     data: {
                         GPT_content: content,
-                        food_idx: food_idx
+                        user_idx: user_idx
                     },
                     success: function (res) {
                         console.log("결과" + res); // 응답값 출력
                         // Redirect to the home page
-                        window.location.href = res;
+                        window.location.href = "http://localhost:9000/home2";
                         alert("prompt 전송 성공!!")
                     }
                 });
@@ -487,6 +609,7 @@
     </script>
 </head>
 <body>
+<c:set var="root" value="<%=request.getContextPath() %>"/>
 <h2>가게정보 관리</h2>
 <div class="y_updateinfo">
     <div style="margin-left: 25px; margin-top: 20px;">

@@ -26,34 +26,71 @@
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"/>
 <script type="text/javascript">
-    $(function(){
-        $("#s_login").click(function(){
-            let id=$("#s_id").val();
-            let password=$("#s_password").val();
+    // $(function(){
+    //     $("#s_login").click(function(){
+    //         let id=$("#s_id").val();
+    //         let password=$("#s_password").val();
+    //
+    //         var form=new FormData();
+    //         form.append("id", id);
+    //         form.append("password", password);
+    //
+    //         $.ajax({
+    //             type: "post",
+    //             url: "./loginaction",
+    //             processData:false,
+    //             contentType:false,
+    //             data: form,
+    //             dataType:"text",
+    //             success: function (res) {
+    //                 if(res==1)
+    //                 {
+    //                     window.location.href="business";
+    //                 }else{
+    //                     document.querySelector("#s_alert").html("아이디 또는 비밀번호가 일치하지 않습니다.");
+    //                 }
+    //             }//success function 끝
+    //         })//ajax 끝
+    //     })//로그인버튼 끝
+    // });
+    $(function() {
+        $("#s_login").click(function() {
+            let id = $("#s_id").val();
+            let password = $("#s_password").val();
 
-            var form=new FormData();
+            var form = new FormData();
             form.append("id", id);
             form.append("password", password);
 
             $.ajax({
                 type: "post",
                 url: "./loginaction",
-                processData:false,
-                contentType:false,
+                processData: false,
+                contentType: false,
                 data: form,
-                dataType:"text",
-                success: function (res) {
-                    if(res==1)
-                    {
-                        window.location.href="business";
-                    }else{
-                        document.querySelector("#s_alert").html("아이디 또는 비밀번호가 일치하지 않습니다.");
+                dataType: "text",
+                success: function(res) {
+                    if (res == 1) {
+                        // 해당 user_idx가 food_list 테이블에 존재하는지 확인하는 AJAX 요청
+                        $.ajax({
+                            type: "get",
+                            url: "./existFoodList",
+                            data: { user_idx: res },
+                            success: function(response) {
+                                if (response == 1) {
+                                    window.location.href = "business";
+                                } else {
+                                    window.location.href = "/mypage/writeform";
+                                }
+                            }
+                        });
+                    } else {
+                        $("#s_alert").html("아이디 또는 비밀번호가 일치하지 않습니다.");
                     }
-                }//success function 끝
-            })//ajax 끝
-        })//로그인버튼 끝
+                }
+            });
+        });
     });
-
 
     $(function (){
         $("#signup").click(function(){
@@ -295,7 +332,7 @@
     </div>
 
     <div id="submit">
-        <button class="custom-btn btn-3"><span><b>시작하기</b></span></button>
+        <button class="custom-btn btn-3" id="start" data-bs-toggle="modal" data-bs-target="#loginModal"><span><b>시작하기</b></span></button>
     </div>
 
     <footer>
@@ -427,9 +464,7 @@
 
 
 <script>
-    /* ------------------------------------ Click on login and Sign Up to  changue and view the effect
-    ---------------------------------------
-    */
+    /* ----------Click on login and Sign Up to  changue and view the effect-------------*/
     const time_to_show_login = 400;
     const time_to_hidden_login = 200;
 

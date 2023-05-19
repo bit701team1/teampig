@@ -2,6 +2,7 @@ package boot.semipig.controller;
 
 import boot.semipig.dto.JoinDto;
 
+import boot.semipig.dto.OwnerpageDto;
 import boot.semipig.service.JoinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,4 +44,13 @@ public class BusinessController {
     public int isIdAvailable(JoinDto dto) {
         return joinService.isIdAvailable(dto);
     }
+    @GetMapping("/existFoodList")
+    @ResponseBody
+    public int existFoodList(HttpSession session) {
+        int user_idx = (int) session.getAttribute("loginidx");
+        OwnerpageDto dto = new OwnerpageDto();
+        dto.setUser_idx(user_idx);
+        return joinService.existFoodList(dto);
+    }
+
 }

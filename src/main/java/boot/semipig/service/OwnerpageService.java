@@ -39,7 +39,7 @@ public class OwnerpageService implements OwnerpageServiceInter {
          *  프롬프트 채워넣기
          * */
 
-        String aiprompt = "너는 홍보글을 작성하는 마케터야, 아래 제공하는 정보로 가독성이 좋게 가게소개로 들어갈 홍보글 작성해줘! \n가게 이름: "+odto.getRESTRT_NM()+", 주요메뉴: "+odto.getREPRSNT_FOOD_NM()+", 주소: "+odto.getREFINE_ROADNM_ADDR()+", 전화번호: "+odto.getTASTFDPLC_TELNO()
+        String aiprompt = "너는 식당홍보를 해야하는 사장님이야, 아래 제공하는 정보로 가독성이 좋게 가게 소개 홍보글 작성해줘! \n가게 이름: "+odto.getRESTRT_NM()+", 주요메뉴: "+odto.getREPRSNT_FOOD_NM()+", 주소: "+odto.getREFINE_ROADNM_ADDR()+", 전화번호: "+odto.getTASTFDPLC_TELNO()
          +", 오픈시간: "+odto.getOpentime()+", 영업종료시간: "+odto.getClosetime()+", 휴일: "+odto.getHoliday()+", 가게 강점: "+odto.getPoint();
 
         //openai로 보낸다
@@ -49,7 +49,7 @@ public class OwnerpageService implements OwnerpageServiceInter {
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json"); // 데이터 타입이 무엇인가
 
-        con.setRequestProperty("Authorization", "Bearer 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");//인증 ,openapi key
+        con.setRequestProperty("Authorization", "Bearer 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");//인증 ,openapi key
 
         con.setDoOutput(true);
 
