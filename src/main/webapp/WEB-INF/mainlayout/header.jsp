@@ -31,6 +31,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
 
     </style>
@@ -188,46 +191,58 @@
     }
 </script>
 
-
-
 <%--HTML 영역--%>
-<div id="m_header">
-    <!-- 1.상단 메뉴바 영역 - 아마 tiles 쓸 수도 있음 -->
-    <header>
-        <div id="m_logo">
-            <a href="main.jsp">
-                <img src="photo/logo4.png">
-            </a>
+<div class="m_realheader">
+    <div class="m_realheader-container">
+        <div class="m_headerlogo-container">
+            <img src="#" alt="로고출력">
         </div>
-
-        <div id="m_topMenu">
-            <ul>
-                <li><a href="#">공지사항</a></li>
-                <li><a href="#">고객센터</a></li>
-                <li><a href="#">마이페이지</a></li>
-                <li><a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
+        <div id="m_headertop-panel" class="m_headeraction-panel">
+            <ul class="m_headermain-navigation">
+                <li>
+                    <a href="#" class="m_cover">
+                        <span class="text-effect">맛집리스트</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="m_cover">
+                        <span class="text-effect">끼니비지니스</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="m_cover">
+                        <span class="text-effect">공지사항</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="m_cover">
+                        <span class="text-effect">마이페이지</span>
+                    </a>
+                </li>
             </ul>
-        </div>
-        <nav>f
-            <div class="container">
-                <form autocomplete="off">
-                    <div class="finder">
-                        <div class="finder__outer">
-                            <div class="finder__inner">
-                                <div class="finder__icon" ref="icon"></div>
-                                <input class="finder__input" type="text" name="q" />
-                            </div>
-                        </div>
-                    </div>
-                </form>
-
-                <div id="m_status">
-                    <h3>로그인 여부 영역</h3>
-                </div>
+            <div class="m_headeruser-control">
+                <a href="#" class="m_cover" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
             </div>
-        </nav>
-    </header>
+        </div>
+
+        <span id="m_headerform-open" class="m_headersearch-toggle">
+                    <i class="fa fa-search"></i>
+                </span>
+        <div class="m_headersearch-holder">
+            <form id="m_headeridsearch-form" class="m_headersearch-form">
+                <input type="text" name="qwrd" placeholder="검색어를 입력하세요." class="m_headersearch-input">
+                <button type="submit" id="form-submit" class="m_headersearch-toggle">
+                    <i class="fa fa-search"></i>
+                </button>
+                <button type="reset" id="m_headerform-close" class="m_search-close">
+                    <i class="fa fa-times"></i>
+                </button>
+            </form>
+        </div>
+    </div>
 </div>
-    <script src="js/header.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/header.js"></script>
 </body>
 </html>

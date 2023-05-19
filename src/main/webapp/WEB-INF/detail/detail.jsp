@@ -439,43 +439,97 @@
     </script>
 </head>
 <body>
+<%@ include file="/WEB-INF/mainlayout/footer.jsp" %>
 
+<div id="m_container">
 
-<div class="s_reviewphoto"></div>
-<div class="s_side">
-    <div id="map" style="width:400px; height:328px;"></div>
-    <div id="s_nearby"></div><!--주변 인기 식당-->
-</div>
-<div class="s_info">
-    <div class="s_storename ">${dto.RESTRT_NM} <span class="s_fontcolorapply">${dto.average}</span>
-        <div class="s_button">
-            <button id="s_reviewform" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reviewModal"><i class="bi bi-pencil-fill"></i>
-                <span>리뷰쓰기</span></button>
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal"> <i class="bi bi-calendar-check-fill"></i>
-                <span>예약하기</span></button>
-            <div id="k_iconplace"><i class="fa fa-star bookmarkstar"></i></div>
+    <div id="m_apimap">
+        <div class="s_reviewphoto"></div>
+    </div>
+
+    <!-- 3. 각 영역의 이름이 들어감 -->
+    <div id="m_pagename">
+        <div id="s_nearby"></div>
+    </div>
+
+    <!-- 4. 리스트 출력 영역 -->
+
+    <div id="m_tabMenu">
+        <div class="k_buttonarea">
+            <div class="button raised btn_condition ajax-button" list_type="type_1">
+                <div class="center" fit>평점순</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised btn_condition ajax-button" list_type="type_2">
+                <div class="center" fit>리뷰많은순</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised btn_condition ajax-button" list_type="type_3">
+                <div class="center" fit>가고싶다순</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <br>
+            <br>
+            <div class="button raised btn_condition ajax-button" list_type="1만원대">
+                <div class="center" fit>1만원대</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised btn_condition ajax-button" list_type="2만원대">
+                <div class="center" fit>2만원대</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised btn_condition ajax-button" list_type="3만원대">
+                <div class="center" fit>3만원대</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised btn_condition ajax-button" list_type="4만원이상">
+                <div class="center" fit>4만원이상</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
         </div>
     </div>
-    <div class="s_storedetailinfo">
-        <table>
-            <tr>
-                <td style="color: gray">주소</td><td>&nbsp;${dto.REFINE_LOTNO_ADDR}</td>
-            </tr>
-            <tr>
-                <td style="color: gray">전화번호</td><td>&nbsp;${dto.TASTFDPLC_TELNO}</td>
-            </tr>
+    <div id="m_list">
+        <div class="s_storename ">${dto.RESTRT_NM} <span class="s_fontcolorapply">${dto.average}</span>
+            <div class="s_button">
+                <button id="s_reviewform" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reviewModal"><i class="bi bi-pencil-fill"></i>
+                    <span>리뷰쓰기</span></button>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal"> <i class="bi bi-calendar-check-fill"></i>
+                    <span>예약하기</span></button>
+                <div id="k_iconplace"><i class="fa fa-star bookmarkstar"></i></div>
+            </div>
+        </div>
+        <div class="s_storedetailinfo">
+            <table>
+                <tr>
+                    <td style="color: gray">주소</td><td>&nbsp;${dto.REFINE_LOTNO_ADDR}</td>
+                </tr>
+                <tr>
+                    <td style="color: gray">전화번호</td><td>&nbsp;${dto.TASTFDPLC_TELNO}</td>
+                </tr>
 
-            <tr>
-                <td style="color: gray">음식종류</td><td>&nbsp;${dto.food_type}</td>
-            </tr>
-            <tr>
-                <td style="color: gray">가격대</td><td>&nbsp;${dto.food_price}</td>
-            </tr>
-        </table>
-        <br>
-        ${dto.GPT_content}<br>
+                <tr>
+                    <td style="color: gray">음식종류</td><td>&nbsp;${dto.food_type}</td>
+                </tr>
+                <tr>
+                    <td style="color: gray">가격대</td><td>&nbsp;${dto.food_price}</td>
+                </tr>
+            </table>
+            <br>
+            ${dto.GPT_content}<br>
+        </div>
+        <div class="s_review"></div>
     </div>
-    <div class="s_review"></div>
+
+
+<%--    ----------------%>
+
+<div class="s_side">
+    <div id="map" style="width:400px; height:328px;"></div>
+    <!--주변 인기 식당-->
+</div>
+<div class="s_info">
+
+</div>
 </div>
 
 

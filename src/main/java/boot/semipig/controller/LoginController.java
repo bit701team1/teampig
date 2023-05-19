@@ -42,7 +42,7 @@ public class LoginController{
             session.setAttribute("loginok", "yes");
             session.setAttribute("loginid", id);
             int user_idx=loginService.getUserIdx(id);
-            session.setAttribute("user_idx", user_idx);
+            session.setAttribute("loginidx", user_idx);
             session.setAttribute("saveid", saveid==null?"no":"yes");
 
             return 1;
