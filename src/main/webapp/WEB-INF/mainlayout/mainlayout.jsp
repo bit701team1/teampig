@@ -19,7 +19,6 @@
 <body>
 <%@ include file="mainlist.jsp" %>
     <div class="mainlayout">
-
         <header class="header">
             <tiles:insertAttribute name="header"/>
         </header>

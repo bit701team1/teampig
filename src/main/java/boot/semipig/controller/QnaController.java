@@ -32,24 +32,39 @@ public class QnaController {
         //게시판의 총 글갯수 얻기
         int totalCount = qnaService.getTotalCount();
         int totalPage;//총페이지 수
-        int perPage = 5;//한페이지당 보여질 글의 갯수
+        int perPage;//한페이지당 보여질 글의 갯수
         int perBlock = 5;//한 블럭당 보여질 페이지의 갯수
         int startNum;//각 페이지에서 보여질 글의 시작번호 mysql에서는 endNum 따로 구할필요는 없음
         int startPage;//각 블럭에서 보여질 시작페이지 번호
         int endPage;//각 블럭에서 보여질 끝 페이지 번호
         int no;//글 출력 시 출력할 페이지 번호
 
-        //총 페이지 수
-        totalPage = totalCount / perPage + (totalCount % perPage == 0 ? 0 : 1);
-        //시작페이지
+        if (currentPage == 1) {
+            perPage = 5; // 첫 페이지에는 5개
+        } else {
+            perPage = 8; // 나머지 페이지에는 8개
+        }
+        // 총 페이지 수 계산
+        if (currentPage == 1) {
+            totalPage = 1 + (totalCount - 5) / 8 + ((totalCount - 5) % 8 == 0 ? 0 : 1);
+        } else {
+            totalPage = totalCount / 8 + (totalCount % 8 == 0 ? 0 : 1);
+        }
+
+        // 시작 페이지 계산
         startPage = (currentPage - 1) / perBlock * perBlock + 1;
-        //끝페이지
+
+        // 끝 페이지 계산
         endPage = startPage + perBlock - 1;
-        //이 때 문제점...endPage가 totalPage보다 크면 안된다.
         if (endPage > totalPage)
             endPage = totalPage;
+
         //각 페이지의 시작번호(1페이지 :mysql은 0,2페이지는 :3,3페이지:6...)
-        startNum = (currentPage - 1) * perPage;
+        if (currentPage == 1) {
+            startNum = 0;
+        } else {
+            startNum = 5 + (currentPage - 2) * 8;
+        }
         //각 글마다 출력할 글번호 (예:10개일 경우 1페이지:10,2페이지:7...)
         //no=totalCount-(currentPage-1)*perPage;
         no = totalCount - startNum;

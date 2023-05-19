@@ -1,14 +1,37 @@
-/*.j_qna_logo{*/
-/*    width: 100px;*/
-/*    height: 100px;*/
-/*}*/
-/*.qna_header{*/
-/*    margin-top: 10px;*/
-/*}*/
-/*.j_qna_ul,.j_alert_ul{*/
-/*    font-size: 14px;*/
-/*    line-height: 1.8;*/
-/*    color: #222;*/
-/*    list-style: none;*/
-/*    -webkit-padding-start: 0px;*/
-/*}*/
+.hongbobox {
+    overflow: hidden;
+}
+.qna_banner {
+    display: flex;
+}
+Copy code
+iframe {
+    transition: all 0.5s ease-in-out;
+}
+iframe:hover {
+    transform: scale(1.5, 1.5);
+}
+hr.hr-177 {
+    height: 5px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8c8c inset;
+    background: linear-gradient(to bottom, #65b8d7, #47a0cf);
+}
+hr.hr-13 {
+    height: 8px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8c8c inset;
+    background: linear-gradient(to bottom, #83cfe0, #65b8d7);
+}
+hr.hr-14 {
+    height: 8px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8c8c inset;
+    background: linear-gradient(to bottom, #47a0cf, #388dbf);
+}
+hr.hr-133 {
+    height: 2px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8c8c inset;
+    background: linear-gradient(to bottom, #47a0cf, #388dbf);
+}
