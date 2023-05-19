@@ -102,7 +102,6 @@ public class WriteController {
     @GetMapping("/reviewajax")
     public @ResponseBody Map<String, Object> review2(@RequestParam(defaultValue = "1") int currentPage, HttpSession session) {
         int food_idx = (int) session.getAttribute("loginidx");
-        DetailDto dto =
         Map<String, Object> response = new HashMap<>();
         int totalCount = myservice.getTotalCount();
         int totalPage; //총 페이지수
