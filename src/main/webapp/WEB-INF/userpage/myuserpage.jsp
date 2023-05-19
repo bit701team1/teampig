@@ -37,12 +37,14 @@
             padding-top: 10px;
             vertical-align: middle;
             line-height: 5px;
+            font-weight: bolder;
         }
 
         .mypage_foodtype{
             font-family: 'Dongle', sans-serif;
             font-size: 32px;
             vertical-align: top;
+            color: #757575;
         }
 
         .mypage_writeday{

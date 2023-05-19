@@ -4,11 +4,12 @@
     100% { transform: translateX(-100%); }
 }
 #m_footer{
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     width: 100%;
     background-color: #fff;
+    z-index: 999;
 }
 
 .m_foottainer{
@@ -21,7 +22,7 @@ ul {
 }
 .footer-section {
     background: #fff;
-    position: relative;
+    position: absolute;
 }
 .footer-cta {
     border-bottom: 1px solid #373636;

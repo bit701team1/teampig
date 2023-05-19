@@ -47,7 +47,6 @@
 	<section class="header">
 		<tiles:insertAttribute name="header"/>
 	</section>
-
 </div>
 <div class="y_bosspage2">
 	<section class="main">
