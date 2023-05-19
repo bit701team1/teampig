@@ -1,6 +1,5 @@
 package boot.semipig.controller;
 
-import boot.semipig.dto.DetailDto;
 import boot.semipig.dto.LoginDto;
 import boot.semipig.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.net.http.HttpHeaders;
+
 
 @Controller
 public class LoginController{
@@ -26,7 +25,7 @@ public class LoginController{
 
     @PostMapping("/loginaction")//회원정보 확인 뒤 db에 있는 회원정보일 경우 session에 회원정보를 뿌려줌.
     @ResponseBody public int loginactino
-            (Model model, String id, String password, @RequestParam(required=false) String saveid, HttpSession session){
+            (Model model,String username, String id, String password, @RequestParam(required=false) String saveid, HttpSession session){
 
         //System.out.println((String)request.getHeader("Referer"));
         int count=loginService.isEqualIdPass(id, password);
@@ -42,7 +41,7 @@ public class LoginController{
             session.setAttribute("loginok", "yes");
             session.setAttribute("loginid", id);
             int user_idx=loginService.getUserIdx(id);
-            session.setAttribute("user_idx", user_idx);
+            session.setAttribute("loginidx", user_idx);
             session.setAttribute("saveid", saveid==null?"no":"yes");
 
             return 1;
@@ -54,6 +53,9 @@ public class LoginController{
     {
         String referer = request.getHeader("Referer");
         session.removeAttribute("loginok");
+        session.removeAttribute("loginidx");
+        session.removeAttribute("loginid");
+
         return "redirect:"+referer;
     }
 

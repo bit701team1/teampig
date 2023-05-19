@@ -34,6 +34,26 @@
             z-index: 1;
             position: relative;
         }
+        .s_nearbystoretable{
+            width: 400px;
+        }
+        .s_nearbytd{
+            width: 100px;
+        }
+        .s_upddel{
+            float: right;
+            padding-right: 30px;
+            padding-top: 2px;
+
+        }
+        .s_persontd
+        {
+            vertical-align: top;
+
+        }
+        /**{
+            width: 1200px;
+        }*/
     </style>
     <script type="text/javascript">
         $(function(){
@@ -167,7 +187,7 @@
                     data:form,
                     success:function(res){
                         //console.log(review_idx);xw
-                        location.reload();
+                        location.reload();//수정
                     }
                 })//ajax 끝
 
@@ -241,15 +261,15 @@
                         s+=`<div class='s_reviewtable'><table class="s_inner_table">
 
                            <tr>
-                           <td rowspan='3'class="s_persontd">`;
+                           <td rowspan='3'class="s_persontd" align="center" >`;
 
                         if(ele.user_photo!=null){
                             s+=`
-        <img src="https://${imageUrl}/join/\${ele.user_photo}" style="width: 80px; height: 80px;border-radius: 100%;">
+        <img src="https://${imageUrl}/join/\${ele.user_photo}" style="width: 20px; height: 20px;border-radius: 100%;">
         <br>&nbsp;<span style="color:gray">\${ele.user_name}</span>`;
                         }else{
                             s+=`
-        <img src="../../save/pigperson.png" style="width: 80px; height: 80px; border-radius: 100%;" >
+        <img src="../../save/pigperson.png" style="width: 48px; height: 48px; border-radius: 100%; padding-top: 10px;" >
          <br>&nbsp;<span style="color:gray">\${ele.user_name}</span>
         `
                         }
@@ -257,7 +277,7 @@
                        <td>\${ele.write_day}`;
 
                         if(ele.user_id=='${sessionScope.loginid}')
-                        {s+=`<span class="s_update" review_idx="\${ele.review_idx}" data-bs-toggle="modal" data-bs-target="#reviewupdateModal" >수정</span>|<span class="s_delete" review_idx="\${ele.review_idx}">삭제</span>`}
+                        {s+=`<p class="s_upddel"><span class="s_update" review_idx="\${ele.review_idx}" data-bs-toggle="modal" data-bs-target="#reviewupdateModal" >수정</span>|<span class="s_delete" review_idx="\${ele.review_idx}">삭제</span></p>`}
                         s+=`</td></tr>
 
                        <tr>
@@ -353,18 +373,21 @@
                 url:"./nearbystore?SIGUN_NM="+SIGUN_NM,
                 success:function(res){
                     let s="";
+                    let num=0;
                     s+="<div> 주변 인기 식당 ";
                     $.each(res, function(idx, ele){
-                        s+="<table>";
-                        s+=`<tr><td rowspan='3'><img src='../../save/pigperson.png' style="width: 80px; height: 80px;"></td>`;
+                        if(${dto.food_idx}!=ele.food_idx){
+                            num++;
+                        s+="<table class='s_nearbystoretable'>";
+                        s+=`<tr><td rowspan='3' class='s_nearbytd'><img src='../../save/pigperson.png' style="width: 80px; height: 80px;"></td>`;
                         s+=`<td><a href="detail?food_idx=\${ele.food_idx}">\${ele.restrt_NM} </a>  <span class="s_fontcolorapply">\${ele.average}</span></td>`;
                         s+=`<tr><td>\${ele.food_type}</td></tr>`;
                         s+=`<tr><td>\${ele.food_price}</td></tr>`;
                         s+="</table>";
-                        if(idx==4)
+                        if(num==4)
                         {
                             return false;
-                        }
+                        }}
                     })
                     s+="</div>";
                     $("#s_nearby").html(s);
@@ -440,6 +463,10 @@
 </head>
 <body>
 
+<%--<%@ include file="/WEB-INF/mainlayout/footer.jsp" %>--%>
+<section class="footer">
+    <tiles:insertAttribute name="footer"/>
+</section>
 
 <div class="s_reviewphoto"></div>
 <div class="s_side">

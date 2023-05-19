@@ -19,15 +19,133 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="path/to/font-awesome/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="stylesheet" href="css/realmain.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+
+
     <style>
     </style>
 </head>
+<c:set var="root" value="<%=request.getContextPath() %>"/>
+<script type="text/javascript">
+    $(function(){
+        $("#s_login").click(function(){
+            let id=$("#s_id").val();
+            let password=$("#s_password").val();
+
+            var form=new FormData();
+            form.append("id", id);
+            form.append("password", password);
+
+            $.ajax({
+                type: "post",
+                url: "./loginaction",
+                processData:false,
+                contentType:false,
+                data: form,
+                dataType:"text",
+                success: function (res) {
+                    if(res==1)
+                    {
+                        window.location.href="realmain";
+                    }else{
+                        document.querySelector("#s_alert").html("아이디 또는 비밀번호가 일치하지 않습니다.");
+                    }
+                }//success function 끝
+            })//ajax 끝
+        })//로그인버튼 끝
+    });
+
+
+    $(function (){
+        $("#signup").click(function(){
+            let email = $("#email").val();
+            let id = $("#id").val();
+            let password = $("#password").val();
+            let user_name = $("#user_name").val();
+            let user_type = $("#user_type").val();
+
+            var formData = {
+                "email": email,
+                "id": id,
+                "password": password,
+                "user_name": user_name,
+                "user_type": user_type
+            };
+            $.ajax({
+                type: "GET",
+                url: "/isIdAvailable",
+                data: {id: id},
+                success: function (isAvailable) {
+                    if(isAvailable==1){
+                        alert("이미 가입된 아이디입니다");
+                        return false;
+                    }else{
+                        //Display confirmation dialog
+                        if (confirm("회원가입하시겠습니까?")) {
+                            // User clicked "OK" - proceed with form submission
+                            $.ajax({
+                                type: "post",
+                                url: "./insert",
+                                data: {"email":email,"id":id,"password":password,"user_name":user_name,"user_type":user_type},
+                                dataType: "text",
+                                success: function(res) {
+                                    console.log("회원가입 완료");
+
+                                    // 회원가입이 성공적으로 처리되면 원하는 작업을 수행할 수 있습니다.
+                                    location.reload();
+                                },
+                                error: function(xhr, status, error) {
+                                    console.log("회원가입 오류");
+                                    console.log("Status:"+status);
+                                    console.log("error:"+error);
+                                    console.log(xhr.responseText);
+                                }
+                            });
+                        } else {
+                            // User clicked "Cancel" - refresh the page
+                            location.reload();
+                        }
+                    }
+                }
+            });
+            // Display confirmation dialog
+            // if (confirm("Are you sure you want to submit the form?")) {
+            //     // User clicked "OK" - proceed with form submission
+            //     $.ajax({
+            //         type: "post",
+            //         url: "./insert",
+            //         data: {"email":email,"id":id,"password":password,"user_name":user_name,"user_type":user_type},
+            //         dataType: "text",
+            //         success: function(res) {
+            //             console.log("회원가입 완료");
+            //
+            //             // 회원가입이 성공적으로 처리되면 원하는 작업을 수행할 수 있습니다.
+            //             location.reload();
+            //         },
+            //         error: function(xhr, status, error) {
+            //             console.log("회원가입 오류");
+            //             console.log("Status:"+status);
+            //             console.log("error:"+error);
+            //             console.log(xhr.responseText);
+            //         }
+            //     });
+            // } else {
+            //     // User clicked "Cancel" - refresh the page
+            //     location.reload();
+            // }
+        });
+    });
+
+</script>
 <body>
 <nav class="navbar navbar-dark bg-dark sticky-top navbar-expand-lg fixed-top">
     <a class="navbar-brand" href="#section-a">
@@ -56,13 +174,257 @@
             <li class="nav-item">
                 <a class="nav-link  text-white" href="#">마이페이지</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link  text-white" href="#">로그인</a>
-            </li>
+            <c:choose>
+                <c:when test="${sessionScope.loginok=='yes'}">
+                    <li><a href="#"  class="nav-link  text-white" onclick="location.href='./logout'">로그아웃</a></li>
+
+                </c:when>
+                <c:otherwise>
+                    <li><a href="#" class="nav-link  text-white" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
+                </c:otherwise>
+
+            </c:choose>
         </ul>
     </div>
 </nav>
+<script src="js/slideshow.js"></script>
+<!-- The Modal -->
+<div class="modal fade" id="loginModal">
+    <div class="modal-dialog" >
+        <div class="modal-content" style="background-color: transparent; border:transparent; " >
 
+            <!-- Modal Header -->
+            <%--            <div class="modal-header" style="opacity: 0.9">--%>
+            <%--                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>--%>
+            <%--            </div>--%>
+
+            <!-- Modal body -->
+            <div class="modal-body" >
+                <div class="position">
+                    <div class="cont_principal">
+                        <div class="cont_centrar">
+
+                            <div class="cont_login">
+                                <div class="cont_info_log_sign_up">
+                                    <div class="col_md_login">
+                                        <div class="cont_ba_opcitiy">
+
+                                            <h2>LOGIN</h2>
+                                            <p>로그인 해주세요!</p>
+                                            <button class="btn_login" onclick="change_to_login()">LOGIN</button>
+                                        </div>
+                                    </div>
+                                    <div class="col_md_sign_up">
+                                        <div class="cont_ba_opcitiy">
+                                            <h2>SIGN UP</h2>
+
+
+                                            <p>계정이 없으신가요?</p>
+
+                                            <button class="btn_sign_up" onclick="change_to_sign_up()">SIGN UP</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="cont_back_info">
+                                    <div class="cont_img_back_grey">
+                                        <img src='${root}/photo/login.png' />
+                                    </div>
+                                </div>
+
+                                <div class="modal-body"> <!-- Add this container -->
+                                    <div class="cont_forms">
+                                        <div class="cont_img_back_">
+                                            <img src='${root}/photo/signup.png'/>
+                                        </div>
+                                        <div class="cont_form_login">
+                                            <a href="#" onclick="hidden_login_and_sign_up()" ><i class="bi bi-x-lg"></i></a>
+                                            <h2>LOGIN</h2>
+                                            <input type="text" placeholder="id" id="s_id"/>
+                                            <input type="password" placeholder="Password" id="s_password"/>
+                                            <button class="btn_login" onclick="change_to_login()" id="s_login">LOGIN</button><br>
+
+                                            <a id="naver-login-btn" href="#" role="button" class="naverLogin">
+                                                <div id="naverIdLogin" ></div><!--naver button 영역-->
+                                            </a>
+                                            <a href="javascript:kakaoLogin();"><img src='${root}/photo/kakao.png' width="100px" height="37px" style="margin-top: 5px;"></a>
+
+                                            <form id="form-kakao-login" method="post" action="kakao-login">
+                                                <input type="hidden" name="email"/>
+                                                <input type="hidden" name="name"/>
+                                                <input type="hidden" name="img"/>
+                                            </form>
+                                        </div>
+                                        <div class="cont_form_sign_up">
+                                            <a href="#" onclick="hidden_login_and_sign_up()"><i class="bi bi-x-lg" style=
+                                                    "position: relative; bottom:50px;"></i></a>
+
+                                            <h2>SIGN UP</h2>
+                                            <input type="text" name="email" id="email" placeholder="Email"/>
+                                            <input type="text" name="id" id="id" placeholder="id" />
+                                            <input type="password" name="password" id="password" placeholder="Password" />
+                                            <input type="text" name="user_name" id="user_name" placeholder="name" />
+
+                                            <br>
+                                            <select class="form-select" name="user_type" id="user_type">
+                                                <option value="" selected disabled>선택</option>
+                                                <option value="1">일반 사용자</option>
+                                                <option value="2">사장님</option>
+                                                <option value="3">관리자</option>
+                                            </select>
+                                            <button class="btn_sign_up" type="button" id="signup">SIGN UP</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    /* ------------------------------------ Click on login and Sign Up to  changue and view the effect
+    ---------------------------------------
+    */
+    const time_to_show_login = 400;
+    const time_to_hidden_login = 200;
+
+    function change_to_login() {
+        document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_login";
+        document.querySelector('.cont_form_login').style.display = "block";
+        document.querySelector('.cont_form_sign_up').style.opacity = "0";
+
+        setTimeout(function(){  document.querySelector('.cont_form_login').style.opacity = "1"; },time_to_show_login);
+
+        setTimeout(function(){
+            document.querySelector('.cont_form_sign_up').style.display = "none";
+        },time_to_hidden_login);
+    }
+
+    const time_to_show_sign_up = 100;
+    const time_to_hidden_sign_up = 400;
+
+    function change_to_sign_up(at) {
+        document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_sign_up";
+        document.querySelector('.cont_form_sign_up').style.display = "block";
+        document.querySelector('.cont_form_login').style.opacity = "0";
+
+        setTimeout(function(){  document.querySelector('.cont_form_sign_up').style.opacity = "1";
+        },time_to_show_sign_up);
+
+        setTimeout(function(){   document.querySelector('.cont_form_login').style.display = "none";
+        },time_to_hidden_sign_up);
+
+
+    }
+
+
+    const time_to_hidden_all = 500;
+
+
+    function hidden_login_and_sign_up() {
+
+        document.querySelector('.cont_forms').className = "cont_forms";
+        document.querySelector('.cont_form_sign_up').style.opacity = "0";
+        document.querySelector('.cont_form_login').style.opacity = "0";
+
+        setTimeout(function(){
+            document.querySelector('.cont_form_sign_up').style.display = "none";
+            document.querySelector('.cont_form_login').style.display = "none";
+        },time_to_hidden_all);
+
+    }
+
+    //카카오 관련
+    window.Kakao.init("4d6b82467bdefbaaed27526fdc7aecbe");// 어떤 웹앱으로 연결될지
+
+    function kakaoLogin() {
+        window.Kakao.Auth.login({
+            scope: 'profile_nickname, account_email',//카카오로부터 받아올 정보
+            //로그인에 성공할 경우 콜백함수 작동, authObj: 받아온 오브젝트 데이터
+            success: function (authObj) {
+                console.log(authObj);
+                window.Kakao.API.request({
+                    url: '/v2/user/me',//혅재 로그인한 사용자의 정보를 가지고 옴.
+                    success: res => {
+                        var kakao_account = res.kakao_account;//account정보 가져옴
+                        console.log(kakao_account);
+                        console.log(kakao_account.email);
+                        console.log(kakao_account.profile.nickname);
+
+                        $.ajax({
+                            type: "post",
+                            url: "/emailcheck",
+                            dataType: "text",
+                            data: {"email": kakao_account.email, "name": kakao_account.profile.nickname},
+                            success: function (res) {
+                                if(res==0)
+                                {
+                                    alert("회원이 아닙니다. 회원가입해주세요!");
+
+                                    $("#s_signup").html("추가정보를 입력해주세요");
+                                    $("#email").val(kakao_account.email);
+                                    $("#email").attr("readonly", true);
+                                    console.log(kakao_account.profile.nickname);
+                                    $("#user_name").val(kakao_account.profile.nickname);
+                                    $("#user_name").attr("readonly", true);
+                                    change_to_sign_up();
+
+                                }
+                                else{
+                                    window.location.href='snsloginaction?email='+kakao_account.email;
+                                }
+
+                            }//success function 끝
+                        });//ajax 끝
+                    }//success 끝
+                })
+            }
+        })
+    }
+
+    var redirectUrl ; // Get the previous URL
+    //네이버 관련
+    //네이버 아이디로그인 초기화 script
+    var naverLogin =new naver.LoginWithNaverId({
+        clientId:"KMw1CKJNqR_tTHgOY5np",
+        callbackUrl: "http://localhost:9000/auth/naver/callback", //callback ur
+        loginButton: {color: "green", type:2, height: 40},//로그인 버튼의 타입 지정
+        //isPopup: true,
+        callbackHandle: true//callback 페이지가 분리되었을 경우 콜백 페이지에서는 콜백 처리를 바꿀 수있도록 설정
+    });
+
+    naverLogin.init();//설정정보 초기화 연ㄷ동 준비
+
+    //이 페이지가 정상적으로 다 로드되었을 때 해당 함수를 실행할 것.
+
+
+    // 모달 표시 함수
+    function showLoginModal() {
+        const modal = new bootstrap.Modal(document.getElementById('loginModal'));
+        modal.show();
+    }
+    var urlParams=new URLSearchParams(window.location.search);
+    var n_email=urlParams.get('n_email');
+    var n_name=urlParams.get('n_name');
+    //받아온 이메일과 네임 값이 존재할 경우 모달을 띄우고 change to sign up 함수 호출
+    if(n_email&&n_name){
+        //모달 띄우기
+        showLoginModal();
+        change_to_sign_up();
+        $("#s_signup").html("추가정보를 입력해주세요");
+        $("#email").val(n_email);
+        $("#email").attr("readonly", true);
+        $("#user_name").val(n_name);
+        $("#user_name").attr("readonly", true);
+        change_to_sign_up();
+    }
+</script>
 
 <!--페이지 1번-->
 <section id="section-a">
@@ -508,7 +870,10 @@
 
 <!--제이쿼리, 부트스트랩 라이브러리 영역-->
 
+<%--
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+--%>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
