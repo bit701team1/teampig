@@ -8,10 +8,10 @@
         select * from food_list where food_idx=#{food_idx}
     </select>
     <select id="getReviewlist" parameterType="int" resultType="ReviewDto">
-        SELECT r.*, f.RESTRT_NM
-        FROM review r
-                 LEFT JOIN food_list f ON r.FOOD_IDX = f.FOOD_IDX
-        WHERE r.USER_IDX = #{user_idx}
-        ORDER BY r.WRITE_DAY DESC
+        SELECT * FROM review WHERE user_idx = #{user_idx}
+        ORDER BY write_day DESC
+    </select>
+    <select id="getNameByIdx" parameterType="int" resultType="String">
+        select user_name from user where user_idx = #{user_idx}
     </select>
 </mapper>

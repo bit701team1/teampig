@@ -11,4 +11,5 @@ public interface UserpageMapper {
     public List<Integer> getFoodidx(int user_idx);
     public List<SearchDto> getFoodlist(int food_idx);
     public List<ReviewDto> getReviewlist(int user_idx);
+    public  String getNameByIdx(int user_idx);
 }

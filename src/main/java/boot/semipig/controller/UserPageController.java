@@ -8,6 +8,7 @@ import boot.semipig.mapper.ServiceMapper;
 import boot.semipig.service.LoginService;
 import boot.semipig.service.MyService;
 import boot.semipig.service.UserpageService;
+import boot.semipig.service.UserpageServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,27 +35,26 @@ public class UserPageController {
     @GetMapping("/userpage")
     public String userpage(HttpSession session, Model model){
         int user_idx = (int) session.getAttribute("loginidx");
-        // DTO 객체를 생성하여 세션에서 가져온 정보를 저장
 
-        serviceMapper.getmypage(user_idx);
-        DetailDto dto =serviceMapper.getmypage(user_idx);
-        LoginDto dtos=loginService.getUserInfo(user_idx);
-        dto.setUser_idx(user_idx);
-        int totalCount = myservice.getTotalCount();
-        model.addAttribute("user_idx", user_idx);
-        model.addAttribute("logindto", dtos);
-        model.addAttribute("dto", dto);
+        String user_name = userpageService.getNameByIdx(user_idx);
+        model.addAttribute("user_name",user_name);
 
-        model.addAttribute("totalCount", totalCount);
-        return "/userpage/myuserpage";
+        return "/myuserpage/userpage/myuserpage";
     }
 
-    @GetMapping("bookmarklist")
+    @GetMapping("/myuserpage/myreview")
+    public String myreview(){
+        return "/myuserpage/userpage/myreview";
+    }
+    @GetMapping("/userpage/wishlist")
+    public  String wishlist(){
+        return "/myuserpage/userpage/wishlist";
+    }
+
+
+    @GetMapping("/bookmarklist")
     @ResponseBody
     public List<SearchDto>  bookmarklist(int user_idx){
-        /*//@RequestParam(required = false) Integer user_idx
-        int user_idx = (int)session.getAttribute("user_idx");*/
-
         //List에 담아서 idx list로 만듬
         List<Integer> bookmark_food_idx = userpageService.getFoodidx(user_idx);
 
@@ -71,8 +71,9 @@ public class UserPageController {
     @GetMapping("reviewlist")
     @ResponseBody
     public List<ReviewDto> reviewlist(int user_idx){
+        System.out.println(user_idx);
         List<ReviewDto> list = userpageService.getReviewlist(user_idx);
-        System.out.println(list);
+        //System.out.println(list);
         return list;
     }
 
