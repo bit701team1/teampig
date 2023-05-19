@@ -34,6 +34,26 @@
             z-index: 1;
             position: relative;
         }
+        .s_nearbystoretable{
+            width: 400px;
+        }
+        .s_nearbytd{
+            width: 100px;
+        }
+        .s_upddel{
+            float: right;
+            padding-right: 30px;
+            padding-top: 2px;
+
+        }
+        .s_persontd
+        {
+            vertical-align: top;
+
+        }
+        /**{
+            width: 1200px;
+        }*/
     </style>
     <script type="text/javascript">
         $(function(){
@@ -167,7 +187,7 @@
                     data:form,
                     success:function(res){
                         //console.log(review_idx);xw
-                        location.reload();
+                        location.reload();//수정
                     }
                 })//ajax 끝
 
@@ -241,15 +261,15 @@
                         s+=`<div class='s_reviewtable'><table class="s_inner_table">
 
                            <tr>
-                           <td rowspan='3'class="s_persontd">`;
+                           <td rowspan='3'class="s_persontd" align="center" >`;
 
                         if(ele.user_photo!=null){
                             s+=`
-        <img src="https://${imageUrl}/join/\${ele.user_photo}" style="width: 80px; height: 80px;border-radius: 100%;">
+        <img src="https://${imageUrl}/join/\${ele.user_photo}" style="width: 20px; height: 20px;border-radius: 100%;">
         <br>&nbsp;<span style="color:gray">\${ele.user_name}</span>`;
                         }else{
                             s+=`
-        <img src="../../save/pigperson.png" style="width: 80px; height: 80px; border-radius: 100%;" >
+        <img src="../../save/pigperson.png" style="width: 48px; height: 48px; border-radius: 100%; padding-top: 10px;" >
          <br>&nbsp;<span style="color:gray">\${ele.user_name}</span>
         `
                         }
@@ -257,7 +277,7 @@
                        <td>\${ele.write_day}`;
 
                         if(ele.user_id=='${sessionScope.loginid}')
-                        {s+=`<span class="s_update" review_idx="\${ele.review_idx}" data-bs-toggle="modal" data-bs-target="#reviewupdateModal" >수정</span>|<span class="s_delete" review_idx="\${ele.review_idx}">삭제</span>`}
+                        {s+=`<p class="s_upddel"><span class="s_update" review_idx="\${ele.review_idx}" data-bs-toggle="modal" data-bs-target="#reviewupdateModal" >수정</span>|<span class="s_delete" review_idx="\${ele.review_idx}">삭제</span></p>`}
                         s+=`</td></tr>
 
                        <tr>
@@ -353,18 +373,21 @@
                 url:"./nearbystore?SIGUN_NM="+SIGUN_NM,
                 success:function(res){
                     let s="";
+                    let num=0;
                     s+="<div> 주변 인기 식당 ";
                     $.each(res, function(idx, ele){
-                        s+="<table>";
-                        s+=`<tr><td rowspan='3'><img src='../../save/pigperson.png' style="width: 80px; height: 80px;"></td>`;
+                        if(${dto.food_idx}!=ele.food_idx){
+                            num++;
+                        s+="<table class='s_nearbystoretable'>";
+                        s+=`<tr><td rowspan='3' class='s_nearbytd'><img src='../../save/pigperson.png' style="width: 80px; height: 80px;"></td>`;
                         s+=`<td><a href="detail?food_idx=\${ele.food_idx}">\${ele.restrt_NM} </a>  <span class="s_fontcolorapply">\${ele.average}</span></td>`;
                         s+=`<tr><td>\${ele.food_type}</td></tr>`;
                         s+=`<tr><td>\${ele.food_price}</td></tr>`;
                         s+="</table>";
-                        if(idx==4)
+                        if(num==4)
                         {
                             return false;
-                        }
+                        }}
                     })
                     s+="</div>";
                     $("#s_nearby").html(s);
@@ -439,43 +462,101 @@
     </script>
 </head>
 <body>
+<%@ include file="/WEB-INF/mainlayout/footer.jsp" %>
 
+<%--<%@ include file="/WEB-INF/mainlayout/footer.jsp" %>--%>
+<section class="footer">
+    <tiles:insertAttribute name="footer"/>
+</section>
+<div id="m_container">
 
-<div class="s_reviewphoto"></div>
-<div class="s_side">
-    <div id="map" style="width:400px; height:328px;"></div>
-    <div id="s_nearby"></div><!--주변 인기 식당-->
-</div>
-<div class="s_info">
-    <div class="s_storename ">${dto.RESTRT_NM} <span class="s_fontcolorapply">${dto.average}</span>
-        <div class="s_button">
-            <button id="s_reviewform" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reviewModal"><i class="bi bi-pencil-fill"></i>
-                <span>리뷰쓰기</span></button>
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal"> <i class="bi bi-calendar-check-fill"></i>
-                <span>예약하기</span></button>
-            <div id="k_iconplace"><i class="fa fa-star bookmarkstar"></i></div>
+    <div id="m_apimap">
+        <div class="s_reviewphoto"></div>
+    </div>
+
+    <!-- 3. 각 영역의 이름이 들어감 -->
+    <div id="m_pagename">
+        <div id="s_nearby"></div>
+    </div>
+
+    <!-- 4. 리스트 출력 영역 -->
+
+    <div id="m_tabMenu">
+        <div class="k_buttonarea">
+            <div class="button raised btn_condition ajax-button" list_type="type_1">
+                <div class="center" fit>평점순</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised btn_condition ajax-button" list_type="type_2">
+                <div class="center" fit>리뷰많은순</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised btn_condition ajax-button" list_type="type_3">
+                <div class="center" fit>가고싶다순</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <br>
+            <br>
+            <div class="button raised btn_condition ajax-button" list_type="1만원대">
+                <div class="center" fit>1만원대</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised btn_condition ajax-button" list_type="2만원대">
+                <div class="center" fit>2만원대</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised btn_condition ajax-button" list_type="3만원대">
+                <div class="center" fit>3만원대</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised btn_condition ajax-button" list_type="4만원이상">
+                <div class="center" fit>4만원이상</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
         </div>
     </div>
-    <div class="s_storedetailinfo">
-        <table>
-            <tr>
-                <td style="color: gray">주소</td><td>&nbsp;${dto.REFINE_LOTNO_ADDR}</td>
-            </tr>
-            <tr>
-                <td style="color: gray">전화번호</td><td>&nbsp;${dto.TASTFDPLC_TELNO}</td>
-            </tr>
+    <div id="m_list">
+        <div class="s_storename ">${dto.RESTRT_NM} <span class="s_fontcolorapply">${dto.average}</span>
+            <div class="s_button">
+                <button id="s_reviewform" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reviewModal"><i class="bi bi-pencil-fill"></i>
+                    <span>리뷰쓰기</span></button>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal"> <i class="bi bi-calendar-check-fill"></i>
+                    <span>예약하기</span></button>
+                <div id="k_iconplace"><i class="fa fa-star bookmarkstar"></i></div>
+            </div>
+        </div>
+        <div class="s_storedetailinfo">
+            <table>
+                <tr>
+                    <td style="color: gray">주소</td><td>&nbsp;${dto.REFINE_LOTNO_ADDR}</td>
+                </tr>
+                <tr>
+                    <td style="color: gray">전화번호</td><td>&nbsp;${dto.TASTFDPLC_TELNO}</td>
+                </tr>
 
-            <tr>
-                <td style="color: gray">음식종류</td><td>&nbsp;${dto.food_type}</td>
-            </tr>
-            <tr>
-                <td style="color: gray">가격대</td><td>&nbsp;${dto.food_price}</td>
-            </tr>
-        </table>
-        <br>
-        ${dto.GPT_content}<br>
+                <tr>
+                    <td style="color: gray">음식종류</td><td>&nbsp;${dto.food_type}</td>
+                </tr>
+                <tr>
+                    <td style="color: gray">가격대</td><td>&nbsp;${dto.food_price}</td>
+                </tr>
+            </table>
+            <br>
+            ${dto.GPT_content}<br>
+        </div>
+        <div class="s_review"></div>
     </div>
-    <div class="s_review"></div>
+
+
+<%--    ----------------%>
+
+<div class="s_side">
+    <div id="map" style="width:400px; height:328px;"></div>
+    <!--주변 인기 식당-->
+</div>
+<div class="s_info">
+
+</div>
 </div>
 
 

@@ -25,7 +25,16 @@ public class UserpageService implements UserpageServiceInter {
     }
 
     @Override
-    public List<ReviewDto> getReviewlist(int user_idx) {
-        return userpageMapper.getReviewlist(user_idx);
+    public List<ReviewDto> getReviewlist(int user_idx,int startNum, int perPage) {
+        return userpageMapper.getReviewlist(user_idx,startNum,perPage);
+    }
+
+    @Override
+    public String getNameByIdx(int user_idx) {
+        return userpageMapper.getNameByIdx(user_idx);
+    }
+    @Override
+    public int getReviewCount(int user_idx) {
+        return userpageMapper.getReviewCount(user_idx);
     }
 }

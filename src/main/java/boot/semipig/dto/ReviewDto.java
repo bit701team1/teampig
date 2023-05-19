@@ -25,6 +25,7 @@ public class ReviewDto {
 
     //mypage 출력용
     private String RESTRT_NM;
+    private String food_type;
 
 }
 

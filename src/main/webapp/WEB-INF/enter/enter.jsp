@@ -15,10 +15,10 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="/css/enter.css" />
     <script src="/js/enter.js"> </script>
-
     <style>
         body, body * {
-            font-family: 'Jua'
+            font-family: 'Jua';
+            overflow: hidden;
         }
     </style>
 </head>
@@ -30,41 +30,34 @@
     }
 </script>
 <body>
-<header style="position: relative; height: 1000px;">
-    <audio class="j_enter_audio" id="audio">
-        <source src="/audio/entersound.mp3" type="audio/mpeg">
-    </audio>
-    <div class="j_enter_logo">
-        <a onclick="playAudio()" style="cursor: grab">
-        <img src="/photo/gguineapig.png" style="width: 100px; height: 100px;" >
-        </a>
-    </div>
-    <div class="j_enter_bg_r_img">
-        <video autoplay loop muted width="100%" height="100%" style="object-fit: cover;">
-            <source src="/video/makingfood02.mp4" type="video/mp4">
-        </video>
-        <img class="bg_r_img" src="/photo/j_enter_oner_0.jpg">
-        <img class="bg_r_img" src="/photo/j_enter_oner_1.jpg">
-        <img class="bg_r_img" src="/photo/j_enter_oner_2.png">
-        <img class="bg_r_img" src="/photo/j_enter_oner_3.png">
-        <img class="bg_r_img" src="/photo/j_enter_oner_4.png">
-        <button type="button" class="btn btn-secondary btn-sm j_enter_welcome_btn"
-                onclick="location.href='/business'">싸좡님은 요기 클릭해</button>
-    </div>
+<section style="width: 100%">
+    <div class="enter_section">
+        <audio class="j_enter_audio" id="audio">
+            <source src="/audio/entersound.mp3" type="audio/mpeg">
+        </audio>
 
-    <div class="j_enter_bg_l_img">
-        <video autoplay loop muted width="100%" height="100%" style="object-fit: cover;">
-            <source src="/video/eatingfood02.mp4" type="video/mp4">
-        </video>
-        <img class="bg_l_img" src="/photo/j_enter_user_0.png">
-        <img class="bg_l_img" src="/photo/j_enter_user_1.png">
-        <img class="bg_l_img" src="/photo/j_enter_user_2.png">
-        <img class="bg_l_img" src="/photo/j_enter_user_3.png">
-        <img class="bg_l_img" src="/photo/j_enter_user_4.png">
-        <button type="button" class="btn btn-secondary btn-sm j_enter_ownermenual_btn"
-                onclick="location.href='/home1'">Welcome Koera Food</button>
-    </div>
-</header>
+        <div class="j_enter_logo">
+            <a onclick="playAudio()" style="cursor: grab">
+                <img src="/photo/gguineapig.png" style="width: 95px; height: 100px;" >
+            </a>
+        </div>
 
+        <div class="j_bg_box">
+            <video id="entervideo" autoplay muted>
+                <source src="/video/enterfoodinfo.mp4" type="video/mp4">
+            </video>
+            <div style="float: left; width: 50%; height: 100%">
+                <img id="bg_l_img" src="/photo/j_enter_user_0.png" style="width: 710px; height: 100%; left: 25%; ">
+            </div>
+            <div style="width: 50%; margin-left: 710px; height: 100% ">
+                <img id="bg_r_img" src="/photo/j_enter_oner_0.jpg" style="width: 710px; height: 100%; right: 25%; ">
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm j_enter_welcome_btn"
+                    onclick="location.href='/home1'">Welcome GGuineapig</button>
+            <button type="button" class="btn btn-secondary btn-sm j_enter_ownermenual_btn"
+                    onclick="location.href='/business'">Oner Page</button>
+        </div>
+    </div>
+</section>
 </body>
 </html>

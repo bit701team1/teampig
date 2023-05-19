@@ -58,14 +58,18 @@
                                 if(res==0)
                                 {
                                     //alert("회원이 아닙니다. 회원가입해주세요.");
-                                    //String ss=(String)${sessionScope.previousUrl};
-                                    //console.log(ss);
+                                    /*String ss=(String)${sessionScope.previousUrl}
+                                    console.log(${sessionScope.previousUrl});*/
 
                                     var redirectUrl='../../business?n_email='+email+'&n_name='+name;
                                     window.location.href=redirectUrl;
+                                    //console.log(redirectUrl);
+                                   // var redirectUrl = document.referrer; // Get the previous URL
+                                   // window.location.href = redirectUrl;
+                                    //window.history.back();
                                 }
                                 else{
-                                    window.location.href='../../naverloginaction?email='+email;
+                                    window.location.href='../../snsloginaction?email='+email;
                                 }
                             }//success function 끝
                         })

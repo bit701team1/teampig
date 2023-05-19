@@ -15,16 +15,32 @@
         <put-attribute name="main" value="/WEB-INF/booking/main.jsp"/>
     </definition>
 
+    <!-- Kim -->
+    <definition name="userpage" template="/WEB-INF/userpage/home.jsp">
+        <put-attribute name="header" value="/WEB-INF/userpage/header.jsp"/>
+        <put-attribute name="myuserpage" value="/WEB-INF/userpage/myuserpage.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/userpage/menu.jsp"/>
+    </definition>
+    <definition name="/myuserpage" extends="userpage">
+        <put-attribute name="myuserpage" value="/WEB-INF/userpage/myuserpage.jsp"/>
+    </definition>
+    <definition name="/myuserpage/*/*" extends="userpage">
+        <put-attribute name="myuserpage" value="/WEB-INF/{1}/{2}.jsp"></put-attribute>
+    </definition>
+    <!-- Kim end -->
+
     <definition name="/main/*/*" extends="booking">
         <put-attribute name="main" value="/WEB-INF/{1}/{2}.jsp"></put-attribute>
     </definition>
+
+
 
     <!--    식당리스트 출력 영역입니다.-->
     <definition name="mainlayout" template="/WEB-INF/mainlayout/mainlayout.jsp">
         <put-attribute name="header" value="/WEB-INF/mainlayout/header.jsp"/>
         <put-attribute name="mainlist" value="/WEB-INF/mainlayout/mainlist.jsp"/>
         <put-attribute name="chatbot" value="/WEB-INF/mainlayout/chatbot.jsp"/>
-        <put-attribute name="footer" value="/WEB-INF/mainlayout/footer.jsp"/>
+        <!--<put-attribute name="footer" value="/WEB-INF/mainlayout/footer.jsp"/>-->
     </definition>
 
     <definition name="/mainlist" extends="mainlayout">

@@ -5,8 +5,8 @@
         <selectKey resultType="java.lang.Integer" keyProperty="food_idx" order="AFTER">
             SELECT LAST_INSERT_ID();
         </selectKey>
-        insert into food_list (food_price,RESTRT_NM,TASTFDPLC_TELNO,REPRSNT_FOOD_NM,REFINE_ROADNM_ADDR,opentime,closetime,holiday,point,food_type)
-        values (#{food_price},#{RESTRT_NM},#{TASTFDPLC_TELNO},#{REPRSNT_FOOD_NM},#{REFINE_ROADNM_ADDR},#{opentime},#{closetime},#{holiday},#{point},#{food_type})
+        insert into food_list (user_idx,food_price,RESTRT_NM,TASTFDPLC_TELNO,REPRSNT_FOOD_NM,REFINE_ROADNM_ADDR,opentime,closetime,holiday,point,food_type,REFINE_WGS84_LAT,REFINE_WGS84_LOGT)
+        values (#{user_idx},#{food_price},#{RESTRT_NM},#{TASTFDPLC_TELNO},#{REPRSNT_FOOD_NM},#{REFINE_ROADNM_ADDR},#{opentime},#{closetime},#{holiday},#{point},#{food_type},#{REFINE_WGS84_LAT},#{REFINE_WGS84_LOGT})
     </insert>
     <insert id="insertPhoto" parameterType="FoodPhotoDto">
         insert into food_photo (user_idx, photoname) values (#{user_idx},#{photoname})

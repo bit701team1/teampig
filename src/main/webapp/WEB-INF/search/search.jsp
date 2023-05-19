@@ -29,11 +29,42 @@
     &lt;%&ndash;<%@ include file="../mainlayout/footer.jsp" %>&ndash;%&gt;
     <%@ include file="../mainlayout/chatbot.jsp" %>--%>
 
-    <style>
-        body, body * {
-            font-family: 'Jua'
-        }
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/login.css">
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
+
+
+    <link rel="stylesheet" href="css/mainlayout.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="css/login.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap"
+          rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-*********" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+    <style>
         .page_num{
             text-align: center;
             height: 35px;
@@ -229,12 +260,9 @@
                 var currentPage = inputPage;
                 var inputsearch ="";
 
-
-
                 if(list_type == null){
                     list_type = "type_search";
                 }
-
 
                 if($("#inputsearch").val() !=""){
                     tmpsearch = $("#inputsearch").val();
@@ -354,7 +382,6 @@
                                         <div class="k_GPT_place">\${ele.gpt_content}</div>
                                     </div>
                                 </div>
-
                             `;
 
                             s += "</div>";
@@ -553,7 +580,42 @@
         }//initMap function 끝
     </script>
 </head>
+
 <body>
+
+
+<c:set var="root" value="<%=request.getContextPath() %>"/>
+<%--<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</button>--%>
+<!-- The Modal -->
+<div class="modal fade" id="loginModal">
+    <div class="modal-dialog" >
+        <div class="modal-content" style="background-color: transparent; border:transparent; " >
+
+            <!-- Modal Header -->
+            <%--            <div class="modal-header" style="opacity: 0.9">--%>
+            <%--                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>--%>
+            <%--            </div>--%>
+
+            <!-- Modal body -->
+            <div class="modal-body" >
+                <div class="position">
+                    <div class="cont_principal">
+                        <div class="cont_centrar">
+
+                            <div class="cont_login">
+                                <div class="cont_info_log_sign_up">
+                                    <div class="col_md_login">
+                                        <div class="cont_ba_opcitiy">
+
+                                            <h2>LOGIN</h2>
+                                            <p>로그인 해주세요!</p>
+                                            <button class="btn_login" onclick="change_to_login()">LOGIN</button>
+                                        </div>
+                                    </div>
+                                    <div class="col_md_sign_up">
+                                        <div class="cont_ba_opcitiy">
+                                            <h2>SIGN UP</h2>
+
 <h2>test</h2>
 <form action="/temp_login" method="post">
     <input type="text" name="id" value="testID">
@@ -566,10 +628,186 @@
 <span><b>세션 username: ${sessionScope.username}</b></span><br>
 
 
-<div class="input-group">
-    <input type="text" id="inputsearch">
-    <button type="button" class="ajax-button searchbtn" list_type="type_search">검색</button>
+
+                                            <p>계정이 없으신가요?</p>
+
+                                            <button class="btn_sign_up" onclick="change_to_sign_up()">SIGN UP</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="cont_back_info">
+                                    <div class="cont_img_back_grey">
+                                        <img src='${root}/photo/login.png' />
+                                    </div>
+                                </div>
+
+                                <div class="modal-body"> <!-- Add this container -->
+                                    <div class="cont_forms">
+                                        <div class="cont_img_back_">
+                                            <img src='${root}/photo/signup.png'/>
+                                        </div>
+                                        <div class="cont_form_login">
+                                            <a href="#" onclick="hidden_login_and_sign_up()" ><i class="bi bi-x-lg"></i></a>
+                                            <h2>LOGIN</h2>
+                                            <input type="text" placeholder="id" />
+                                            <input type="password" placeholder="Password" />
+                                            <button class="btn_login" onclick="change_to_login()">LOGIN</button><br>
+                                            <img src="${root}/photo/naver.png" width="100px" style="margin-top: 5px; cursor: pointer;" onclick="initNaverLogin()">
+                                            <img src='${root}/photo/kakao.png' width="100px" height="37px" style="margin-top: 5px; cursor: pointer;">
+                                        </div>
+
+                                        <div class="cont_form_sign_up">
+                                            <a href="#" onclick="hidden_login_and_sign_up()"><i class="bi bi-x-lg" style=
+                                                    "position: relative; bottom:50px;"></i></a>
+                                            <h2>SIGN UP</h2>
+                                            <input type="text" placeholder="Email" />
+                                            <input type="text" placeholder="id" />
+                                            <input type="password" placeholder="Password" /><br>
+                                            <select class="form-select">
+                                                <option value="일반사용자">일반 사용자</option>
+                                                <option value="사장님">사장님</option>
+                                            </select>
+                                            <button class="btn_sign_up" onclick="change_to_sign_up()">SIGN UP</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    /* ------------------------------------ Click on login and Sign Up to  changue and view the effect
+  ---------------------------------------
+  */
+
+
+    const time_to_show_login = 400;
+    const time_to_hidden_login = 200;
+
+    function change_to_login() {
+        document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_login";
+        document.querySelector('.cont_form_login').style.display = "block";
+        document.querySelector('.cont_form_sign_up').style.opacity = "0";
+
+        setTimeout(function(){  document.querySelector('.cont_form_login').style.opacity = "1"; },time_to_show_login);
+
+        setTimeout(function(){
+            document.querySelector('.cont_form_sign_up').style.display = "none";
+        },time_to_hidden_login);
+    }
+
+    const time_to_show_sign_up = 100;
+    const time_to_hidden_sign_up = 400;
+
+    function change_to_sign_up(at) {
+        document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_sign_up";
+        document.querySelector('.cont_form_sign_up').style.display = "block";
+        document.querySelector('.cont_form_login').style.opacity = "0";
+
+        setTimeout(function(){  document.querySelector('.cont_form_sign_up').style.opacity = "1";
+        },time_to_show_sign_up);
+
+        setTimeout(function(){   document.querySelector('.cont_form_login').style.display = "none";
+        },time_to_hidden_sign_up);
+
+
+    }
+
+    const time_to_hidden_all = 500;
+
+    function hidden_login_and_sign_up() {
+
+        document.querySelector('.cont_forms').className = "cont_forms";
+        document.querySelector('.cont_form_sign_up').style.opacity = "0";
+        document.querySelector('.cont_form_login').style.opacity = "0";
+
+        setTimeout(function(){
+            document.querySelector('.cont_form_sign_up').style.display = "none";
+            document.querySelector('.cont_form_login').style.display = "none";
+        },time_to_hidden_all);
+
+    }
+</script>
+
+<script>
+    function initNaverLogin() {
+        var naverLogin = new naver.LoginWithNaverId({
+            clientId: "KMw1CKJNqR_tTHgOY5np",
+            callbackUrl: "http://localhost:9000/auth/naver/callback",
+            loginButton: { color: "green", type: 10, height: 60 },
+            callbackHandle: true
+        });
+
+        naverLogin.init();
+    }
+</script>
+
+<%--HTML 영역--%>
+<div class="m_realheader">
+    <div class="m_realheader-container">
+        <div class="m_headerlogo-container">
+            <img src="#" alt="로고출력">
+        </div>
+        <div id="m_headertop-panel" class="m_headeraction-panel">
+            <ul class="m_headermain-navigation">
+                <li>
+                    <a href="#" class="m_cover">
+                        <span class="text-effect">맛집리스트</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="m_cover">
+                        <span class="text-effect">끼니비지니스</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="m_cover">
+                        <span class="text-effect">공지사항</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="m_cover">
+                        <span class="text-effect">마이페이지</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="m_headeruser-control">
+                <a href="#" class="m_cover" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+            </div>
+        </div>
+
+        <span id="m_headerform-open" class="m_headersearch-toggle">
+                    <i class="fa fa-search"></i>
+                </span>
+        <div class="m_headersearch-holder">
+            <form id="m_headeridsearch-form" class="m_headersearch-form">
+                <input type="text" name="qwrd" placeholder="검색어를 입력하세요." class="m_headersearch-input">
+                <button type="submit" id="form-submit" class="m_headersearch-toggle">
+                    <i class="fa fa-search"></i>
+                </button>
+                <button type="reset" id="m_headerform-close" class="m_search-close">
+                    <i class="fa fa-times"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/header.js"></script>
+<%--라인--%>
+
+<div id="#m_container">
+    <div class="input-group">
+        <input type="text" id="inputsearch">
+        <button type="button" class="ajax-button searchbtn" list_type="type_search">검색</button>
+    </div>
 
 <div id="map" class="mapinclude" style="width:800px; height:400px;"></div><br><br>
 <div class="k_buttonarea">
@@ -610,11 +848,141 @@
 </div>
 
 
-<div class="s_list">
+<div class="s_list" style="height: 2200px; width: 1200px;margin: 0 auto;"></div>
 </div>
-<br><br><br>
 
-<script>
-</script>
+
+<div id="m_footer">
+    <footer class="footer-section">
+        <div class="m_foottainer">
+            <div class="footer-cta pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="cta-text">
+                                <h4>회사주소</h4>
+                                <span>서울 강남구 강남대로94길 20 삼오빌딩 5-9층</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-phone"></i>
+                            <div class="cta-text">
+                                <h4>전화번호</h4>
+                                <span>0507-1414-9601</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="far fa-envelope-open"></i>
+                            <div class="cta-text">
+                                <h4>메일주소</h4>
+                                <span>bitcamp701@naver.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-content pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-logo">
+                                <a href="index.html"><img src="photo/cilogo.png" class="img-fluid" alt="logo"></a>
+                            </div>
+                            <div class="footer-text">
+                                <p>술 한잔 마셨습니다... 프로젝트가 미완성이어도 좋습니다. 하지만 '끼니 피그' 하나만 기억해 주세요. 진심을 다해 전합니다. 프로젝트가 별로일 수 있습니다. 밤낮으로 고민하고 코딩했습니다... 최선을 다했고, 열심히 했습니다. 저희 팀의 진심이 느껴지길 바랍니다. 고맙습니다...
+                                </p>
+                            </div>
+                            <div class="footer-social-icon">
+                                <span>서포터즈</span>
+                                <a href="https://data.gg.go.kr"><img src="photo/ggd.png" class="ggd"></a>
+                                <a href="https://openai.com/blog/chatgpt"><img src="photo/aigpt.png"></a>
+                                <a href="https://www.data.go.kr"><img src="photo/publicdata.png"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h3>전체서비스</h3>
+                            </div>
+                            <ul>
+                                <li><a href="#">회사소개</a></li>
+                                <li><a href="#">비지니스</a></li>
+                                <li><a href="#">이용약관</a></li>
+                                <li><a href="#">공지사항</a></li>
+                                <li><a href="#">고객센터</a></li>
+                                <li><a href="#">고객관리</a></li>
+                                <li><a href="#">광고서비스운영</a></li>
+                                <li><a href="#">문의내역</a></li>
+                                <li><a href="#">개인정보처리방침</a></li>
+                                <li><a href="#">채용공고</a></li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div id="slideShow">
+                                    <div id="slides">
+                                        <img src="photo/banner1.png" alt="광고">
+                                        <img src="photo/banner5.png" alt="광고">
+                                        <img src="photo/banner3.png" alt="광고">
+                                        <img src="photo/banner4.png" alt="광고">
+                                        <img src="photo/banner2.png" alt="광고">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h3>고객의 소리</h3>
+                            </div>
+                            <div class="footer-text mb-25">
+                                <p>
+                                    서비스 개선사항, 공공데이터 수정, 잘못된 정보 제보등 끼니피그에 다양한 고객들의 의견을 들려주세요.
+                                </p>
+                            </div>
+                            <div class="subscribe-form">
+                                <form action="#">
+                                    <input type="text" placeholder="Email Address">
+                                    <button><i class="fab fa-telegram-plane"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-area">
+            <div class="m_foottainer">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                        <div class="copyright-text">
+                            <p>Copyright &copy; 2023, All Right Reserved <a href="main.jsp"><b>비트캠프 1조</b></a></p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                        <div class="footer-menu">
+                            <ul>
+                                <li><a href="#">입장페이지</a></li>
+                                <li><a href="#">검색서비스</a></li>
+                                <li><a href="#">마이페이지</a></li>
+                                <li><a href="#">관리페이지</a></li>
+                                <li><a href="#">비지니스</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+<script src="js/footer.js"></script>
 </body>
 </html>
