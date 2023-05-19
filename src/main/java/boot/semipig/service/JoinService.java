@@ -1,6 +1,7 @@
 package boot.semipig.service;
 
 import boot.semipig.dto.JoinDto;
+import boot.semipig.dto.OwnerpageDto;
 import boot.semipig.mapper.JoinMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,4 +26,14 @@ public class JoinService implements JoinServiceInter{
         }
     }
 
+    @Override
+    public int existFoodList(OwnerpageDto dto) {
+        int existFoodList=joinMapper.existFoodList(dto);
+        if(existFoodList == 1)
+        {
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 }
