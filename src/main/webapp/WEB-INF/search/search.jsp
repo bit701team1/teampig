@@ -368,6 +368,7 @@
                             s+=`
                                 <div class="content_container" food_idx="\${ele.food_idx}"
                                          loginidx="${loginidx}"
+
                                          restrt_list="\${ele.restrt_NM}"
                                          food_type="\${ele.food_type}">
                                     <div class="k_photoplace">사진</div>
@@ -582,6 +583,7 @@
 
 <body>
 
+
 <c:set var="root" value="<%=request.getContextPath() %>"/>
 <%--<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</button>--%>
 <!-- The Modal -->
@@ -613,6 +615,18 @@
                                     <div class="col_md_sign_up">
                                         <div class="cont_ba_opcitiy">
                                             <h2>SIGN UP</h2>
+
+<h2>test</h2>
+<form action="/temp_login" method="post">
+    <input type="text" name="id" value="testID">
+    <input type="int" name="loginidx" value="1">
+    <input type="submit" value="임시로그인"> &nbsp;
+    <button type="button" onclick="location.href='/temp_logout'">로그아웃</button>
+</form>
+<span><b>세션id: ${sessionScope.loginid}</b></span><br>
+<span><b>세션 loginidx: ${sessionScope.loginidx}</b></span><br>
+<span><b>세션 username: ${sessionScope.username}</b></span><br>
+
 
 
                                             <p>계정이 없으신가요?</p>

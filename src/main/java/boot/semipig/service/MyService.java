@@ -23,22 +23,27 @@ public class MyService implements ServiceInter {
         serviceMapper.insertt(dto);
     }
     @Override
-    public List<ServiceDto> selectt() {
+    public List<ServiceDto> selectt(int user_idx) {
         // TODO Auto-generated method stub
-        return serviceMapper.selectt();
+        return serviceMapper.selectt(user_idx);
     }
     @Override
     public void deletee(int num) {
         // TODO Auto-generated method stub
         serviceMapper.deletee(num);}
     @Override
-    public List<ServiceDto> getAll(int startNum, int perPage, LocalDateTime currentDateTime) {
+    public List<ServiceDto> getAll(int startNum, int perPage, int user_idx,LocalDateTime currentDateTime) {
         Map<String, Object> map = new HashMap<>();
         map.put("startNum", startNum);
         map.put("perPage", perPage);
+        map.put("user_idx",user_idx);
          map.put("currentDateTime", currentDateTime);
         return serviceMapper.getAll(map);
     }
+    @Override
+    public void deleteqna(int qna_idx) {
+        // TODO Auto-generated method stub
+        serviceMapper.deleteqna(qna_idx);}
     @Override
     public void updatee(ServiceDto dto) {
         serviceMapper.updatee(dto);
@@ -58,10 +63,11 @@ public class MyService implements ServiceInter {
         serviceMapper.deletecoupon(num);
     }
     @Override
-    public List<QnaDto> qnalist(int startNum, int perPage){
+    public List<QnaDto> qnalist(int startNum, int perPage, int user_idx){
         Map<String, Object> map = new HashMap<>();
         map.put("startNum", startNum);
         map.put("perPage", perPage);
+        map.put("user_idx",user_idx);
         return serviceMapper.qnalist(map);
     }
     @Override

@@ -28,7 +28,6 @@ public interface OwnerpageServiceInter {
 
     public List<String> getAllPhoto(int user_idx);
 
-    String removephotos(int user_idx);
 
     public void removePhotos(int user_idx);
 }

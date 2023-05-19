@@ -20,15 +20,15 @@
         body, body * {
             font-family: 'Gowun Batang';
         }
-         .y_updateinfo {
-             margin-top: 10px;
-             width: 1000px;
-             border-radius: 0.825rem;
-             border-top: 0.25rem solid #5C732C !important;
-             box-shadow: 0 .15rem 1.0rem 0 rgba(58, 59, 69, .15) !important;
-             transition: box-shadow 0.1s ease;
+        .y_updateinfo {
+            margin-top: 10px;
+            width: 1000px;
+            border-radius: 0.825rem;
+            border-top: 0.25rem solid #5C732C !important;
+            box-shadow: 0 .15rem 1.0rem 0 rgba(58, 59, 69, .15) !important;
+            transition: box-shadow 0.1s ease;
             height: 800px;
-         }
+        }
 
         .RESTRT_NM {
             margin-top: 10px;
@@ -163,7 +163,7 @@
 
         .prev {
             position: relative;
-           right: 274px;
+            right: 274px;
             top:10px;
 
         }
@@ -255,7 +255,7 @@
     $(function () {
         //업로드한 사진들과 데이타를 같이 묶어서 서버에 전송하기
         $("#contentadd").click(function () {
-            let food_idx=$("#user_idx").val();
+            let user_idx=$("#user_idx").val();
             let cnt=$("#photo")[0].files.length;
             let point=$("#point").val()
             let TASTFDPLC_TELNO=$("#TASTFDPLC_TELNO").val();
@@ -286,26 +286,26 @@
             form.append("closetime",closetime);
             form.append("holiday",holiday);
             form.append("point",point);
-            form.append("food_idx",food_idx);
+            form.append("user_idx",user_idx);
 
             console.log($("#photo")[0].files)
             console.log($("#user_idx").val());
             $.ajax({
-                type: "get",
-                url: "./removephotos",
-                data: {user_idx: user_idx},
+                type: "delete",
+                url: "./removephotos/"+user_idx,
+                // data: {user_idx: user_idx},
                 dataType: "text",
                 success: function () {
                     console.log("기존 사진이 삭제되었습니다.");
                     $.ajax({
-                        type: "post",
+                        type: "POST",
                         dataType: "text",
-                        url:"./update",
-                        processData:false,
-                        contentType:false,
-                        data:form,
-                        success:function (res){
-                            console.log("결과"+res); // 응답값 출력
+                        url: "./update",
+                        processData: false,
+                        contentType: false,
+                        data: form,
+                        success: function () {
+                            // console.log("결과" + res); // 응답값 출력
                         }
                     });
                 }
@@ -399,7 +399,7 @@
             e.preventDefault();
 
             let content = $("#GPT_content").val();
-            let food_idx = $("#user_idx").val();
+            let user_idx = $("#user_idx").val();
 
             $.ajax({
                 type: "post",
@@ -420,108 +420,108 @@
 <body>
 <h2>가게정보 관리</h2>
 <div class="y_updateinfo">
-<div class="RESTRT_NM" >
-    <h1>${dto.RESTRT_NM}</h1>
-</div>
+    <div class="RESTRT_NM" >
+        <h1>${dto.RESTRT_NM}</h1>
+    </div>
     <div style="margin-left: 25px;">
-    <h3  style=" font-weight: bold;">직접수정</h3>
-    <span>우리 가게의 정보를 직접 등록해보세요! 최신화된 정보일수록, 더 많은 손님들의 관심을 높일 수 있습니다.</span>
+        <h3  style=" font-weight: bold;">직접수정</h3>
+        <span>우리 가게의 정보를 직접 등록해보세요! 최신화된 정보일수록, 더 많은 손님들의 관심을 높일 수 있습니다.</span>
     </div>
-        <div class="image-container">
-    <div class="detail_img">
-        <img id="main-img" src="" alt="Example Image" style="max-width: 100%; max-height: 100%;">
+    <div class="image-container">
+        <div class="detail_img">
+            <img id="main-img" src="" alt="Example Image" style="max-width: 100%; max-height: 100%;">
+        </div>
+        <!--상품 썸네일-->
+        <div class="detail_thumb"></div>
     </div>
-    <!--상품 썸네일-->
-    <div class="detail_thumb"></div>
-</div>
 
-<div class="right_input_section">
-    <form action="update" method="post" enctype="multipart/form-data">
-        <input type="hidden" id="user_idx" name="user_idx" value="${dto.user_idx}">
-        <table>
-            <tr>
-                <td>
-                    <label for="TASTFDPLC_TELNO"><span class="y_info2">전화번호</span> </label>
-                </td>
-                <td>
-                    <input type="tel" id="TASTFDPLC_TELNO" name="TASTFDPLC_TELNO" value=${dto.TASTFDPLC_TELNO}>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="REFINE_ROADNM_ADDR"><span class="y_info2">주소</span></label>
-                </td>
-                <td>
-                    <input type="text" id="REFINE_ROADNM_ADDR" name="REFINE_ROADNM_ADDR" value="${dto.REFINE_ROADNM_ADDR}">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="REPRSNT_FOOD_NM"><span class="y_info2">주요메뉴</span></label>
-                </td>
-                <td>
-                    <input type="text" id="REPRSNT_FOOD_NM" name="REPRSNT_FOOD_NM" value="${dto.REPRSNT_FOOD_NM}">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="point"><span class="y_info2">홍보 포인트</span></label>
-                </td>
-                <td>
-                    <input type="text" id="point" name="point" value="${dto.point}" placeholder="신선한, 주차장이 넓은 등, 30자 제한" maxlength="30">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="opentime"><span class="y_info2">오픈시간</span></label>
-                </td>
-                <td>
-                    <input type="time" id="opentime" name="opentime" min="00:00" max="24:00" step="300" value="${dto.opentime}">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="closetime"><span class="y_info2">종료시간</span></label>
-                </td>
-                <td>
-                    <input type="time" id="closetime" name="closetime" min="00:00" max="24:00" step="300" value="${dto.closetime}">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="holiday" ><span class="y_info2">휴일</span></label>
-                </td>
-                <td>
-                    <select id="holiday" name="holiday"  style="margin-left: 30px; height: 50px;">
-                        <option value="없음" ${dto.holiday == '없음' ? 'selected' : ''}>없음</option>
-                        <option value="일요일" ${dto.holiday == '일요일' ? 'selected' : ''}>일요일</option>
-                        <option value="월요일" ${dto.holiday == '월요일' ? 'selected' : ''}>월요일</option>
-                        <option value="화요일" ${dto.holiday == '화요일' ? 'selected' : ''}>화요일</option>
-                        <option value="수요일" ${dto.holiday == '수요일' ? 'selected' : ''}>수요일</option>
-                        <option value="목요일" ${dto.holiday == '목요일' ? 'selected' : ''}>목요일</option>
-                        <option value="금요일" ${dto.holiday == '금요일' ? 'selected' : ''}>금요일</option>
-                        <option value="토요일" ${dto.holiday == '토요일' ? 'selected' : ''}>토요일</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <br>
-                    <label for="photo"><span class="y_info2">사진 넣기</span></label>
-                </td>
-                <td>
-                    <br>
-                    <input type="file" id="photo" name="photo" multiple style="height: 50px;">
-                </td>
-            </tr>
-            <tr align="center">
-                <td colspan="2">
-                    <button type="submit" style="margin-top:50px; float:right;" id="contentadd" >홍보글 작성</button>
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
+    <div class="right_input_section">
+        <form action="update" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="user_idx" name="user_idx" value="${dto.user_idx}">
+            <table>
+                <tr>
+                    <td>
+                        <label for="TASTFDPLC_TELNO"><span class="y_info2">전화번호</span> </label>
+                    </td>
+                    <td>
+                        <input type="tel" id="TASTFDPLC_TELNO" name="TASTFDPLC_TELNO" value=${dto.TASTFDPLC_TELNO}>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="REFINE_ROADNM_ADDR"><span class="y_info2">주소</span></label>
+                    </td>
+                    <td>
+                        <input type="text" id="REFINE_ROADNM_ADDR" name="REFINE_ROADNM_ADDR" value="${dto.REFINE_ROADNM_ADDR}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="REPRSNT_FOOD_NM"><span class="y_info2">주요메뉴</span></label>
+                    </td>
+                    <td>
+                        <input type="text" id="REPRSNT_FOOD_NM" name="REPRSNT_FOOD_NM" value="${dto.REPRSNT_FOOD_NM}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="point"><span class="y_info2">홍보 포인트</span></label>
+                    </td>
+                    <td>
+                        <input type="text" id="point" name="point" value="${dto.point}" placeholder="신선한, 주차장이 넓은 등, 30자 제한" maxlength="30">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="opentime"><span class="y_info2">오픈시간</span></label>
+                    </td>
+                    <td>
+                        <input type="time" id="opentime" name="opentime" min="00:00" max="24:00" step="300" value="${dto.opentime}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="closetime"><span class="y_info2">종료시간</span></label>
+                    </td>
+                    <td>
+                        <input type="time" id="closetime" name="closetime" min="00:00" max="24:00" step="300" value="${dto.closetime}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="holiday" ><span class="y_info2">휴일</span></label>
+                    </td>
+                    <td>
+                        <select id="holiday" name="holiday"  style="margin-left: 30px; height: 50px;">
+                            <option value="없음" ${dto.holiday == '없음' ? 'selected' : ''}>없음</option>
+                            <option value="일요일" ${dto.holiday == '일요일' ? 'selected' : ''}>일요일</option>
+                            <option value="월요일" ${dto.holiday == '월요일' ? 'selected' : ''}>월요일</option>
+                            <option value="화요일" ${dto.holiday == '화요일' ? 'selected' : ''}>화요일</option>
+                            <option value="수요일" ${dto.holiday == '수요일' ? 'selected' : ''}>수요일</option>
+                            <option value="목요일" ${dto.holiday == '목요일' ? 'selected' : ''}>목요일</option>
+                            <option value="금요일" ${dto.holiday == '금요일' ? 'selected' : ''}>금요일</option>
+                            <option value="토요일" ${dto.holiday == '토요일' ? 'selected' : ''}>토요일</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br>
+                        <label for="photo"><span class="y_info2">사진 넣기</span></label>
+                    </td>
+                    <td>
+                        <br>
+                        <input type="file" id="photo" name="photo" multiple style="height: 50px;">
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2">
+                        <button type="submit" style="margin-top:50px; float:right;" id="contentadd" >홍보글 작성</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </div>
 <div class="outputarea">
     <div class="outputarea_sub">
@@ -536,5 +536,4 @@
         <button type="submit" id="sendprompt">전송</button>
     </form>
 </div>
-</body>
-</html>
+</b

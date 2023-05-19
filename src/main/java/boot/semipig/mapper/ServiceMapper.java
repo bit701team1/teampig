@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ServiceMapper {
 
     public void insertt(ServiceDto dto);
-    public List<ServiceDto> selectt();
+    public List<ServiceDto> selectt(int user_idx);
     public void deletee(int num);
     public List<ServiceDto> getAll(Map<String, Object> map);
     public void updatee(ServiceDto dto);
@@ -24,4 +24,5 @@ public interface ServiceMapper {
 
     int ReservationCount(String start);
     public DetailDto getmypage(int user_idx);
+    public void deleteqna(int qna_idx);
 }

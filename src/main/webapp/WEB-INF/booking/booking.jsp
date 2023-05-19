@@ -51,11 +51,11 @@
             left: 0;
             right: 0;
             height:3px; /* 더 두껍게 보이도록 조절 */
-            background-color: black;
+            background-color:#5C732C;
         }
 
         .table td {
-            border-bottom: 1px solid lightgray;
+            border-bottom: 1px solid #5C732C;
         }
     </style>
 
@@ -172,37 +172,40 @@
         });
     }
 </script>
-<div class="y_couponlist" style="margin-top: 50px;">
-<table class="table"  style="width: 800px; margin: auto;">
-    <caption align="top"><h4><b>쿠폰 목록</b></h4></caption>
-    <thead>
-    <tr>
-        <th style="width: 100px">쿠폰</th>
-        <th style="width: 280px">남은 시간</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="dto" items="${list2}" varStatus="i">
-        <tr>
-            <td>${dto.number}%할인</td>
-            <td>
-                <div class="countdown" id="countdown-${i.index}">
-                    <p class="countdown-timer-days">00</p>
-                    <p class="countdown-timer-hours">00</p>
-                    <p class="countdown-timer-minutes">00</p>
-                    <p class="countdown-timer-seconds">00</p>
-                    <span style="float: right;font-size:15px;cursor:pointer;"
-                          id="y_delete_${dto.num}">삭제
-        </span>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-    </c:forEach>
+    <div class="y_couponlist" style="margin-top: 50px;">
+        <table class="table" style="width: 800px; margin: auto; margin-bottom: 50px;">
+            <caption align="top">
+                <h4><b>쿠폰 목록</b></h4>
+            </caption>
+            <thead>
+            <tr>
+                <th style="width: 20px">번호</th>
+                <th style="width: 100px">쿠폰</th>
+                <th style="width: 280px">남은 시간</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="dto" items="${list2}" varStatus="i">
+                <tr>
+                    <td>${i.index+1}</td>
+                    <td>${dto.number}%할인</td>
+                    <td>
+                        <div class="countdown" id="countdown-${i.index}">
+                            <p class="countdown-timer-days">00</p>
+                            <p class="countdown-timer-hours">00</p>
+                            <p class="countdown-timer-minutes">00</p>
+                            <p class="countdown-timer-seconds">00</p>
+                            <span style="float: right;font-size:15px;cursor:pointer;"
+                                  id="y_delete_${dto.num}">삭제</span>
+                        </div>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-</table>
-</div>
-</div>
 <script>
     <c:forEach var="dto" items="${list2}" varStatus="i">
     var time${i.index} = "${dto.time}";
@@ -213,7 +216,11 @@
         if (timeDiff${i.index} <= 0) {
             clearInterval(timeinterval${i.index});
             const countdownEl${i.index} = document.querySelector("#countdown-${i.index}");
-            countdownEl${i.index}.innerHTML = "<p>쿠폰의 유효기간이 끝났습니다.</p>";
+            countdownEl${i.index}.querySelector(".countdown-timer-days").innerHTML = "쿠폰 유효기간이 끝났습니다";
+            countdownEl${i.index}.querySelector(".countdown-timer-hours").innerHTML = "";
+            countdownEl${i.index}.querySelector(".countdown-timer-minutes").innerHTML = "";
+            countdownEl${i.index}.querySelector(".countdown-timer-seconds").innerHTML = "";
+            countdownEl${i.index}.querySelector("#y_delete_${dto.num}").textContent = "삭제";
             return;
         }
         // 남은 시간을 일, 시간, 분, 초 단위로 계산합니다.

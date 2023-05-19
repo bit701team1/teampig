@@ -13,7 +13,6 @@ public interface OwnerpageMapper {
     public OwnerpageDto getData(int user_idx);
     public void updateOwner(OwnerpageDto dto);
     public void updatePrompt(OwnerpageDto dto);
-    public int getFood_idx(int user_idx);
     public List<FoodPhotoDto> getPhotos(int user_idx);
     public List<OwnerpageDto> getAllOwner();
     public List<String> getAllPhoto(int user_idx);

@@ -41,9 +41,11 @@ public class LoginController{
             session.setAttribute("loginok", "yes");
             session.setAttribute("loginid", id);
             int user_idx=loginService.getUserIdx(id);
+
+            String user_name = loginService.getUserInfo(user_idx).getUser_name();
+            session.setAttribute("username",user_name);
             session.setAttribute("loginidx", user_idx);
             session.setAttribute("saveid", saveid==null?"no":"yes");
-
             return 1;
         }
 
@@ -53,19 +55,21 @@ public class LoginController{
     {
         String referer = request.getHeader("Referer");
         session.removeAttribute("loginok");
-        session.removeAttribute("loginidx");
+
         session.removeAttribute("loginid");
+        session.removeAttribute("loginidx");
+        session.removeAttribute("username");
 
         return "redirect:"+referer;
     }
 
-   /* @GetMapping("/joinformtest")
-    public String logintest(Model model, String email, String name)
-    {
-        model.addAttribute("email", email);
-        model.addAttribute("name", name);
-        return "main/joinformtest";
-    }*/
+    /* @GetMapping("/joinformtest")
+     public String logintest(Model model, String email, String name)
+     {
+         model.addAttribute("email", email);
+         model.addAttribute("name", name);
+         return "main/joinformtest";
+     }*/
     @PostMapping("/emailcheck")
     @ResponseBody public int emailCheck(String email){
         return loginService.doublecheck(email);

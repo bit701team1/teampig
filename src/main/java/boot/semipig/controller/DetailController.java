@@ -3,18 +3,19 @@ package boot.semipig.controller;
 import boot.semipig.dto.*;
 import boot.semipig.service.DetailService;
 import boot.semipig.service.LoginService;
+import boot.semipig.service.MyService;
 import boot.semipig.service.ReviewService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,8 @@ public class DetailController {
     //가게 홍보글
     @Autowired
     ReviewService reviewService;//리뷰 띄우기
-
+    @Autowired
+    private MyService myservice;
 
     /*@GetMapping("/detail2")
     public String detail2(Model model, Integer food_idx, HttpSession session)
@@ -123,7 +125,25 @@ public class DetailController {
 
         return list;
     }
+    @PostMapping("/calendarinsert")
+    @ResponseBody
+    public void insertt(@RequestBody String jsondata, HttpSession session) {
+        System.out.println("jsondata=" + jsondata);
+        int idx = (int) session.getAttribute("loginidx");
+        String username = (String) session.getAttribute("username");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            ServiceDto[] dtos = mapper.readValue(jsondata, ServiceDto[].class);
+            for (ServiceDto dto : dtos) {
+                dto.setUser_idx(idx);
+                dto.setUser_name(username);
+                myservice.insertt(dto);
+            }
 
+        } catch (IOException e) {
+            // 예외 처리
+        }
+    }
     @GetMapping("/delete")//리뷰 삭제
     @ResponseBody public void delete(int review_idx)
     {

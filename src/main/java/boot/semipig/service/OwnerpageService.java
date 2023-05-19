@@ -49,7 +49,7 @@ public class OwnerpageService implements OwnerpageServiceInter {
         con.setRequestMethod("POST");
         con.setRequestProperty("Content-Type", "application/json"); // 데이터 타입이 무엇인가
 
-        con.setRequestProperty("Authorization", "Bearer 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");//인증 ,openapi key
+        con.setRequestProperty("Authorization", "Bearer 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");//인증 ,openapi key
 
         con.setDoOutput(true);
 
@@ -137,13 +137,6 @@ public class OwnerpageService implements OwnerpageServiceInter {
     @Override
     public List<OwnerpageDto> getDataPhoto(int user_idx) {
         return ownerpageMapper.getDataPhoto(user_idx);
-    }
-
-
-    @Override
-    public String removephotos(int user_idx) {
-        ownerpageMapper.removephotos(user_idx);
-        return "Success"; // Or any other appropriate result
     }
 
 
