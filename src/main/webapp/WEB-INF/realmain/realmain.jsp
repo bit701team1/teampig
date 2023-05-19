@@ -880,7 +880,7 @@
 
 <!--페이지 애니메이션 영역-->
 
-<script src="  https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@14.2.0/dist/smooth-scroll.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@14.2.0/dist/smooth-scroll.min.js"></script>
 
 <script type="text/javascript">
     $(function(){

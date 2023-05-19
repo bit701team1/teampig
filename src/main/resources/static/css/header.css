@@ -1,0 +1,249 @@
+*, *:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/**************************************************************/
+
+body {
+    font-family: Lato, Arial, Sans-Serif;
+    font-size: 14px;
+    line-height: 1.429;
+}
+
+.m_realheader-container {
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    max-width: 1360px;
+}
+
+.m_realheader {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    position: relative;
+}
+
+.m_realheader .m_headerlogo-container {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    text-align: center;
+}
+
+.m_realheader .m_headerlogo-container .m_headerlogo-icon {
+    display: inline-block;
+    font-size: 48px;
+    line-height: 1;
+    margin-top: 8px;
+    vertical-align: baseline;
+}
+
+.m_realheader .m_headerlogo-container .icon-text {
+    display: none;
+    font-size: 32px;
+    vertical-align: baseline;
+}
+
+.m_realheader .m_headeraction-panel {
+    float: right;
+    padding-right: 64px;
+}
+
+.m_realheader .m_headermain-navigation {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.m_realheader .m_headermain-navigation > li {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 25px 20px 20px;
+}
+.m_headermain-navigation a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.m_headeruser-control a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.m_realheader .m_headeruser-control {
+    border-left: 1px solid #ccc;
+    display: inline-block;
+    padding: 10px 20px;
+    vertical-align: middle;
+}
+
+.m_realheader .m_headersearch-toggle {
+    appearance: none;
+    background: #fff;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1;
+    padding: 24px;
+    width: 64px;
+    height: 64px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.m_realheader #m_headerform-open {
+    opacity: 1;
+    position: absolute;
+    top: 0;
+    right: 20px;
+    transition: all 0.4s ease;
+}
+
+.m_realheader #m_headerform-open.hidden {
+    opacity: 0;
+}
+
+.m_realheader .m_headersearch-holder {
+    display: none;
+    overflow: hidden;
+    height: 60px;
+    width: 700px;
+    position: absolute;
+    top: 0;
+    right: 20px;
+}
+
+.m_realheader .m_headersearch-form {
+    opacity: 0;
+    width: 280px;
+    position: absolute;
+    top: 0;
+    right: -216px;
+    transition-property: opacity, transform;
+    transition-duration: 0.4s;
+    transition-timing-function: ease;
+}
+
+.m_realheader .m_headersearch-form.active {
+    opacity: 1;
+}
+
+.m_realheader .m_headersearch-form .m_headersearch-input {
+    appearance: none;
+    background: #f1f1f1;
+    border: none;
+    font-size: 16px;
+    padding: 20px 32px 20px 84px;
+    width: 100%;
+}
+
+.m_realheader .m_headersearch-form > .m_headersearch-toggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.m_realheader .m_headersearch-form > .m_search-close {
+    appearance: none;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1;
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+    position: absolute;
+    top: 17px;
+    right: 5px;
+}
+
+@media (max-width: 1400px) {
+    .m_realheader-container {
+        max-width: 960px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .m_realheader-container {
+        max-width: 100%;
+    }
+
+    .m_realheader {
+        padding: 0;
+    }
+
+    .m_realheader .m_headerlogo-container {
+        display: block;
+        margin: 0 auto;
+        width: auto;
+    }
+
+    .m_realheader .m_headerlogo-container .m_headerlogo-icon {
+        font-size: 32px;
+        margin-top: 16px;
+    }
+
+    .m_realheader .m_headerlogo-container .icon-text {
+        display: inline-block;
+    }
+
+    .m_realheader .m_headerlogo-container .icon-text + .m_headerlogo-icon,
+    .m_realheader .m_headerlogo-container .m_headerlogo-icon + .icon-text,
+    .m_realheader .m_headerlogo-container .icon-text + .icon-text {
+        margin-left: 2px;
+    }
+
+    .m_realheader .m_headeraction-panel {
+        display: none;
+    }
+}
+
+.m_realheader .m_headersearch-form .m_headersearch-toggle i {
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* 메뉴버튼 디자인 */
+
+.m_headermain-navigation {
+    display: flex;
+}
+
+.m_headermain-navigation li {
+    margin: 0 10px;
+}
+
+.text-effect {
+    position: relative;
+    display: inline-block;
+}
+
+.text-effect::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #D9B779;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-in-out;
+}
+
+.text-effect:hover::before {
+    transform: scaleX(1);
+}
+
+.text-effect:hover {
+    color: #2C4002;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
