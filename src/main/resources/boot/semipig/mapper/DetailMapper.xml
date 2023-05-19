@@ -21,6 +21,14 @@
     order by average desc
     </select>
 
+    <select id="nearbyStorephoto" parameterType="int" resultType="FoodPhotoDto">
+        SELECT *
+        FROM food_photo
+        WHERE user_idx = #{user_idx}
+        ORDER BY photo_idx ASC
+            LIMIT 1;
+    </select>
+
     <insert id="insertFoodHistory" parameterType="map">
         INSERT INTO user_history (user_idx, food_type, restrt_list)
         VALUES (#{user_idx}, #{food_type}, #{restrt_list})

@@ -117,6 +117,7 @@ public Map<String, Object> insertOwner(OwnerpageDto dto, List<MultipartFile> upl
     // 데이터부터 DB에 저장
     ownerpageService.insertOwner(dto);
 
+
     // 추가
     String openaiResult = ownerpageService.openai(dto.getFood_idx());
     dto.setGPT_content(openaiResult);

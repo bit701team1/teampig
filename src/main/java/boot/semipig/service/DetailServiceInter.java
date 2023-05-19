@@ -1,6 +1,7 @@
 package boot.semipig.service;
 
 import boot.semipig.dto.DetailDto;
+import boot.semipig.dto.FoodPhotoDto;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface DetailServiceInter {
     public void insertBookmark(int user_idx, int food_idx);
     public void deleteBookmark(int user_idx, int food_idx);
     public List<DetailDto> nearbyStore(String SIGUN_NM);
+    public FoodPhotoDto nearbyStorephoto(int user_idx);
 }

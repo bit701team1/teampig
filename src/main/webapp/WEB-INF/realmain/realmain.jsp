@@ -270,7 +270,6 @@
                                                 <option value="" selected disabled>선택</option>
                                                 <option value="1">일반 사용자</option>
                                                 <option value="2">사장님</option>
-                                                <option value="3">관리자</option>
                                             </select>
                                             <button class="btn_sign_up" type="button" id="signup">SIGN UP</button>
                                         </div>
