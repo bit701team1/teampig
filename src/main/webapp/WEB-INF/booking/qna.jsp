@@ -69,6 +69,7 @@
         <!-- 페이지네이션은 여기에 동적으로 생성됩니다 -->
     </div>
 </div>
+
 <script>
     function loadReservations(currentPage) {
         console.log('Current Page:', currentPage); // 현재 페이지 값 출력
@@ -99,10 +100,17 @@
                                 hour: '2-digit',
                                 minute: '2-digit',
                                 second: '2-digit'
-                            }) + '<span id="y_delete" style="float: right; font-size: 15px; cursor: pointer;">삭제</span>' +
+                            }) + '<span id="y_delete2_'+dto.qna_idx+'" style="float: right; font-size: 15px; cursor: pointer;">삭제</span>' +
                             '</td>' +
                             '</tr>';
                         $('#qnaList').append(reservationRow);
+                        // 삭제 이벤트 바인딩 코드를 AJAX 콜백 함수 내부로 이동
+                        $("#y_delete2_" + dto.qna_idx).click(function() {
+                            let a = confirm("삭제하려면 확인을 눌러주세요");
+                            if (a) {
+                                location.href = './deleteqna?qna_idx=' + dto.qna_idx;
+                            }
+                        });
                     });
                     $('#noReservationMessage').hide();
                 }
@@ -138,6 +146,7 @@
         // Initial load of reservations
         loadReservations(1);
     });
+
 </script>
 </body>
 </html>

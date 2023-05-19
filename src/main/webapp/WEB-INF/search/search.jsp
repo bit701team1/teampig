@@ -340,6 +340,7 @@
                             s+=`
                                 <div class="content_container" food_idx="\${ele.food_idx}"
                                          loginidx="${loginidx}"
+
                                          restrt_list="\${ele.restrt_NM}"
                                          food_type="\${ele.food_type}">
                                     <div class="k_photoplace">사진</div>
@@ -560,8 +561,9 @@
     <input type="submit" value="임시로그인"> &nbsp;
     <button type="button" onclick="location.href='/temp_logout'">로그아웃</button>
 </form>
-<span><b>세션id: ${sessionScope.id}</b></span><br>
+<span><b>세션id: ${sessionScope.loginid}</b></span><br>
 <span><b>세션 loginidx: ${sessionScope.loginidx}</b></span><br>
+<span><b>세션 username: ${sessionScope.username}</b></span><br>
 
 
 <div class="input-group">

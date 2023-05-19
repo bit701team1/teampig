@@ -3,14 +3,11 @@ package boot.semipig.controller;
 import java.io.Console;
 import java.io.IOException;
 import java.util.*;
-
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import boot.semipig.dto.*;
 import boot.semipig.mapper.ServiceMapper;
-import boot.semipig.service.MyService;
-import boot.semipig.service.OwnerpageService;
+import boot.semipig.service.*;
 import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -30,15 +27,27 @@ public class WriteController {
     private ServiceMapper serviceMapper;
     @Autowired
     private OwnerpageService ownerpageService;
+    @Autowired
+    private QnaService qnaService;
+    @Autowired
+    private LoginService loginService;
+    @Autowired
+    private ReviewService reviewService;
+    @Autowired
     public NcpObjectStorageService storageService;
     public String bucketName = "pig701-bucket";
+    List<String> photoNames=new ArrayList<>();
 
     @GetMapping("/form")
-    public String coupon(Model model) {
+    public String coupon(Model model, HttpSession session) {
+        int user_idx = (int) session.getAttribute("loginidx");
+        serviceMapper.getmypage(user_idx);
+        LoginDto dtos=loginService.getUserInfo(user_idx);
         List<couponDto> list2 = myservice.couponall();
         int totalCount = myservice.getTotalCount();
         OwnerpageDto odto = ownerpageService.getData(3);
         model.addAttribute("dto",odto);
+        model.addAttribute("logindto", dtos);
         model.addAttribute("totalCount", totalCount);
         model.addAttribute("list2", list2);
         return "/main/booking/booking";
@@ -48,12 +57,14 @@ public class WriteController {
     @ResponseBody
     public void insertt(@RequestBody String jsondata, HttpSession session) {
         System.out.println("jsondata=" + jsondata);
-        String id = (String) session.getAttribute("loginid");
+        int idx = (int) session.getAttribute("loginidx");
+        String username = (String) session.getAttribute("username");
         ObjectMapper mapper = new ObjectMapper();
         try {
             ServiceDto[] dtos = mapper.readValue(jsondata, ServiceDto[].class);
             for (ServiceDto dto : dtos) {
-                dto.setUser_id(id);
+                dto.setUser_idx(idx);
+                dto.setUser_name(username);
                 myservice.insertt(dto);
             }
         } catch (IOException e) {
@@ -66,16 +77,32 @@ public class WriteController {
         myservice.deletecoupon(num);
         return "redirect:form";
     }
-
     @GetMapping("/review")
-    public String review(Model model) {
+    public String review(Model model, HttpSession session) {
+        int user_idx = (int) session.getAttribute("loginidx");
+        serviceMapper.getmypage(user_idx);
+        LoginDto dtos=loginService.getUserInfo(user_idx);
+        model.addAttribute("logindto", dtos);
         int totalCount = myservice.getTotalCount();
         model.addAttribute("totalCount", totalCount);
         return "/main/booking/review";
     }
-
+    @GetMapping("/deleteqna")
+    public String deleteqna(int qna_idx)
+    {
+        qnaService.deleteQna(qna_idx);
+        return "redirect:qna";
+    }
+    @GetMapping("/deletereview")//리뷰 삭제
+    @ResponseBody String delete(int review_idx)
+    {
+        reviewService.deleteReview(review_idx);
+        return "redirect:review";
+    }
     @GetMapping("/reviewajax")
-    public @ResponseBody Map<String, Object> review2(@RequestParam(defaultValue = "1") int currentPage) {
+    public @ResponseBody Map<String, Object> review2(@RequestParam(defaultValue = "1") int currentPage, HttpSession session) {
+        int food_idx = (int) session.getAttribute("loginidx");
+        DetailDto dto =
         Map<String, Object> response = new HashMap<>();
         int totalCount = myservice.getTotalCount();
         int totalPage; //총 페이지수
@@ -98,7 +125,7 @@ public class WriteController {
         startNum = (currentPage - 1) * perPage;
         //각 글마다 출력할 글번호(예:10개일경우 1페이지: 10, 2페이지 : 20,
         no = totalCount - startNum;
-        List<ReviewDto> list = myservice.reviewlist(startNum, perPage);
+        List<ReviewDto> list = myservice.reviewlist(startNum, perPage, food_idx);
 
         response.put("totalCount", totalCount);
         response.put("list", list);
@@ -112,7 +139,8 @@ public class WriteController {
     }
 
     @GetMapping("/qnaajax")
-    public @ResponseBody Map<String, Object> qna2(@RequestParam(defaultValue = "1") int currentPage) {
+    public @ResponseBody Map<String, Object> qna2(@RequestParam(defaultValue = "1") int currentPage, HttpSession session) {
+        int user_idx = (int) session.getAttribute("loginidx");
         Map<String, Object> response = new HashMap<>();
         int totalCount = myservice.getTotalCount();
         int totalPage; //총 페이지수
@@ -135,7 +163,7 @@ public class WriteController {
         startNum = (currentPage - 1) * perPage;
         //각 글마다 출력할 글번호(예:10개일경우 1페이지: 10, 2페이지 : 20,
         no = totalCount - startNum;
-        List<QnaDto> list = myservice.qnalist(startNum, perPage);
+        List<QnaDto> list = myservice.qnalist(startNum, perPage,user_idx);
 
         response.put("totalCount", totalCount);
         response.put("list", list);
@@ -149,19 +177,26 @@ public class WriteController {
     }
 
     @GetMapping("/qna")
-    public String qna(Model model) {
+    public String qna(Model model, HttpSession session) {
+        int user_idx = (int) session.getAttribute("loginidx");
+        serviceMapper.getmypage(user_idx);
+        LoginDto dtos=loginService.getUserInfo(user_idx);
         int totalCount = myservice.getTotalCount();
+        model.addAttribute("logindto", dtos);
         model.addAttribute("totalCount", totalCount);
         return "/main/booking/qna";
     }
 
     @GetMapping("/infoupdate")
     public String infoupdate(Model model, HttpSession session) {
+
         int totalCount = myservice.getTotalCount();
         model.addAttribute("totalCount", totalCount);
-        int user_idx = (int) session.getAttribute("user_idx");
+        int user_idx = (int) session.getAttribute("loginidx");
+        serviceMapper.getmypage(user_idx);
+        LoginDto dtos=loginService.getUserInfo(user_idx);
         OwnerpageDto dto = ownerpageService.getData(user_idx);
-
+        model.addAttribute("logindto", dtos);
         model.addAttribute("dto", dto);
         return "/main/booking/infoupdate";
     }
@@ -248,5 +283,23 @@ public class WriteController {
         return "redirect:./infoupdate";
 //        return openaiResult;
     }
+    @DeleteMapping("/removephotos/{user_idx}")
+    @ResponseBody
+    public void deletePhoto(@PathVariable int user_idx) {
+        System.out.println("user_idx"+user_idx);
+        // Retrieve the photo filename from the database
+        List<String> list=ownerpageService.getAllPhoto(user_idx);
+//        System.out.println("list"+list.get(0));
+        // Delete the photo from the storage
+        for(String photoname:list)
+        {
+//            System.out.println("photo:"+photoname);
+            storageService.deleteFile(bucketName,"foodphoto", photoname);
+        }
+        // Delete the photo from the database
+        ownerpageService.removePhotos(user_idx);
+//        return "redirect:./infoupdate";
+    }
+
 }
 

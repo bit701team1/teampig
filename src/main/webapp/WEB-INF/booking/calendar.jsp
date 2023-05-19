@@ -239,7 +239,7 @@
                     $.each(data.list, function(index, dto) {
                         var reservationRow = '<tr>' +
                             '<td style="text-align: center;">'  + (index+1) + '</td>' +
-                            '<td>' + dto.user_id + '</td>' +
+                            '<td>' + dto.user_name + '</td>' +
                             '<td>' + dto.start.substring(0, 16) +
                             '<span style="float: right; font-size: 20px; cursor: pointer;" data-bs-toggle="modal" ' +
                             'data-bs-target="#calendarModal" onclick="openModal(' + dto.num + ', \'' + dto.start.substring(0, 10) + '\', \'' + dto.start.substring(11, 16) + '\')">' +

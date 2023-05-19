@@ -27,9 +27,9 @@
 
    div.y_bosspage2 {
 	   position : absolute;
-	   top:100px;
+
+	   width: 1000px;top:100px;
 	   left: 380px;
-	   width: 1000px;
 	   margin: 10px;
    }
 </style>
@@ -54,7 +54,7 @@
 		<tiles:insertAttribute name="main"/>
 	</section>
 </div>
-<img src="${root}/photo/fruit.jpg" style="width: 1300px; height:800px; position: fixed; left:250px;margin-top: 1px; z-index: -10;">
+<img src="${root}/photo/fruit.jpg" style="width: 1300px; height:800px; position: fixed; left:250px;margin-top: 1px; z-index: -10; opacity: 0.7;">
 <div class="y_bosspage3">
 	<section class="menu">
 		<tiles:insertAttribute name="menu"/>

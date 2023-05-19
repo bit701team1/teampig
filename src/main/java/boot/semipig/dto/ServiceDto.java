@@ -9,7 +9,7 @@ import org.apache.ibatis.type.Alias;
 public class ServiceDto {
     private String num;
     private int user_idx;
-    private String user_id;
-    private String store_id;
+    private String user_name;
+    private int food_idx;
     private String start;
 }

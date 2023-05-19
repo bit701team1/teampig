@@ -5,7 +5,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import boot.semipig.dto.LoginDto;
 import boot.semipig.dto.OwnerpageDto;
+import boot.semipig.mapper.ServiceMapper;
+import boot.semipig.service.LoginService;
 import boot.semipig.service.OwnerpageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,16 +38,23 @@ public class CalendarController {
     private MyService myservice;
     @Autowired
     private OwnerpageService ownerpageService;
+    @Autowired
+    private LoginService loginService;
+    @Autowired
+    private ServiceMapper serviceMapper;
     @GetMapping("/calendar")
-    public String calendar2(Model model) {
-        OwnerpageDto odto = ownerpageService.getData(3);
-        model.addAttribute("dto",odto);
+    public String calendar2(Model model, HttpSession session) {
+        int user_idx = (int) session.getAttribute("loginidx");
+        serviceMapper.getmypage(user_idx);
+        LoginDto dtos=loginService.getUserInfo(user_idx);
+        model.addAttribute("logindto", dtos);
         int totalCount = myservice.getTotalCount();
         model.addAttribute("totalCount", totalCount);
         return "/main/booking/calendar";
     }
     @GetMapping("/calendarajax")
-    public @ResponseBody Map<String, Object> calendar(@RequestParam(defaultValue = "1") int currentPage) {
+    public @ResponseBody Map<String, Object> calendar(@RequestParam(defaultValue = "1") int currentPage, HttpSession session) {
+        int user_idx = (int) session.getAttribute("loginidx");
         Map<String, Object> response = new HashMap<>();
         LocalDateTime currentDateTime = LocalDateTime.now();
         int totalCount = myservice.getTotalCount();
@@ -68,7 +78,7 @@ public class CalendarController {
         startNum = (currentPage - 1) * perPage;
         //각 글마다 출력할 글번호(예:10개일경우 1페이지: 10, 2페이지 : 20,
         no = totalCount - startNum;
-        List<ServiceDto> list = myservice.getAll(startNum, perPage, currentDateTime);
+        List<ServiceDto> list = myservice.getAll(startNum, perPage,user_idx, currentDateTime);
 
         response.put("totalCount", totalCount);
         response.put("list", list);
@@ -84,8 +94,9 @@ public class CalendarController {
 
     @GetMapping("/list")
     @ResponseBody
-    public List<ServiceDto> list() {
-        List<ServiceDto> eventList = myservice.selectt();
+    public List<ServiceDto> list(HttpSession session) {
+        int user_idx = (int) session.getAttribute("loginidx");
+        List<ServiceDto> eventList = myservice.selectt(user_idx);
         return eventList;
     }
     @GetMapping("/delete")
