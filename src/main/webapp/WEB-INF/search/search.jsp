@@ -229,12 +229,9 @@
                 var currentPage = inputPage;
                 var inputsearch ="";
 
-
-
                 if(list_type == null){
                     list_type = "type_search";
                 }
-
 
                 if($("#inputsearch").val() !=""){
                     tmpsearch = $("#inputsearch").val();
@@ -353,7 +350,6 @@
                                         <div class="k_GPT_place">\${ele.gpt_content}</div>
                                     </div>
                                 </div>
-
                             `;
 
                             s += "</div>";
@@ -553,18 +549,6 @@
     </script>
 </head>
 <body>
-<h2>test</h2>
-<form action="/temp_login" method="post">
-    <input type="text" name="id" value="testID">
-    <input type="int" name="loginidx" value="1">
-    <input type="submit" value="임시로그인"> &nbsp;
-    <button type="button" onclick="location.href='/temp_logout'">로그아웃</button>
-</form>
-<span><b>세션id: ${sessionScope.id}</b></span><br>
-<span><b>세션 loginidx: ${sessionScope.loginidx}</b></span><br>
-<span><b>세션 user_idx: ${sessionScope.user_idx}</b></span><br>
-
-
 <div class="input-group">
     <input type="text" id="inputsearch">
     <button type="button" class="ajax-button searchbtn" list_type="type_search">검색</button>

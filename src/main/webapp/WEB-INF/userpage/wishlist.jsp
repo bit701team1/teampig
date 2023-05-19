@@ -67,6 +67,12 @@
                         s+=`<span>\${ele.food_type}</span>`;
                         s+=`<span><img src="/bookmark/filledstar.png" class="starimage starfilling k_mybookmark" food_idx ='\${ele.food_idx}'></span><br>`;
 
+
+
+
+
+
+
                         }); //each end
 
                         $("div#k_wishlist").html(s);

@@ -10,6 +10,7 @@ import java.util.List;
 public interface UserpageMapper {
     public List<Integer> getFoodidx(int user_idx);
     public List<SearchDto> getFoodlist(int food_idx);
-    public List<ReviewDto> getReviewlist(int user_idx);
+    public List<ReviewDto> getReviewlist(int user_idx,int startNum, int perPage);
     public  String getNameByIdx(int user_idx);
+    public int getReviewCount(int user_idx);
 }
