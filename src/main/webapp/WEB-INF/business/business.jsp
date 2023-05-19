@@ -510,8 +510,8 @@
                                     $("#email").val(kakao_account.email);
                                     $("#email").attr("readonly", true);
                                     console.log(kakao_account.profile.nickname);
-                                    $("#name").val(kakao_account.profile.nickname);
-                                    $("#name").attr("readonly", true);
+                                    $("#user_name").val(kakao_account.profile.nickname);
+                                    $("#user_name").attr("readonly", true);
                                     change_to_sign_up();
 
                                 }
@@ -527,6 +527,7 @@
         })
     }
 
+    var redirectUrl ; // Get the previous URL
     //네이버 관련
     //네이버 아이디로그인 초기화 script
     var naverLogin =new naver.LoginWithNaverId({
@@ -558,8 +559,8 @@
         $("#s_signup").html("추가정보를 입력해주세요");
         $("#email").val(n_email);
         $("#email").attr("readonly", true);
-        $("#name").val(n_name);
-        $("#name").attr("readonly", true);
+        $("#user_name").val(n_name);
+        $("#user_name").attr("readonly", true);
         change_to_sign_up();
     }
 </script>

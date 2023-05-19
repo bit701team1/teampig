@@ -37,8 +37,8 @@ public class DetailController {
     ReviewService reviewService;//리뷰 띄우기
 
 
-    @GetMapping("/detail")//디테일 페이지에서 가게 정보 띄우기
-    public String detail(Model model, Integer food_idx, HttpSession session)
+    /*@GetMapping("/detail2")
+    public String detail2(Model model, Integer food_idx, HttpSession session)
     {
         System.out.println("Controller food_idx="+food_idx);
 
@@ -48,6 +48,25 @@ public class DetailController {
         //추가
         Integer user_idx= (Integer)session.getAttribute("loginidx");
         System.out.println(user_idx);
+
+        int count = detailService.getBookmarkCount(user_idx, food_idx);
+        //System.out.println(count);
+        model.addAttribute("count",count);
+
+        return "/detail";
+    }
+*/
+    @GetMapping("/detail")//디테일 페이지에서 가게 정보 띄우기
+    public String detail(Model model, Integer food_idx, HttpSession session)
+    {
+        //System.out.println("Controller food_idx="+food_idx);
+
+        DetailDto dto=detailService.selectFood(food_idx);
+        model.addAttribute("dto", dto);
+
+        //추가
+        Integer user_idx= (Integer)session.getAttribute("loginidx");
+        //System.out.println(user_idx);
 
         int count = detailService.getBookmarkCount(user_idx, food_idx);
         //System.out.println(count);
@@ -94,8 +113,8 @@ public class DetailController {
 
             int lidx=reviewService.getUserNum(dto.getReview_idx());
             LoginDto ldto=loginService.getUserInfo(lidx);
-            System.out.println(ldto.getUser_name());
-            System.out.println(ldto.getId());
+            //System.out.println(ldto.getUser_name());
+            //System.out.println(ldto.getId());
             dto.setUser_id(ldto.getId());
             dto.setUser_name(ldto.getUser_name());
             dto.setUser_photo(ldto.getUser_photo());
@@ -140,15 +159,28 @@ public class DetailController {
     @PostMapping("/updatereview")//리뷰 수정한 것 업로드
     public String reviewUpdate(ReviewDto dto, List<MultipartFile> upload)
     {
-        //어느 시점에 스토리지에 있는걸 삭제해야할지..
+
         System.out.println("모달 업데이트 테스트");
         reviewService.updateReview(dto);
-        System.out.println("score: "+dto.getScore());
+        /*System.out.println("score: "+dto.getScore());
         System.out.println("review_idx:"+dto.getReview_idx());
-        System.out.println("reviewtext:"+dto.getReviewtext());
+        System.out.println("reviewtext:"+dto.getReviewtext());*/
+
+        //스토리지에 사진 지우기
+        List<String> photoList=reviewService.getAllPhoto(dto.getReview_idx());
+        if(photoList.size()>0)
+        {
+            for(String photoname:photoList)
+            {
+                storageService.deleteFile(bucketName, "review", photoname);
+            }
+            reviewService.deletePhoto(dto.getReview_idx());
+        }
+
 
         System.out.println(upload);
-        if(upload!=null&&!upload.get(0).getOriginalFilename().equals(""))//null값인 경우 사진은 업로드하지 않음.
+        System.out.println(upload.size());
+        if(upload.size()>0&&!upload.get(0).getOriginalFilename().equals(""))//null값인 경우 사진은 업로드하지 않음.
         {
             System.out.println("여기 나오나?");
 
@@ -158,23 +190,18 @@ public class DetailController {
                 String photoname=storageService.uploadFile(bucketName, "review", mfile);
                 //업로드한 파일명을 db에 저장
                 ReviewPhotoDto pdto=new ReviewPhotoDto();
+                //System.out.println("updatetest!ㅇㅅㅇ"+dto.getReview_idx());
+                //System.out.println(photoname);
                 pdto.setReview_idx(dto.getReview_idx());
                 pdto.setPhotoname(photoname);
-                reviewService.updatePhoto(pdto);
+                System.out.println(pdto.getPhotoname());
+                reviewService.insertPhoto(pdto);
             }
 
 
-        }else{
-            //아무것도 사진 없다고 할떄 사진 삭제하기
-            reviewService.deletePhoto(dto.getReview_idx());
+        }
 
-        }
-        //스토리지에 사진 지우기
-        List<String> photoList=reviewService.getAllPhoto(dto.getReview_idx());
-        for(String photoname:photoList)
-        {
-            storageService.deleteFile(bucketName, "review", photoname);
-        }
+
 
         return "redirect:detail?food_idx="+dto.getFood_idx();
     }
@@ -200,7 +227,7 @@ public class DetailController {
         //history 저장 과정
         //history 갯수 확인
         int historycount = detailService.getHistoryCount(user_idx);
-        System.out.println(historycount);
+        //System.out.println(historycount);
 
         //history 저장 갯수 설정
         if(historycount>=5){
@@ -220,10 +247,10 @@ public class DetailController {
 
 
         Integer loginidx= (Integer)session.getAttribute("loginidx");
-        System.out.println("food_idx="+food_idx);
-        System.out.println("loginidx="+loginidx);
+        //System.out.println("food_idx="+food_idx);
+        //System.out.println("loginidx="+loginidx);
         int count = detailService.getBookmarkCount(loginidx,food_idx);
-        System.out.println("count="+count);
+        //System.out.println("count="+count);
 
 
         return count;
