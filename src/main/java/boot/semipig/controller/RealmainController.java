@@ -8,11 +8,12 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class RealmainController {
-    @GetMapping("/realmain")
+    @GetMapping("/")
     public String realmain(HttpSession session, HttpServletRequest request)
     {
         String previousUrl = request.getHeader("Referer");
         session.setAttribute("previousUrl", previousUrl);
         return "realmain/realmain";
     }
+
 }

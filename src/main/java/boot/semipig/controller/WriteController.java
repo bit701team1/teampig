@@ -40,8 +40,6 @@ public class WriteController {
     public String bucketName = "pig701-bucket";
     List<String> photoNames=new ArrayList<>();
 
-    List<String> photoNames=new ArrayList<>();
-
     @GetMapping("/form")
     public String coupon(Model model, HttpSession session) {
         int user_idx = (int) session.getAttribute("loginidx");

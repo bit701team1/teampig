@@ -71,8 +71,9 @@ public class MyService implements ServiceInter {
         return serviceMapper.qnalist(map);
     }
     @Override
-    public List<ReviewDto> reviewlist(int startNum, int perPage){
+    public List<ReviewDto> reviewlist(int startNum, int perPage, int food_idx){
         Map<String, Object> map = new HashMap<>();
+        map.put("food_idx",food_idx);
         map.put("startNum", startNum);
         map.put("perPage", perPage);
         return serviceMapper.reviewlist(map);
