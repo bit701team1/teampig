@@ -321,7 +321,7 @@
         /*지저분하면 뺼 것*/
         .s_couponimage{
 
-            animation: vibration 0.1s infinite;
+            animation: vibration 0.2s infinite;
         }
         @keyframes vibration {
             from {
@@ -1305,7 +1305,14 @@
                                 </table>
                             </div>
 
-                            <div style="width: 100px; height: 100px; margin-left: 300px; margin-top: 20px;" class="s_ct s_coupon"><div class="s_cpinfotop">% 할인</div><img src="../../save/couponimage.png" style="width: 120px; height: 100px;" class="s_couponimage"><div class="s_cpinfobottom">남은 시간</div></div>
+                            <div style="width: 200px; height: 100px; margin-left: 300px; margin-top: 20px;" class="s_ct s_coupon"><div class="s_cpinfotop" style="margin-left: 35px;">${cdto.number}% 할인</div>
+                                <img src="../../save/couponimage.png" onclick="update()" style="cursor:pointer;width: 120px; height: 100px; margin-left: 10px;" class="s_couponimage"> 수량 ${cdto.max}<div class="s_cpinfobottom">
+                                <div class="countdown" id="countdown-" style="margin-top: 10px">
+                                <p class="countdown-timer-days" style="display: inline-block;">00</p>
+                                <p class="countdown-timer-hours"  style="display: inline-block;">00</p>
+                                <p class="countdown-timer-minutes" style="display: inline-block;" >00</p>
+                                <p class="countdown-timer-seconds" style="display: inline-block;" >00</p>
+                            </div></div></div>
                         </div>
                         <br>
                         ${dto.GPT_content}<br>
@@ -1333,6 +1340,52 @@
                 "pluginKey": "708c4779-dafe-4260-abe0-c76183c1b24a"
             });
         </script>
+        <script>
+            var time = "${cdto.time}";
+            const endDate = new Date(time);
+            const timeinterval = setInterval(() => {
+                const timeDiff = endDate.getTime() - Date.now();
+                // 남은 시간을 일, 시간, 분, 초 단위로 계산합니다.
+                const days = Math.floor(timeDiff/ (1000 * 60 * 60 * 24));
+                const hours= Math.floor((timeDiff% (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                const daysEl= document.querySelector("#countdown- .countdown-timer-days");
+                const hoursEl = document.querySelector("#countdown- .countdown-timer-hours");
+                const minutesEl = document.querySelector("#countdown- .countdown-timer-minutes");
+                const secondsEl = document.querySelector("#countdown- .countdown-timer-seconds");
+
+                daysEl.textContent = days + "일";
+                hoursEl.textContent = hours + "시간";
+                minutesEl.textContent = minutes+ "분";
+                secondsEl.textContent = seconds + "초";
+            }, 1000);
+        </script>
+        <script>
+            function update() {
+                var food_idx = ${dto.food_idx};
+                var number = "${cdto.number}";
+                var time= "${cdto.time}";
+                var max = "${cdto.max}";
+                $.ajax({
+                    type: "POST",
+                    url: './max',
+                    data: { "user_idx": food_idx,
+                        "number":number,
+                        "time":time,
+                        "max":max
+                    },
+                    success: function (response) {
+                        alert(response);
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText);
+                    }
+                });
+            }
+        </script>
+
         <!--모달 관련-->
         <!--리뷰 자세히 보기 클릭-->
         <!-- Modal -->

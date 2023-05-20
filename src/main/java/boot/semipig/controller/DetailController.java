@@ -135,42 +135,6 @@ public class DetailController {
             // 예외 처리
         }
     }
-//    @PostMapping("/max")
-//    @ResponseBody
-//    public void max(couponDto cdto,couponlistDto listdto, HttpSession session) {
-//        String id = (String) session.getAttribute("loginid");
-////        listdto.setUser_id(id);
-//        System.out.println("cdto:"+cdto);
-//        System.out.println("listdto"+listdto);
-//            myservice.couponmax(cdto); // 업데이트 수행
-//        listdto.setUser_id(id);
-//        myservice.couponid(listdto);
-//        }
-//@PostMapping("/max")
-//@ResponseBody
-//public void max(couponDto dtoc, couponlistDto listDto, HttpSession session) {
-//    String id = (String) session.getAttribute("loginid");
-//    listDto.setUser_id(id);
-//
-//    System.out.println("dto: " + dtoc);
-//    System.out.println("listDto: " + listDto);
-//    // 이미 쿠폰을 가지고 있는지 확인
-//    List<couponlistDto> existingCouponList = myservice.couponlist(listDto.getUser_idx());
-//    for(couponlistDto coupon : existingCouponList) {
-//        if(coupon.getUser_id().equals(id)) {
-//            System.out.println("이미 쿠폰을 가지고 있습니다.");
-//            return;
-//        }
-//    }
-//
-//    // 쿠폰을 가져갈 수 있는 경우의 처리 로직 작성
-//    myservice.couponmax(dtoc); // 업데이트 수행
-//    myservice.couponid(listDto); // 인서트 수행
-//
-//    // 쿠폰을 가져갔을 때의 추가 로직 작성
-//    System.out.println("쿠폰을 성공적으로 가져갔습니다.");
-//}
-
     @PostMapping("/max")
     public ResponseEntity<String> max(couponDto dtoc, couponlistDto listDto, HttpSession session) {
         if (dtoc == null) {
@@ -199,8 +163,7 @@ public class DetailController {
         myservice.couponid(listDto); // 인서트 수행
 
         // 쿠폰을 가져갔을 때의 추가 로직 작성
-        System.out.println("쿠폰을 성공적으로 가져갔습니다.");
-        return new ResponseEntity<>("쿠폰을 성공적으로 가져갔습니다.", HttpStatus.OK);
+        return new ResponseEntity<>("쿠폰 등록 완료!.", HttpStatus.OK);
     }
 
     @GetMapping("/delete")//리뷰 삭제
