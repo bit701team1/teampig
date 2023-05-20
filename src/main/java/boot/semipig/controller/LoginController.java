@@ -44,15 +44,20 @@ public class LoginController{
             session.setAttribute("loginok", "yes");
             session.setAttribute("loginid", id);
             int user_idx=loginService.getUserIdx(id);
-
+            int user_type = loginService.getUserInfo(user_idx).getUser_type();
             String user_name = loginService.getUserInfo(user_idx).getUser_name();
-            int user_type = joinService.selectUserType(user_idx);
+
+
             session.setAttribute("username",user_name);
             session.setAttribute("loginidx", user_idx);
             session.setAttribute("user_type",user_type);
             session.setAttribute("saveid", saveid==null?"no":"yes");
             System.out.println("type:"+user_type);
             System.out.println("res:"+session.getAttribute("user_type"));
+
+
+
+
             return 1;
         }
 

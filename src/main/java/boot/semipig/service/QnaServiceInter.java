@@ -11,7 +11,6 @@ public interface QnaServiceInter {
     public int getTotalCount();
     public int getAnswerCount(int qna_idx);
 
-    public void updateStep(int qna_ref, int qna_step);
     public void insertQnaBoard(QnaDto dto);
     public void insertQnaAnswer(QnaAnswerDto dto);
     public List<QnaAnswerDto> getQnaAnswer(int qna_idx);

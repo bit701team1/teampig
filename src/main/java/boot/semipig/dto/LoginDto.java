@@ -11,5 +11,6 @@ public class LoginDto {
     private String password;
     private String user_name;
     private String hp;
+    private int user_type;
     private String user_photo;
 }
