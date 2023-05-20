@@ -57,23 +57,65 @@ public class UserPageController {
 
     @GetMapping("/bookmarklist")
     @ResponseBody
-    public List<SearchDto>  bookmarklist(int user_idx){
+    public Map<String, Object>  bookmarklist(int user_idx,@RequestParam(defaultValue = "1") int currentPage){
+
+        int totalCount = 0;
+
+        int totalPage =0; //총 페이지 수
+        int perPage=5;//한 페이지당 보여질 글의 갯수
+        int perBlock=5;//한 블럭당 보여질 페이지 갯수
+
+        int startNum;//각 페이지에서 보여질 글의 시작번호
+        int startPage;//각 블럭에서 보여질 시작 페이지번호
+        int endPage;//각 블럭에서 보여질 끝 페이지번호
+
+        startPage=(currentPage-1)/perBlock*perBlock+1; //(2-1)/3*3+1=1, (5-1)/3*3+1=4
+
+
+        endPage=startPage+perBlock-1;
+        //System.out.println("endPage="+endPage);
+
+
         //List에 담아서 idx list로 만듬
         List<Integer> bookmark_food_idx = userpageService.getFoodidx(user_idx);
+        //System.out.println(bookmark_food_idx);
+
+        startNum = (currentPage-1)*5+1;
+        int lastNum = (currentPage)*5;
+        int i=0;
 
         List<SearchDto> result = new ArrayList<>();
 
          for(int idx:bookmark_food_idx){
+             i++;
             List<SearchDto> list=userpageService.getFoodlist(idx);
-            result.addAll(list);
+            if(i>=startNum && i<=lastNum)
+            {result.addAll(list);}
         }
 
-        return result;
+        //System.out.println(i+"개 출력");
+        totalCount = i;
+        totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
+        //System.out.println("totalPage="+totalPage);
+
+        if(endPage>totalPage)
+            endPage=totalPage;
+
+        Map<String, Object> resultMap = new HashMap<>();
+
+        resultMap.put("currentPage", currentPage);
+        resultMap.put("list", result);
+        resultMap.put("startPage", startPage);
+        resultMap.put("endPage", endPage);
+        resultMap.put("totalPage", totalPage);
+        resultMap.put("currentPage", currentPage);
+
+        return resultMap;
     }
 
     @GetMapping("reviewlist")
     @ResponseBody
-    public Map<String, Object> reviewlist(int user_idx, @RequestParam(defaultValue = "1") int currentPage, Model model){
+    public Map<String, Object> reviewlist(int user_idx, @RequestParam(defaultValue = "1") int currentPage){
 
         int totalCount = 0;
 

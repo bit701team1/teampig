@@ -13,24 +13,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
     <style>
         body, body * {
             font-family: 'Jua'
         }
+        #title_bookmark{
+            font-size: 30px;
+        }
 
         #k_wishlist{
             width: 1000px;
-            margin-top: 55px;
+            margin-top: 10px;
         }
 
         img.starimage{
             width: 26px;
             height: 26px;
             cursor: pointer;
-            z-index: 1;
-            position: relative;
+            z-index: 99;
+            vertical-align: center;
         }
 
+        k_bookmark_place{
+            /*display: flex;
+            align-items: center;
+            justify-content: center;*/
+        }
         .mypage_tr{
             border-bottom: 1px solid #aaaaaa;
             height: 64px;
@@ -38,7 +48,7 @@
         }
         .mypage_tr:hover{
             border-bottom: 1px solid #aaaaaa;
-            height: 50px;
+            height: 64px;
             cursor: pointer;
             background-color: #f6f5f0;
         }
@@ -48,6 +58,13 @@
             vertical-align: middle;
             line-height: 5px;
             font-weight: bolder;
+        }
+
+        .mypage_foodtype{
+            font-family: 'Dongle', sans-serif;
+            font-size: 32px;
+            vertical-align:center;
+            color: #757575;
         }
 
         .page_num{
@@ -117,7 +134,7 @@
     </style>
     <script>
         $(function (){
-            wishlist();
+            wishlist(1);
 
             $(document).on('click', '.k_mybookmark', function() {
 
@@ -144,26 +161,63 @@
 
 
         }); // $func end
-        function wishlist(){
+        function wishlist(currentPage){
             var loginidx =${sessionScope.loginidx}
                 $.ajax({
                     type:"get",
                     url:"/bookmarklist",
                     dataType:"json",
-                    data:{"user_idx": loginidx},
+                    data:{"user_idx": loginidx,"currentPage":currentPage},
                     success: function(res) {
-                        var s=`<table class="table table-borderless" style="width: 850px">`;
-                        $.each(res, function (idx, ele) {
+                        console.log(res);
+                        var s=`<table style="width: 900px">`;
+                        $.each(res.list, function (idx, ele) {
                             s+=`
-                            <tr class="mypage_tr" onclick="location.href='detail?food_idx='+\${ele.food_idx}">
+                            <tr class="mypage_tr" onclick="location.href='../detail?food_idx='+\${ele.food_idx}">
                                 <td class="mypage_RESTR_NM">\${ele.restrt_NM}</td>
                                 <td class="mypage_foodtype">#\${ele.food_type}</td>
-                                <td class="k_reviewtext"><img src="/bookmark/filledstar.png" class="starimage starfilling k_mybookmark" food_idx ='\${ele.food_idx}'></td>
+                                <td>\${ele.food_price}</td>
+                                <td class="k_bookmark_place"><img src="/bookmark/filledstar.png" class="starimage starfilling k_mybookmark" food_idx ='\${ele.food_idx}'></td>
                             </tr>
                         `;
                         }); //each end
 
                         s+=`</table>`;
+
+                        /*페이징처리*/
+                        s += `<br><br><div id="k_page_place">
+                        <!-- 처음으로 -->
+                    	<span class="page_num page_first"><i class="bi bi-skip-start-fill" style="color:black;text-decoration:none;cursor: pointer;"
+                        onclick="wishlist(1);"></i></span>
+                        `;
+                        <!-- 이전 -->
+                        if(res.startPage>1){
+                            s += `<span class="page_num page_previous" startpage="\${res.startPage-1}"><a style="color: black; text-decoration: none; cursor: pointer;"
+                            onclick="wishlist(\${res.startPage-1});"><i class="bi bi-caret-left-fill"></i></a></span>`;
+                        }
+                        //현재 번호
+                        for (var i = res.startPage; i <= res.endPage; i++) {
+                            if (i == res.currentPage) {
+                                s += `<span class="page_cur_num" for_idx="\${i}"><a style="color: #7ee0b6; text-decoration: none; cursor: pointer;border-bottom: 3px solid #7ee0b6;"
+                                onclick="wishlist(\${i});" id="currentPage">\${i}</a></span>`;
+                            } else {
+                                s += `<span class="page_num page_nor_num" for_idx="\${i}"><a style="color: black; text-decoration: none; cursor: pointer; num_type='\${res.list_type}'"
+                                id="currentPage" onclick="wishlist(\${i})">\${i}</a></span>`;
+
+                            }
+                        }
+                        <!-- 다음 -->
+                        if (res.endPage < res.totalPage) {
+                            s += `<span class="page_num page_next" endpage="\${res.endPage + 1}"><a style="color: black; text-decoration: none; cursor: pointer;"
+                            onclick="reviewlist(\${res.endPage + 1});"><i class="bi bi-caret-right-fill"></i></a></span>`;
+                        }
+
+                        <!-- 마지막 페이지 -->
+                        s+=`<span class="page_num page_last" totalpage="\${res.totalPage}"><i class="bi bi-skip-end-fill"
+                           style="color:black;text-decoration:none;cursor: pointer;"
+                            onclick="reviewlist(\${res.totalPage});"></i>
+                            </div></span>`;
+
 
                         $("div#k_wishlist").html(s);
                     }
@@ -173,6 +227,7 @@
     </script>
 </head>
 <body>
+<span id="title_bookmark"><i class="bi bi-star"></i> 즐겨찾기</span>
 <div id="k_wishlist" style="margin-left: 30px"></div>
 </body>
 </html>

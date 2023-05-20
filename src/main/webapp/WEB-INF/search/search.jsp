@@ -23,6 +23,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
 
     <%--<%@ include file="../mainlayout/header.jsp" %>
     &lt;%&ndash;<%@ include file="../mainlayout/mainlist.jsp" %>&ndash;%&gt;
@@ -36,6 +39,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
           rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap" rel="stylesheet">
 
 
 
@@ -65,6 +69,39 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 
     <style>
+        #m_container{
+            align-items: center;
+            justify-content: center;
+            width: 1200px;
+            display: inline;
+        }
+
+        .restrt_nm{
+            font-family: 'Dongle', sans-serif;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .k_scoreline{
+            font-size: 20px;
+        }
+        .k_moneyline{
+            font-size: 20px;
+        }
+
+        .button.raised:hover {
+            background-color: rgba(199,199,199,0.3);
+            box-shadow: 4px 4px 8px 0 rgba(199,199,199,0.3);
+            transition-delay: 0s;
+            border: 1px solid rgba(100, 100, 100, 0.3);
+        }
+
+        .button-clicked {
+            box-shadow: 4px 4px 8px 0 rgba(199,199,199,0.3) !important;
+            transition-delay: 0s!important;
+            border: 2px solid rgba(4,202,148,1)!important;
+            color: rgba(4,202,148,1)!important;
+        }
+
         .page_num{
             text-align: center;
             height: 35px;
@@ -127,6 +164,11 @@
             margin-bottom: 6px;
         }
 
+        .moneyimage{
+            width: 26px;
+            height: 26px;
+        }
+
         .mapinclude{
             clear: both;
             width: 100%;
@@ -134,6 +176,7 @@
             background-color: orange;
             overflow: hidden;
             margin-top: 50px;
+            margin-left: 170px;
         }
 
         .k_foodlist {
@@ -143,12 +186,13 @@
         }
 
         .k_buttonarea{
+            width: 1200px;
+            align-items: center;
             margin-left: 20px;
         }
 
-        /*버튼*/
+
         body {
-            background-color: #f9f9f9;
             font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -169,6 +213,7 @@
             font-size: 0.9em;
             background-color: #fff;
             color: #646464;
+            z-index: 999;
         }
 
         .button > paper-ripple {
@@ -184,21 +229,10 @@
 
         }
 
-        .button.raised:hover {
-            background-color: rgba(199,199,199,0.3);
-            box-shadow: 4px 4px 8px 0 rgba(199,199,199,0.3);
-            transition-delay: 0s;
-            border: 1px solid rgba(100, 100, 100, 0.3);
-        }
 
-        .button-clicked {
-            box-shadow: 4px 4px 8px 0 rgba(199,199,199,0.3);
-            transition-delay: 0s;
-            border: 2px solid rgba(4,202,148,1);
-            color: rgba(4,202,148,1);
-        }
         .center {
             text-align: center;
+
         }
 
         .k_photoplace{
@@ -214,16 +248,24 @@
         }
 
         .k_GPT_place {
-            white-space: nowrap;
+            font-size: 17px;
+            max-width: 900px;
+
             overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 600px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* 원하는 줄 수로 조정 */
+            -webkit-box-orient: vertical;
+            line-height: 1.2; /* 줄 간격 조정 */
+
+        }
+        .k_GPT_place{
+            content: '...';
         }
 
         .content_container{
             cursor: pointer;
             float: left;
-            width:900px;
+            width:1200px;
             display: flex;
             margin-bottom: 20px;
         }
@@ -238,10 +280,13 @@
         }
 
         .k_foodtype{
+            font-family: 'Nanum Pen Script', cursive;
             color: #757575;
+            font-size: 28px;
         }
 
         .k_innercontent_container{
+            width: 900px;
             margin-left: 10px;
             font-size: 15px ;
         }
@@ -264,8 +309,8 @@
                     list_type = "type_search";
                 }
 
-                if($("#inputsearch").val() !=""){
-                    tmpsearch = $("#inputsearch").val();
+                if($(".inputsearch").val() !=""){
+                    tmpsearch = $(".inputsearch").val();
                     inputsearch = tmpsearch;
                 }
                 else {
@@ -355,30 +400,36 @@
                     }
                 })
                     .done(function(res) {
-                        //console.log(res);
+
                         let s =`<br>`;
                         if(inputsearch !="")
-                            s+=`<b>\${res.inputsearch}에 대한 검색 결과입니다</b><br>`;
+                            s+=`<b>\${res.inputsearch} 에 대한 검색 결과입니다</b><br>`;
 
                         var average ="";
                         var fixed_average ="";
+
+                        //console.log(res);
+
                         s += "<div class='k_searchlist'>";
                         $.each(res.list, function (idx, ele) {
 
-                            s+=`
+                            s+=`<br><br>
                                 <div class="content_container" food_idx="\${ele.food_idx}"
                                          loginidx="${loginidx}"
-
                                          restrt_list="\${ele.restrt_NM}"
                                          food_type="\${ele.food_type}">
-                                    <div class="k_photoplace">사진</div>
+                                    <div>
+                                        <img class="k_photoplace" src="http://pujmemyrqkys17181384.cdn.ntruss.com/foodphoto/\${ele.photoname}?type=f&w=200&h=200&ttype=png">
+                                    </div>
                                     <div class="k_innercontent_container">
                                         <div class="k_foodlist">
-                                        \${ele.restrt_NM}
+                                        <span class="restrt_nm">\${ele.restrt_NM}</span>
                                         <div class="k_foodtype">#\${ele.food_type}</div>
-                                        <div>\${ele.average.toFixed(1)}점 | <img src="bookmark/filledstar.png" class="starimage">
-                                                \${ele.bookmarkcount}</div>
-                                        <div>\${ele.food_price}</div>
+                                        <span class="k_scoreline">\${ele.average.toFixed(1)}점 | <img src="bookmark/filledstar.png" class="starimage">
+                                                \${ele.bookmarkcount}
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="k_moneyline"><img src="bookmark/money.png" class="moneyimage"> \${ele.food_price}</span>
+                                         </span>
+
                                         <div class="k_GPT_place">\${ele.gpt_content}</div>
                                     </div>
                                 </div>
@@ -389,7 +440,7 @@
                         }); //each문 end
 
 
-                        s += `<br><br><div style="display: inline">
+                        s += `<br><br><div style="display: inline;margin-left: 420px">
                         <!-- 처음으로 -->
                     	<span class="page_num page_first" num_type='\${res.list_type}'><i class="bi bi-skip-start-fill" style="color:black;text-decoration:none;cursor: pointer;"
                         onclick="list(1, '\${res.list_type}');"></i></span>
@@ -422,8 +473,143 @@
                             onclick="list(\${res.totalPage}, '\${res.list_type}');"></i>
                             </div></span><br><br><br>`;
 
+
+                        s+=`
+                                <div id="m_footer">
+                                <footer class="footer-section">
+                                    <div class="m_foottainer">
+                                        <div class="footer-cta pt-5 pb-5">
+                                            <div class="row">
+                                                <div class="col-xl-4 col-md-4 mb-30">
+                                                    <div class="single-cta">
+                                                        <i class="fas fa-map-marker-alt"></i>
+                                                        <div class="cta-text">
+                                                            <h4>회사주소</h4>
+                                                            <span>서울 강남구 강남대로94길 20 삼오빌딩 5-9층</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-md-4 mb-30">
+                                                    <div class="single-cta">
+                                                        <i class="fas fa-phone"></i>
+                                                        <div class="cta-text">
+                                                            <h4>전화번호</h4>
+                                                            <span>0507-1414-9601</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-md-4 mb-30">
+                                                    <div class="single-cta">
+                                                        <i class="far fa-envelope-open"></i>
+                                                        <div class="cta-text">
+                                                            <h4>메일주소</h4>
+                                                            <span>bitcamp701@naver.com</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="footer-content pt-5 pb-5">
+                                            <div class="row">
+                                                <div class="col-xl-4 col-lg-4 mb-50">
+                                                    <div class="footer-widget">
+                                                        <div class="footer-logo">
+                                                            <a href="index.html"><img src="photo/cilogo.png" class="img-fluid" alt="logo"></a>
+                                                        </div>
+                                                        <div class="footer-text">
+                                                            <p>술 한잔 마셨습니다... 프로젝트가 미완성이어도 좋습니다. 하지만 '끼니 피그' 하나만 기억해 주세요. 진심을 다해 전합니다. 프로젝트가 별로일 수 있습니다. 밤낮으로 고민하고 코딩했습니다... 최선을 다했고, 열심히 했습니다. 저희 팀의 진심이 느껴지길 바랍니다. 고맙습니다...
+                                                            </p>
+                                                        </div>
+                                                        <div class="footer-social-icon">
+                                                            <span>서포터즈</span>
+                                                            <a href="https://data.gg.go.kr"><img src="photo/ggd.png" class="ggd"></a>
+                                                            <a href="https://openai.com/blog/chatgpt"><img src="photo/aigpt.png"></a>
+                                                            <a href="https://www.data.go.kr"><img src="photo/publicdata.png"></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                                                    <div class="footer-widget">
+                                                        <div class="footer-widget-heading">
+                                                            <h3>전체서비스</h3>
+                                                        </div>
+                                                        <ul>
+                                                            <li><a href="#">회사소개</a></li>
+                                                            <li><a href="#">비지니스</a></li>
+                                                            <li><a href="#">이용약관</a></li>
+                                                            <li><a href="#">공지사항</a></li>
+                                                            <li><a href="#">고객센터</a></li>
+                                                            <li><a href="#">고객관리</a></li>
+                                                            <li><a href="#">광고서비스운영</a></li>
+                                                            <li><a href="#">문의내역</a></li>
+                                                            <li><a href="#">개인정보처리방침</a></li>
+                                                            <li><a href="#">채용공고</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xl-12">
+                                                            <div id="slideShow">
+                                                                <div id="slides">
+                                                                    <img src="photo/banner1.png" alt="광고">
+                                                                    <img src="photo/banner5.png" alt="광고">
+                                                                    <img src="photo/banner3.png" alt="광고">
+                                                                    <img src="photo/banner4.png" alt="광고">
+                                                                    <img src="photo/banner2.png" alt="광고">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                                                    <div class="footer-widget">
+                                                        <div class="footer-widget-heading">
+                                                            <h3>고객의 소리</h3>
+                                                        </div>
+                                                        <div class="footer-text mb-25">
+                                                            <p>
+                                                                서비스 개선사항, 공공데이터 수정, 잘못된 정보 제보등 끼니피그에 다양한 고객들의 의견을 들려주세요.
+                                                            </p>
+                                                        </div>
+                                                        <div class="subscribe-form">
+                                                            <form action="#">
+                                                                <input type="text" placeholder="Email Address">
+                                                                <button><i class="fab fa-telegram-plane"></i></button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="copyright-area">
+                                        <div class="m_foottainer">
+                                            <div class="row">
+                                                <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                                                    <div class="copyright-text">
+                                                        <p>Copyright &copy; 2023, All Right Reserved <a href="main.jsp"><b>비트캠프 1조</b></a></p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                                                    <div class="footer-menu">
+                                                        <ul>
+                                                            <li><a href="#">입장페이지</a></li>
+                                                            <li><a href="#">검색서비스</a></li>
+                                                            <li><a href="#">마이페이지</a></li>
+                                                            <li><a href="#">관리페이지</a></li>
+                                                            <li><a href="#">비지니스</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </footer>
+                            </div>
+
+                        `;
+
                         $("div.s_list").html(s);
-                        $("#inputsearch").val("");
+                        $(".inputsearch").val("");
                     }) //success
                 /*});*/ // click event
                 //});
@@ -481,39 +667,53 @@
             });
 
             //검색 버튼 enter키 활성화
-            $("#inputsearch").on("keyup", function (event) {
+            $(document).on("keyup",".searchbtn" ,function (event) {
                 if (event.keyCode === 13) {  // Enter 키가 눌렸을 때
                     event.preventDefault(); // 기본 동작 방지
                     $(".searchbtn").click(); // 검색 버튼 클릭
                 }
             });
 
-            $(".ajax-button").click(function() {
+            $(document).on('click',".ajax-button",function() {
                 var list_type = $(this).attr("list_type");
                 var inputsearch = "";
                 var currentPage = ${currentPage}
 
                 if(list_type == "type_search"){
-                    inputsearch = $("#inputsearch").val();
+                    inputsearch = $(".inputsearch").val();
                 }
 
                 list(currentPage,list_type);
             });
 
             $(document).ready(function () {
-                $("#inputsearch").val(""); // 입력창을 공백으로 초기화
+                $(".inputsearch").val(""); // 입력창을 공백으로 초기화
                 //$(".ajax-button[list_type='type_search']").trigger("click"); // 검색 버튼 자동 클릭
             });
 
 
-            $(".btn_condition").on('click', function() {
-                if ($(this).hasClass('button-clicked')) {
-                    $(this).removeClass('button-clicked');
-                } else {
-                    $(".btn_condition").removeClass('button-clicked');
-                    $(this).addClass('button-clicked');
-                }
+            $(document).ready(function() {
+                $(".btn_condition").on('click', function() {
+                /*    if ($(this).hasClass('button-clicked')) {
+                        alert("click");
+                        $(this).removeClass('button-clicked');
+                    } else {
+                        $(".btn_condition").removeClass('button-clicked');
+                        alert("delete");
+                        $(this).addClass('button-clicked');
+                    }*/
+
+                    if($(this).hasClass('button-clicked')){
+                    }else {
+                        $(".btn_condition").removeClass('button-clicked');
+                        $(this).addClass('button-clicked');
+                    }
+
+
+
+                });
             });
+
 
             window.list(1);
         }); // $func end
@@ -616,16 +816,16 @@
                                         <div class="cont_ba_opcitiy">
                                             <h2>SIGN UP</h2>
 
-<h2>test</h2>
-<form action="/temp_login" method="post">
-    <input type="text" name="id" value="testID">
-    <input type="int" name="loginidx" value="1">
-    <input type="submit" value="임시로그인"> &nbsp;
-    <button type="button" onclick="location.href='/temp_logout'">로그아웃</button>
-</form>
-<span><b>세션id: ${sessionScope.loginid}</b></span><br>
-<span><b>세션 loginidx: ${sessionScope.loginidx}</b></span><br>
-<span><b>세션 username: ${sessionScope.username}</b></span><br>
+                                            <h2>test</h2>
+                                            <form action="/temp_login" method="post">
+                                                <input type="text" name="id" value="testID">
+                                                <input type="int" name="loginidx" value="1">
+                                                <input type="submit" value="임시로그인"> &nbsp;
+                                                <button type="button" onclick="location.href='/temp_logout'">로그아웃</button>
+                                            </form>
+                                            <span><b>세션id: ${sessionScope.loginid}</b></span><br>
+                                            <span><b>세션 loginidx: ${sessionScope.loginidx}</b></span><br>
+                                            <span><b>세션 username: ${sessionScope.username}</b></span><br>
 
 
 
@@ -787,12 +987,14 @@
                 </span>
         <div class="m_headersearch-holder">
             <form id="m_headeridsearch-form" class="m_headersearch-form">
-                <input type="text" name="qwrd" placeholder="검색어를 입력하세요." class="m_headersearch-input">
-                <button type="submit" id="form-submit" class="m_headersearch-toggle">
+                <input type="text" name="qwrd" placeholder="검색어를 입력하세요." class="m_headersearch-input inputsearch">
+                <button type="submit" id="form-submit" class="m_headersearch-toggle ajax-button searchbtn" list_type="type_search">
                     <i class="fa fa-search"></i>
                 </button>
                 <button type="reset" id="m_headerform-close" class="m_search-close">
                     <i class="fa fa-times"></i>
+                </button>
+                <button type="submit" id="k_btnsearch" class="ajax-button searchbtn" list_type="type_search" hidden>
                 </button>
             </form>
         </div>
@@ -802,187 +1004,47 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/header.js"></script>
 <%--라인--%>
-
 <div id="#m_container">
-    <div class="input-group">
-        <input type="text" id="inputsearch">
-        <button type="button" class="ajax-button searchbtn" list_type="type_search">검색</button>
-    </div>
-
-<div id="map" class="mapinclude" style="width:800px; height:400px;"></div><br><br>
-<div class="k_buttonarea">
-    <div class="button raised btn_condition ajax-button" list_type="type_1">
-        <div class="center" fit>평점순</div>
-        <paper-ripple fit></paper-ripple>
-    </div>
-    <div class="button raised btn_condition ajax-button" list_type="type_2">
-        <div class="center" fit>리뷰많은순</div>
-        <paper-ripple fit></paper-ripple>
-    </div>
-    <div class="button raised btn_condition ajax-button" list_type="type_3">
-        <div class="center" fit>가고싶다순</div>
-        <paper-ripple fit></paper-ripple>
-    </div>
-    <br>
-    <br>
-    <div class="button raised btn_condition ajax-button" list_type="1만원대">
-        <div class="center" fit>1만원대</div>
-        <paper-ripple fit></paper-ripple>
-    </div>
-    <div class="button raised btn_condition ajax-button" list_type="2만원대">
-        <div class="center" fit>2만원대</div>
-        <paper-ripple fit></paper-ripple>
-    </div>
-    <div class="button raised btn_condition ajax-button" list_type="3만원대">
-        <div class="center" fit>3만원대</div>
-        <paper-ripple fit></paper-ripple>
-    </div>
-    <div class="button raised btn_condition ajax-button" list_type="4만원이상">
-        <div class="center" fit>4만원이상</div>
-        <paper-ripple fit></paper-ripple>
-    </div>
-</div>
-
-<br><br>
-
-</div>
-
-
-<div class="s_list" style="height: 2200px; width: 1200px;margin: 0 auto;"></div>
-</div>
-
-
-<div id="m_footer">
-    <footer class="footer-section">
-        <div class="m_foottainer">
-            <div class="footer-cta pt-5 pb-5">
-                <div class="row">
-                    <div class="col-xl-4 col-md-4 mb-30">
-                        <div class="single-cta">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div class="cta-text">
-                                <h4>회사주소</h4>
-                                <span>서울 강남구 강남대로94길 20 삼오빌딩 5-9층</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-4 mb-30">
-                        <div class="single-cta">
-                            <i class="fas fa-phone"></i>
-                            <div class="cta-text">
-                                <h4>전화번호</h4>
-                                <span>0507-1414-9601</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-4 mb-30">
-                        <div class="single-cta">
-                            <i class="far fa-envelope-open"></i>
-                            <div class="cta-text">
-                                <h4>메일주소</h4>
-                                <span>bitcamp701@naver.com</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <span style="display: inline-flex;align-items: center;">
+        <div id="map" class="mapinclude" style="width:800px; height:400px;"></div>
+        <div class="k_buttonarea">
+            <div class="button raised btn_condition ajax-button" list_type="type_1">
+                <div class="center" fit>평점순</div>
+                <paper-ripple fit></paper-ripple>
             </div>
-            <div class="footer-content pt-5 pb-5">
-                <div class="row">
-                    <div class="col-xl-4 col-lg-4 mb-50">
-                        <div class="footer-widget">
-                            <div class="footer-logo">
-                                <a href="index.html"><img src="photo/cilogo.png" class="img-fluid" alt="logo"></a>
-                            </div>
-                            <div class="footer-text">
-                                <p>술 한잔 마셨습니다... 프로젝트가 미완성이어도 좋습니다. 하지만 '끼니 피그' 하나만 기억해 주세요. 진심을 다해 전합니다. 프로젝트가 별로일 수 있습니다. 밤낮으로 고민하고 코딩했습니다... 최선을 다했고, 열심히 했습니다. 저희 팀의 진심이 느껴지길 바랍니다. 고맙습니다...
-                                </p>
-                            </div>
-                            <div class="footer-social-icon">
-                                <span>서포터즈</span>
-                                <a href="https://data.gg.go.kr"><img src="photo/ggd.png" class="ggd"></a>
-                                <a href="https://openai.com/blog/chatgpt"><img src="photo/aigpt.png"></a>
-                                <a href="https://www.data.go.kr"><img src="photo/publicdata.png"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
-                        <div class="footer-widget">
-                            <div class="footer-widget-heading">
-                                <h3>전체서비스</h3>
-                            </div>
-                            <ul>
-                                <li><a href="#">회사소개</a></li>
-                                <li><a href="#">비지니스</a></li>
-                                <li><a href="#">이용약관</a></li>
-                                <li><a href="#">공지사항</a></li>
-                                <li><a href="#">고객센터</a></li>
-                                <li><a href="#">고객관리</a></li>
-                                <li><a href="#">광고서비스운영</a></li>
-                                <li><a href="#">문의내역</a></li>
-                                <li><a href="#">개인정보처리방침</a></li>
-                                <li><a href="#">채용공고</a></li>
-                            </ul>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div id="slideShow">
-                                    <div id="slides">
-                                        <img src="photo/banner1.png" alt="광고">
-                                        <img src="photo/banner5.png" alt="광고">
-                                        <img src="photo/banner3.png" alt="광고">
-                                        <img src="photo/banner4.png" alt="광고">
-                                        <img src="photo/banner2.png" alt="광고">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
-                        <div class="footer-widget">
-                            <div class="footer-widget-heading">
-                                <h3>고객의 소리</h3>
-                            </div>
-                            <div class="footer-text mb-25">
-                                <p>
-                                    서비스 개선사항, 공공데이터 수정, 잘못된 정보 제보등 끼니피그에 다양한 고객들의 의견을 들려주세요.
-                                </p>
-                            </div>
-                            <div class="subscribe-form">
-                                <form action="#">
-                                    <input type="text" placeholder="Email Address">
-                                    <button><i class="fab fa-telegram-plane"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="button raised btn_condition ajax-button" list_type="type_2">
+                <div class="center" fit>리뷰많은순</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised btn_condition ajax-button" list_type="type_3">
+                <div class="center" fit>즐겨찾기순</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="button raised btn_condition ajax-button" list_type="1만원대">
+                <div class="center" fit>1만원대</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised btn_condition ajax-button" list_type="2만원대">
+                <div class="center" fit>2만원대</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <br><br>
+            <div class="button raised btn_condition ajax-button" list_type="3만원대">
+                <div class="center" fit>3만원대</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <div class="button raised btn_condition ajax-button" list_type="4만원이상">
+                <div class="center" fit>4만원이상</div>
+                <paper-ripple fit></paper-ripple>
             </div>
         </div>
-        <div class="copyright-area">
-            <div class="m_foottainer">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
-                        <div class="copyright-text">
-                            <p>Copyright &copy; 2023, All Right Reserved <a href="main.jsp"><b>비트캠프 1조</b></a></p>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
-                        <div class="footer-menu">
-                            <ul>
-                                <li><a href="#">입장페이지</a></li>
-                                <li><a href="#">검색서비스</a></li>
-                                <li><a href="#">마이페이지</a></li>
-                                <li><a href="#">관리페이지</a></li>
-                                <li><a href="#">비지니스</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    </span>
 </div>
-</body>
+<div class="s_list" style="width: 1200px;margin: 0 auto;"></div>
+</div>
 <script src="js/footer.js"></script>
 </body>
 </html>

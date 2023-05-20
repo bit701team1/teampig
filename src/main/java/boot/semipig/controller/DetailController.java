@@ -250,7 +250,7 @@ public class DetailController {
         //System.out.println(historycount);
 
         //history 저장 갯수 설정
-        if(historycount>=5){
+        if(historycount>=15){
             detailService.autoHistoryDelete(user_idx);
         }
 

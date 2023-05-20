@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boot.semipig.mapper.RealmainMapper">
+    <select id="getFavoriteFood" parameterType="int" resultType="String">
+        SELECT food_type
+        FROM user_history
+        WHERE user_idx = #{user_idx}
+        GROUP BY food_type
+        ORDER BY COUNT(*) DESC
+            LIMIT 1;
+    </select>
+    <select id="getSecondFood" parameterType="int" resultType="String">
+        SELECT food_type
+        FROM user_history
+        WHERE user_idx = #{user_idx}
+        GROUP BY food_type
+        ORDER BY COUNT(*) DESC
+            LIMIT 1, 1;
+    </select>
+    <select id="getRecommandFood" parameterType="String" resultType="int">
+        SELECT food_idx
+        FROM food_list
+        WHERE food_type = #{favoriteFood}
+        ORDER BY RAND()
+            LIMIT 2;
+    </select>
+    <select id="getRecommandList" parameterType="int" resultType="SearchDto">
+        SELECT food_list.*, food_photo.photoname
+        FROM food_list
+                 LEFT JOIN (
+            SELECT user_idx, photoname
+            FROM food_photo
+            WHERE user_idx IN (
+                SELECT user_idx
+                FROM food_list
+                WHERE food_idx = #{food_idx}
+            )
+                LIMIT 1
+        ) AS food_photo ON food_list.food_idx = food_photo.user_idx
+        WHERE food_list.food_idx = #{food_idx}
+    </select>
+
+    <!--하단부 -->
+    <select id="getHighScoreFood" resultType="SearchDto">
+        SELECT t.*, f.photoname
+        FROM (
+                 SELECT a.*, IFNULL(AVG(b.score), 0) AS average
+                 FROM food_list a
+                          LEFT JOIN review b ON a.food_idx = b.food_idx
+                 GROUP BY a.food_idx
+             ) AS t
+                 LEFT JOIN (
+            SELECT user_idx, photoname
+            FROM food_photo
+        ) AS f ON t.user_idx = f.user_idx
+        ORDER BY t.average DESC
+            LIMIT 1
+    </select>
+    <select id="getManyReview" resultType="SearchDto">
+        SELECT t.*, f.photoname
+        FROM (
+                 SELECT a.*, IFNULL(AVG(b.score), NULL) AS average, COUNT(b.food_idx) AS review_count
+                 FROM food_list a
+                          LEFT JOIN review b ON a.food_idx = b.food_idx
+                 GROUP BY a.food_idx
+                 ORDER BY review_count DESC
+                     LIMIT 1
+             ) AS t
+                 LEFT JOIN (
+            SELECT user_idx, photoname
+            FROM food_photo
+            WHERE user_idx IN (SELECT user_idx FROM food_list)
+            GROUP BY user_idx
+        ) AS f ON t.user_idx = f.user_idx;
+    </select>
+    <select id="getBookmarkList" resultType="SearchDto">
+        SELECT t.*, f.photoname
+        FROM (
+                 SELECT f.*, COUNT(DISTINCT b.user_idx) AS bookmark_count, IFNULL(AVG(r.score), 0) AS average
+                 FROM food_list AS f
+                          LEFT JOIN bookmark AS b ON f.food_idx = b.food_idx
+                          LEFT JOIN review AS r ON f.food_idx = r.food_idx
+                 GROUP BY f.food_idx
+                 ORDER BY bookmark_count DESC
+                     LIMIT 1
+             ) AS t
+                 LEFT JOIN (
+            SELECT user_idx, photoname
+            FROM food_photo
+            WHERE user_idx IN (SELECT user_idx FROM food_list)
+            GROUP BY user_idx
+        ) AS f ON t.user_idx = f.user_idx;
+    </select>
+    <select id="getRandomOne" resultType="SearchDto">
+        SELECT f.*, p.photoname
+        FROM food_list f
+                 LEFT JOIN food_photo p ON f.food_idx = p.user_idx
+        WHERE f.food_idx = (SELECT food_idx FROM food_list ORDER BY RAND() LIMIT 1)
+            limit 1;
+    </select>
+</mapper>

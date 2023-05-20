@@ -23,4 +23,5 @@ public class SearchDto {
     private int bookmarkcount;
     private String food_price;
     private double average;
+    private String photoname;
 }

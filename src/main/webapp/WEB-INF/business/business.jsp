@@ -54,6 +54,18 @@
     //     })//로그인버튼 끝
     // });
     $(function() {
+
+        //login시 enter키 이벤트
+        $(document).on('keyup',"#s_password", function (event){
+            if (event.keyCode === 13) {  // Enter 키가 눌렸을 때
+                event.preventDefault(); // 기본 동작 방지
+                $(".btn_login").click(); // login button 클릭
+            }
+        });
+
+
+
+
         $("#s_login").click(function() {
             let id = $("#s_id").val();
             let password = $("#s_password").val();

@@ -32,6 +32,19 @@
 
 
     <style>
+        #k_history_place{
+            width: 1500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #k_hotplace{
+            width: 1500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"/>
@@ -62,7 +75,126 @@
                 }//success function 끝
             })//ajax 끝
         })//로그인버튼 끝
-    });
+
+        //history ajax
+        $.ajax({
+            type: "get",
+            url: "./historyrecommand",
+            dataType:"json",
+            success: function (res) {
+                var s="";
+                $.each(res.recommandlist,function (idx, ele){
+                    s+=`
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                                 <div class="card mb-3 scroll-page">
+                                    <img class="card-img-top" src="http://pujmemyrqkys17181384.cdn.ntruss.com/foodphoto/\${ele.photoname}?type=f&w=200&h=200&ttype=png" alt="맛집">
+                                        <div class="card-body">
+                                            <h5 class="card-title">당신의 1순위 카테고리</h5>
+                                            <p class="card-text">\${ele.restrt_NM}</p>
+                                            <p class="card-type">#\${ele.food_type}</p>
+                                            <div class="frame">
+                                                <button class="custom-btn btn-2" onclick="window.location.href='/detail?food_idx='+\${ele.food_idx}">
+                                                <a target="_blank"></a>방문하기</button>
+                                            </div>
+                                        </div>
+                                </div>
+                        </div>
+                    `;
+                }); //each1
+
+                $.each(res.secondlist,function (idx, ele) {
+                    s += `
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                                 <div class="card mb-3 scroll-page">
+                                    <img class="card-img-top" src="http://pujmemyrqkys17181384.cdn.ntruss.com/foodphoto/\${ele.photoname}?type=f&w=200&h=200&ttype=png" alt="맛집">
+                                        <div class="card-body">
+                                            <h5 class="card-title">당신의 2순위 카테고리</h5>
+                                            <p class="card-text">\${ele.restrt_NM}</p>
+                                            <p class="card-type">#\${ele.food_type}</p>
+                                            <div class="frame">
+                                                <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
+                                            </div>
+                                        </div>
+                                </div>
+                        </div>
+                    `;
+                }); //each2
+
+                $("#k_history_place").html(s);
+            }//success function 끝
+        })//ajax 끝
+
+        $.ajax({
+            type: "get",
+            url: "./hotplace",
+            dataType:"json",
+            success: function (res) {
+                console.log(res);
+                var r="";
+                $.each(res,function (idx, ele){
+                    r += `
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                                 <div class="card mb-3 scroll-page">
+                                    <img class="card-img-top" src="http://pujmemyrqkys17181384.cdn.ntruss.com/foodphoto/\${ele.photoname}?type=f&w=200&h=200&ttype=png" alt="맛집">
+                                        <div class="card-body">
+                                            <h5 class="card-title">`;
+
+                            if(idx==0){
+                                r+=`평점순`;
+                            }else if(idx ==1){
+                                r+=`리뷰순`;
+                            } else if(idx ==2){
+                                r+=`즐겨찾기순`;
+                            } else {
+                                r+=`무작위 추천`;
+                            }
+
+                    r+=`</h5>
+                                            <p class="card-text">\${ele.restrt_NM}</p>
+                                            <p class="card-type">#\${ele.food_type}</p>
+                                            <div class="frame">
+                                                <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
+                                            </div>
+                                        </div>
+                                </div>
+                        </div>
+                    `;
+
+                }); //each end
+
+                $("#k_hotplace").html(r);
+            }//success function 끝
+        })//ajax 끝
+
+        //login시 enter키 이벤트
+        $(document).on('keyup',".inputsearch", function (event){
+            if (event.keyCode === 13) {  // Enter 키가 눌렸을 때
+                event.preventDefault(); // 기본 동작 방지
+                $(".k_btnsearch").click(); // login button 클릭
+            }
+        });
+
+        $(document).on('click',".k_btnsearch", function (event){
+            var input = $(".inputsearch").val();
+
+            event.preventDefault(); // 클릭 이벤트의 기본 동작을 중단합니다.
+            $.ajax({
+                url: "/setsearchsession",
+                type: "get",
+                dataType:"json",
+                data: {"input": input},
+                success: function (res) {
+                    alert(res);
+                },
+                error: function (error) {
+                    // 요청이 실패한 경우의 동작을 정의합니다.
+                    // ...
+                    alert("전송 실패");
+                }
+            });
+        });
+
+    }); //$func end
 
 
     $(function (){
@@ -460,7 +592,8 @@
                                     <div class="line line2"></div>
                                 </div>
 
-                                <input type="search" placeholder="키워드 입력" class="search" />
+                                <input type="search" placeholder="키워드 입력" class="search inputsearch" />
+                                <button type="button" class="k_btnsearch" list_type="type_search" hidden></button>
                             </button>
 
                             <div class="close"></div>
@@ -508,6 +641,8 @@
 
 <!--페이지 2번-->
 
+
+
 <section id="section-b">
 
     <div class="container-fluid pt-5 pb-5">
@@ -519,118 +654,17 @@
             </div>
 
             <!-- 상단 컨텐츠 -->
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food1.jpg" alt="맛집">
-                    <div class="card-body">
-                        <h5 class="card-title">가장 많이 방문한 맛집</h5>
-                        <p class="card-text">당신이 가장 많이 방문한 맛집입니다.</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div id="k_history_place"></div>
+        </div>
 
-            <div class="col-lg-3 col-md-6  col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food2.jpg" alt="맛집">
-                    <div class="card-body">
-                        <h5 class="card-title">최근에 방문한 맛집</h5>
-                        <p class="card-text">가장 최근에 방문한 맛집입니다.</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6  col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food3.jpg" alt="맛집">
-                    <div class="card-body">
-                        <h5 class="card-title">리뷰가 많은 맛집</h5>
-                        <p class="card-text">당신이 관심 있는 맛집</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6  col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food4.jpg" alt="맛집">
-                    <div class="card-body">
-                        <h5 class="card-title">인기 많은 맛집</h5>
-                        <p class="card-text">끼니피그 인증 맛집</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-12 mt-5">
+        <div class="row">
+            <div class="col-lg-12">
                 <h1 id="menu-2"><br>&nbsp;</h1>
-                <h2 class="text-center pb-3 text-black">히스토리</h2>
+                <h2 class="text-center pb-3 text-black scroll-page">인기맛집</h2>
             </div>
 
             <!-- 하단 컨텐츠 -->
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food5.jpg" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">1만원 맛집</h5>
-                        <p class="card-text">1만원으로 즐기는 식당</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-12"><span>1만원</span><span><a href="#" target="_blank"></a>방문하기</span></button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6  col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food6.jpg" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">2만원 맛집</h5>
-                        <p class="card-text">2만원으로 즐기는 식당</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-12"><span>2만원</span><span><a href="#" target="_blank"></a>방문하기</span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6  col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food7.jpg" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">3만원 맛집</h5>
-                        <p class="card-text">3만원에 즐기는 식당</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-12"><span>3만원</span><span><a href="#" target="_blank"></a>방문하기</span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6  col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food8.jpg" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">4만원 맛집</h5>
-                        <p class="card-text">4만원에 즐기는 식당</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-12"><span>4만원</span><span><a href="#" target="_blank"></a>방문하기</span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <div id="k_hotplace"></div>
         </div>
     </div>
 </section>
@@ -717,7 +751,7 @@
                             <button class="custom-btn btn-6"><span>가입하기</span></button>
                         </div>
                     </div>
-
+                </div>
             </form>
 
 
