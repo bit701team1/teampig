@@ -309,7 +309,7 @@
                 <a class="nav-link  text-white" href="#menu-3">끼니피그소개</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  text-white" href="/WEB-INF/userpage/myuserpage.jsp">마이페이지</a>
+                <a class="nav-link  text-white" href="userpage">마이페이지</a>
             </li>
             <c:choose>
                 <c:when test="${sessionScope.loginok=='yes'}">
