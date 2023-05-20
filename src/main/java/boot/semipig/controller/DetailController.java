@@ -8,6 +8,8 @@ import boot.semipig.service.ReviewService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -62,17 +64,23 @@ public class DetailController {
     public String detail(Model model, Integer food_idx, HttpSession session)
     {
         //System.out.println("Controller food_idx="+food_idx);
-
+        couponDto dtos = new couponDto();
+        dtos.setUser_idx(food_idx);
         DetailDto dto=detailService.selectFood(food_idx);
         model.addAttribute("dto", dto);
-
         //추가
         Integer user_idx= (Integer)session.getAttribute("loginidx");
         //System.out.println(user_idx);
-
         int count = detailService.getBookmarkCount(user_idx, food_idx);
         //System.out.println(count);
+        couponDto cdto = myservice.getCouponByUserIdx(food_idx);
+        //model 저장
+        model.addAttribute("cdto",cdto);
         model.addAttribute("count",count);
+        // 쿠폰 DTO 생성 및 설정
+        // 쿠폰 DTO를 서비스로 전달하여 처리
+
+
 
         return "/detail/detail";
     }
@@ -144,6 +152,74 @@ public class DetailController {
             // 예외 처리
         }
     }
+//    @PostMapping("/max")
+//    @ResponseBody
+//    public void max(couponDto cdto,couponlistDto listdto, HttpSession session) {
+//        String id = (String) session.getAttribute("loginid");
+////        listdto.setUser_id(id);
+//        System.out.println("cdto:"+cdto);
+//        System.out.println("listdto"+listdto);
+//            myservice.couponmax(cdto); // 업데이트 수행
+//        listdto.setUser_id(id);
+//        myservice.couponid(listdto);
+//        }
+//@PostMapping("/max")
+//@ResponseBody
+//public void max(couponDto dtoc, couponlistDto listDto, HttpSession session) {
+//    String id = (String) session.getAttribute("loginid");
+//    listDto.setUser_id(id);
+//
+//    System.out.println("dto: " + dtoc);
+//    System.out.println("listDto: " + listDto);
+//    // 이미 쿠폰을 가지고 있는지 확인
+//    List<couponlistDto> existingCouponList = myservice.couponlist(listDto.getUser_idx());
+//    for(couponlistDto coupon : existingCouponList) {
+//        if(coupon.getUser_id().equals(id)) {
+//            System.out.println("이미 쿠폰을 가지고 있습니다.");
+//            return;
+//        }
+//    }
+//
+//    // 쿠폰을 가져갈 수 있는 경우의 처리 로직 작성
+//    myservice.couponmax(dtoc); // 업데이트 수행
+//    myservice.couponid(listDto); // 인서트 수행
+//
+//    // 쿠폰을 가져갔을 때의 추가 로직 작성
+//    System.out.println("쿠폰을 성공적으로 가져갔습니다.");
+//}
+
+    @PostMapping("/max")
+    public ResponseEntity<String> max(couponDto dtoc, couponlistDto listDto, HttpSession session) {
+        if (dtoc == null) {
+            return new ResponseEntity<>("쿠폰 정보가 없습니다.", HttpStatus.CONFLICT);
+        }
+        String id = (String) session.getAttribute("loginid");
+        listDto.setUser_id(id);
+
+        System.out.println("dto: " + dtoc);
+        System.out.println("listDto: " + listDto);
+        // 이미 쿠폰을 가지고 있는지 확인
+        List<couponlistDto> existingCouponList = myservice.couponlist(listDto.getUser_idx());
+        for(couponlistDto coupon : existingCouponList) {
+            if(coupon.getUser_id().equals(id)) {
+                System.out.println("이미 쿠폰을 가지고 있습니다.");
+                return new ResponseEntity<>("이미 쿠폰을 가지고 있습니다.", HttpStatus.CONFLICT);
+            }
+        }
+
+        if(dtoc.getMax() == 0){
+            return new ResponseEntity<>("수량이 없는 쿠폰입니다", HttpStatus.CONFLICT);
+        }
+
+        // 쿠폰을 가져갈 수 있는 경우의 처리 로직 작성
+        myservice.couponmax(dtoc); // 업데이트 수행
+        myservice.couponid(listDto); // 인서트 수행
+
+        // 쿠폰을 가져갔을 때의 추가 로직 작성
+        System.out.println("쿠폰을 성공적으로 가져갔습니다.");
+        return new ResponseEntity<>("쿠폰을 성공적으로 가져갔습니다.", HttpStatus.OK);
+    }
+
     @GetMapping("/delete")//리뷰 삭제
     @ResponseBody public void delete(int review_idx)
     {

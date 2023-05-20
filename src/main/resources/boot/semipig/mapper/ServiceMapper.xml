@@ -19,17 +19,27 @@
     <select id="detail" resultType="ServiceDto">
     select * from calendar where num=#{num}
     </select>
+    <select id="getFoodIdx" resultType="int" parameterType="int">
+        select food_idx
+        from food_list a
+                 left join user b
+                           on a.user_idx =b.user_idx
+        where b.user_idx=#{user_idx}
+    </select>
     <select id="couponall" resultType="couponDto">
-    select * from coupon order by num desc
+    select * from coupon where user_idx=#{user_idx} order by num desc
     </select>
     <insert id="couponinsert" parameterType="couponDto">
-        insert into coupon(number,time) values(#{number},#{time})
+        insert into coupon(number,time,user_idx,max) values(#{number},#{time},#{user_idx},#{max})
     </insert>
     <delete id="deletecoupon" parameterType="int">
         delete from coupon where num = #{num}
     </delete>
     <select id="getTotalCount" resultType="int">
-        select count(*) from calendar where start > NOW()
+        select count(*) from calendar where start > NOW() and food_idx = #{user_idx}
+    </select>
+    <select id="reviewcount" resultType="int">
+        select count(*) from review where food_idx=#{food_idx}
     </select>
     <select id="qnalist" parameterType="Map" resultType="qnaDto">
         select * from qna where user_idx=#{user_idx} ORDER BY qna_idx desc LIMIT #{startNum}, #{perPage}
@@ -41,6 +51,20 @@
         SELECT COUNT(*) FROM calendar WHERE start = #{start}
     </select>
     <select id="getmypage" resultType="DetailDto" parameterType="int">
-        select * from food_list where user_idx=#{user_idx}
+        select * from food_list where food_idx=#{food_idx}
+    </select>
+    <update id="couponmax" parameterType="couponDto">
+        UPDATE coupon
+        SET max = max - 1
+        WHERE user_idx = #{user_idx} AND max > 0 and time > NOW()
+    </update>
+    <insert id="couponid" parameterType="couponlistDto">
+        insert into couponlist(number,time,user_idx,user_id) values(#{number},#{time},#{user_idx},#{user_id})
+    </insert>
+    <select id="couponlist" parameterType="int" resultType="couponlistDto">
+        select * from couponlist where user_idx=#{user_idx}
+    </select>
+    <select id="getCouponByUserIdx" parameterType="int" resultType="couponDto">
+        select * from coupon where user_idx = #{user_idx} AND time > now()
     </select>
 </mapper>

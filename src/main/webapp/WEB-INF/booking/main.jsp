@@ -128,7 +128,7 @@
 <div class="y_square">
     <div class="y_content">예약 총 ${totalCount} </div>
     <div class="y_content" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#couponModal"><span class="y_coup">쿠폰 등록</span></div>
-    <div class="y_content">내 가게 리뷰 100개</div>
+    <div class="y_content">내 가게 리뷰 ${reviewcount}</div>
 </div>
 
     <!-- The Modal -->
@@ -164,7 +164,7 @@
                             <div class="mb-3">
                                 <div class="input-group">
                                     <span class="input-group-text">수량</span>
-                                    <input type="text" class="form-control" id="quantity">
+                                    <input type="text" class="form-control" id="quantity" name="max">
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -214,11 +214,12 @@
 <script>
     function applyCoupon() {
         var event2 = {
-            number: '', time:''
+            number: '', time:'', max:''
         };
 
         event2.time = document.getElementById('y_cdate').value + 'T' + document.getElementById('y_ctime').value;
         event2.number= document.getElementById('coupon').value;
+        event2.max = document.getElementById('quantity').value;
         var events2 = [event2];
 
         var jsondata2 = JSON.stringify(events2);

@@ -45,19 +45,21 @@ public class CalendarController {
     @GetMapping("/calendar")
     public String calendar2(Model model, HttpSession session) {
         int user_idx = (int) session.getAttribute("loginidx");
+        int food_idx = (int) session.getAttribute("loginidx");
         serviceMapper.getmypage(user_idx);
         LoginDto dtos=loginService.getUserInfo(user_idx);
         model.addAttribute("logindto", dtos);
-        int totalCount = myservice.getTotalCount();
+        int totalCount = myservice.getTotalCount(food_idx);
         model.addAttribute("totalCount", totalCount);
         return "/main/booking/calendar";
     }
     @GetMapping("/calendarajax")
     public @ResponseBody Map<String, Object> calendar(@RequestParam(defaultValue = "1") int currentPage, HttpSession session) {
         int user_idx = (int) session.getAttribute("loginidx");
+        int food_idx = (int) session.getAttribute("loginidx");
         Map<String, Object> response = new HashMap<>();
         LocalDateTime currentDateTime = LocalDateTime.now();
-        int totalCount = myservice.getTotalCount();
+        int totalCount = myservice.getTotalCount(food_idx);
         int totalPage; //총 페이지수
         int perPage = 10; //한 페이지당 보여질 글의 갯수
         int perBlock = 5; //한 블럭당 보여질 페이지의 갯수

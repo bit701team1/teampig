@@ -24,9 +24,9 @@
             display: flex;
             flex-direction: column; align-items: center;
         }
-         .table {
-             border-collapse: collapse;
-         }
+        .table {
+            border-collapse: collapse;
+        }
 
         .table th {
             position: relative;
