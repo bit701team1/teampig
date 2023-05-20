@@ -82,26 +82,46 @@
                 data: form,
                 dataType: "text",
                 success: function(res) {
+                    // 해당 user_idx가 food_list 테이블에 존재하는지 확인하는 AJAX 요청
                     if (res == 1) {
-                        // 해당 user_idx가 food_list 테이블에 존재하는지 확인하는 AJAX 요청
-                        $.ajax({
-                            type: "get",
-                            url: "./existFoodList",
-                            data: { user_idx: res },
-                            success: function(response) {
-                                if (response == 1) {
-                                    window.location.href = "business";
-                                } else {
-                                    window.location.href = "/mypage/writeform";
-                                }
-                            }
-                        });
+                        window.location.href = "business";
                     } else {
-                        $("#s_alert").html("아이디 또는 비밀번호가 일치하지 않습니다.");
+                        alert("아이디 또는 비밀번호가 일치하지 않습니다.")
+                        // $("#s_alert").html("아이디 또는 비밀번호가 일치하지 않습니다.");
                     }
                 }
             });
         });
+    });
+    $(function (){
+       $("#mypage").click(function (){
+           var user_idx = ${loginidx}
+           $.ajax({
+               type: "get",
+               url: "./selectUserType",
+               dataType: "text",
+               success: function(userType) {
+                   console.log("User type: " + userType);
+                   if(userType==2){
+                       $.ajax({
+                           type: "get",
+                           url: "./existFoodList",
+                           data:{"user_idx": user_idx},
+                           success: function(response) {
+                               console.log(response);
+                               if (response == 1) {
+                                   window.location.href = "/home2";
+                               } else {
+                                   window.location.href = "/mypage/writeform";
+                               }
+                           }
+                           });
+                   }else {
+                       window.location.href = "business";
+                   }
+               }
+           });
+       });
     });
 
     $(function (){
@@ -156,31 +176,6 @@
                     }
                 }
             });
-            // Display confirmation dialog
-            // if (confirm("Are you sure you want to submit the form?")) {
-            //     // User clicked "OK" - proceed with form submission
-            //     $.ajax({
-            //         type: "post",
-            //         url: "./insert",
-            //         data: {"email":email,"id":id,"password":password,"user_name":user_name,"user_type":user_type},
-            //         dataType: "text",
-            //         success: function(res) {
-            //             console.log("회원가입 완료");
-            //
-            //             // 회원가입이 성공적으로 처리되면 원하는 작업을 수행할 수 있습니다.
-            //             location.reload();
-            //         },
-            //         error: function(xhr, status, error) {
-            //             console.log("회원가입 오류");
-            //             console.log("Status:"+status);
-            //             console.log("error:"+error);
-            //             console.log(xhr.responseText);
-            //         }
-            //     });
-            // } else {
-            //     // User clicked "Cancel" - refresh the page
-            //     location.reload();
-            // }
         });
     });
 
@@ -197,7 +192,8 @@
             <ul>
                 <li><a href="#">공지사항</a></li>
                 <li><a href="#">고객센터</a></li>
-                <li><a href="${root}/home2">마이페이지</a></li>
+<%--                <li><a href="${root}/home2" id="mypage">마이페이지</a></li>--%>
+                <li><a href="#" id="mypage">마이페이지</a></li>
                 <c:choose>
                     <c:when test="${sessionScope.loginok=='yes'}">
                         <li><a href="#"   onclick="location.href='./logout'">로그아웃</a></li>

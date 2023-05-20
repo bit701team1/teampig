@@ -121,7 +121,7 @@
         }
 
         .detail_thumb {
-            border: black solid 1px;
+            /*border: black solid 1px;*/
             width: 95%;
             margin: 10px auto;
             display: flex;
@@ -140,43 +140,75 @@
             align-items: center;
             cursor: pointer;
         }
+        .thumbnail img{
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+        }
 
         button[type="submit"]:hover {
             background-color: #2C4002;
         }
 
-        .prev,
-        .next {
+        /*모달창*/
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            max-width: 800px;
+            height: auto;
+            max-height: 60vh;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .close {
+            color: inherit;
+            float: right;
+            font-weight: bold;
             cursor: pointer;
             position: absolute;
-            top: 50%;
-            width: auto;
-            margin-top: -22px;
-            padding: 16px;
-            color: white;
-            font-weight: bold;
-            font-size: 30px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
+            bottom: 10px;
+            right: 10px;
+            font-size: 20px;
         }
 
-        .prev {
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .video-wrapper {
             position: relative;
-            right: 274px;
-            top:10px;
+            padding-bottom: 56.25%;
+            height: 70%;
 
         }
 
-        .next {
-            right: 492px;
-            top:465px;
-            border-radius: 3px 0 0 3px;
-        }
-
-        .prev:hover,
-        .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90%;
         }
 
         .prompt {
@@ -255,6 +287,7 @@
     $(function () {
         //업로드한 사진들과 데이타를 같이 묶어서 서버에 전송하기
         $("#contentadd").click(function () {
+            $("#contentadd").prop("disabled", true);
             let user_idx=$("#user_idx").val();
             let cnt=$("#photo")[0].files.length;
             let point=$("#point").val()
@@ -290,6 +323,7 @@
 
             console.log($("#photo")[0].files)
             console.log($("#user_idx").val());
+
             $.ajax({
                 type: "delete",
                 url: "./removephotos/"+user_idx,
@@ -306,10 +340,15 @@
                         data: form,
                         success: function () {
                             // console.log("결과" + res); // 응답값 출력
+                        },
+                        complete: function () {
+                            $("#contentadd").prop("disabled", false);
+                            location.reload(); // 새로고침
                         }
                     });
                 }
             });
+
         });
     });
 
@@ -465,10 +504,10 @@
                 </tr>
                 <tr>
                     <td>
-                        <label for="point"><span class="y_info2">홍보 포인트</span></label>
+                        <label for="point"><span class="y_info2">요청사항</span></label>
                     </td>
                     <td>
-                        <input type="text" id="point" name="point" value="${dto.point}" placeholder="신선한, 주차장이 넓은 등, 30자 제한" maxlength="30">
+                        <input type="text" id="point" name="point" value="${dto.point}" placeholder="언어, 스타일, 홍보포인트(30자이내)" maxlength="30">
                     </td>
                 </tr>
                 <tr>
@@ -516,7 +555,7 @@
                 </tr>
                 <tr align="center">
                     <td colspan="2">
-                        <button type="submit" style="margin-top:50px; float:right;" id="contentadd" >홍보글 작성</button>
+                        <button type="submit" style="margin-top:50px; float:right;" id="contentadd" data-bs-toggle="modal" data-bs-target="#myModal" onclick="openModal()">홍보글 작성</button>
                     </td>
                 </tr>
             </table>
@@ -530,10 +569,44 @@
     <form action="U_updateprompt" method="post" enctype="multipart/form-data">
         <div class="prompt" id="prompt">
             <textarea class="GPT_content" id="GPT_content" name="GPT_content" value="${dto.GPT_content}">
-                ${dto.GPT_content}
+${dto.GPT_content}
             </textarea>
         </div>
-        <button type="submit" id="sendprompt">전송</button>
+        <button type="submit" id="sendprompt" style="margin-right: 60px;">전송</button>
     </form>
 </div>
-</b
+<!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <button id="closeButton" style="display: none;" onclick="closeModal()" class="close">&times;</button>
+        <div class="video-wrapper">
+            <video id="videoPlayer" loop autoplay>
+                <source src="../video/entersiteinfo.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+<script>
+    // Modal 이벤트
+    // Open Modal
+    function openModal() {
+        document.getElementById("modal").style.display = "block";
+        document.getElementById("videoPlayer").play();
+    }
+
+    // Close Modal
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+        document.getElementById("videoPlayer").pause();
+        document.getElementById("videoPlayer").currentTime = 0;
+    }
+    const videoPlayer = document.getElementById('videoPlayer');
+    const closeButton = document.getElementById('closeButton');
+
+    videoPlayer.addEventListener('ended', function() {
+        closeButton.style.display = 'block';
+    });
+
+</script>
+</body>
+</html>

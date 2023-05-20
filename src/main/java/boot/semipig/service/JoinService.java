@@ -36,4 +36,13 @@ public class JoinService implements JoinServiceInter{
             return 0;
         }
     }
+
+    @Override
+    public int selectUserType(int user_idx) {
+        int selectUserType= joinMapper.selectUserType(user_idx);
+
+        return selectUserType;
+    }
+
+
 }

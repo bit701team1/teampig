@@ -11,4 +11,7 @@
     <select id="existFoodList" parameterType="JoinDto" resultType="int">
         select exists (select * from food_list where user_idx = #{user_idx})
     </select>
+    <select id="selectUserType" parameterType="int" resultType="int">
+        SELECT user_type FROM user WHERE user_idx = #{user_idx}
+    </select>
 </mapper>

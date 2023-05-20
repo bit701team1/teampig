@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class BusinessController {
@@ -51,6 +53,12 @@ public class BusinessController {
         OwnerpageDto dto = new OwnerpageDto();
         dto.setUser_idx(user_idx);
         return joinService.existFoodList(dto);
+    }
+    @GetMapping("/selectUserType")
+    @ResponseBody
+    public int selectUserType(HttpSession session) {
+        int user_type = (int) session.getAttribute("user_type");
+        return user_type;
     }
 
 }
