@@ -10,8 +10,7 @@ import java.util.Map;
 @Mapper
 public interface QnaMapper {
     public int getMaxNum(); //답글관련
-    public void updateStep(Map<String, Integer> map); //ref, step이 들어있다.
-    
+
     //qna 카운트랑, qna_idx를 받은 answer카운트
     public int getTotalCount();
     public int getAnswerCount(int qna_idx);

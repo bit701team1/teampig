@@ -41,11 +41,14 @@ public class LoginController{
             session.setAttribute("loginok", "yes");
             session.setAttribute("loginid", id);
             int user_idx=loginService.getUserIdx(id);
-
+            int user_type = loginService.getUserInfo(user_idx).getUser_type();
             String user_name = loginService.getUserInfo(user_idx).getUser_name();
+
             session.setAttribute("username",user_name);
             session.setAttribute("loginidx", user_idx);
             session.setAttribute("saveid", saveid==null?"no":"yes");
+            session.setAttribute("usertype",user_type);
+
             return 1;
         }
 

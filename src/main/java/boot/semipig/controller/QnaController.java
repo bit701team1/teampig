@@ -1,16 +1,18 @@
 package boot.semipig.controller;
 
+import boot.semipig.dto.LoginDto;
 import boot.semipig.dto.QnaAnswerDto;
 import boot.semipig.dto.QnaDto;
+import boot.semipig.mapper.ServiceMapper;
+import boot.semipig.service.LoginService;
+import boot.semipig.service.OwnerpageService;
 import boot.semipig.service.QnaService;
 import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.security.auth.Subject;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,10 +26,20 @@ public class QnaController {
     @Autowired
     private QnaService qnaService;
 
+    @Autowired
+    private LoginService loginService;
+
+    @Autowired
+    private OwnerpageService ownerpageService;
+
+    @Autowired
+    public NcpObjectStorageService storageService;
+
+    public String bucketName="pig701-bucket";
 
     //질문게시판 리스트 출력
     @GetMapping("/list")
-    public String list(@RequestParam(defaultValue = "1") int currentPage, Model model) //null값이면 초기페이지를 1page로
+    public String list(@RequestParam(defaultValue = "1") int currentPage, Model model, HttpSession session) //null값이면 초기페이지를 1page로
     {
         //게시판의 총 글갯수 얻기
         int totalCount = qnaService.getTotalCount();
@@ -38,6 +50,8 @@ public class QnaController {
         int startPage;//각 블럭에서 보여질 시작페이지 번호
         int endPage;//각 블럭에서 보여질 끝 페이지 번호
         int no;//글 출력 시 출력할 페이지 번호
+        int user_idx = (int) session.getAttribute("loginidx");
+        int user_type = loginService.getUserInfo(user_idx).getUser_type();
 
         if (currentPage == 1) {
             perPage = 5; // 첫 페이지에는 5개
@@ -72,40 +86,39 @@ public class QnaController {
         //각 페이지에 필요한 게시글 db에서 가져오기\
         List<QnaDto> list = qnaService.getQnaPagingList(startNum, perPage);
         List<QnaDto> adminlist = qnaService.getNoticePagingList(startNum, perPage);
+        LoginDto dtos = loginService.getUserInfo(user_idx);
 
 
         List<Map<String, Object>> fulllist = new ArrayList<>();
-        for(QnaDto dto : list){
+        for (QnaDto dto : list) {
 
-            Map<String, Object>  map= new HashMap<>();
+            Map<String, Object> map = new HashMap<>();
             int qna_idx = dto.getQna_idx();
 
-            map.put("getAnswerCount",qnaService.getAnswerCount(dto.getQna_idx()));
-            map.put("qna_idx",dto.getQna_idx());
-            map.put("qna_subject",dto.getQna_subject());
-            map.put("qna_content",dto.getQna_content());
-            map.put("qna_pass",dto.getQna_pass());
-            map.put("qna_readcount",dto.getQna_readcount());
-            map.put("qna_ref",dto.getQna_ref());
-            map.put("qna_step",dto.getQna_step());
-            map.put("qna_depth",dto.getQna_depth());
-            map.put("qna_writeday",dto.getQna_writeday());
-            map.put("writer",dto.getWriter());
-            map.put("qna_ispass",dto.isQna_ispass());
-            map.put("user_type",dto.getUser_type());
-            map.put("user_idx",dto.getUser_idx());
+            map.put("getAnswerCount", qnaService.getAnswerCount(dto.getQna_idx()));
+            map.put("qna_idx", dto.getQna_idx());
+            map.put("qna_subject", dto.getQna_subject());
+            map.put("qna_content", dto.getQna_content());
+            map.put("qna_pass", dto.getQna_pass());
+            map.put("qna_ref", dto.getQna_ref());
+            map.put("qna_writeday", dto.getQna_writeday());
+            map.put("writer", dto.getWriter());
+            map.put("qna_ispass", dto.isQna_ispass());
+            map.put("user_type", dto.getUser_type());
+            map.put("user_idx", dto.getUser_idx());
             fulllist.add(map);
         }
 
         //출력 시 필요한 변수들을 model에 몽땅 저장
-        model.addAttribute("adminlist",adminlist);
-        model.addAttribute("list",fulllist);
+        model.addAttribute("adminlist", adminlist);
+        model.addAttribute("list", fulllist);
         model.addAttribute("totalCount", totalCount);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("totalPage", totalPage);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("no", no);
+        model.addAttribute("logindto", dtos);
 
         return "/qna/qnalist";
     }
@@ -117,23 +130,27 @@ public class QnaController {
             @RequestParam(defaultValue = "1") int currentPage,
             @RequestParam(defaultValue = "0") int qna_idx,
             @RequestParam(defaultValue = "0") int qna_ref,
-            @RequestParam(defaultValue = "0") int qna_step,
-            @RequestParam(defaultValue = "0") int qna_depth,
-            Model model
+            Model model,
+            HttpSession session
     ) {
+        int user_idx = (int) session.getAttribute("loginidx");
+        int user_type = loginService.getUserInfo(user_idx).getUser_type();
+
+        LoginDto dtos = loginService.getUserInfo(user_idx);
+
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("qna_idx", qna_idx);
         model.addAttribute("qna_ref", qna_ref);
-        model.addAttribute("qna_step", qna_step);
-        model.addAttribute("qna_depth", qna_depth);
 
+        model.addAttribute("logindto", dtos);
+
+        System.out.println(qna_idx);
         return "/qna/qnawriteform";
     }
 
     //공지글 또는 질문 인서트
     @PostMapping("/insert")
-    public String insert(QnaDto dto, @RequestParam("qna_ispass") boolean qna_ispass)
-    {
+    public String insert(QnaDto dto, @RequestParam("qna_ispass") boolean qna_ispass) {
         dto.setQna_ispass(qna_ispass);
         qnaService.insertQnaBoard(dto);
         return "redirect:list";
@@ -141,7 +158,7 @@ public class QnaController {
 
     //답변 인서트
     @PostMapping("/insertanswer")
-    public String insertQnaAnswer(QnaAnswerDto dto){
+    public String insertQnaAnswer(QnaAnswerDto dto) {
         qnaService.insertQnaAnswer(dto);
 
         return "redirect:/qna/list";
@@ -158,8 +175,7 @@ public class QnaController {
 
     //공지글, 일반 질문 삭제
     @GetMapping("/delete")
-    public String delete(int qna_idx)
-    {
+    public String delete(int qna_idx) {
         QnaDto dto = qnaService.getData(qna_idx);
         qnaService.deleteQna(qna_idx);
         return "redirect:list";
@@ -167,36 +183,14 @@ public class QnaController {
 
     @PostMapping("/ansdelete")
     @ResponseBody
-    public void deleteAnswer(int qna_idx,int answer_idx)
-    {
-        QnaDto dto= qnaService.getData(qna_idx);
-        qnaService.deleteAnswer(qna_idx,answer_idx);
+    public void deleteAnswer(int qna_idx, int answer_idx) {
+        QnaDto dto = qnaService.getData(qna_idx);
+        qnaService.deleteAnswer(qna_idx, answer_idx);
         System.out.println(qna_idx);
         System.out.println(answer_idx);
     }
+}
 
     //세션 로그인
-    @PostMapping("temp_login")
-    public String doLogin(String id,
-                          int user_idx, int user_type,
-                          HttpSession session) {
-        // 아이디와 비밀번호를 검증한 후, 세션에 아이디를 저장한다.
-        session.setAttribute("id", id);
-        session.setAttribute("user_idx", user_idx);
-        session.setAttribute("user_type", user_type);
-        // 로그인 후에는 다른 페이지로 리다이렉트한다.
-        return "redirect:list";
-    }
-    @GetMapping("temp_logout")
-    public String logout(HttpSession session) {
-
-        session.removeAttribute("id");
-        session.removeAttribute("user_idx");
-        session.removeAttribute("user_type");
-        return "redirect:list";
-    }
 
 
-
-
-}

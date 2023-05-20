@@ -12,13 +12,10 @@
         select count(*) from qna_answer where qna_idx=#{qna_idx}
     </select>
 
-    <update id="updateStep" parameterType="Map">
-        update qna set qna_step=qna_step+1 where qna_ref=#{qna_ref} and qna_step&gt;#{qna_step}
-    </update>
 
     <insert id="insertQnaBoard" parameterType="QnaDto">
-        insert into qna (writer, qna_subject,user_type,user_idx,qna_content, qna_pass, qna_ref, qna_step, qna_depth, qna_writeday,qna_ispass) values
-            (#{writer},#{qna_subject},#{user_type},#{user_idx},#{qna_content},#{qna_pass},#{qna_ref},${qna_step},#{qna_depth},now(),#{qna_ispass});
+        insert into qna (writer, qna_subject,user_type,user_idx,qna_content, qna_pass, qna_ref, qna_writeday,qna_ispass) values
+            (#{writer},#{qna_subject},#{user_type},#{user_idx},#{qna_content},#{qna_pass},#{qna_ref},now(),#{qna_ispass});
             <selectKey keyProperty="qna_idx" resultType="int" order="AFTER">
                 SELECT last_insert_id()
             </selectKey>
@@ -45,10 +42,10 @@
 
 
     <select id="getQnaPagingList" parameterType="Map" resultType="QnaDto">
-        select * from qna where user_type!=3 order by qna_ref desc, qna_step limit #{start}, #{perpage}
+        select * from qna where user_type!=3 order by qna_ref desc limit #{start}, #{perpage}
     </select>
     <select id="getNoticePagingList" parameterType="Map" resultType="QnaDto">
-        select * from qna where user_type=3 order by qna_ref desc, qna_step limit #{start}, #{perpage}
+        select * from qna where user_type=3 order by qna_ref desc limit #{start}, #{perpage}
     </select>
 
 </mapper>

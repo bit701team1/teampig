@@ -53,7 +53,7 @@
                 <img id="bg_r_img" src="/photo/j_enter_oner_0.jpg" style="width: 710px; height: 100%; right: 25%; ">
             </div>
             <button type="button" class="btn btn-secondary btn-sm j_enter_welcome_btn"
-                    onclick="location.href='/home1'">Welcome GGuineapig</button>
+                    onclick="location.href='/realmain'">Welcome GGuineapig</button>
             <button type="button" class="btn btn-secondary btn-sm j_enter_ownermenual_btn"
                     onclick="location.href='/business'">Oner Page</button>
         </div>
