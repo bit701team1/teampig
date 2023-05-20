@@ -30,6 +30,7 @@ public class HomeController {
     @GetMapping("/home2")
     public String home1(Model model, HttpSession session) {
         int user_idx = (int) session.getAttribute("loginidx");
+        int food_idx= myservice.getFoodIdx(user_idx);
         // DTO 객체를 생성하여 세션에서 가져온 정보를 저장
         serviceMapper.getmypage(user_idx);
         DetailDto dto =serviceMapper.getmypage(user_idx);

@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 
 @Controller
@@ -39,25 +40,7 @@ public class DetailController {
     @Autowired
     private MyService myservice;
 
-    /*@GetMapping("/detail2")
-    public String detail2(Model model, Integer food_idx, HttpSession session)
-    {
-        System.out.println("Controller food_idx="+food_idx);
 
-        DetailDto dto=detailService.selectFood(food_idx);
-        model.addAttribute("dto", dto);
-
-        //추가
-        Integer user_idx= (Integer)session.getAttribute("loginidx");
-        System.out.println(user_idx);
-
-        int count = detailService.getBookmarkCount(user_idx, food_idx);
-        //System.out.println(count);
-        model.addAttribute("count",count);
-
-        return "/detail";
-    }
-*/
     @GetMapping("/detail")//디테일 페이지에서 가게 정보 띄우기
     public String detail(Model model, Integer food_idx, HttpSession session)
     {
@@ -157,18 +140,8 @@ public class DetailController {
         //on delete cacade 설정시 외부키로 연결된 데이타들은 자동으로 삭제된다
         reviewService.deleteReview(review_idx);
     }
-   /* @GetMapping("/updateform")//리뷰 수정 페이지
-    public String updateform(Model model, int food_idx, int review_idx)
-    {
-        DetailDto fdto=detailService.selectFood(food_idx);
-        model.addAttribute("fdto", fdto);
-        ReviewDto rdto=reviewService.selectReview(review_idx);
-        List<ReviewPhotoDto> plist=reviewService.getPhotos(review_idx);
-        rdto.setPhotoList(plist);
-        model.addAttribute("rdto", rdto);
-        return "/detail/updateform";
-    }
-*/
+
+
     @GetMapping("/selectonereview")
     @ResponseBody public ReviewDto selectOneReview(Model model, int review_idx){
         ReviewDto dto=reviewService.selectReview(review_idx);
@@ -229,11 +202,22 @@ public class DetailController {
     @GetMapping("/nearbystore")//지역 관련 값을 받아와서 그 지역의 인기 맛집 네개 출력(여기서는 전부 보내고 jsp 페이지에서 네개만 출력)
     @ResponseBody public List<DetailDto> nearbystore(String SIGUN_NM)
     {
-        //System.out.println("test"+SIGUN_NM);
         List<DetailDto> nlist=detailService.nearbyStore(SIGUN_NM);
-        //System.out.println("tt"+nlist);
+        List<DetailDto> list=new Vector<>();
+        for(DetailDto dto:nlist)
+        {
+            //급해서 food_idx를 user_idx로 대신함
+            String photoname=detailService.nearbyStorephoto(dto.getFood_idx()).getPhotoname();
+            if(photoname!=null)
+            {
+                dto.setPhotoname(photoname);
+                System.out.println(dto.getFood_idx());
+                System.out.println("test"+photoname);
+                list.add(dto);
+            }
+        }
 
-        return nlist;
+        return list;
     }
 
     //추가
@@ -303,6 +287,22 @@ public class DetailController {
     {
         return "detail/testform";
     }*/
+    @GetMapping("/imagetest")
+    public String imageTest(Model model,  HttpSession session)
+    {
+        int food_idx=1;
+        System.out.println("Controller food_idx="+food_idx);
 
+        DetailDto dto=detailService.selectFood(food_idx);
+        model.addAttribute("dto", dto);
 
+        //추가
+        Integer user_idx= (Integer)session.getAttribute("loginidx");
+        System.out.println(user_idx);
+
+        int count = detailService.getBookmarkCount(user_idx, food_idx);
+        //System.out.println(count);
+        model.addAttribute("count",count);
+        return "detail/imagetest";
+    }
 }

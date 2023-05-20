@@ -261,7 +261,7 @@
         .reviewformrestrt_nm{
             font-size: 28px;
         }
-        <%--추가로 넣은 것 --%>
+<%--추가로 넣은 것 --%>
         .s_nearbystoretable{
             margin-top: 10px;
             /*margin-bottom: 7px;*/
@@ -319,7 +319,7 @@
         .s_couponimage{
 
             animation: vibration 0.1s infinite;
-        }
+           }
         @keyframes vibration {
             from {
                 transform: rotate(2deg);
@@ -495,8 +495,8 @@
                 }
             });
             //리뷰 클릭시 자세히 보기
-            $(".s_reviewtable").click(function(){
-
+            $("div.s_reviewtable").click(function(){
+                openModal();
             })
 
         })//시작함수 끝
@@ -549,7 +549,7 @@
         <br>&nbsp;<span style="color:gray">\${ele.user_name}</span>`;
                         }else{
                             s+=`
-        <img src="../../save/personimage\${num}.png" style="width: 48px; height: 48px; border-radius: 100%; padding-top: 10px;" >
+        <img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/personimage\${num}.png" style="width: 48px; height: 48px; border-radius: 100%; padding-top: 10px;" >
          <br>&nbsp;<span class="rusername"style="color:gray">\${ele.user_name}</span>
         `
                         }
@@ -776,10 +776,10 @@
                         var s="";
 
                         if(res==1) {
-                            s=`<img src="bookmark/filledstar.png" class="starimage starfilling reviewpencil"><span style="font-size: 10px;"><b class="reviewpencil">가고싶다</b></span>`;
+                            s=`<img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/filledstar.png" class="starimage starfilling reviewpencil"><span style="font-size: 10px;"><b class="reviewpencil">가고싶다</b></span>`;
                         }
                         else{
-                            s=`<img src="bookmark/star.png" class="starimage starempty reviewpencil"><span style="font-size: 10px;"><b class="reviewpencil">가고싶다</b></span>`;
+                            s=`<img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/star.png" class="starimage starempty reviewpencil"><span style="font-size: 10px;"><b class="reviewpencil">가고싶다</b></span>`;
                         }
 
                         $("#k_iconplace").html(s);
@@ -1203,13 +1203,13 @@
                         <span class="s_fontsize30">${dto.RESTRT_NM} <span class="s_fontcolorapply">${dto.average}</span></span>
 
                         <div class="s_button">
-                            <%--                            <button id="s_reviewform" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reviewModal"><i class="bi bi-pencil-fill"></i>--%>
-                            <%--                                <span>리뷰쓰기</span></button>--%>
-                            <%--                            <button type=기"button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal"> <i class="bi bi-calendar-check-fill"></i>--%>
-                            <%--                                <span>예약하기</span></button>--%>
+<%--                            <button id="s_reviewform" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reviewModal"><i class="bi bi-pencil-fill"></i>--%>
+<%--                                <span>리뷰쓰기</span></button>--%>
+<%--                            <button type=기"button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal"> <i class="bi bi-calendar-check-fill"></i>--%>
+<%--                                <span>예약하기</span></button>--%>
                             <div id="k_iconplace" class="s_btbt" style="width: 38px; height: 38px;"></div>
-                            <div class="s_btbt"><img src="../../save/pencil.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#reviewModal"><span style="font-size: 10px;"><b class="reviewpencil">리뷰쓰기</b></span></div>
-                            <div class="s_btbt"><img src="../../save/calendar.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#calendarModal"><span style="font-size: 10px;"><b class="reviewpencil">예약하기</b></span></div>
+                             <div class="s_btbt"><img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/pencil.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#reviewModal"><span style="font-size: 10px;"><b class="reviewpencil">리뷰쓰기</b></span></div>
+                            <div class="s_btbt"><img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/calendar.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#calendarModal"><span style="font-size: 10px;"><b class="reviewpencil">예약하기</b></span></div>
 
                         </div>
 
@@ -1217,24 +1217,24 @@
                     <div class="s_storedetailinfo">
                         <div  class="s_couptable">
                             <div class="s_ct" style="width: 800px;">
-                                <table class="infotable">
-                                    <tr>
-                                        <td style="color: gray">주소</td><td>&nbsp;${dto.REFINE_LOTNO_ADDR}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="color: gray">전화번호</td><td>&nbsp;${dto.TASTFDPLC_TELNO}</td>
-                                    </tr>
+                        <table class="infotable">
+                            <tr>
+                                <td style="color: gray">주소</td><td>&nbsp;${dto.REFINE_LOTNO_ADDR}</td>
+                            </tr>
+                            <tr>
+                                <td style="color: gray">전화번호</td><td>&nbsp;${dto.TASTFDPLC_TELNO}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td style="color: gray">음식종류</td><td>&nbsp;${dto.food_type}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="color: gray">가격대</td><td>&nbsp;${dto.food_price}</td>
-                                    </tr>
-                                </table>
+                            <tr>
+                                <td style="color: gray">음식종류</td><td>&nbsp;${dto.food_type}</td>
+                            </tr>
+                            <tr>
+                                <td style="color: gray">가격대</td><td>&nbsp;${dto.food_price}</td>
+                            </tr>
+                        </table>
                             </div>
 
-                            <div style="width: 100px; height: 100px; margin-left: 300px; margin-top: 20px;" class="s_ct s_coupon"><div class="s_cpinfotop">10% 할인</div><img src="../../save/couponimage.png" style="width: 120px; height: 100px;" class="s_couponimage"><div class="s_cpinfobottom">남은 시간</div></div>
+                        <div style="width: 100px; height: 100px; margin-left: 300px; margin-top: 20px;" class="s_ct s_coupon"><div class="s_cpinfotop">10% 할인</div><img src="../../save/couponimage.png" style="width: 120px; height: 100px;" class="s_couponimage"><div class="s_cpinfobottom">남은 시간</div></div>
                         </div>
                         <br>
                         ${dto.GPT_content}<br>
@@ -1248,323 +1248,355 @@
                 <hr>
                 <div class="s_review"></div>
 
-            </div>
+        </div>
             <div id="s_around">
                 <div class="s_side">
                     <div id="map" style="width:400px; height:328px;"></div>
                     <div id="s_nearby"></div><!--주변 인기 식당-->
                 </div>
             </div>
-        </div>
+    </div>
         <script>
             (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
             ChannelIO('boot', {
                 "pluginKey": "708c4779-dafe-4260-abe0-c76183c1b24a"
             });
         </script>
-        <!--모달 관련-->
+    <!--모달 관련-->
         <!--리뷰 자세히 보기 클릭-->
-
-        <!---예약모달-->
-        <div style="width:450px;">
-
-            <!-- The Modal -->
-            <div class="modal fade" id="calendarModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">예약하기</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-
-                        <!-- Modal body -->
-                        <div class="modal-body">
-
-                            <table  class="table table-bordered">
-
-                                <tr>
-                                    <th style="width: 100px;background-color: #ddd">날짜</th>
-                                    <td>
-                                        <input type="date" class="form-control" name="start" id="y_date">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th style="width: 100px;background-color: #ddd">시간</th>
-                                    <td>
-                                        <input type="text" id="y_time" >
-                                    </td>
-                                </tr>
-                                <tr>
-                                </tr>
-                            </table>
-
-                        </div>
-                        <!-- Modal footer -->
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="allSave()">예약하기</button>
-                    </div>
+        <!-- Modal -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <button id="closeButton" style="display: none;"onclick="closeModal()" class="close" >&times;</button>
+                <div class="video-wrapper">
+                    <video id="videoPlayer" controls>
+                        <source src="../ad/ad.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
         </div>
-        <!--리뷰 수정 모달-->
+
+        <script>
+            // Modal 이벤트
+            // Open Modal
+            function openModal() {
+                document.getElementById("modal").style.display = "block";
+                document.getElementById("videoPlayer").play();
+            }
+
+            // Close Modal
+            function closeModal() {
+                document.getElementById("modal").style.display = "none";
+                document.getElementById("videoPlayer").pause();
+                document.getElementById("videoPlayer").currentTime = 0;
+            }
+            const videoPlayer = document.getElementById('videoPlayer');
+            const closeButton = document.getElementById('closeButton');
+
+            videoPlayer.addEventListener('ended', function() {
+                closeButton.style.display = 'block';
+            });
+        </script>
+    <!---예약모달-->
+    <div style="width:450px;">
+
         <!-- The Modal -->
-        <div class="modal" id="reviewupdateModal" >
+        <div class="modal fade" id="calendarModal">
             <div class="modal-dialog">
                 <div class="modal-content">
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">수정하기</h4>
+                        <h4 class="modal-title">예약하기</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <div class="u_wrap">
-                            <h1>${dto.RESTRT_NM}에 대한 솔직한 리뷰를 써주세요.</h1>
-                            <input type="hidden" id="u_food_idx" value="${dto.food_idx}">
-                            <input type="hidden" id="u_user_idx" value="${sessionScope.loginidx}">
-                            <input type="hidden" id="u_review_idx" value="">
 
-                            <input type="hidden" class="u_review_score" id="u_score" value="0">
-                            <div class="u_review_rating">
+                        <table  class="table table-bordered">
 
-                                <div class="u_rating">
-                                    <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
-                                    <input type="checkbox" name="rating" id="u_rating1" value="1" class="u_rate_radio" title="1점">
-                                    <label for="u_rating1"></label>
-                                    <input type="checkbox" name="rating" id="u_rating2" value="2" class="u_rate_radio" title="2점">
-                                    <label for="u_rating2"></label>
-                                    <input type="checkbox" name="rating" id="u_rating3" value="3" class="u_rate_radio" title="3점" >
-                                    <label for="u_rating3"></label>
-                                    <input type="checkbox" name="rating" id="u_rating4" value="4" class="u_rate_radio" title="4점">
-                                    <label for="u_rating4"></label>
-                                    <input type="checkbox" name="rating" id="u_rating5" value="5" class="u_rate_radio" title="5점">
-                                    <label for="u_rating5"></label>
-                                </div>
-                            </div>
+                            <tr>
+                                <th style="width: 100px;background-color: #ddd">날짜</th>
+                                <td>
+                                    <input type="date" class="form-control" name="start" id="y_date">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="width: 100px;background-color: #ddd">시간</th>
+                                <td>
+                                    <input type="text" id="y_time" >
+                                </td>
+                            </tr>
+                            <tr>
+                            </tr>
+                        </table>
 
-                            <div class="u_review_contents">
-            <textarea rows="10" class="u_review_textarea form-control"
-                      placeholder="${sessionScope.loginid}님, 주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!
-            " id="u_reviewtext" ></textarea>
-                            </div>
-                            <div><input type="file" multiple="multiple" class="form-control" name="upload" id="u_myfile"></div>
-                            <div>
-                                <div class="s_photosqure">
-                                    <img src="" style="width: 100px; height: 100px;" id="s_u_photosqure">
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
-
                     <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success s_updatebtn" data-bs-dismiss="modal" >수정하기</button>
-                    </div>
-
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="allSave()">예약하기</button>
                 </div>
             </div>
         </div>
-        <div style="width: 450px;">
-            <!--review modal-->
-            <!-- The Modal -->
-            <div class="modal fade" id="reviewModal">
-                <div class="modal-dialog" style="width: 500px;">
-                    <div class="modal-content" style="width: 500px;">
+    </div>
+    <!--리뷰 수정 모달-->
+    <!-- The Modal -->
+    <div class="modal" id="reviewupdateModal" >
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">리뷰 쓰기</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">수정하기</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="u_wrap">
+                        <h1>${dto.RESTRT_NM}에 대한 솔직한 리뷰를 써주세요.</h1>
+                        <input type="hidden" id="u_food_idx" value="${dto.food_idx}">
+                        <input type="hidden" id="u_user_idx" value="${sessionScope.loginidx}">
+                        <input type="hidden" id="u_review_idx" value="">
+
+                        <input type="hidden" class="u_review_score" id="u_score" value="0">
+                        <div class="u_review_rating">
+
+                            <div class="u_rating">
+                                <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
+                                <input type="checkbox" name="rating" id="u_rating1" value="1" class="u_rate_radio" title="1점">
+                                <label for="u_rating1"></label>
+                                <input type="checkbox" name="rating" id="u_rating2" value="2" class="u_rate_radio" title="2점">
+                                <label for="u_rating2"></label>
+                                <input type="checkbox" name="rating" id="u_rating3" value="3" class="u_rate_radio" title="3점" >
+                                <label for="u_rating3"></label>
+                                <input type="checkbox" name="rating" id="u_rating4" value="4" class="u_rate_radio" title="4점">
+                                <label for="u_rating4"></label>
+                                <input type="checkbox" name="rating" id="u_rating5" value="5" class="u_rate_radio" title="5점">
+                                <label for="u_rating5"></label>
+                            </div>
                         </div>
 
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <div class="wrap">
-                                <div><b class="reviewformrestrt_nm s_fontcolorapply">${dto.RESTRT_NM}</b><span>에 대한 솔직한 리뷰를 써주세요.</span></div>
-                                <form  method="post" action="insertreview" enctype="multipart/form-data">
-
-                                    <input type="hidden" id="user_idx" value="${sessionScope.loginidx}">
-                                    <input type="hidden" id="food_idx" value="${dto.food_idx}">
-                                    <input type="hidden" class="review_score" id="score" value="0">
-                                    <div class="review_rating">
-
-                                        <div class="rating">
-                                            <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
-                                            <input type="checkbox" name="rating" id="rating1" value="1" class="rate_radio" title="1점">
-                                            <label for="rating1"></label>
-                                            <input type="checkbox" name="rating" id="rating2" value="2" class="rate_radio" title="2점">
-                                            <label for="rating2"></label>
-                                            <input type="checkbox" name="rating" id="rating3" value="3" class="rate_radio" title="3점" >
-                                            <label for="rating3"></label>
-                                            <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio" title="4점">
-                                            <label for="rating4"></label>
-                                            <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
-                                            <label for="rating5"></label>
-                                        </div>
-                                    </div>
-
-                                    <div class="review_contents">
-            <textarea rows="10" class="review_textarea form-control"
+                        <div class="u_review_contents">
+            <textarea rows="10" class="u_review_textarea form-control"
                       placeholder="${sessionScope.loginid}님, 주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!
-            " id="reviewtext"></textarea>
-                                    </div>
-                                    <div><input type="file" multiple="multiple" class="form-control" name="upload" id="myfile"></div>
-                                    <div>
-                                        <div class="s_photosqure">
-                                            <img src="" style="width: 100px; height: 100px;" id="s_photosqure">
-                                        </div>
-                                    </div>
-
-
-
-                                </form>
-
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success s_reviewsave" data-bs-dismiss="modal" >리뷰저장</button>
-                            </div>
-
+            " id="u_reviewtext" ></textarea>
                         </div>
+                        <div><input type="file" multiple="multiple" class="form-control" name="upload" id="u_myfile"></div>
+                        <div>
+                            <div class="s_photosqure">
+                                <img src="" style="width: 100px; height: 100px;" id="s_u_photosqure">
+                            </div>
+                        </div>
+
                     </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success s_updatebtn" data-bs-dismiss="modal" >수정하기</button>
                 </div>
 
             </div>
         </div>
     </div>
-    <script src="js/footer.js"></script>
+    <div style="width: 450px;">
+        <!--review modal-->
+        <!-- The Modal -->
+        <div class="modal fade" id="reviewModal">
+            <div class="modal-dialog" style="width: 500px;">
+                <div class="modal-content" style="width: 500px;">
 
-    <script type="text/javascript">
-        $("#myfile").change(function(){
-            console.log("1:"+$(this)[0].files.length);
-            console.log("2:"+$(this)[0].files[0]);
-            //정규표현식
-            var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
-            var f=$(this)[0].files[0];//현재 선택한 파일
-            if(!f.type.match(reg)){
-                alert("확장자가 이미지파일이 아닙니다");
-                return;
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">리뷰 쓰기</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="wrap">
+                            <div><b class="reviewformrestrt_nm s_fontcolorapply">${dto.RESTRT_NM}</b><span>에 대한 솔직한 리뷰를 써주세요.</span></div>
+                            <form  method="post" action="insertreview" enctype="multipart/form-data">
+
+                                <input type="hidden" id="user_idx" value="${sessionScope.loginidx}">
+                                <input type="hidden" id="food_idx" value="${dto.food_idx}">
+                                <input type="hidden" class="review_score" id="score" value="0">
+                                <div class="review_rating">
+
+                                    <div class="rating">
+                                        <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
+                                        <input type="checkbox" name="rating" id="rating1" value="1" class="rate_radio" title="1점">
+                                        <label for="rating1"></label>
+                                        <input type="checkbox" name="rating" id="rating2" value="2" class="rate_radio" title="2점">
+                                        <label for="rating2"></label>
+                                        <input type="checkbox" name="rating" id="rating3" value="3" class="rate_radio" title="3점" >
+                                        <label for="rating3"></label>
+                                        <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio" title="4점">
+                                        <label for="rating4"></label>
+                                        <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
+                                        <label for="rating5"></label>
+                                    </div>
+                                </div>
+
+                                <div class="review_contents">
+            <textarea rows="10" class="review_textarea form-control"
+                      placeholder="${sessionScope.loginid}님, 주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!
+            " id="reviewtext"></textarea>
+                                </div>
+                                <div><input type="file" multiple="multiple" class="form-control" name="upload" id="myfile"></div>
+                                <div>
+                                    <div class="s_photosqure">
+                                        <img src="" style="width: 100px; height: 100px;" id="s_photosqure">
+                                    </div>
+                                </div>
+
+
+
+                            </form>
+
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success s_reviewsave" data-bs-dismiss="modal" >리뷰저장</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="js/footer.js"></script>
+
+<script type="text/javascript">
+    $("#myfile").change(function(){
+        console.log("1:"+$(this)[0].files.length);
+        console.log("2:"+$(this)[0].files[0]);
+        //정규표현식
+        var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+        var f=$(this)[0].files[0];//현재 선택한 파일
+        if(!f.type.match(reg)){
+            alert("확장자가 이미지파일이 아닙니다");
+            return;
+        }
+        if($(this)[0].files[0]){
+            var reader=new FileReader();
+            reader.onload=function(e){
+                $("#s_photosqure").attr("src",e.target.result);
             }
-            if($(this)[0].files[0]){
-                var reader=new FileReader();
-                reader.onload=function(e){
-                    $("#s_photosqure").attr("src",e.target.result);
-                }
-                reader.readAsDataURL($(this)[0].files[0]);
+            reader.readAsDataURL($(this)[0].files[0]);
+        }
+    });
+    $("#u_myfile").change(function(){
+        console.log("1:"+$(this)[0].files.length);
+        console.log("2:"+$(this)[0].files[0]);
+        //정규표현식
+        var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+        var f=$(this)[0].files[0];//현재 선택한 파일
+        if(!f.type.match(reg)){
+            alert("확장자가 이미지파일이 아닙니다");
+            return;
+        }
+        if($(this)[0].files[0]){
+            var reader=new FileReader();
+            reader.onload=function(e){
+                $("#s_u_photosqure").attr("src",e.target.result);
             }
-        });
-        $("#u_myfile").change(function(){
-            console.log("1:"+$(this)[0].files.length);
-            console.log("2:"+$(this)[0].files[0]);
-            //정규표현식
-            var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
-            var f=$(this)[0].files[0];//현재 선택한 파일
-            if(!f.type.match(reg)){
-                alert("확장자가 이미지파일이 아닙니다");
-                return;
-            }
-            if($(this)[0].files[0]){
-                var reader=new FileReader();
-                reader.onload=function(e){
-                    $("#s_u_photosqure").attr("src",e.target.result);
-                }
-                reader.readAsDataURL($(this)[0].files[0]);
-            }
-        });
-    </script>
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            reader.readAsDataURL($(this)[0].files[0]);
         }
-        .s_review{
-            position: relative;
-            margin-top: 10px;
-        }
-        #s_cont{
-            margin: 0 auto;
-            width: 1200px;
-            max-width: 100%; /* 추가 */
-        }
+    });
+</script>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .s_review{
+        position: relative;
+        margin-top: 10px;
+    }
+    #s_cont{
+        margin: 0 auto;
+        width: 1200px;
+        max-width: 100%; /* 추가 */
+    }
 
-        header{
-            width: 100%;
-            height: 100px;
-            /*background-color: brown;*/
-        }
+    header{
+        width: 100%;
+        height: 100px;
+        /*background-color: brown;*/
+    }
 
-        #s_logo{
-            float: left;
-            width: 250px;
-            height: 100px;
-            /*background-color: yellowgreen;*/
-        }
+    #s_logo{
+        float: left;
+        width: 250px;
+        height: 100px;
+        /*background-color: yellowgreen;*/
+    }
 
-        nav{
-            float: right;
-            width: 900px;
-            height: 100px;
-            /*background-color: aqua;*/
-        }
+    nav{
+        float: right;
+        width: 900px;
+        height: 100px;
+        /*background-color: aqua;*/
+    }
 
-        #s_infolist {
-            /* overflow: hidden; 클리어(Clear) 처리 */
-            position: absolute;
-            width: 100%;
-            height: auto;
-            margin: 0;
-            padding: 0;
-        }
-        .s_detail{
-            position: absolute;
-        }
-        #s_storelist {
-            float: left;
-            display: inline-block;
-            width: 60%;
-            height: 300px;
-            position:absolute;
-            margin-top: 7px;
-            /*background-color: lightblue;*/
-        }
+    #s_infolist {
+        /* overflow: hidden; 클리어(Clear) 처리 */
+        position: absolute;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+    }
+    .s_detail{
+        position: absolute;
+    }
+    #s_storelist {
+        float: left;
+        display: inline-block;
+        width: 60%;
+        height: 300px;
+        position:absolute;
+        margin-top: 7px;
+        /*background-color: lightblue;*/
+    }
 
-        #s_around {
-            float: right;
-            display: inline-block;
-            position: relative;
-            margin-top: 0px;
-            width: 40%;
-            height: 300px;
-            /*background-color: lightgray;*/
-        }
+    #s_around {
+        float: right;
+        display: inline-block;
+        position: relative;
+        margin-top: 0px;
+        width: 40%;
+        height: 300px;
+        /*background-color: lightgray;*/
+    }
 
 
 
-        #s_photolist{
-            width: 100%;
-            height: 300px;
-        }
+    #s_photolist{
+        width: 100%;
+        height: 300px;
+    }
 
-        #s_photos{
-            width: 1200px;
-            height: 100%;
-            /*background-color: beige;*/
-        }
+    #s_photos{
+        width: 1200px;
+        height: 100%;
+        /*background-color: beige;*/
+    }
 
 
 
-        footer{
-            /*position: absolute;*/
-            width: 100%;
-            height: 100px;
-            /*background-color: chocolate;*/
-        }
-    </style>
+    footer{
+        /*position: absolute;*/
+        width: 100%;
+        height: 100px;
+        /*background-color: chocolate;*/
+    }
+</style>
 </body>
 </html>
