@@ -1305,7 +1305,7 @@
                                 </table>
                             </div>
 
-                            <div style="width: 100px; height: 100px; margin-left: 300px; margin-top: 20px;" class="s_ct s_coupon"><div class="s_cpinfotop">10% 할인</div><img src="../../save/couponimage.png" style="width: 120px; height: 100px;" class="s_couponimage"><div class="s_cpinfobottom">남은 시간</div></div>
+                            <div style="width: 100px; height: 100px; margin-left: 300px; margin-top: 20px;" class="s_ct s_coupon"><div class="s_cpinfotop">% 할인</div><img src="../../save/couponimage.png" style="width: 120px; height: 100px;" class="s_couponimage"><div class="s_cpinfobottom">남은 시간</div></div>
                         </div>
                         <br>
                         ${dto.GPT_content}<br>
@@ -1368,49 +1368,7 @@
                 closeButton.style.display = 'block';
             });
         </script>
-        <!---예약모달-->
-        <%--    <div style="width:450px;">--%>
 
-        <%--        <!-- The Modal -->--%>
-        <%--        <div class="modal fade" id="calendarModal">--%>
-        <%--            <div class="modal-dialog">--%>
-        <%--                <div class="modal-content">--%>
-
-        <%--                    <!-- Modal Header -->--%>
-        <%--                    <div class="modal-header">--%>
-        <%--                        <h4 class="modal-title">예약하기</h4>--%>
-        <%--                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>--%>
-        <%--                    </div>--%>
-
-        <%--                    <!-- Modal body -->--%>
-        <%--                    <div class="modal-body">--%>
-
-        <%--                        <table  class="table table-bordered">--%>
-
-        <%--                            <tr>--%>
-        <%--                                <th style="width: 100px;background-color: #ddd">날짜</th>--%>
-        <%--                                <td>--%>
-        <%--                                    <input type="date" class="form-control" name="start" id="y_date">--%>
-        <%--                                </td>--%>
-        <%--                            </tr>--%>
-        <%--                            <tr>--%>
-        <%--                                <th style="width: 100px;background-color: #ddd">시간</th>--%>
-        <%--                                <td>--%>
-        <%--                                    <input type="text" id="y_time" >--%>
-        <%--                                </td>--%>
-        <%--                            </tr>--%>
-        <%--                            <tr>--%>
-        <%--                            </tr>--%>
-        <%--                        </table>--%>
-
-        <%--                    </div>--%>
-        <%--                    <!-- Modal footer -->--%>
-        <%--                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="allSave()">예약하기</button>--%>
-        <%--                </div>--%>
-        <%--            </div>--%>
-        <%--        </div>--%>
-        <%--    </div>--%>
-        <!---예약모달-->
         <div class="modal fade" id="calendarModal">
             <div class="modal-dialog">
                 <div class="modal-content">
