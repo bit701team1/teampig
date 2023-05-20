@@ -9,4 +9,5 @@ public interface JoinMapper {
     public void insertUser(JoinDto dto);
     public int isIdAvailable(JoinDto dto);
     int existFoodList(OwnerpageDto dto);
+    public int selectUserType(int user_idx);
 }

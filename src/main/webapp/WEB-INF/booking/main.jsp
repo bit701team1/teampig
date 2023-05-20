@@ -83,46 +83,46 @@
 <c:set var="root" value="<%=request.getContextPath() %>"/>
 <h2>가게정보</h2>
 <div class="y_myinfo">
-    <div style="display: flex; margin-top: 10px;">
-        <img src='${root}/photo/food.gif' style="width: 450px; height:400px;" class="rounded" alt="Cinque Terre">
-<table class="table table-bordered" style="width: 500px; margin-left: 20px; height:400px; ">
-    <tr>
-        <td style="width: 100px; background: #F6F6F6;">이름 </td>
-        <td>${dto.RESTRT_NM}</td>
-    </tr>
-    <tr>
-        <td style="width: 100px; background: #F6F6F6;">전화번호 </td>
-        <td>${dto.TASTFDPLC_TELNO}</td>
-    </tr>
-    <tr>
-        <td style="width: 100px; background: #F6F6F6;">가격대 </td>
-        <td>${dto.food_price}</td>
-    </tr>
-    <tr>
-        <td style="width: 100px; background: #F6F6F6;">주 메뉴</td>
-        <td>${dto.food_type}</td>
-    </tr>
-    <tr>
-        <td style="width: 100px; background: #F6F6F6;">주소  </td>
-        <td>${dto.REFINE_ROADNM_ADDR}</td>
-    </tr>
-    <tr>
-        <td style="width: 100px; background: #F6F6F6;"> 가게 포인트 </td>
-        <td>${dto.point}</td>
-    </tr>
-    <tr>
-        <td style="width: 100px; background: #F6F6F6;"> 오픈 시간 </td>
-        <td>${dto.opentime}</td>
-    </tr>
-    <tr>
-        <td style="width: 100px; background: #F6F6F6;"> 닫는 시간 </td>
-        <td>${dto.closetime}</td>
-    </tr>
-    <tr>
-        <td style="width: 100px; background: #F6F6F6;">휴일</td>
-        <td>${dto.holiday}</td>
-    </tr>
-</table>
+    <div style="display: flex; margin-top: 10px;" class="detail_img">
+        <img src="" style="width: 450px; height:400px;" class="rounded" alt="Cinque Terre" id="main-img">
+        <table class="table table-bordered" style="width: 500px; margin-left: 20px; height:400px; ">
+            <tr>
+                <td style="width: 100px; background: #F6F6F6;">이름 </td>
+                <td>${dto.RESTRT_NM}</td>
+            </tr>
+            <tr>
+                <td style="width: 100px; background: #F6F6F6;">전화번호 </td>
+                <td>${dto.TASTFDPLC_TELNO}</td>
+            </tr>
+            <tr>
+                <td style="width: 100px; background: #F6F6F6;">가격대 </td>
+                <td>${dto.food_price}</td>
+            </tr>
+            <tr>
+                <td style="width: 100px; background: #F6F6F6;">주 메뉴</td>
+                <td>${dto.food_type}</td>
+            </tr>
+            <tr>
+                <td style="width: 100px; background: #F6F6F6;">주소  </td>
+                <td>${dto.REFINE_ROADNM_ADDR}</td>
+            </tr>
+            <tr>
+                <td style="width: 100px; background: #F6F6F6;"> 가게 포인트 </td>
+                <td>${dto.point}</td>
+            </tr>
+            <tr>
+                <td style="width: 100px; background: #F6F6F6;"> 오픈 시간 </td>
+                <td>${dto.opentime}</td>
+            </tr>
+            <tr>
+                <td style="width: 100px; background: #F6F6F6;"> 닫는 시간 </td>
+                <td>${dto.closetime}</td>
+            </tr>
+            <tr>
+                <td style="width: 100px; background: #F6F6F6;">휴일</td>
+                <td>${dto.holiday}</td>
+            </tr>
+        </table>
 </div>
 </div>
 <div class="y_square">
@@ -187,6 +187,7 @@
     const timeInput2 = document.getElementById('y_ctime');
     const dateInput2 = document.getElementById('y_cdate');
     const now2 = new Date();
+    var imagePaths = [];
 
     dateInput2.min = now2.toISOString().split('T')[0];
     flatpickr(dateInput2, {
@@ -210,8 +211,6 @@
         minTime: now2,
         maxTime: '23:59', // 23:59까지 선택 가능
     });
-</script>
-<script>
     function applyCoupon() {
         var event2 = {
             number: '', time:''
@@ -240,6 +239,29 @@
             }
         });
     }
+    $(document).ready(function() {
+        // Function to change the main image
+        function changeImage(imagePath) {
+            $("#main-img").attr("src", imagePath);
+        }
+        var user_idx = ${dto.user_idx};
+        console.log(user_idx);
+        // Send an Ajax request to get the photos
+        $.ajax({
+            type: "GET",
+            url: "/mypage/getphoto", // 해당 URL을 실제로 사용하는 경로로 변경해야 합니다.
+            data: { "user_idx": user_idx }, // 사용자의 user_idx 값을 넣어야 합니다.
+            dataType: "json",
+            success: function(res) {
+                // 첫 번째 사진의 photoname을 꺼내어 콘솔에 출력
+                var firstPhoto = res[0].photoList[0];
+                var photoname = firstPhoto.photoname;
+                console.log("First photoname: " + photoname);
+
+                $("#main-img").attr("src", "http://kr.object.ncloudstorage.com/pig701-bucket/foodphoto/"+photoname);
+            }
+        });
+    });
 </script>
 <style>
     .custom-div {

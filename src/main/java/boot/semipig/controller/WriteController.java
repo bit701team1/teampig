@@ -227,10 +227,7 @@ public class WriteController {
         //수정
         ownerpageService.updateOwner(dto);
 
-        String openaiResult = ownerpageService.openai(dto.getUser_idx());
-        dto.setGPT_content(openaiResult);
-        ownerpageService.updatePrompt(dto);
-        System.out.println("update:"+openaiResult);
+
         if (upload != null) {
             System.out.println("size:" + upload.size());
             System.out.println("upload.get(0).getOriginalFilename()=" + upload.get(0).getOriginalFilename());
@@ -244,9 +241,16 @@ public class WriteController {
                 ownerpageService.insertPhoto(fdto);
             }
         }
+
+        String openaiResult = ownerpageService.openai(dto.getUser_idx());
+        dto.setGPT_content(openaiResult);
+        ownerpageService.updatePrompt(dto);
+        System.out.println("updateㅇㅇㅇ:"+openaiResult);
+
         //수정 후 내용보기로 이동
         return "redirect:./infoupdate?user_idx="+dto.getUser_idx();
     }
+
     @GetMapping("/getphoto")
     @ResponseBody
     public List<OwnerpageDto> getphoto(@RequestParam Optional<Integer> user_idx) {
