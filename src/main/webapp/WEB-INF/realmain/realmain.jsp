@@ -23,15 +23,33 @@
     <link rel="stylesheet" href="path/to/font-awesome/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-*********" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-*********" crossorigin="anonymous" />
 
-    <link rel="stylesheet" href="css/realmain.css">
-    <link rel="stylesheet" href="css/footer.css">
+
+    <link rel="stylesheet" href="/css/realmain.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/login.css">
+
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 
-
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <style>
+        #k_history_place{
+            width: 1500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #k_hotplace{
+            width: 1500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"/>
@@ -62,7 +80,126 @@
                 }//success function 끝
             })//ajax 끝
         })//로그인버튼 끝
-    });
+
+        //history ajax
+        $.ajax({
+            type: "get",
+            url: "./historyrecommand",
+            dataType:"json",
+            success: function (res) {
+                var s="";
+                $.each(res.recommandlist,function (idx, ele){
+                    s+=`
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                                 <div class="card mb-3 scroll-page">
+                                    <img class="card-img-top" src="http://pujmemyrqkys17181384.cdn.ntruss.com/foodphoto/\${ele.photoname}?type=f&w=200&h=200&ttype=png" alt="맛집">
+                                        <div class="card-body">
+                                            <h5 class="card-title">당신의 1순위 카테고리</h5>
+                                            <p class="card-text">\${ele.restrt_NM}</p>
+                                            <p class="card-type">#\${ele.food_type}</p>
+                                            <div class="frame">
+                                                <button class="custom-btn btn-2" onclick="window.location.href='/detail?food_idx='+\${ele.food_idx}">
+                                                <a target="_blank"></a>방문하기</button>
+                                            </div>
+                                        </div>
+                                </div>
+                        </div>
+                    `;
+                }); //each1
+
+                $.each(res.secondlist,function (idx, ele) {
+                    s += `
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                                 <div class="card mb-3 scroll-page">
+                                    <img class="card-img-top" src="http://pujmemyrqkys17181384.cdn.ntruss.com/foodphoto/\${ele.photoname}?type=f&w=200&h=200&ttype=png" alt="맛집">
+                                        <div class="card-body">
+                                            <h5 class="card-title">당신의 2순위 카테고리</h5>
+                                            <p class="card-text">\${ele.restrt_NM}</p>
+                                            <p class="card-type">#\${ele.food_type}</p>
+                                            <div class="frame">
+                                                <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
+                                            </div>
+                                        </div>
+                                </div>
+                        </div>
+                    `;
+                }); //each2
+
+                $("#k_history_place").html(s);
+            }//success function 끝
+        })//ajax 끝
+
+        $.ajax({
+            type: "get",
+            url: "./hotplace",
+            dataType:"json",
+            success: function (res) {
+                console.log(res);
+                var r="";
+                $.each(res,function (idx, ele){
+                    r += `
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                                 <div class="card mb-3 scroll-page">
+                                    <img class="card-img-top" src="http://pujmemyrqkys17181384.cdn.ntruss.com/foodphoto/\${ele.photoname}?type=f&w=200&h=200&ttype=png" alt="맛집">
+                                        <div class="card-body">
+                                            <h5 class="card-title">`;
+
+                            if(idx==0){
+                                r+=`평점순`;
+                            }else if(idx ==1){
+                                r+=`리뷰순`;
+                            } else if(idx ==2){
+                                r+=`즐겨찾기순`;
+                            } else {
+                                r+=`무작위 추천`;
+                            }
+
+                    r+=`</h5>
+                                            <p class="card-text">\${ele.restrt_NM}</p>
+                                            <p class="card-type">#\${ele.food_type}</p>
+                                            <div class="frame">
+                                                <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
+                                            </div>
+                                        </div>
+                                </div>
+                        </div>
+                    `;
+
+                }); //each end
+
+                $("#k_hotplace").html(r);
+            }//success function 끝
+        })//ajax 끝
+
+        //login시 enter키 이벤트
+        $(document).on('keyup',".inputsearch", function (event){
+            if (event.keyCode === 13) {  // Enter 키가 눌렸을 때
+                event.preventDefault(); // 기본 동작 방지
+                $(".k_btnsearch").click(); // login button 클릭
+            }
+        });
+
+        $(document).on('click',".k_btnsearch", function (event){
+            var input = $(".inputsearch").val();
+
+            event.preventDefault(); // 클릭 이벤트의 기본 동작을 중단합니다.
+            $.ajax({
+                url: "/setsearchsession",
+                type: "get",
+                dataType:"json",
+                data: {"input": input},
+                success: function (res) {
+                    alert(res);
+                },
+                error: function (error) {
+                    // 요청이 실패한 경우의 동작을 정의합니다.
+                    // ...
+                    alert("전송 실패");
+                }
+            });
+        });
+
+    }); //$func end
 
 
     $(function (){
@@ -149,7 +286,7 @@
 <body>
 <nav class="navbar navbar-dark bg-dark sticky-top navbar-expand-lg fixed-top">
     <a class="navbar-brand" href="#section-a">
-        <img src="images/logo4.png" width="50" height="50" alt="로고 출력 페이지">
+        <img src="/photo/mainpage/mainlogo.png" alt="로고 출력 페이지">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -172,15 +309,20 @@
                 <a class="nav-link  text-white" href="#menu-3">끼니피그소개</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  text-white" href="#">마이페이지</a>
+                <a class="nav-link  text-white" href="userpage">마이페이지</a>
             </li>
             <c:choose>
                 <c:when test="${sessionScope.loginok=='yes'}">
-                    <li><a href="#"  class="nav-link  text-white" onclick="location.href='./logout'">로그아웃</a></li>
-
+                    <li><a href="#"  class="nav-link  text-white" onclick="location.href='./logout'">
+                        <i class="fa-solid fa-user-slash fa-2xl"></i>
+                        </a>
+                    </li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="#" class="nav-link  text-white" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
+                    <li><a href="#" class="nav-link  text-white" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="fa-regular fa-user fa-2xl"></i>
+                        </a>
+                    </li>
                 </c:otherwise>
 
             </c:choose>
@@ -270,13 +412,11 @@
                                                 <option value="" selected disabled>선택</option>
                                                 <option value="1">일반 사용자</option>
                                                 <option value="2">사장님</option>
-                                                <option value="3">관리자</option>
                                             </select>
                                             <button class="btn_sign_up" type="button" id="signup">SIGN UP</button>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -433,7 +573,24 @@
             <div class="col-lg-12">
                 <div class="about scroll-page">
                     <h1><span class="ityped"></span></h1>
-                    <h4>끼니피그 맛집검색</h4>
+                    <br>
+                    <h4>
+                        <i class="fa-sharp fa-solid fa-j fa-beat-fade" style="color: #2c4002;"></i>
+                        <i class="fa-sharp fa-solid fa-u fa-beat-fade" style="color: #2c4002;"></i>
+                        <i class="fa-sharp fa-solid fa-s fa-beat-fade" style="color: #2c4002;"></i>
+                        <i class="fa-sharp fa-solid fa-t fa-beat-fade" style="color: #2c4002;"></i>
+                        &nbsp;
+                        <i class="fa-sharp fa-solid fa-d fa-beat-fade" style="color: #2c4002;"></i>
+                        <i class="fa-sharp fa-solid fa-o fa-beat-fade" style="color: #2c4002;"></i>
+                        &nbsp;
+                        <i class="fa-sharp fa-solid fa-e fa-beat-fade" style="color: #2c4002;"></i>
+                        <i class="fa-sharp fa-solid fa-a fa-beat-fade" style="color: #2c4002;"></i>
+                        <i class="fa-sharp fa-solid fa-t fa-beat-fade" style="color: #2c4002;"></i>
+                        &nbsp;
+                        <i class="fa-regular fa-exclamation fa-beat-fade" style="color: #2c4002;"></i>
+                        <i class="fa-regular fa-exclamation fa-beat-fade" style="color: #2c4002;"></i>
+                        <i class="fa-regular fa-exclamation fa-beat-fade" style="color: #2c4002;"></i>
+                    </h4>
 
                     <div id="m_searchbar">
                         <div class="wrapper">
@@ -460,7 +617,8 @@
                                     <div class="line line2"></div>
                                 </div>
 
-                                <input type="search" placeholder="키워드 입력" class="search" />
+                                <input type="search" placeholder="키워드 입력" class="search inputsearch" />
+                                <button type="button" class="k_btnsearch" list_type="type_search" hidden></button>
                             </button>
 
                             <div class="close"></div>
@@ -468,31 +626,31 @@
 
 
                             <div class="nav-items items1">
-                                <i class="fa-solid fa-house"><a href="#"></a></i>
+                                <i class="fa-solid fa-house"><a href="http://localhost:9000/enter"></a></i>
                             </div>
                             <div class="nav-items items2">
-                                <i class="fa-solid fa-location-dot"><a href="#"></a></i>
+                                <i class="fa-solid fa-location-dot"><a href="http://localhost:9000/search"></a></i>
                             </div>
                             <div class="nav-items items3">
-                                <i class="fa-solid fa-star"><a href="#"></a></i>
+                                <i class="fa-solid fa-star"><a href="http://localhost:9000/mypage/writeform"></a></i>
                             </div>
                             <div class="nav-items items4">
-                                <i class="fa-solid fa-won-sign"><a href="#"></a></i>
+                                <i class="fa-solid fa-won-sign"><a href="http://localhost:9000/search"></a></i>
                             </div>
 
                             <div class="box">
                                 <p style="margin-bottom: -5px;">추천검색어</p>
                                 <div class="box-line box-line1">
-                                    <a href="#">#데이트 코스</a>
+                                    <a href="http://localhost:9000/detail?food_idx=3">#데이트 코스</a>
                                 </div>
                                 <div class="box-line box-line2">
-                                    <a href="#">#가성비 맛집</a>
+                                    <a href="http://localhost:9000/detail?food_idx=1">#가성비 맛집</a>
                                 </div>
                                 <div class="box-line box-line3">
-                                    <a href="#">#노키즈 존</a>
+                                    <a href="http://localhost:9000/detail?food_idx=34">#노키즈 존</a>
                                 </div>
                                 <div class="box-line box-line4">
-                                    <a href="#">#가족 모임</a>
+                                    <a href="http://localhost:9000/detail?food_idx=35">#가족 모임</a>
                                 </div>
                             </div>
                         </div>
@@ -508,6 +666,8 @@
 
 <!--페이지 2번-->
 
+
+
 <section id="section-b">
 
     <div class="container-fluid pt-5 pb-5">
@@ -519,118 +679,18 @@
             </div>
 
             <!-- 상단 컨텐츠 -->
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food1.jpg" alt="맛집">
-                    <div class="card-body">
-                        <h5 class="card-title">가장 많이 방문한 맛집</h5>
-                        <p class="card-text">당신이 가장 많이 방문한 맛집입니다.</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-lg-3 col-md-6  col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food2.jpg" alt="맛집">
-                    <div class="card-body">
-                        <h5 class="card-title">최근에 방문한 맛집</h5>
-                        <p class="card-text">가장 최근에 방문한 맛집입니다.</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div id="k_history_place"></div>
+        </div>
 
-            <div class="col-lg-3 col-md-6  col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food3.jpg" alt="맛집">
-                    <div class="card-body">
-                        <h5 class="card-title">리뷰가 많은 맛집</h5>
-                        <p class="card-text">당신이 관심 있는 맛집</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6  col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food4.jpg" alt="맛집">
-                    <div class="card-body">
-                        <h5 class="card-title">인기 많은 맛집</h5>
-                        <p class="card-text">끼니피그 인증 맛집</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-12 mt-5">
+        <div class="row">
+            <div class="col-lg-12">
                 <h1 id="menu-2"><br>&nbsp;</h1>
-                <h2 class="text-center pb-3 text-black">히스토리</h2>
+                <h2 class="text-center pb-3 text-black scroll-page">인기맛집</h2>
             </div>
 
             <!-- 하단 컨텐츠 -->
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food5.jpg" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">1만원 맛집</h5>
-                        <p class="card-text">1만원으로 즐기는 식당</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-12"><span>1만원</span><span><a href="#" target="_blank"></a>방문하기</span></button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6  col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food6.jpg" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">2만원 맛집</h5>
-                        <p class="card-text">2만원으로 즐기는 식당</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-12"><span>2만원</span><span><a href="#" target="_blank"></a>방문하기</span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6  col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food7.jpg" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">3만원 맛집</h5>
-                        <p class="card-text">3만원에 즐기는 식당</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-12"><span>3만원</span><span><a href="#" target="_blank"></a>방문하기</span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6  col-sm-6">
-                <div class="card mb-3 scroll-page">
-                    <img class="card-img-top" src="images/food8.jpg" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">4만원 맛집</h5>
-                        <p class="card-text">4만원에 즐기는 식당</p>
-                        <div class="frame">
-                            <button class="custom-btn btn-12"><span>4만원</span><span><a href="#" target="_blank"></a>방문하기</span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <div id="k_hotplace"></div>
         </div>
     </div>
 </section>
@@ -682,21 +742,16 @@
 
 <!-- 페이지 4번 -->
 <section id="menu-4">
-
     <div class="container pb-3">
         <div class="row">
             <div class="col-lg-12 pt-5 pb-5">
-
-                <h1 class=" scroll-page text-center info">
+                <h1 class="scroll-page text-center info">
                     당신의 맛집을 세계인과 나눠요!
                 </h1>
-
             </div>
         </div>
-
         <div class="jumbotron jumbo scroll-page">
             <form action="">
-
                 <div class="row">
                     <div class="col-lg-12">
                         <input type="text" class="form-control" placeholder="이름을 입력해주세요">
@@ -706,30 +761,30 @@
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="이메일을 입력해주세요">
                         <small id="emailHelp" class="form-text text-muted">당신의 이메일을 기반으로 회원가입을 진행합니다.</small>
                     </div>
-
                     <div class="form-group col-lg-12">
                         <label for="exampleFormControlTextarea1"></label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="당신의 의견을 들려주세요"></textarea>
                     </div>
-
                     <div class="container">
                         <div class="row justify-content-center">
                             <button class="custom-btn btn-6"><span>가입하기</span></button>
                         </div>
                     </div>
+                </div>
 
-            </form>
 
+
+
+
+            </form> <!-- </form> 태그 추가 -->
 
         </div>
-
     </div>
-
 </section>
 
 
 <footer class="footer-section">
-    <div class="container">
+    <div class="m_foottainer">
         <div class="footer-cta pt-5 pb-5">
             <div class="row">
                 <div class="col-xl-4 col-md-4 mb-30">
@@ -766,7 +821,7 @@
                 <div class="col-xl-4 col-lg-4 mb-50">
                     <div class="footer-widget">
                         <div class="footer-logo">
-                            <a href="index.html"><img src="images/cilogo.png" class="img-fluid" alt="logo"></a>
+                            <a href="/WEB-INF/enter/enter.jsp"><img src="photo/footer/cilogo.png" class="img-fluid" alt="logo"></a>
                         </div>
                         <div class="footer-text">
                             <p>술 한잔 마셨습니다... 프로젝트가 미완성이어도 좋습니다. 하지만 '끼니 피그' 하나만 기억해 주세요. 진심을 다해 전합니다. 프로젝트가 별로일 수 있습니다. 밤낮으로 고민하고 코딩했습니다... 최선을 다했고, 열심히 했습니다. 저희 팀의 진심이 느껴지길 바랍니다. 고맙습니다...
@@ -774,9 +829,9 @@
                         </div>
                         <div class="footer-social-icon">
                             <span>서포터즈</span>
-                            <a href="https://data.gg.go.kr"><img src="images/ggd.png" class="ggd"></a>
-                            <a href="https://openai.com/blog/chatgpt"><img src="images/aigpt.png"></a>
-                            <a href="https://www.data.go.kr"><img src="images/publicdata.png"></a>
+                            <a href="https://data.gg.go.kr"><img src="photo/footer/ggd.png" class="ggd"></a>
+                            <a href="https://openai.com/blog/chatgpt"><img src="photo/footer/aigpt.png"></a>
+                            <a href="https://www.data.go.kr"><img src="photo/footer/publicdata.png"></a>
                         </div>
                     </div>
                 </div>
@@ -786,14 +841,14 @@
                             <h3>전체서비스</h3>
                         </div>
                         <ul>
-                            <li><a href="#">회사소개</a></li>
-                            <li><a href="#">비지니스</a></li>
+                            <li><a href="/WEB-INF/business/business.jsp">회사소개</a></li>
+                            <li><a href="/WEB-INF/business/business.jsp">비지니스</a></li>
                             <li><a href="#">이용약관</a></li>
-                            <li><a href="#">공지사항</a></li>
+                            <li><a href="/WEB-INF/qna/qnalist.jsp">공지사항</a></li>
                             <li><a href="#">고객센터</a></li>
                             <li><a href="#">고객관리</a></li>
                             <li><a href="#">광고서비스운영</a></li>
-                            <li><a href="#">문의내역</a></li>
+                            <li><a href="/WEB-INF/qna/qnalist.jsp">문의내역</a></li>
                             <li><a href="#">개인정보처리방침</a></li>
                             <li><a href="#">채용공고</a></li>
                         </ul>
@@ -802,11 +857,11 @@
                         <div class="col-xl-12">
                             <div id="slideShow">
                                 <div id="slides">
-                                    <img src="images/banner1.png" alt="광고">
-                                    <img src="images/banner5.png" alt="광고">
-                                    <img src="images/banner3.png" alt="광고">
-                                    <img src="images/banner4.png" alt="광고">
-                                    <img src="images/banner2.png" alt="광고">
+                                    <img src="photo/footer/banner1.png" alt="광고">
+                                    <img src="photo/footer/banner5.png" alt="광고">
+                                    <img src="photo/footer/banner3.png" alt="광고">
+                                    <img src="photo/footer/banner4.png" alt="광고">
+                                    <img src="photo/footer/banner2.png" alt="광고">
                                 </div>
                             </div>
                         </div>
@@ -823,9 +878,11 @@
                             </p>
                         </div>
                         <div class="subscribe-form">
-                            <div class="input-wrapper">
-                                <input type="text" placeholder="메일주소를 입력하세요." />
-                                <button type="submit"><i class="fab fa-telegram-plane"></i></button>
+                            <div class="m_input-wrapper">
+                                <div class="m_input-group">
+                                    <input type="text" placeholder="이메일 주소를 적어주세요">
+                                    <button><i class="fab fa-telegram-plane"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -838,17 +895,17 @@
             <div class="row">
                 <div class="col-xl-6 col-lg-6 text-center text-lg-left">
                     <div class="copyright-text">
-                        <p>Copyright &copy; 2023, All Right Reserved <a href="footer.html"><b>비트캠프 1조</b></a></p>
+                        <p>Copyright &copy; 2023, All Right Reserved <a href="/WEB-INF/enter/enter.jsp"><b>비트캠프 1조</b></a></p>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
                     <div class="footer-menu">
                         <ul>
-                            <li><a href="#">입장페이지</a></li>
-                            <li><a href="#">검색서비스</a></li>
-                            <li><a href="#">마이페이지</a></li>
-                            <li><a href="#">관리페이지</a></li>
-                            <li><a href="#">비지니스</a></li>
+                            <li><a href="/WEB-INF/enter/enter.jsp">입장페이지</a></li>
+                            <li><a href="/WEB-INF/search/search.jsp">검색서비스</a></li>
+                            <li><a href="/WEB-INF/userpage/myuserpage.jsp">마이페이지</a></li>
+                            <li><a href="/WEB-INF/booking/main.jsp">관리페이지</a></li>
+                            <li><a href="/WEB-INF/business/business.jsp">비지니스</a></li>
                         </ul>
                     </div>
                 </div>
@@ -893,10 +950,10 @@
 <script src="https://unpkg.com/scrollreveal@4.0.7/dist/scrollreveal.min.js"></script>
 <script>
     ScrollReveal().reveal(".scroll-page", {
-        duration: 800, // 애니메이션 지속 시간
+        duration: 400, // 애니메이션 지속 시간
         distance: "20px", // 원점으로부터의 거리
         delay: 100, // 애니메이션 딜레이
-        interval: 200, // 애니메이션 간격
+        interval: 100, // 애니메이션 간격
         reset: true, // 반복 애니메이션 초기화
         easing: "cubic-bezier(0.5, 0, 0, 1)", // 애니메이션 이징
         mobile: false, // 모바일 장치에서 애니메이션 비활성화

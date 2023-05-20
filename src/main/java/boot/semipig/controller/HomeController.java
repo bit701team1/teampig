@@ -31,12 +31,6 @@ public class HomeController {
     @Autowired
     private LoginService loginService;
 
-    @GetMapping({"/", "/home1"})
-    public String home() {
-        return "/mainlist";
-    }
-
-
     @GetMapping("/home2")
     public String home1(Model model, HttpSession session) {
         int user_idx = (int) session.getAttribute("loginidx");

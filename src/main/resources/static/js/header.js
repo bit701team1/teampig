@@ -61,6 +61,6 @@ $(document).ready(function () {
         e.preventDefault();
 
         $(this).find('[name="qwrd"]')
-            .val('검색어를 찾을 수 없습니다.');
+            .val('');
     });
 });

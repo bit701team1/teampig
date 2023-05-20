@@ -8,7 +8,7 @@
         select count(*) from user where id=#{id} and password=#{password}
     </select>
     <select id="getUserIdx" parameterType="String" resultType="int">
-        select user_idx from user where id=#{id}
+        select user_idx  from user where id=#{id}
     </select>
     <select id="getUserInfo" parameterType="int" resultType="LoginDto">
         select * from user where user_idx=#{user_idx}

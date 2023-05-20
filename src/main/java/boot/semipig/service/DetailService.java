@@ -1,6 +1,7 @@
 package boot.semipig.service;
 
 import boot.semipig.dto.DetailDto;
+import boot.semipig.dto.FoodPhotoDto;
 import boot.semipig.mapper.DetailMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,11 @@ public class DetailService implements DetailServiceInter{
     public List<DetailDto> nearbyStore(String SIGUN_NM) {
         List<DetailDto> list=detailMapper.nearbyStore(SIGUN_NM);
         return list;
+    }
+
+    @Override
+    public FoodPhotoDto nearbyStorephoto(int user_idx) {
+        return detailMapper.nearbyStorephoto(user_idx);
     }
 
 }

@@ -1,6 +1,7 @@
 package boot.semipig.controller;
 
 import boot.semipig.dto.LoginDto;
+import boot.semipig.service.JoinService;
 import boot.semipig.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpSession;
 public class LoginController{
     @Autowired
     LoginService loginService;
+    @Autowired
+    JoinService joinService;
 
 
    /* @GetMapping("/login")//로그인 페이지, 나중에 합친 후에 메인페이지로 맵핑 변경할 것.
@@ -41,11 +44,20 @@ public class LoginController{
             session.setAttribute("loginok", "yes");
             session.setAttribute("loginid", id);
             int user_idx=loginService.getUserIdx(id);
-
+            int user_type = loginService.getUserInfo(user_idx).getUser_type();
             String user_name = loginService.getUserInfo(user_idx).getUser_name();
+
+
             session.setAttribute("username",user_name);
             session.setAttribute("loginidx", user_idx);
+            session.setAttribute("user_type",user_type);
             session.setAttribute("saveid", saveid==null?"no":"yes");
+            System.out.println("type:"+user_type);
+            System.out.println("res:"+session.getAttribute("user_type"));
+
+
+
+
             return 1;
         }
 

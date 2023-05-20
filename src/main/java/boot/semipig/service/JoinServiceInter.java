@@ -7,4 +7,6 @@ public interface JoinServiceInter {
     public void insertUser(JoinDto dto);
     public int isIdAvailable(JoinDto dto);
     public int existFoodList(OwnerpageDto dto);
+
+    public int selectUserType(int user_idx);
 }

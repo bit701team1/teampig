@@ -1,0 +1,203 @@
+@keyframes slide {
+    0% { transform: translateX(0); }
+    90% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+#m_footer{
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+}
+
+.m_foottainer{
+    margin: 0 auto;
+    width: 1200px;
+}
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+.footer-section {
+    width: 100%;
+    background: #fff;
+    position: absolute;
+}
+.footer-cta {
+    border-bottom: 1px solid #373636;
+}
+.single-cta i {
+    color: #5C732C;
+    font-size: 30px;
+    float: left;
+    margin-top: 8px;
+}
+.cta-text {
+    padding-left: 15px;
+    display: inline-block;
+}
+.cta-text h4 {
+    color: #000;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+.cta-text span {
+    color: #757575;
+    font-size: 15px;
+}
+.footer-content {
+    position: relative;
+    z-index: 2;
+}
+.footer-pattern img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 330px;
+    background-size: cover;
+    background-position: 100% 100%;
+}
+.footer-logo {
+    margin-bottom: 10px;
+}
+.footer-logo img {
+    max-width: 330px;
+    border-radius: 15px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+    transform: perspective(1000px) rotateX(10deg);
+}
+.footer-text p {
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: #7e7e7e;
+    line-height: 28px;
+    width: 330px;
+}
+.footer-social-icon span {
+    color: #2C4002;
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 5px;
+    margin-top: 40px;
+}
+
+.footer-social-icon a {
+    display: inline-block; /* 이미지를 인라인 요소로 변경 */
+    margin-right: 10px; /* 이미지 사이의 간격을 조정 */
+}
+
+.footer-social-icon img {
+    width: 100px; /* 이미지의 가로 크기 설정 */
+    height: auto; /* 이미지의 세로 크기는 자동으로 조정 */
+}
+
+#slideShow {
+    overflow: hidden;
+    width: 831px;
+    height: 134px;
+    position: relative;
+    margin-top: 50px;
+}
+
+#slides {
+    width: calc(831px * 5);
+    position: absolute;
+    transition: transform 0.5s;
+}
+
+#slides > img {
+    width: 831px;
+    float: left;
+
+}
+
+
+.footer-widget-heading h3 {
+    color: #2C4002;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    position: relative;
+}
+.footer-widget-heading h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    height: 2px;
+    width: 50px;
+    background: #2C4002;
+}
+.footer-widget ul li {
+    display: inline-block;
+    float: left;
+    width: 50%;
+    margin-bottom: 12px;
+}
+.footer-widget ul li a:hover{
+    color: #5C732C;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.footer-widget ul li a {
+    color: #878787;
+    text-transform: capitalize;
+}
+.subscribe-form {
+    position: relative;
+    margin-top: 50px;
+    /*overflow: hidden;*/
+}
+.subscribe-form input {
+    width: 100%;
+    padding: 14px 28px;
+    background: #fff;
+    border: 1px solid #2C4002;
+    color: #000;
+}
+.subscribe-form button {
+    position: absolute;
+    right: 0;
+    background: #5C732C;
+    padding: 13px 20px;
+    border: 1px solid #2C4002;
+    top: 0;
+}
+.subscribe-form button i {
+    color: #fff;
+    font-size: 22px;
+    transform: rotate(-6deg);
+}
+.copyright-area{
+    width: 100%;
+    background: #1B260A;
+    padding: 25px 0;
+}
+.copyright-text p {
+    margin: 0;
+    font-size: 14px;
+    color: #878787;
+    margin-top: 10px;
+}
+.copyright-text p a{
+    color: #D9B29C;
+
+}
+.footer-menu li {
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+.footer-menu li:hover a{
+    color: #ff5e14;
+}
+.footer-menu li a {
+    font-size: 14px;
+    color: #878787;
+
+}
+

@@ -1,6 +1,7 @@
 package boot.semipig.mapper;
 
 import boot.semipig.dto.DetailDto;
+import boot.semipig.dto.FoodPhotoDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,4 +21,5 @@ public interface DetailMapper {
     public void insertBookmark(int user_idx, int food_idx);
     public void deleteBookmark(int user_idx, int food_idx);
     public List<DetailDto> nearbyStore(String SIGUN_NM);
+    public FoodPhotoDto nearbyStorephoto(int user_idx);
 }

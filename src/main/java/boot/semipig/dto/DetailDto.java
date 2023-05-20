@@ -27,4 +27,5 @@ public class DetailDto {
     private String holiday;
     private String point;
     private String average;
+    private String photoname;
 }

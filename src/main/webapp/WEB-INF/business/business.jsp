@@ -54,6 +54,18 @@
     //     })//로그인버튼 끝
     // });
     $(function() {
+
+        //login시 enter키 이벤트
+        $(document).on('keyup',"#s_password", function (event){
+            if (event.keyCode === 13) {  // Enter 키가 눌렸을 때
+                event.preventDefault(); // 기본 동작 방지
+                $(".btn_login").click(); // login button 클릭
+            }
+        });
+
+
+
+
         $("#s_login").click(function() {
             let id = $("#s_id").val();
             let password = $("#s_password").val();
@@ -70,26 +82,46 @@
                 data: form,
                 dataType: "text",
                 success: function(res) {
+                    // 해당 user_idx가 food_list 테이블에 존재하는지 확인하는 AJAX 요청
                     if (res == 1) {
-                        // 해당 user_idx가 food_list 테이블에 존재하는지 확인하는 AJAX 요청
-                        $.ajax({
-                            type: "get",
-                            url: "./existFoodList",
-                            data: { user_idx: res },
-                            success: function(response) {
-                                if (response == 1) {
-                                    window.location.href = "business";
-                                } else {
-                                    window.location.href = "/mypage/writeform";
-                                }
-                            }
-                        });
+                        window.location.href = "business";
                     } else {
-                        $("#s_alert").html("아이디 또는 비밀번호가 일치하지 않습니다.");
+                        alert("아이디 또는 비밀번호가 일치하지 않습니다.")
+                        // $("#s_alert").html("아이디 또는 비밀번호가 일치하지 않습니다.");
                     }
                 }
             });
         });
+    });
+    $(function (){
+       $("#mypage").click(function (){
+           var user_idx = ${loginidx}
+           $.ajax({
+               type: "get",
+               url: "./selectUserType",
+               dataType: "text",
+               success: function(userType) {
+                   console.log("User type: " + userType);
+                   if(userType==2){
+                       $.ajax({
+                           type: "get",
+                           url: "./existFoodList",
+                           data:{"user_idx": user_idx},
+                           success: function(response) {
+                               console.log(response);
+                               if (response == 1) {
+                                   window.location.href = "/home2";
+                               } else {
+                                   window.location.href = "/mypage/writeform";
+                               }
+                           }
+                           });
+                   }else {
+                       window.location.href = "business";
+                   }
+               }
+           });
+       });
     });
 
     $(function (){
@@ -144,31 +176,6 @@
                     }
                 }
             });
-            // Display confirmation dialog
-            // if (confirm("Are you sure you want to submit the form?")) {
-            //     // User clicked "OK" - proceed with form submission
-            //     $.ajax({
-            //         type: "post",
-            //         url: "./insert",
-            //         data: {"email":email,"id":id,"password":password,"user_name":user_name,"user_type":user_type},
-            //         dataType: "text",
-            //         success: function(res) {
-            //             console.log("회원가입 완료");
-            //
-            //             // 회원가입이 성공적으로 처리되면 원하는 작업을 수행할 수 있습니다.
-            //             location.reload();
-            //         },
-            //         error: function(xhr, status, error) {
-            //             console.log("회원가입 오류");
-            //             console.log("Status:"+status);
-            //             console.log("error:"+error);
-            //             console.log(xhr.responseText);
-            //         }
-            //     });
-            // } else {
-            //     // User clicked "Cancel" - refresh the page
-            //     location.reload();
-            // }
         });
     });
 
@@ -185,7 +192,8 @@
             <ul>
                 <li><a href="#">공지사항</a></li>
                 <li><a href="#">고객센터</a></li>
-                <li><a href="${root}/home2">마이페이지</a></li>
+<%--                <li><a href="${root}/home2" id="mypage">마이페이지</a></li>--%>
+                <li><a href="#" id="mypage">마이페이지</a></li>
                 <c:choose>
                     <c:when test="${sessionScope.loginok=='yes'}">
                         <li><a href="#"   onclick="location.href='./logout'">로그아웃</a></li>
@@ -332,7 +340,10 @@
     </div>
 
     <div id="submit">
-        <button class="custom-btn btn-3" id="start" data-bs-toggle="modal" data-bs-target="#loginModal"><span><b>시작하기</b></span></button>
+        <button class="custom-btn btn-3" id="start" onclick="location.href='http://localhost:9000'">
+            <span><b>시작하기</b></span>
+        </button>
+
     </div>
 
     <footer>
@@ -446,7 +457,6 @@
                                                 <option value="" selected disabled>선택</option>
                                                 <option value="1">일반 사용자</option>
                                                 <option value="2">사장님</option>
-                                                <option value="3">관리자</option>
                                             </select>
                                             <button class="btn_sign_up" type="button" id="signup">SIGN UP</button>
                                         </div>
@@ -599,5 +609,53 @@
         change_to_sign_up();
     }
 </script>
+
+<%--채널톡 위치--%>
+<script>
+    (function () {
+        var w = window;
+        if (w.ChannelIO) {
+            return w.console.error("ChannelIO script included twice.");
+        }
+        var ch = function () {
+            ch.c(arguments);
+        };
+        ch.q = [];
+        ch.c = function (args) {
+            ch.q.push(args);
+        };
+        w.ChannelIO = ch;
+
+        function l() {
+            if (w.ChannelIOInitialized) {
+                return;
+            }
+            w.ChannelIOInitialized = true;
+            var s = document.createElement("script");
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://cdn.channel.io/plugin/ch-plugin-web.js";
+            var x = document.getElementsByTagName("script")[0];
+            if (x.parentNode) {
+                x.parentNode.insertBefore(s, x);
+            }
+        }
+
+        function checkScrollPosition() {
+            var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollPosition > 1200) {
+                l();
+                window.removeEventListener("scroll", checkScrollPosition);
+            }
+        }
+
+        window.addEventListener("scroll", checkScrollPosition);
+    })();
+
+    ChannelIO("boot", {
+        pluginKey: "b4df2af4-756d-46b8-b999-7ce37d50bfe2",
+    });
+</script>
+
 </body>
 </html>

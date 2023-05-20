@@ -307,8 +307,7 @@
         .video-wrapper {
             position: relative;
             padding-bottom: 56.25%;
-            height: 70%;
-
+            height: 0;
         }
 
         .video-wrapper video {
@@ -609,7 +608,6 @@
     </script>
 </head>
 <body>
-<c:set var="root" value="<%=request.getContextPath() %>"/>
 <h2>가게정보 관리</h2>
 <div class="y_updateinfo">
     <div style="margin-left: 25px; margin-top: 20px;">
@@ -742,7 +740,7 @@
                 </tr>
                 <tr align="center">
                     <td colspan="2">
-                        <button type="submit" style=" float:right;" id="contentadd" >홍보글 작성</button>
+                        <button type="submit" style=" float:right;" id="contentadd" data-bs-toggle="modal" data-bs-target="#myModal">홍보글 작성</button>
                     </td>
                 </tr>
             </table>

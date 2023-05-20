@@ -1,0 +1,38 @@
+/*.hongbobox {*/
+/*}*/
+.qna_banner {
+    display: flex;
+}
+Copy code
+iframe {
+    transition: all 0.5s ease-in-out;
+}
+iframe:hover {
+    transform: scale(1.5, 1.5);
+}
+
+hr.hr-177 {
+    height: 5px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8c8c inset;
+    background: linear-gradient(to bottom, #65b8d7, #47a0cf);
+}
+hr.hr-13 {
+    height: 8px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8c8c inset;
+    background: linear-gradient(to bottom, #83cfe0, #65b8d7);
+}
+hr.hr-14 {
+    height: 8px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8c8c inset;
+    background: linear-gradient(to bottom, #47a0cf, #388dbf);
+    width: 100%;
+}
+hr.hr-133 {
+    height: 2px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8c8c inset;
+    background: linear-gradient(to bottom, #47a0cf, #388dbf);
+}

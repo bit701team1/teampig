@@ -117,6 +117,7 @@ public Map<String, Object> insertOwner(OwnerpageDto dto, List<MultipartFile> upl
     // 데이터부터 DB에 저장
     ownerpageService.insertOwner(dto);
 
+
     // 추가
     String openaiResult = ownerpageService.openai(dto.getFood_idx());
     dto.setGPT_content(openaiResult);
@@ -232,10 +233,7 @@ public Map<String, Object> insertOwner(OwnerpageDto dto, List<MultipartFile> upl
         //수정
         ownerpageService.updateOwner(dto);
 
-        String openaiResult = ownerpageService.openai(dto.getFood_idx());
-        dto.setGPT_content(openaiResult);
-        ownerpageService.updatePrompt(dto);
-        System.out.println("update:"+openaiResult);
+
         if (upload != null) {
             System.out.println("size:" + upload.size());
             System.out.println("upload.get(0).getOriginalFilename()=" + upload.get(0).getOriginalFilename());
@@ -249,6 +247,10 @@ public Map<String, Object> insertOwner(OwnerpageDto dto, List<MultipartFile> upl
                 ownerpageService.insertPhoto(fdto);
             }
         }
+        String openaiResult = ownerpageService.openai(dto.getFood_idx());
+        dto.setGPT_content(openaiResult);
+        ownerpageService.updatePrompt(dto);
+        System.out.println("update:"+openaiResult);
         //수정 후 내용보기로 이동
         return "redirect:./promptview?food_idx="+dto.getFood_idx();
     }
@@ -333,6 +335,7 @@ public Map<String, Object> insertOwner(OwnerpageDto dto, List<MultipartFile> upl
             return new ArrayList<>(); // food_idx가 없을 경우 빈 리스트 반환
         }
     }
+
     @GetMapping("/home")
     public String home(){
         return "ownerpage/home";

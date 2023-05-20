@@ -36,4 +36,7 @@
     <delete id="removephotos" parameterType="int">
         delete from food_photo where user_idx=#{user_idx}
     </delete>
+    <select id="getphototo" parameterType="int" resultType="FoodPhotoDto">
+        select * from food_photo where user_idx=#{user_idx}
+    </select>
 </mapper>
