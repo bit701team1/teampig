@@ -41,6 +41,18 @@ public class MyService implements ServiceInter {
         return serviceMapper.getAll(map);
     }
     @Override
+    public couponDto getCouponByUserIdx(int user_idx) {
+        return serviceMapper.getCouponByUserIdx(user_idx);
+    }
+    @Override
+    public int getFoodIdx(int user_idx) {
+        return serviceMapper.getFoodIdx(user_idx);
+    }
+    @Override
+    public List<couponlistDto> couponlist(int user_idx){
+        return  serviceMapper.couponlist(user_idx);
+    }
+    @Override
     public void deleteqna(int qna_idx) {
         // TODO Auto-generated method stub
         serviceMapper.deleteqna(qna_idx);}
@@ -49,13 +61,21 @@ public class MyService implements ServiceInter {
         serviceMapper.updatee(dto);
     }
     @Override
-    public List<couponDto> couponall()
-    {
-        return serviceMapper.couponall();
+    public void couponmax(couponDto dto){
+        serviceMapper.couponmax(dto);
     }
-    public void couponinsert(couponDto dto) {
-        // TODO Auto-generated method stub
+    @Override
+    public void couponid(couponlistDto dto){
+        serviceMapper.couponid(dto);
+    }
+    @Override
+    public void couponinsert(couponDto dto){
         serviceMapper.couponinsert(dto);
+    }
+    @Override
+    public List<couponDto> couponall(int user_idx)
+    {
+        return serviceMapper.couponall(user_idx);
     }
     @Override
     public void deletecoupon(int num) {
@@ -80,8 +100,12 @@ public class MyService implements ServiceInter {
         return serviceMapper.reviewlist(map);
     }
 
-    public int getTotalCount() {
-        return serviceMapper.getTotalCount();
+    public int getTotalCount(int food_idx) {
+        return serviceMapper.getTotalCount(food_idx);
+    }
+    public int reviewcount(int food_idx)
+    {
+        return serviceMapper.reviewcount(food_idx);
     }
     public int ReservationCount(String start) {
         return serviceMapper.ReservationCount(start);

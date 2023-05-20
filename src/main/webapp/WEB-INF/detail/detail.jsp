@@ -31,6 +31,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
     <style>
 
         .s_reviewphoto{
@@ -261,7 +264,7 @@
         .reviewformrestrt_nm{
             font-size: 28px;
         }
-<%--추가로 넣은 것 --%>
+        <%--추가로 넣은 것 --%>
         .s_nearbystoretable{
             margin-top: 10px;
             /*margin-bottom: 7px;*/
@@ -319,7 +322,7 @@
         .s_couponimage{
 
             animation: vibration 0.1s infinite;
-           }
+        }
         @keyframes vibration {
             from {
                 transform: rotate(2deg);
@@ -886,6 +889,74 @@
                 }
             })
         });
+        //예약 관련
+        function allSave() {
+            var event = {
+                start: '',
+                food_idx: ''
+            };
+
+            event.start = document.getElementById('y_date').value + 'T' + document.getElementById('y_time').value;
+            event.food_idx = ${dto.food_idx}; // JavaScript에서 food_idx 값을 가져옴
+
+
+            var events = [event];
+
+            var jsondata = JSON.stringify(events);
+            console.log(jsondata);
+            savedata(jsondata);
+        }
+
+        function savedata(jsondata, food_idx) {
+            $.ajax({
+                type: 'POST',
+                url: './calendarinsert?food_idx=' + food_idx,
+                data: jsondata,
+                contentType: 'application/json',
+                dataType: 'text',
+                success: function(result) {
+                    console.log(jsondata);
+                    alert("예약완료!");
+                },
+                error: function(request, status, error) {
+                    alert('이미 예약된 시간입니다' + error);
+                }
+            });
+        }
+
+        function allSave() {
+            var event = {
+                start: '',
+                food_idx: ''
+            };
+
+            event.start = document.getElementById('y_date').value + 'T' + document.getElementById('y_time').value;
+            event.food_idx = ${dto.food_idx}; // JavaScript에서 food_idx 값을 가져옴
+
+
+            var events = [event];
+
+            var jsondata = JSON.stringify(events);
+            console.log(jsondata);
+            savedata(jsondata);
+        }
+
+        function savedata(jsondata, food_idx) {
+            $.ajax({
+                type: 'POST',
+                url: './calendarinsert?food_idx=' + food_idx,
+                data: jsondata,
+                contentType: 'application/json',
+                dataType: 'text',
+                success: function(result) {
+                    console.log(jsondata);
+                    alert("예약완료!");
+                },
+                error: function(request, status, error) {
+                    alert('이미 예약된 시간입니다' + error);
+                }
+            });
+        }
 
     </script>
 </head>
@@ -1203,12 +1274,12 @@
                         <span class="s_fontsize30">${dto.RESTRT_NM} <span class="s_fontcolorapply">${dto.average}</span></span>
 
                         <div class="s_button">
-<%--                            <button id="s_reviewform" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reviewModal"><i class="bi bi-pencil-fill"></i>--%>
-<%--                                <span>리뷰쓰기</span></button>--%>
-<%--                            <button type=기"button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal"> <i class="bi bi-calendar-check-fill"></i>--%>
-<%--                                <span>예약하기</span></button>--%>
+                            <%--                            <button id="s_reviewform" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reviewModal"><i class="bi bi-pencil-fill"></i>--%>
+                            <%--                                <span>리뷰쓰기</span></button>--%>
+                            <%--                            <button type=기"button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal"> <i class="bi bi-calendar-check-fill"></i>--%>
+                            <%--                                <span>예약하기</span></button>--%>
                             <div id="k_iconplace" class="s_btbt" style="width: 38px; height: 38px;"></div>
-                             <div class="s_btbt"><img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/pencil.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#reviewModal"><span style="font-size: 10px;"><b class="reviewpencil">리뷰쓰기</b></span></div>
+                            <div class="s_btbt"><img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/pencil.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#reviewModal"><span style="font-size: 10px;"><b class="reviewpencil">리뷰쓰기</b></span></div>
                             <div class="s_btbt"><img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/calendar.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#calendarModal"><span style="font-size: 10px;"><b class="reviewpencil">예약하기</b></span></div>
 
                         </div>
@@ -1217,24 +1288,24 @@
                     <div class="s_storedetailinfo">
                         <div  class="s_couptable">
                             <div class="s_ct" style="width: 800px;">
-                        <table class="infotable">
-                            <tr>
-                                <td style="color: gray">주소</td><td>&nbsp;${dto.REFINE_LOTNO_ADDR}</td>
-                            </tr>
-                            <tr>
-                                <td style="color: gray">전화번호</td><td>&nbsp;${dto.TASTFDPLC_TELNO}</td>
-                            </tr>
+                                <table class="infotable">
+                                    <tr>
+                                        <td style="color: gray">주소</td><td>&nbsp;${dto.REFINE_LOTNO_ADDR}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: gray">전화번호</td><td>&nbsp;${dto.TASTFDPLC_TELNO}</td>
+                                    </tr>
 
-                            <tr>
-                                <td style="color: gray">음식종류</td><td>&nbsp;${dto.food_type}</td>
-                            </tr>
-                            <tr>
-                                <td style="color: gray">가격대</td><td>&nbsp;${dto.food_price}</td>
-                            </tr>
-                        </table>
+                                    <tr>
+                                        <td style="color: gray">음식종류</td><td>&nbsp;${dto.food_type}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: gray">가격대</td><td>&nbsp;${dto.food_price}</td>
+                                    </tr>
+                                </table>
                             </div>
 
-                        <div style="width: 100px; height: 100px; margin-left: 300px; margin-top: 20px;" class="s_ct s_coupon"><div class="s_cpinfotop">10% 할인</div><img src="../../save/couponimage.png" style="width: 120px; height: 100px;" class="s_couponimage"><div class="s_cpinfobottom">남은 시간</div></div>
+                            <div style="width: 100px; height: 100px; margin-left: 300px; margin-top: 20px;" class="s_ct s_coupon"><div class="s_cpinfotop">10% 할인</div><img src="../../save/couponimage.png" style="width: 120px; height: 100px;" class="s_couponimage"><div class="s_cpinfobottom">남은 시간</div></div>
                         </div>
                         <br>
                         ${dto.GPT_content}<br>
@@ -1248,21 +1319,21 @@
                 <hr>
                 <div class="s_review"></div>
 
-        </div>
+            </div>
             <div id="s_around">
                 <div class="s_side">
                     <div id="map" style="width:400px; height:328px;"></div>
                     <div id="s_nearby"></div><!--주변 인기 식당-->
                 </div>
             </div>
-    </div>
+        </div>
         <script>
             (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
             ChannelIO('boot', {
                 "pluginKey": "708c4779-dafe-4260-abe0-c76183c1b24a"
             });
         </script>
-    <!--모달 관련-->
+        <!--모달 관련-->
         <!--리뷰 자세히 보기 클릭-->
         <!-- Modal -->
         <div id="modal" class="modal">
@@ -1297,10 +1368,49 @@
                 closeButton.style.display = 'block';
             });
         </script>
-    <!---예약모달-->
-    <div style="width:450px;">
+        <!---예약모달-->
+        <%--    <div style="width:450px;">--%>
 
-        <!-- The Modal -->
+        <%--        <!-- The Modal -->--%>
+        <%--        <div class="modal fade" id="calendarModal">--%>
+        <%--            <div class="modal-dialog">--%>
+        <%--                <div class="modal-content">--%>
+
+        <%--                    <!-- Modal Header -->--%>
+        <%--                    <div class="modal-header">--%>
+        <%--                        <h4 class="modal-title">예약하기</h4>--%>
+        <%--                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>--%>
+        <%--                    </div>--%>
+
+        <%--                    <!-- Modal body -->--%>
+        <%--                    <div class="modal-body">--%>
+
+        <%--                        <table  class="table table-bordered">--%>
+
+        <%--                            <tr>--%>
+        <%--                                <th style="width: 100px;background-color: #ddd">날짜</th>--%>
+        <%--                                <td>--%>
+        <%--                                    <input type="date" class="form-control" name="start" id="y_date">--%>
+        <%--                                </td>--%>
+        <%--                            </tr>--%>
+        <%--                            <tr>--%>
+        <%--                                <th style="width: 100px;background-color: #ddd">시간</th>--%>
+        <%--                                <td>--%>
+        <%--                                    <input type="text" id="y_time" >--%>
+        <%--                                </td>--%>
+        <%--                            </tr>--%>
+        <%--                            <tr>--%>
+        <%--                            </tr>--%>
+        <%--                        </table>--%>
+
+        <%--                    </div>--%>
+        <%--                    <!-- Modal footer -->--%>
+        <%--                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="allSave()">예약하기</button>--%>
+        <%--                </div>--%>
+        <%--            </div>--%>
+        <%--        </div>--%>
+        <%--    </div>--%>
+        <!---예약모달-->
         <div class="modal fade" id="calendarModal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -1314,18 +1424,18 @@
                     <!-- Modal body -->
                     <div class="modal-body">
 
-                        <table  class="table table-bordered">
+                        <table id="tables">
 
                             <tr>
-                                <th style="width: 100px;background-color: #ddd">날짜</th>
+                                <th style="width: 100px;">날짜</th>
                                 <td>
                                     <input type="date" class="form-control" name="start" id="y_date">
                                 </td>
                             </tr>
                             <tr>
-                                <th style="width: 100px;background-color: #ddd">시간</th>
+                                <th style="width: 100px;">시간</th>
                                 <td>
-                                    <input type="text" id="y_time" >
+                                    <input type="text" class="form-control" id="y_time" >
                                 </td>
                             </tr>
                             <tr>
@@ -1334,11 +1444,48 @@
 
                     </div>
                     <!-- Modal footer -->
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="allSave()">예약하기</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" style="background-color:#5C732C;" data-bs-dismiss="modal" onclick="allSave()">예약하기</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        const timeInput = document.getElementById('y_time');
+        const dateInput = document.getElementById('y_date');
+        const now = new Date();
+        // opentime과 closetime 값을 출력할 HTML 요소의 ID를 가리키는 변수를 설정합니다.
+        const openTime = '${dto.opentime}'; // 'opentime' 값으로 변경해야 합니다.
+        const closeTime = '${dto.closetime}'; // 'closetime' 값으로 변경해야 합니다.
+
+        dateInput.min = now.toISOString().split('T')[0];
+
+        flatpickr(dateInput, {
+            minDate: "today", // 오늘 날짜를 최소 선택 가능 날짜로 설정
+            onChange: function(selectedDates, dateStr, instance) {
+                if (selectedDates[0].toDateString() === now.toDateString()) {
+                    // 선택한 날짜가 오늘이라면, 현재 시간부터 선택 가능하도록 설정
+                    timePicker.set('minTime', now.getHours() + ':00');
+                } else {
+                    // 선택한 날짜가 오늘이 아니라면, 어떤 시간이든 선택 가능하도록 설정
+                    timePicker.set('minTime', '00:00');
+                }
+            },
+        });
+        const timePicker = flatpickr(timeInput, {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: 'H:i',
+            time_24hr: true,
+            minuteIncrement: 60,
+            minTime: openTime, // 현재 시간부터 선택 가능
+            maxTime: closeTime, // 23:59까지 선택 가능
+        });
+
+    </script>
+
+
     <!--리뷰 수정 모달-->
     <!-- The Modal -->
     <div class="modal" id="reviewupdateModal" >

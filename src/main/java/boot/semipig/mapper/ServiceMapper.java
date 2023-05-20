@@ -13,10 +13,16 @@ public interface ServiceMapper {
     public void deletee(int num);
     public List<ServiceDto> getAll(Map<String, Object> map);
     public void updatee(ServiceDto dto);
-    public List<couponDto> couponall();
+    couponDto getCouponByUserIdx(int user_idx);
+    List<couponlistDto> couponlist(int user_idx);
+    public void couponmax (couponDto dto);
+    public void couponid(couponlistDto dto);
     public void couponinsert(couponDto dto);
+    public int getFoodIdx(int user_idx);
+    public List<couponDto> couponall(int user_idx);
     public void deletecoupon(int num);
-    public int getTotalCount();
+    public int getTotalCount(int food_idx);
+    public int reviewcount (int food_idx);
 
     public List<QnaDto> qnalist(Map<String, Object> map);
 

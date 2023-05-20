@@ -179,26 +179,29 @@
             </caption>
             <thead>
             <tr>
-                <th style="width: 20px">번호</th>
-                <th style="width: 100px">쿠폰</th>
-                <th style="width: 280px">남은 시간</th>
+                <th style="width: 80px;text-align: center;">번호</th>
+                <th style="width: 200px; text-align: center;">쿠폰</th>
+                <th style="width: 320px; text-align: center;">남은 시간</th>
+                <th style="width:200px; text-align: center;">수량</th>
+
             </tr>
             </thead>
             <tbody>
             <c:forEach var="dto" items="${list2}" varStatus="i">
                 <tr>
-                    <td>${i.index+1}</td>
-                    <td>${dto.number}%할인</td>
-                    <td>
+                    <td  style="text-align: center;">${i.index+1}</td>
+                    <td style="text-align: center;">${dto.number}%할인</td>
+                    <td style="text-align: center;">
                         <div class="countdown" id="countdown-${i.index}">
                             <p class="countdown-timer-days">00</p>
                             <p class="countdown-timer-hours">00</p>
                             <p class="countdown-timer-minutes">00</p>
                             <p class="countdown-timer-seconds">00</p>
-                            <span style="float: right;font-size:15px;cursor:pointer;"
-                                  id="y_delete_${dto.num}">삭제</span>
                         </div>
                     </td>
+                    <td style="text-align: center;">${dto.max}개 남았습니다
+                        <span style="float: right;font-size:15px;cursor:pointer;"
+                              id="y_delete_${dto.num}">삭제</span></td>
                 </tr>
             </c:forEach>
             </tbody>
