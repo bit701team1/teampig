@@ -12,7 +12,7 @@ body {
     opacity: 0.8;
 }
 .nav-item a {
-    font-size: 1.0em;
+    font-size: 1.2em;
 }
 
 .nav-item a:hover {
@@ -21,9 +21,9 @@ body {
 }
 
 #section-a {
-    background-image: url("images/backfood1.png");
+    background-image: url("/photo/mainpage/section1.png");
+    background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
     padding-top: 5%;
     padding-bottom: 5%;
 }
@@ -41,8 +41,8 @@ body {
     0px 18px 23px rgba(0, 0, 0, 0.1);
 }
 
-.about > h5 {
-    padding-top: 5%;
+.about > h4 {
+    padding-top: 1%;
 }
 
 .about > div {
@@ -67,7 +67,7 @@ body {
         font-size: 1em;
     }
 
-    .about > h5 {
+    .about > h4 {
         font-size: 0.9em;
     }
 
@@ -76,10 +76,20 @@ body {
         padding-bottom: 50%;
     }
 }
-
 #section-b {
-    /* background: linear-gradient(to right, #2C5364, #203A43, #0F2027); */
+    background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.5),
+    rgba(217, 183, 121, 0.5),
+    rgba(217, 183, 121, 0.5),
+    rgba(92, 115, 44, 0.8),
+    rgba(44, 64, 2, 0.8),
+    rgba(27, 38, 10, 0.8)
+    );
 }
+
+
+
 
 @media screen and (max-width: 576px) {
     .tools-wrapper {
@@ -94,8 +104,12 @@ body {
 @media (max-width: 560px) {
 }
 
-#section-d {
-    /* background: linear-gradient(to right, #5B86E5, #36D1DC); */
+#menu-4{
+    background-image: url("/photo/mainpage/section4.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
 .jumbo {
@@ -142,6 +156,7 @@ footer {
     z-index: 5;
     position: relative;
     margin: 0 auto;
+    margin-top: -4%;
 }
 .item {
     cursor: pointer;
@@ -242,7 +257,7 @@ footer {
     box-shadow: none;
 }
 ::placeholder {
-    font-weight: italic;
+    font-weight: normal;
     color: white;
 }
 .circle { /*검색창 버튼 원형*/
@@ -284,7 +299,7 @@ footer {
 }
 .nav-items:hover {
     transform: scale(1.1);
-    transition-timing-function: 0.1s;
+    transition-timing-function: linear;
 }
 .items1 {
     top: -100%;

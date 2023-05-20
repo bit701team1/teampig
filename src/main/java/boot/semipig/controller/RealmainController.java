@@ -22,10 +22,12 @@ import java.util.Map;
 @Controller
 public class RealmainController {
 
+
     @Autowired
     private RealmainMapper realmainMapper;
 
-    @GetMapping("/realmain")
+
+    @GetMapping("/")
     public String realmain(HttpSession session, HttpServletRequest request)
     {
         String previousUrl = request.getHeader("Referer");
@@ -33,6 +35,7 @@ public class RealmainController {
 
         return "realmain/realmain";
     }
+
 
     @GetMapping("/historyrecommand")
     @ResponseBody
@@ -100,6 +103,5 @@ public class RealmainController {
 
         return "확인";
     }
-
 
 }

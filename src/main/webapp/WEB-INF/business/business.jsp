@@ -340,7 +340,10 @@
     </div>
 
     <div id="submit">
-        <button class="custom-btn btn-3" id="start" data-bs-toggle="modal" data-bs-target="#loginModal"><span><b>시작하기</b></span></button>
+        <button class="custom-btn btn-3" id="start" onclick="location.href='http://localhost:9000'">
+            <span><b>시작하기</b></span>
+        </button>
+
     </div>
 
     <footer>
@@ -454,7 +457,6 @@
                                                 <option value="" selected disabled>선택</option>
                                                 <option value="1">일반 사용자</option>
                                                 <option value="2">사장님</option>
-                                                <option value="3">관리자</option>
                                             </select>
                                             <button class="btn_sign_up" type="button" id="signup">SIGN UP</button>
                                         </div>
@@ -607,5 +609,53 @@
         change_to_sign_up();
     }
 </script>
+
+<%--채널톡 위치--%>
+<script>
+    (function () {
+        var w = window;
+        if (w.ChannelIO) {
+            return w.console.error("ChannelIO script included twice.");
+        }
+        var ch = function () {
+            ch.c(arguments);
+        };
+        ch.q = [];
+        ch.c = function (args) {
+            ch.q.push(args);
+        };
+        w.ChannelIO = ch;
+
+        function l() {
+            if (w.ChannelIOInitialized) {
+                return;
+            }
+            w.ChannelIOInitialized = true;
+            var s = document.createElement("script");
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://cdn.channel.io/plugin/ch-plugin-web.js";
+            var x = document.getElementsByTagName("script")[0];
+            if (x.parentNode) {
+                x.parentNode.insertBefore(s, x);
+            }
+        }
+
+        function checkScrollPosition() {
+            var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollPosition > 1200) {
+                l();
+                window.removeEventListener("scroll", checkScrollPosition);
+            }
+        }
+
+        window.addEventListener("scroll", checkScrollPosition);
+    })();
+
+    ChannelIO("boot", {
+        pluginKey: "b4df2af4-756d-46b8-b999-7ce37d50bfe2",
+    });
+</script>
+
 </body>
 </html>

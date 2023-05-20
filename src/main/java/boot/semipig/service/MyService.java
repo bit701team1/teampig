@@ -73,6 +73,7 @@ public class MyService implements ServiceInter {
     @Override
     public List<ReviewDto> reviewlist(int startNum, int perPage, int food_idx){
         Map<String, Object> map = new HashMap<>();
+        map.put("food_idx",food_idx);
         map.put("startNum", startNum);
         map.put("perPage", perPage);
         map.put("food_idx",food_idx);
