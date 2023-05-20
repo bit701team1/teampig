@@ -206,7 +206,8 @@ public class DetailController {
         List<DetailDto> list=new Vector<>();
         for(DetailDto dto:nlist)
         {
-            String photoname=detailService.nearbyStorephoto(dto.getUser_idx()).getPhotoname();//급해서 food_idx를 user_idx로 대신함
+            //급해서 food_idx를 user_idx로 대신함
+            String photoname=detailService.nearbyStorephoto(dto.getFood_idx()).getPhotoname();
             if(photoname!=null)
             {
                 dto.setPhotoname(photoname);

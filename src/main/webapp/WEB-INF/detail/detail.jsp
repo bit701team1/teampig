@@ -46,7 +46,7 @@
         }
         pre{
             white-space: pre-wrap;
-            margin-right: 14px;
+            margin-right: 20px;
         }
         .s_side{
             margin-top: 10px;
@@ -160,6 +160,11 @@
 
         }
         div.s_reviewtable:hover{
+            background-color: #edf2f1;
+
+            cursor: pointer;
+        }
+        div.s_imagetable:hover{
             background-color: #edf2f1;
 
             cursor: pointer;
@@ -298,6 +303,41 @@
         }
         span.s_delete:hover{
             color:gray;
+        }
+        /*.s_couptable{*/
+        /*    display: flex;*/
+        /*}*/
+        /*.s_ct{*/
+        /*    float: left;*/
+        /*}*/
+        .s_couptable {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 10px; /* 필요에 따라 조정 */
+        }
+        /*지저분하면 뺼 것*/
+        .s_couponimage{
+
+            animation: vibration 0.1s infinite;
+           }
+        @keyframes vibration {
+            from {
+                transform: rotate(2deg);
+            }
+            to {
+                transform: rotate(-2deg);
+            }
+        }
+        .s_cpinfobottom{
+            position: relative;
+            margin-top: -18px;
+            margin-left: 10px;
+        }
+        .s_cpinfotop{
+            position: relative;
+            margin-bottom: -18px;
+            z-index: 50;
+            margin-left: 23px;
         }
     </style>
     <script>
@@ -455,8 +495,8 @@
                 }
             });
             //리뷰 클릭시 자세히 보기
-            $(".s_reviewtable").click(function(){
-
+            $("div.s_reviewtable").click(function(){
+                openModal();
             })
 
         })//시작함수 끝
@@ -498,7 +538,7 @@
                     $.each(res, function(idx, ele){
                         let num=Math.floor(Math.random()*5)+1;
 
-                        s+=`<div class='s_reviewtable'><table class="s_inner_table">
+                        s+=`<div class='s_reviewtable s_imagetable'><table class="s_inner_table">
 
                            <tr class="s_persontr trpadding" >
                            <td rowspan='4'class="s_persontd tablepadding" align="center">`;
@@ -509,19 +549,30 @@
         <br>&nbsp;<span style="color:gray">\${ele.user_name}</span>`;
                         }else{
                             s+=`
-        <img src="../../save/personimage\${num}.png" style="width: 48px; height: 48px; border-radius: 100%; padding-top: 10px;" >
+        <img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/personimage\${num}.png" style="width: 48px; height: 48px; border-radius: 100%; padding-top: 10px;" >
          <br>&nbsp;<span class="rusername"style="color:gray">\${ele.user_name}</span>
         `
                         }
                         s+=`</td>
-                       <td class="tablepadding td640" style="color:gray">\${ele.write_day}`;
+                       <td class="tablepadding td640" >`;
+                        for(let i=0; i<ele.score; i++)
+                        {
+                            s+=`<img src="../../save/pigperson.png" style="width: 26px; height: 26px;">`;
+                        }
 
                         if(ele.user_id=='${sessionScope.loginid}')
                         {s+=`<p class="s_upddel"><span class="s_update" review_idx="\${ele.review_idx}" data-bs-toggle="modal" data-bs-target="#reviewupdateModal" >수정</span>|<span class="s_delete" review_idx="\${ele.review_idx}">삭제</span></p>`}
                         s+=`</td></tr>`
 
 
-                        s+=` <tr><td><img src="../../save/pigperson.png" style="width: px; height: 9px;"></td></tr>`;
+                        s+=` <tr><td style="color:gray">`;
+                        //s+=`<img src="../../save/pigperson.png" style="width: px; height: 9px;">`;
+                        // $.each(ele.score, function(i, e){
+                        //     s+=`<img src="../../save/pigperson.png" style="width: 9px; height: 9px;">`;
+                        // })
+
+                        s+=`\${ele.write_day}`;
+                        s+=`</td></tr>`;
                         s+=`
                        <tr>
                            <td class="tablepadding"><pre>\${ele.reviewtext}</pre></td>
@@ -725,10 +776,10 @@
                         var s="";
 
                         if(res==1) {
-                            s=`<img src="bookmark/filledstar.png" class="starimage starfilling reviewpencil"><span style="font-size: 10px;"><b>가고싶다</b></span>`;
+                            s=`<img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/filledstar.png" class="starimage starfilling reviewpencil"><span style="font-size: 10px;"><b class="reviewpencil">가고싶다</b></span>`;
                         }
                         else{
-                            s=`<img src="bookmark/star.png" class="starimage starempty reviewpencil"><span style="font-size: 10px;"><b>가고싶다</b></span>`;
+                            s=`<img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/star.png" class="starimage starempty reviewpencil"><span style="font-size: 10px;"><b class="reviewpencil">가고싶다</b></span>`;
                         }
 
                         $("#k_iconplace").html(s);
@@ -1059,11 +1110,20 @@
     }
     .s_button{
         float:right;
-        display: inline-block;
+        display: flex;
+        /*align-items: center;*/
+        /*justify-content: center;*/
     }
-    ul{
-        list-style: none;
-        display: inline-block;
+    .s_btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .s_btbt{
+        margin-left: 15px;
+    }
+    .s_info{
+        margin-top: 10px;
     }
 
 
@@ -1140,20 +1200,23 @@
             <div id="s_storelist">
                 <div class="s_info">
                     <div class="s_storename ">
-                        <div class="s_fontsize30">${dto.RESTRT_NM} <span class="s_fontcolorapply">${dto.average}</span></div>
+                        <span class="s_fontsize30">${dto.RESTRT_NM} <span class="s_fontcolorapply">${dto.average}</span></span>
+
                         <div class="s_button">
 <%--                            <button id="s_reviewform" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#reviewModal"><i class="bi bi-pencil-fill"></i>--%>
 <%--                                <span>리뷰쓰기</span></button>--%>
 <%--                            <button type=기"button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal"> <i class="bi bi-calendar-check-fill"></i>--%>
 <%--                                <span>예약하기</span></button>--%>
-                            <ul>
-                            <li><div id="k_iconplace" class="s_btn" style="width: 38px; height: 38px;"><i class="fa fa-star bookmarkstar"></i><span style="font-size: 10px;">가고싶다</span></div></li>
-                             <li><img src="../../save/pencil.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#reviewModal"><span style="font-size: 10px;"><b class="reviewpencil">리뷰쓰기</b></span></li>
-                            <li><img src="../../save/calendar.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#calendarModal"><span style="font-size: 10px;"><b class="reviewpencil">예약하기</b></span></li>
-                            </ul>
+                            <div id="k_iconplace" class="s_btbt" style="width: 38px; height: 38px;"></div>
+                             <div class="s_btbt"><img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/pencil.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#reviewModal"><span style="font-size: 10px;"><b class="reviewpencil">리뷰쓰기</b></span></div>
+                            <div class="s_btbt"><img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/calendar.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#calendarModal"><span style="font-size: 10px;"><b class="reviewpencil">예약하기</b></span></div>
+
                         </div>
+
                     </div>
                     <div class="s_storedetailinfo">
+                        <div  class="s_couptable">
+                            <div class="s_ct" style="width: 800px;">
                         <table class="infotable">
                             <tr>
                                 <td style="color: gray">주소</td><td>&nbsp;${dto.REFINE_LOTNO_ADDR}</td>
@@ -1169,9 +1232,16 @@
                                 <td style="color: gray">가격대</td><td>&nbsp;${dto.food_price}</td>
                             </tr>
                         </table>
+                            </div>
+
+                        <div style="width: 100px; height: 100px; margin-left: 300px; margin-top: 20px;" class="s_ct s_coupon"><div class="s_cpinfotop">10% 할인</div><img src="../../save/couponimage.png" style="width: 120px; height: 100px;" class="s_couponimage"><div class="s_cpinfobottom">남은 시간</div></div>
+                        </div>
                         <br>
                         ${dto.GPT_content}<br>
+
                     </div>
+
+
                 </div>
                 <br>
                 <br>
@@ -1193,6 +1263,40 @@
             });
         </script>
     <!--모달 관련-->
+        <!--리뷰 자세히 보기 클릭-->
+        <!-- Modal -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <button id="closeButton" style="display: none;"onclick="closeModal()" class="close" >&times;</button>
+                <div class="video-wrapper">
+                    <video id="videoPlayer" controls>
+                        <source src="../ad/ad.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Modal 이벤트
+            // Open Modal
+            function openModal() {
+                document.getElementById("modal").style.display = "block";
+                document.getElementById("videoPlayer").play();
+            }
+
+            // Close Modal
+            function closeModal() {
+                document.getElementById("modal").style.display = "none";
+                document.getElementById("videoPlayer").pause();
+                document.getElementById("videoPlayer").currentTime = 0;
+            }
+            const videoPlayer = document.getElementById('videoPlayer');
+            const closeButton = document.getElementById('closeButton');
+
+            videoPlayer.addEventListener('ended', function() {
+                closeButton.style.display = 'block';
+            });
+        </script>
     <!---예약모달-->
     <div style="width:450px;">
 
