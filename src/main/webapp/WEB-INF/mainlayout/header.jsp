@@ -195,12 +195,12 @@
 <div class="m_realheader">
     <div class="m_realheader-container">
         <div class="m_headerlogo-container">
-            <img src="/photo/pastachul/chul01.png" alt="로고출력" style="width: 100%; border-radius: 100px;">
+            <img src="/photo/header/header.png" alt="로고출력">
         </div>
         <div id="m_headertop-panel" class="m_headeraction-panel">
             <ul class="m_headermain-navigation">
                 <li>
-                    <a href="#" class="m_cover">
+                    <a href="/search/search" class="m_cover">
                         <span class="text-effect">맛집리스트</span>
                     </a>
                 </li>

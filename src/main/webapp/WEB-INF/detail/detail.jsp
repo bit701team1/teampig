@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ include file="../commonvar.jsp"%>
 
 <!DOCTYPE html>
@@ -31,6 +32,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
@@ -595,6 +597,7 @@
                         }
                         s+='</td></table></div>';
                     })
+
                     s+=`<div id="m_footer">
                     <footer class="footer-section">
                         <div class="m_foottainer">
@@ -726,6 +729,7 @@
                     </footer>
             </div>
         </div>`;
+
 
                     $("div.s_review").html(s);
                 }
@@ -961,216 +965,15 @@
     </script>
 </head>
 <body>
+
 <style>
     @keyframes slide {
         0% { transform: translateX(0); }
         90% { transform: translateX(100%); }
         100% { transform: translateX(-100%); }
     }
-    #m_footer {
-        /*bottom: 0;*/
-        /*left: 0;*/
-        /*width: 100%;*/
-        /*background-color: #fff;*/
-        /*z-index: 99;*/
-        /*position: absolute;*/
-        position: relative;
-        margin-top: 80px;
-        bottom: 0;
-        width: 100%;
-        height: 50px; /* 푸터의 높이 설정 */
-        background-color: #fff;
-        z-index: 99;
-        /*margin-top: 4000px;*/
-    }
-    .m_foottainer{
-        margin: 0 auto;
-        width: 1200px;
-    }
-    ul {
-        margin: 0px;
-        padding: 0px;
-    }
-    .footer-section {
-        background: #fff;
-        position: relative;
-    }
-    .footer-cta {
-        border-bottom: 1px solid #373636;
-    }
-    .single-cta i {
-        color: #5C732C;
-        font-size: 30px;
-        float: left;
-        margin-top: 8px;
-    }
-    .cta-text {
-        padding-left: 15px;
-        display: inline-block;
-    }
-    .cta-text h4 {
-        color: #000;
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 2px;
-    }
-    .cta-text span {
-        color: #757575;
-        font-size: 15px;
-    }
-    .footer-content {
-        position: relative;
-        z-index: 2;
-    }
-    .footer-pattern img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 330px;
-        background-size: cover;
-        background-position: 100% 100%;
-    }
-    .footer-logo {
-        margin-bottom: 10px;
-    }
-    .footer-logo img {
-        max-width: 330px;
-        border-radius: 15px;
-        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
-        transform: perspective(1000px) rotateX(10deg);
-    }
-    .footer-text p {
-        margin-bottom: 14px;
-        font-size: 14px;
-        color: #7e7e7e;
-        line-height: 28px;
-        width: 330px;
-    }
-    .footer-social-icon span {
-        color: #2C4002;
-        display: block;
-        font-size: 20px;
-        font-weight: 700;
-        font-family: 'Poppins', sans-serif;
-        margin-bottom: 5px;
-        margin-top: 40px;
-    }
-
-    .footer-social-icon a {
-        display: inline-block; /* 이미지를 인라인 요소로 변경 */
-        margin-right: 10px; /* 이미지 사이의 간격을 조정 */
-    }
-
-    .footer-social-icon img {
-        width: 100px; /* 이미지의 가로 크기 설정 */
-        height: auto; /* 이미지의 세로 크기는 자동으로 조정 */
-    }
-
-    #slideShow {
-        overflow: hidden;
-        width: 790px;
-        height: 134px;
-        position: relative;
-        margin-top: 50px;
-    }
-
-    #slides {
-        width: calc(790px * 5);
-        position: absolute;
-        transition: transform 0.5s;
-    }
-
-    #slides > img {
-        width: 790px;
-        float: left;
-
-    }
 
 
-    .footer-widget-heading h3 {
-        color: #2C4002;
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 40px;
-        position: relative;
-    }
-    .footer-widget-heading h3::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -15px;
-        height: 2px;
-        width: 50px;
-        background: #2C4002;
-    }
-    .footer-widget ul li {
-        display: inline-block;
-        float: left;
-        width: 50%;
-        margin-bottom: 12px;
-    }
-    .footer-widget ul li a:hover{
-        color: #5C732C;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-        transition: color 0.3s ease, text-shadow 0.3s ease;
-    }
-    .footer-widget ul li a {
-        color: #878787;
-        text-transform: capitalize;
-    }
-    .subscribe-form {
-        position: relative;
-        margin-top: 50px;
-        /*overflow: hidden;*/
-    }
-    .subscribe-form input {
-        width: 100%;
-        padding: 14px 28px;
-        background: #fff;
-        border: 1px solid #2C4002;
-        color: #000;
-    }
-    .subscribe-form button {
-        position: absolute;
-        right: 0;
-        background: #5C732C;
-        padding: 13px 20px;
-        border: 1px solid #2C4002;
-        top: 0;
-    }
-    .subscribe-form button i {
-        color: #fff;
-        font-size: 22px;
-        transform: rotate(-6deg);
-    }
-    .copyright-area{
-        background: #1B260A;
-        padding: 25px 0;
-        width: 1200px;
-    }
-    .copyright-text p {
-        margin: 0;
-        font-size: 14px;
-        color: #878787;
-        margin-top: 10px;
-    }
-    .copyright-text p a{
-        color: #D9B29C;
-
-    }
-    .footer-menu li {
-        display: inline-block;
-        margin-left: 20px;
-        margin-top: 10px;
-    }
-    .footer-menu li:hover a{
-        color: #ff5e14;
-    }
-    .footer-menu li a {
-        font-size: 14px;
-        color: #878787;
-
-    }
     .s_review{
         position: relative;
         margin-top: 70px;
@@ -1202,13 +1005,12 @@
 
 </style>
 <div id="s_cont">
-
     <header>
         <%--HTML 영역--%>
         <div class="m_realheader">
             <div class="m_realheader-container">
                 <div class="m_headerlogo-container">
-                    <img src="/photo/logo4.png" alt="로고출력" style="width: 60px;cursor:pointer;" onclick="location.href='business'">
+                    <img src="/photo/header/headerlogo.png" alt="로고출력" onclick="location.href='business'">
                 </div>
                 <div id="m_headertop-panel" class="m_headeraction-panel">
                     <ul class="m_headermain-navigation">
@@ -1254,7 +1056,6 @@
                 </div>
             </div>
         </div>
-
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="js/header.js"></script>
     </header>
@@ -1318,16 +1119,142 @@
                         </div>
                         <br>
                         ${dto.GPT_content}<br>
-
                     </div>
-
-
                 </div>
                 <br>
                 <br>
                 <hr>
                 <div class="s_review"></div>
-
+                <div id="m_footer" class="container-fluid navbar-fixed-bottom">
+                    <footer class="footer-section">
+                        <div class="m_foottainer">
+                            <div class="footer-cta pt-5 pb-5">
+                                <div class="row">
+                                    <div class="col-xl-4 col-md-4 mb-30">
+                                        <div class="single-cta">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <div class="cta-text">
+                                                <h4>회사주소</h4>
+                                                <span>서울 강남구 강남대로94길 20 삼오빌딩 5-9층</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-md-4 mb-30">
+                                        <div class="single-cta">
+                                            <i class="fas fa-phone"></i>
+                                            <div class="cta-text">
+                                                <h4>전화번호</h4>
+                                                <span>0507-1414-9601</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-md-4 mb-30">
+                                        <div class="single-cta">
+                                            <i class="far fa-envelope-open"></i>
+                                            <div class="cta-text">
+                                                <h4>메일주소</h4>
+                                                <span>bitcamp701@naver.com</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer-content pt-5 pb-5">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-4 mb-50">
+                                        <div class="footer-widget">
+                                            <div class="footer-logo">
+                                                <a href="index.html"><img src="photo/footer/cilogo.png" class="img-fluid" alt="logo"></a>
+                                            </div>
+                                            <div class="footer-text">
+                                                <p>술 한잔 마셨습니다... 프로젝트가 미완성이어도 좋습니다. 하지만 '끼니 피그' 하나만 기억해 주세요. 진심을 다해 전합니다. 프로젝트가 별로일 수 있습니다. 밤낮으로 고민하고 코딩했습니다... 최선을 다했고, 열심히 했습니다. 저희 팀의 진심이 느껴지길 바랍니다. 고맙습니다...
+                                                </p>
+                                            </div>
+                                            <div class="footer-social-icon">
+                                                <span>서포터즈</span>
+                                                <a href="https://data.gg.go.kr"><img src="photo/footer/ggd.png" class="ggd"></a>
+                                                <a href="https://openai.com/blog/chatgpt"><img src="photo/footer/aigpt.png"></a>
+                                                <a href="https://www.data.go.kr"><img src="photo/footer/publicdata.png"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                                        <div class="footer-widget">
+                                            <div class="footer-widget-heading">
+                                                <h3>전체서비스</h3>
+                                            </div>
+                                            <ul>
+                                                <li><a href="#">회사소개</a></li>
+                                                <li><a href="#">비지니스</a></li>
+                                                <li><a href="#">이용약관</a></li>
+                                                <li><a href="#">공지사항</a></li>
+                                                <li><a href="#">고객센터</a></li>
+                                                <li><a href="#">고객관리</a></li>
+                                                <li><a href="#">광고서비스운영</a></li>
+                                                <li><a href="#">문의내역</a></li>
+                                                <li><a href="#">개인정보처리방침</a></li>
+                                                <li><a href="#">채용공고</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div id="slideShow">
+                                                    <div id="slides">
+                                                        <img src="photo/footer/banner1.png" alt="광고">
+                                                        <img src="photo/footer/banner5.png" alt="광고">
+                                                        <img src="photo/footer/banner3.png" alt="광고">
+                                                        <img src="photo/footer/banner4.png" alt="광고">
+                                                        <img src="photo/footer/banner2.png" alt="광고">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                                        <div class="footer-widget">
+                                            <div class="footer-widget-heading">
+                                                <h3>고객의 소리</h3>
+                                            </div>
+                                            <div class="footer-text mb-25">
+                                                <p>
+                                                    서비스 개선사항, 공공데이터 수정, 잘못된 정보 제보등 끼니피그에 다양한 고객들의 의견을 들려주세요.
+                                                </p>
+                                            </div>
+                                            <div class="subscribe-form">
+                                                <form action="#">
+                                                    <input type="text" placeholder="Email Address">
+                                                    <button><i class="fab fa-telegram-plane"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="copyright-area">
+                            <div class="m_foottainer">
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                                        <div class="copyright-text">
+                                            <p>Copyright &copy; 2023, All Right Reserved <a href="main.jsp"><b>비트캠프 1조</b></a></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                                        <div class="footer-menu">
+                                            <ul>
+                                                <li><a href="#">입장페이지</a></li>
+                                                <li><a href="#">검색서비스</a></li>
+                                                <li><a href="#">마이페이지</a></li>
+                                                <li><a href="#">관리페이지</a></li>
+                                                <li><a href="#">비지니스</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
             </div>
             <div id="s_around">
                 <div class="s_side">
@@ -1625,6 +1552,7 @@
         </div>
     </div>
 </div>
+
 <script src="js/footer.js"></script>
 
 <script type="text/javascript">
@@ -1752,6 +1680,8 @@
         height: 100px;
         /*background-color: chocolate;*/
     }
+
 </style>
+
 </body>
 </html>

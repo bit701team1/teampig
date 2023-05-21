@@ -13,15 +13,23 @@
     opacity: 0.9;
 }
 
+
 .j_bg_box{
     width: 100%;
     height: 100%;
     left: 0;
     position: absolute;
     float: left;
+
+/*.j_bg_box {*/
+/*    position: relative;*/
+/*>>>>>>> origin/malibu0521*/
 }
 
-video {
+#entervideo {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
