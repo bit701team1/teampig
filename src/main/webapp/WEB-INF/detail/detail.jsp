@@ -752,7 +752,7 @@
                         if(${dto.food_idx}!=ele.food_idx){
                             num++;
                             s+="<table class='s_nearbystoretable'>";
-                            s+=`<tr><td rowspan='3' class='s_nearbytd'><img src='http://pujmemyrqkys17181384.cdn.ntruss.com/foodphoto/\${ele.photoname}?type=f&w=80&h=80' style="width: 80px; height: 80px;"class="nearbyimg"></td>`;
+                            s+=`<tr><td rowspan='3' class='s_nearbytd'><img src='http://pujmemyrqkys17181384.cdn.ntruss.com/review/\${ele.photoname}?type=f&w=80&h=80' style="width: 80px; height: 80px;"class="nearbyimg"></td>`;
                             s+=`<td style="font-size: 18px;"><a href="detail?food_idx=\${ele.food_idx}" >\${ele.restrt_NM} </a>  <span class="s_fontcolorapply">\${ele.average}</span></td>`;
                             s+=`<tr><td>\${ele.food_type}</td></tr>`;
                             s+=`<tr><td>\${ele.food_price}</td></tr>`;

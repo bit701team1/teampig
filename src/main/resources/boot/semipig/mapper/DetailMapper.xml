@@ -21,11 +21,12 @@
     order by average desc
     </select>
 
-    <select id="nearbyStorephoto" parameterType="int" resultType="FoodPhotoDto">
-        SELECT *
-        FROM food_photo
-        WHERE user_idx = #{user_idx}
-        ORDER BY photo_idx ASC
+    <select id="nearbyStorephoto" parameterType="int" resultType="ReviewPhotoDto">
+        select *
+        from review_photo a
+                 left join review b
+                           on a.review_idx =b.review_idx
+        where b.food_idx=#{food_idx}
             LIMIT 1;
     </select>
 
