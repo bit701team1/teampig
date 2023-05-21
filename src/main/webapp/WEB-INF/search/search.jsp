@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>공공데이터 검색엔진</title>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
@@ -232,7 +232,7 @@
 
         .center {
             text-align: center;
-
+            font-weight: bold;
         }
 
         .k_photoplace{
@@ -514,7 +514,8 @@
                                                 <div class="col-xl-4 col-lg-4 mb-50">
                                                     <div class="footer-widget">
                                                         <div class="footer-logo">
-                                                            <a href="index.html"><img src="photo/cilogo.png" class="img-fluid" alt="logo"></a>
+                                                            <img src="photo/footer/cilogo.png" class="img-fluid" alt="logo">
+                                                           <!-- <a href="index.html"><img src="photo/cilogo.png" class="img-fluid" alt="logo"></a>-->
                                                         </div>
                                                         <div class="footer-text">
                                                             <p>술 한잔 마셨습니다... 프로젝트가 미완성이어도 좋습니다. 하지만 '끼니 피그' 하나만 기억해 주세요. 진심을 다해 전합니다. 프로젝트가 별로일 수 있습니다. 밤낮으로 고민하고 코딩했습니다... 최선을 다했고, 열심히 했습니다. 저희 팀의 진심이 느껴지길 바랍니다. 고맙습니다...
@@ -522,9 +523,9 @@
                                                         </div>
                                                         <div class="footer-social-icon">
                                                             <span>서포터즈</span>
-                                                            <a href="https://data.gg.go.kr"><img src="photo/ggd.png" class="ggd"></a>
-                                                            <a href="https://openai.com/blog/chatgpt"><img src="photo/aigpt.png"></a>
-                                                            <a href="https://www.data.go.kr"><img src="photo/publicdata.png"></a>
+                                                                <a href="https://data.gg.go.kr"><img src="photo/footer/ggd.png" class="ggd"></a>
+                                                                <a href="https://openai.com/blog/chatgpt"><img src="photo/footer/aigpt.png"></a>
+                                                                <a href="https://www.data.go.kr"><img src="photo/footer/publicdata.png"></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -549,12 +550,12 @@
                                                     <div class="row">
                                                         <div class="col-xl-12">
                                                             <div id="slideShow">
-                                                                <div id="slides">
-                                                                    <img src="photo/banner1.png" alt="광고">
-                                                                    <img src="photo/banner5.png" alt="광고">
-                                                                    <img src="photo/banner3.png" alt="광고">
-                                                                    <img src="photo/banner4.png" alt="광고">
-                                                                    <img src="photo/banner2.png" alt="광고">
+                                                                 <div id="slides" style="width:900px;">
+                                                                    <img src="photo/footer/banner1.png" alt="광고">
+                                                                    <img src="photo/footer/banner5.png" alt="광고">
+                                                                    <img src="photo/footer/banner3.png" alt="광고">
+                                                                    <img src="photo/footer/banner4.png" alt="광고">
+                                                                    <img src="photo/footer/banner2.png" alt="광고">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -581,7 +582,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="copyright-area">
+                                    <div class="copyright-area" style="width:1250px">
                                         <div class="m_foottainer">
                                             <div class="row">
                                                 <div class="col-xl-6 col-lg-6 text-center text-lg-left">
@@ -594,7 +595,7 @@
                                                         <ul>
                                                             <li><a href="#">입장페이지</a></li>
                                                             <li><a href="#">검색서비스</a></li>
-                                                            <li><a href="#">마이페이지</a></li>
+                                                            <li><a href="">마이페이지</a></li>
                                                             <li><a href="#">관리페이지</a></li>
                                                             <li><a href="#">비지니스</a></li>
                                                         </ul>
@@ -809,7 +810,7 @@
 
                                             <h2>LOGIN</h2>
                                             <p>로그인 해주세요!</p>
-                                            <button class="btn_login" onclick="change_to_login()">LOGIN</button>
+                                            <button class="btn_login" onclick="change_to_login()">Logout</button>
                                         </div>
                                     </div>
                                     <div class="col_md_sign_up">
@@ -952,33 +953,33 @@
 <div class="m_realheader">
     <div class="m_realheader-container">
         <div class="m_headerlogo-container">
-            <img src="#" alt="로고출력">
+            <img src="/photo/logo4.png" alt="로고출력" style="width: 60px;cursor:pointer;" onclick="location.href='business'">
         </div>
         <div id="m_headertop-panel" class="m_headeraction-panel">
             <ul class="m_headermain-navigation">
                 <li>
-                    <a href="#" class="m_cover">
+                    <a href="/search" class="m_cover">
                         <span class="text-effect">맛집리스트</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="m_cover">
+                    <a href="/business" class="m_cover">
                         <span class="text-effect">끼니비지니스</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="m_cover">
-                        <span class="text-effect">공지사항</span>
+                    <a href="/qna/list" class="m_cover">
+                        <span class="text-effect">질문게시판</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="m_cover">
+                    <a href="${root}/userpage" class="m_cover">
                         <span class="text-effect">마이페이지</span>
                     </a>
                 </li>
             </ul>
             <div class="m_headeruser-control">
-                <a href="#" class="m_cover" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                <a href="#" class="m_cover" data-bs-toggle="modal" data-bs-target="#loginModal">Logout</a>
             </div>
         </div>
 

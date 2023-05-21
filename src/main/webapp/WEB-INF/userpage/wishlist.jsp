@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>공공데이터 검색엔진 - 끼니피그</title>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
@@ -144,7 +144,6 @@
                 var b=confirm("삭제하시겠습니까?");
 
                 if(b){
-                    alert("확인");
                     $.ajax({
                         type: "get",
                         url: "/deleteBookmark",
@@ -173,8 +172,8 @@
                         var s=`<table style="width: 900px">`;
                         $.each(res.list, function (idx, ele) {
                             s+=`
-                            <tr class="mypage_tr" onclick="location.href='../detail?food_idx='+\${ele.food_idx}">
-                                <td class="mypage_RESTR_NM">\${ele.restrt_NM}</td>
+                            <tr class="mypage_tr">
+                                <td class="mypage_RESTR_NM" onclick="location.href='../detail?food_idx='+\${ele.food_idx}">\${ele.restrt_NM}</td>
                                 <td class="mypage_foodtype">#\${ele.food_type}</td>
                                 <td>\${ele.food_price}</td>
                                 <td class="k_bookmark_place"><img src="/bookmark/filledstar.png" class="starimage starfilling k_mybookmark" food_idx ='\${ele.food_idx}'></td>

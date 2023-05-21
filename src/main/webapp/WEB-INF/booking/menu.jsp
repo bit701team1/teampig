@@ -102,12 +102,12 @@ div .y_btn{
 
 	<ul class="y_mainul">
 		<li><span style="position: relative;">
-			<a href="${root}/home2"><span class="y_txt"><i class="bi bi-house" ></i>  My홈</span></a>
+			<a href="${root}/storepage"><span class="y_txt"><i class="bi bi-house" ></i>  My홈</span></a>
 			<span  id="expand1"><i class="bi bi-chevron-compact-down"></i></span>
 	</span>
 	<ul class="y_user">
 				<li>
-				<a href="${root}/home2"><span class="y_txt"> 가게 정보</span></a>
+				<a href="${root}/storepage"><span class="y_txt"> 가게 정보</span></a>
 				</li>
 				<li>
 				<a href="${root}/mypage/infoupdate"><span class="y_txt"> 정보 수정</span></a>

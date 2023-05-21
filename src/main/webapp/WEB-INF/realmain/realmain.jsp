@@ -117,7 +117,7 @@
                                             <p class="card-text">\${ele.restrt_NM}</p>
                                             <p class="card-type">#\${ele.food_type}</p>
                                             <div class="frame">
-                                                <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
+                                                <button class="custom-btn btn-2" onclick="window.location.href='/detail?food_idx='+\${ele.food_idx}">방문하기</button>
                                             </div>
                                         </div>
                                 </div>
@@ -158,7 +158,7 @@
                                             <p class="card-text">\${ele.restrt_NM}</p>
                                             <p class="card-type">#\${ele.food_type}</p>
                                             <div class="frame">
-                                                <button class="custom-btn btn-2"><a href="#" target="_blank"></a>방문하기</button>
+                                                <button class="custom-btn btn-2" onclick="window.location.href='/detail?food_idx='+\${ele.food_idx}">방문하기</button>
                                             </div>
                                         </div>
                                 </div>
@@ -180,10 +180,11 @@
         });
 
         $(document).on('click',".k_btnsearch", function (event){
-            var input = $(".inputsearch").val();
+
+            window.location.href='/search'
 
             event.preventDefault(); // 클릭 이벤트의 기본 동작을 중단합니다.
-            $.ajax({
+           /* $.ajax({
                 url: "/setsearchsession",
                 type: "get",
                 dataType:"json",
@@ -196,7 +197,7 @@
                     // ...
                     alert("전송 실패");
                 }
-            });
+            });*/
         });
 
     }); //$func end
@@ -303,7 +304,7 @@
                 <a class="nav-link  text-white" href="#menu-1">추천맛집</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  text-white" href="#menu-2">히스토리</a>
+                <a class="nav-link  text-white" href="#menu-2">인기맛집</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link  text-white" href="#menu-3">끼니피그소개</a>
@@ -402,7 +403,7 @@
                                                     "position: relative; bottom:50px;"></i></a>
 
                                             <h2>SIGN UP</h2>
-                                            <input type="text" name="email" id="email" placeholder="Email"/>
+                                            <input type="text"  name="email" id="email" placeholder="Email"/>
                                             <input type="text" name="id" id="id" placeholder="id" />
                                             <input type="password" name="password" id="password" placeholder="Password" />
                                             <input type="text" name="user_name" id="user_name" placeholder="name" />
@@ -617,7 +618,7 @@
                                     <div class="line line2"></div>
                                 </div>
 
-                                <input type="search" placeholder="키워드 입력" class="search inputsearch" />
+                                <input type="search" placeholder="검색" class="search inputsearch" onclick="location.href='search'" style="cursor:pointer;"/>
                                 <button type="button" class="k_btnsearch" list_type="type_search" hidden></button>
                             </button>
 

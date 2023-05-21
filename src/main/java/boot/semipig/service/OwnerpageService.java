@@ -50,7 +50,7 @@ public class OwnerpageService implements OwnerpageServiceInter {
         con.setRequestProperty("Content-Type", "application/json"); // 데이터 타입이 무엇인가
 
 
-        con.setRequestProperty("Authorization", "Bearer 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");//인증 ,openapi key
+        con.setRequestProperty("Authorization", "Bearer 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");//인증 ,openapi key
 
 
         con.setDoOutput(true);

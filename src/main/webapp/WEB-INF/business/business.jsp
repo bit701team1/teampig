@@ -110,7 +110,7 @@
                            success: function(response) {
                                console.log(response);
                                if (response == 1) {
-                                   window.location.href = "/home2";
+                                   window.location.href = "/storepage";
                                } else {
                                    window.location.href = "/mypage/writeform";
                                }
@@ -184,16 +184,16 @@
 <div id="container">
     <header>
         <div id="logo">
-            <a href="./business.jsp">
+            <a href="/">
                 <img src="./photo/logo4.png" alt="로고">
             </a>
         </div>
         <div id="highMenu">
             <ul>
                 <li><a href="#">공지사항</a></li>
-                <li><a href="#">고객센터</a></li>
-<%--                <li><a href="${root}/home2" id="mypage">마이페이지</a></li>--%>
-                <li><a href="#" id="mypage">마이페이지</a></li>
+                <li><a href="/qna/list">질문게시판</a></li>
+<%--                <li><a href="${root}/storepage" id="mypage">마이페이지</a></li>--%>
+                <li><a href="/storepage" id="mypage">마이페이지</a></li>
                 <c:choose>
                     <c:when test="${sessionScope.loginok=='yes'}">
                         <li><a href="#"   onclick="location.href='./logout'">로그아웃</a></li>

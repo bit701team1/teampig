@@ -6,21 +6,20 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>공공데이터 검색엔진 - 끼니피그</title>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/css/qnalist.css" />
-    <link rel="stylesheet" href="/css/qnafooter.css" />
-    <link rel="stylesheet" href="/css/header.css" />
-    <script src="/js/qnalist.js"> </script>
+    <link rel="stylesheet" href="/css/qnalist.css"/>
+    <link rel="stylesheet" href="/css/qnafooter.css"/>
+    <link rel="stylesheet" href="/css/header.css"/>
+    <script src="/js/qnalist.js"></script>
     <script src="/js/qnafooter.js"></script>
-    <script src="/js/header.js"></script>
 
     <style>
         body, body *{
-            font-family: 'Jua'
+
         }
         .j_qna_content{
             display: none;
@@ -28,10 +27,7 @@
         .j_alert_content{
             display: none;
         }
-        .j_qna_header{
-            margin: 0 auto;
-        }
-        .j_qna_logo{
+        .j_qna_logoo{
             width: 80px;
             height: 75px;
         }
@@ -51,21 +47,251 @@
             display:block;
             clear:both;
         }
+
+        .line-break {
+            white-space: pre-wrap;
+        }
+        .hover-div {
+            width: 300px;
+            height: 200px;
+            float: left;
+            text-align: center;
+        }
+
+        .j_qna_logo {
+            margin:10px 0;
+            width: 200px;
+            height: 200px;
+            display: none;
+            border-radius: 100px;
+            opacity: 0.5;
+        }
+
+        .hover-div:hover .j_qna_logo {
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
-<header class="j_qna_header" style="height: 90px;">
-    <%@ include file="../mainlayout/header.jsp" %>
+<header>
+    <c:set var="root" value="<%=request.getContextPath() %>"/>
+    <%--<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#loginModal">로그인</button>--%>
+    <!-- The Modal -->
+    <div class="modal fade" id="loginModal">
+        <div class="modal-dialog" >
+            <div class="modal-content" style="background-color: transparent; border:transparent; " >
+
+                <!-- Modal Header -->
+                <%--            <div class="modal-header" style="opacity: 0.9">--%>
+                <%--                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>--%>
+                <%--            </div>--%>
+
+                <!-- Modal body -->
+                <div class="modal-body" >
+                    <div class="position">
+                        <div class="cont_principal">
+                            <div class="cont_centrar">
+
+                                <div class="cont_login">
+                                    <div class="cont_info_log_sign_up">
+                                        <div class="col_md_login">
+                                            <div class="cont_ba_opcitiy">
+
+                                                <h2>LOGIN</h2>
+                                                <p>로그인 해주세요!</p>
+                                                <button class="btn_login" onclick="change_to_login()">LOGIN</button>
+                                            </div>
+                                        </div>
+                                        <div class="col_md_sign_up">
+                                            <div class="cont_ba_opcitiy">
+                                                <h2>SIGN UP</h2>
+
+
+                                                <p>계정이 없으신가요?</p>
+
+                                                <button class="btn_sign_up" onclick="change_to_sign_up()">SIGN UP</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="cont_back_info">
+                                        <div class="cont_img_back_grey">
+                                            <img src='${root}/photo/login.png' />
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-body"> <!-- Add this container -->
+                                        <div class="cont_forms">
+                                            <div class="cont_img_back_">
+                                                <img src='${root}/photo/signup.png'/>
+                                            </div>
+                                            <div class="cont_form_login">
+                                                <a href="#" onclick="hidden_login_and_sign_up()" ><i class="bi bi-x-lg"></i></a>
+                                                <h2>LOGIN</h2>
+                                                <input type="text" placeholder="id" />
+                                                <input type="password" placeholder="Password" />
+                                                <button class="btn_login" onclick="change_to_login()">LOGIN</button><br>
+                                                <img src="${root}/photo/naver.png" width="100px" style="margin-top: 5px; cursor: pointer;" onclick="initNaverLogin()">
+                                                <img src='${root}/photo/kakao.png' width="100px" height="37px" style="margin-top: 5px; cursor: pointer;">
+                                            </div>
+
+                                            <div class="cont_form_sign_up">
+                                                <a href="#" onclick="hidden_login_and_sign_up()"><i class="bi bi-x-lg" style=
+                                                        "position: relative; bottom:50px;"></i></a>
+                                                <h2>SIGN UP</h2>
+                                                <input type="text" placeholder="Email" />
+                                                <input type="text" placeholder="id" />
+                                                <input type="password" placeholder="Password" /><br>
+                                                <select class="form-select">
+                                                    <option value="일반사용자">일반 사용자</option>
+                                                    <option value="사장님">사장님</option>
+                                                </select>
+                                                <button class="btn_sign_up" onclick="change_to_sign_up()">SIGN UP</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ------------------------------------ Click on login and Sign Up to  changue and view the effect
+      ---------------------------------------
+      */
+
+
+        const time_to_show_login = 400;
+        const time_to_hidden_login = 200;
+
+        function change_to_login() {
+            document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_login";
+            document.querySelector('.cont_form_login').style.display = "block";
+            document.querySelector('.cont_form_sign_up').style.opacity = "0";
+
+            setTimeout(function(){  document.querySelector('.cont_form_login').style.opacity = "1"; },time_to_show_login);
+
+            setTimeout(function(){
+                document.querySelector('.cont_form_sign_up').style.display = "none";
+            },time_to_hidden_login);
+        }
+
+        const time_to_show_sign_up = 100;
+        const time_to_hidden_sign_up = 400;
+
+        function change_to_sign_up(at) {
+            document.querySelector('.cont_forms').className = "cont_forms cont_forms_active_sign_up";
+            document.querySelector('.cont_form_sign_up').style.display = "block";
+            document.querySelector('.cont_form_login').style.opacity = "0";
+
+            setTimeout(function(){  document.querySelector('.cont_form_sign_up').style.opacity = "1";
+            },time_to_show_sign_up);
+
+            setTimeout(function(){   document.querySelector('.cont_form_login').style.display = "none";
+            },time_to_hidden_sign_up);
+
+
+        }
+
+        const time_to_hidden_all = 500;
+
+        function hidden_login_and_sign_up() {
+
+            document.querySelector('.cont_forms').className = "cont_forms";
+            document.querySelector('.cont_form_sign_up').style.opacity = "0";
+            document.querySelector('.cont_form_login').style.opacity = "0";
+
+            setTimeout(function(){
+                document.querySelector('.cont_form_sign_up').style.display = "none";
+                document.querySelector('.cont_form_login').style.display = "none";
+            },time_to_hidden_all);
+
+        }
+    </script>
+
+    <script>
+        function initNaverLogin() {
+            var naverLogin = new naver.LoginWithNaverId({
+                clientId: "KMw1CKJNqR_tTHgOY5np",
+                callbackUrl: "http://localhost:9000/auth/naver/callback",
+                loginButton: { color: "green", type: 10, height: 60 },
+                callbackHandle: true
+            });
+
+            naverLogin.init();
+        }
+    </script>
+
+    <%--HTML 영역--%>
+    <div class="m_realheader">
+        <div class="m_realheader-container">
+            <div class="m_headerlogo-container">
+                <img src="/photo/pastachul/chul01.png" alt="로고출력" style="width: 100%; border-radius: 100px;">
+            </div>
+            <div id="m_headertop-panel" class="m_headeraction-panel">
+                <ul class="m_headermain-navigation">
+                    <li>
+                        <a href="/search" class="m_cover">
+                            <span class="text-effect">맛집리스트</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/business" class="m_cover">
+                            <span class="text-effect">끼니비지니스</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/qna/list" class="m_cover">
+                            <span class="text-effect">질문게시판</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/userpage" class="m_cover">
+                            <span class="text-effect">마이페이지</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="m_headeruser-control">
+                    <a href="#" class="m_cover" data-bs-toggle="modal" data-bs-target="#loginModal">Logout</a>
+                </div>
+            </div>
+
+            <span id="m_headerform-open" class="m_headersearch-toggle">
+                    <i class="fa fa-search"></i>
+                </span>
+            <div class="m_headersearch-holder">
+                <form id="m_headeridsearch-form" class="m_headersearch-form">
+                    <input type="text" name="qwrd" placeholder="검색어를 입력하세요." class="m_headersearch-input">
+                    <button type="submit" id="form-submit" class="m_headersearch-toggle">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <button type="reset" id="m_headerform-close" class="m_search-close">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/header.js"></script>
 </header>
 <section style="width: 100%;">
     <div class="j_qna_allbox" style="margin: 0 auto; width: 1400px;">
 
         <div class="qna_header clear" style=" width: 1400px;">
             <div style="width: 300px; height: 200px; float: left; text-align: center;" >
-                <img class="j_qna_logo" src="/photo/pastachul/chul01.png" style="margin:10px 0 ; width: 180px; height: 180px; opacity: 0.4; border-radius: 100px;">
+                <%--                <img class="j_qna_logo" src="/photo/pastachul/chul01.png" style="margin:10px 0 ; width: 180px; height: 180px; display: none; border-radius: 100px;">--%>
+                <div class="hover-div" >
+                    <img class="j_qna_logo" src="/photo/pastachul/chul01.png">
+                </div>
             </div>
             <div style="width: 1100px; height: 200px; float: left; text-align: center;">
-                <img class="j_qna_logo" src="/photo/gguineapig01.png">
+                <img class="j_qna_logoo" src="/photo/gguineapig01.png">
                 <h2 style="margin-top: 8px; ">질문게시판</h2>
                 <p>끼니피그 서비스 사용 중 궁금한 문의사항을 확인하실 수 있습니다</p>
             </div>
@@ -73,11 +299,7 @@
 
         <div class="hongbobox" style="width: 200px; height: 100%; float: left; text-align: center; margin-left: 50px; margin-top: 100px;">
             <div class="qna_banner_imgbox" style="height: 50%; width: 100%; white-space: nowrap; ">
-                <img class="qna_banner_img" src="/photo/pastachul/mangata05.jpg" style="height: 340px; width: 100%; border-radius: 10px; ">
-<%--                <img class="qna_banner_img" src="/photo/mangata01.jpg" style="height: 340px; width: 100%; border-radius: 10px; ">--%>
-<%--                <img class="qna_banner_img" src="/photo/mangata01.jpg" style="height: 340px; width: 100%; border-radius: 10px; ">--%>
-<%--                <img class="qna_banner_img" src="/photo/mangata01.jpg" style="height: 340px; width: 100%; border-radius: 10px; ">--%>
-<%--                <img class="qna_banner_img" src="/photo/mangata01.jpg" style="height: 340px; width: 100%; border-radius: 10px; ">--%>
+                <img class="qna_banner_img" src="/photo/pastachul/mangata01.jpg" style="height: 440px; width: 100%; border-radius: 10px; ">
             </div>
             <div class="qna_banner_youtube" style="height: 100%; width: 200px; white-space: nowrap; margin-top: 40px;">
                 <iframe style="position: relative; transition: all 0.5s ease-in-out; margin-left: 0px; object-fit: cover;" width="100%;" height="100%;" src="https://www.youtube.com/embed/xlseZaiKsTY?autoplay=1&mute=1"
@@ -93,18 +315,18 @@
 
         <div class="j_qna_board" style="width: 1000px; height: 100%; margin-left: 320px;
         border: 1px solid whitesmoke; box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); padding: 40px;">
-<%--            <section style=" margin: 20px auto;">--%>
-<%--                <form action="temp_login" method="post" style="position: relative;">--%>
-<%--                   확인용 <span> id: ${logindto.user_name} // user_idx: ${logindto.user_idx} // user_type: ${logindto.user_type}</span><br>--%>
-<%--                </form>--%>
-<%--            </section>--%>
+            <%--            <section style=" margin: 20px auto;">--%>
+            <%--                <form action="temp_login" method="post" style="position: relative;">--%>
+            <%--                   확인용 <span> id: ${logindto.user_name} // user_idx: ${logindto.user_idx} // user_type: ${logindto.user_type}</span><br>--%>
+            <%--                </form>--%>
+            <%--            </section>--%>
 
 
             <div class="j_qna_write_link">
                 <c:if test="${logindto.user_idx!=0}">
-                <button class="btn btn-sm " type="button" style="background-color:lightblue; color:black; cursor: pointer; margin-left: 91%;" onclick="location.href ='./writeform'">
-                    <i class="bi bi-pencil"></i> 글 쓰기
-                </button>
+                    <button class="btn btn-sm " type="button" style="background-color:lightblue; color:black; cursor: pointer; margin-left: 91%;" onclick="location.href ='./writeform'">
+                        <i class="bi bi-pencil"></i> 글쓰기
+                    </button>
                 </c:if>
                 <hr class="hr-14">
             </div>
@@ -122,8 +344,7 @@
                                             ${dto.qna_subject}
                                     </span>
                                 </h4>
-                                <span style="margin-left: 9px;">by ${dto.writer}  |  <fmt:formatDate value="${dto.qna_writeday}" pattern="yyyy-MM-dd HH:mm"/>  |
-                                            user_type : ${dto.user_type}  | user_idx : ${dto.user_idx}  </span>
+                                <span style="margin-left: 9px;">by ${dto.writer}  |  <fmt:formatDate value="${dto.qna_writeday}" pattern="yyyy-MM-dd HH:mm"/> </span>
                                 <hr class="hr-13">
                             </li>
                         </c:if>
@@ -131,8 +352,8 @@
                             <div style="width: 5%; height: 100%;" >
                                 <img src="/photo/gguineapig02.png" style="width: 30px; height: 30px; margin-left: 10px;">
                             </div>
-                            <div style="width: 88%; height: 50%; margin: 0 auto; left: 20%;">
-                                <span style="font-size: 1.5em; margin-left: 15px; color: black">${dto.qna_content}</span>
+                            <div style="width: 88%; height: 50%; margin: 0 auto; left: 20%; text-align: center;">
+                                <span style="font-size: 1.5em; margin-left: 15px; color: black;" class="line-break">${dto.qna_content}</span>
                                 <c:if test="${logindto.user_type==3}">
                                     <i class="bi bi-trash2-fill admin_alertdel" qna_idx="${dto.qna_idx}"
                                        style="cursor: pointer; margin-left: 20px;"></i>
@@ -400,5 +621,4 @@
         });
     }
 </script>
-</body>
-</html>
+</bo

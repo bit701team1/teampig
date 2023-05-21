@@ -61,15 +61,15 @@
                                     /*String ss=(String)${sessionScope.previousUrl}
                                     console.log(${sessionScope.previousUrl});*/
 
-                                    var redirectUrl='../../business?n_email='+email+'&n_name='+name;
+                                    var redirectUrl='../../enter?n_email='+email+'&n_name='+name;
                                     window.location.href=redirectUrl;
                                     //console.log(redirectUrl);
-                                   // var redirectUrl = document.referrer; // Get the previous URL
-                                   // window.location.href = redirectUrl;
+                                    // var redirectUrl = document.referrer; // Get the previous URL
+                                    // window.location.href = redirectUrl;
                                     //window.history.back();
                                 }
                                 else{
-                                    window.location.href='../../snsloginaction?email='+email;
+                                    window.location.href='../../naverloginaction?email='+email;
                                 }
                             }//success function 끝
                         })

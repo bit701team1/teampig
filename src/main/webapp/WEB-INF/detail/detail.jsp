@@ -634,7 +634,7 @@
                                     <div class="col-xl-4 col-lg-4 mb-50">
                                         <div class="footer-widget">
                                             <div class="footer-logo">
-                                                <a href="index.html"><img src="photo/cilogo.png" class="img-fluid" alt="logo"></a>
+                                                <img src="photo/footer/cilogo.png" class="img-fluid" alt="logo">
                                             </div>
                                             <div class="footer-text">
                                                 <p>술 한잔 마셨습니다... 프로젝트가 미완성이어도 좋습니다. 하지만 '끼니 피그' 하나만 기억해 주세요. 진심을 다해 전합니다. 프로젝트가 별로일 수 있습니다. 밤낮으로 고민하고 코딩했습니다... 최선을 다했고, 열심히 했습니다. 저희 팀의 진심이 느껴지길 바랍니다. 고맙습니다...
@@ -642,9 +642,9 @@
                                             </div>
                                             <div class="footer-social-icon">
                                                 <span>서포터즈</span>
-                                                <a href="https://data.gg.go.kr"><img src="photo/ggd.png" class="ggd"></a>
-                                                <a href="https://openai.com/blog/chatgpt"><img src="photo/aigpt.png"></a>
-                                                <a href="https://www.data.go.kr"><img src="photo/publicdata.png"></a>
+                                                      <a href="https://data.gg.go.kr"><img src="photo/footer/ggd.png" class="ggd"></a>
+                                                      <a href="https://openai.com/blog/chatgpt"><img src="photo/footer/aigpt.png"></a>
+                                                      <a href="https://www.data.go.kr"><img src="photo/footer/publicdata.png"></a>
                                             </div>
                                         </div>
                                     </div>
@@ -670,11 +670,11 @@
                                             <div class="col-xl-12">
                                                 <div id="slideShow">
                                                     <div id="slides">
-                                                        <img src="photo/banner1.png" alt="광고">
-                                                        <img src="photo/banner5.png" alt="광고">
-                                                        <img src="photo/banner3.png" alt="광고">
-                                                        <img src="photo/banner4.png" alt="광고">
-                                                        <img src="photo/banner2.png" alt="광고">
+                                                         <img src="photo/footer/banner1.png" alt="광고">
+                                                        <img src="photo/footer/banner5.png" alt="광고">
+                                                        <img src="photo/footer/banner3.png" alt="광고">
+                                                        <img src="photo/footer/banner4.png" alt="광고">
+                                                        <img src="photo/footer/banner2.png" alt="광고">
                                                     </div>
                                                 </div>
                                             </div>
@@ -779,10 +779,10 @@
                         var s="";
 
                         if(res==1) {
-                            s=`<img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/filledstar.png" class="starimage starfilling reviewpencil"><span style="font-size: 10px;"><b class="reviewpencil">가고싶다</b></span>`;
+                            s=`<img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/filledstar.png" class="starimage starfilling reviewpencil"><span style="font-size: 10px;"><b class="reviewpencil">찜하기</b></span>`;
                         }
                         else{
-                            s=`<img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/star.png" class="starimage starempty reviewpencil"><span style="font-size: 10px;"><b class="reviewpencil">가고싶다</b></span>`;
+                            s=`<img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/star.png" class="starimage starempty reviewpencil"><span style="font-size: 10px;"><b class="reviewpencil">찜하기</b></span>`;
                         }
 
                         $("#k_iconplace").html(s);
@@ -1208,33 +1208,33 @@
         <div class="m_realheader">
             <div class="m_realheader-container">
                 <div class="m_headerlogo-container">
-                    <img src="#" alt="로고출력">
+                    <img src="/photo/logo4.png" alt="로고출력" style="width: 60px;cursor:pointer;" onclick="location.href='business'">
                 </div>
                 <div id="m_headertop-panel" class="m_headeraction-panel">
                     <ul class="m_headermain-navigation">
                         <li>
-                            <a href="#" class="m_cover">
+                            <a href="/search" class="m_cover">
                                 <span class="text-effect">맛집리스트</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="m_cover">
+                            <a href="/business" class="m_cover">
                                 <span class="text-effect">끼니비지니스</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="m_cover">
-                                <span class="text-effect">공지사항</span>
+                            <a href="/qna/list" class="m_cover">
+                                <span class="text-effect">질문게시판</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="m_cover">
+                            <a href="/userpage" class="m_cover">
                                 <span class="text-effect">마이페이지</span>
                             </a>
                         </li>
                     </ul>
                     <div class="m_headeruser-control">
-                        <a href="#" class="m_cover" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                        <a href="#" class="m_cover" data-bs-toggle="modal" data-bs-target="#loginModal">Logout</a>
                     </div>
                 </div>
 
@@ -1305,7 +1305,16 @@
                                 </table>
                             </div>
 
-                            <div style="width: 100px; height: 100px; margin-left: 300px; margin-top: 20px;" class="s_ct s_coupon"><div class="s_cpinfotop">10% 할인</div><img src="../../save/couponimage.png" style="width: 120px; height: 100px;" class="s_couponimage"><div class="s_cpinfobottom">남은 시간</div></div>
+                            <%--<div style="width: 100px; height: 100px; margin-left: 300px; margin-top: 20px;" class="s_ct s_coupon"><div class="s_cpinfotop">10% 할인</div><img src="../../save/couponimage.png" style="width: 120px; height: 100px;" class="s_couponimage"><div class="s_cpinfobottom">남은 시간</div></div>--%>
+                            <c:if test="${cdto.max > 0}">
+                                <div style="width: 200px; height: 100px; margin-left: 300px; margin-top: 20px;" class="s_ct s_coupon"><div class="s_cpinfotop" style="margin-left: 35px;">${cdto.number}% 할인</div>
+                                    <img src="../../save/couponimage.png" onclick="update()" style="cursor:pointer;width: 120px; height: 100px; margin-left: 10px;" class="s_couponimage"> 수량 ${cdto.max}<div class="s_cpinfobottom">
+                                        <div class="countdown" id="countdown-" style="margin-top: 10px">
+                                            <p class="countdown-timer-days" style="display: inline-block;">00</p>
+                                            <p class="countdown-timer-hours"  style="display: inline-block;">00</p>
+                                            <p class="countdown-timer-minutes" style="display: inline-block;" >00</p>
+                                            <p class="countdown-timer-seconds" style="display: inline-block;" >00</p>
+                                        </div></div></div>     </c:if>
                         </div>
                         <br>
                         ${dto.GPT_content}<br>
@@ -1735,7 +1744,6 @@
         height: 100%;
         /*background-color: beige;*/
     }
-
 
 
     footer{

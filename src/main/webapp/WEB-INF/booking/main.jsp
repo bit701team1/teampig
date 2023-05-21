@@ -1,82 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%> 
+         pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta id="ch-new-plugin-theme" name="theme-color" content="#686868">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <meta charset="utf-8">
+    <meta id="ch-new-plugin-theme" name="theme-color" content="#686868">
+    <title>공공데이터 검색엔진 - 끼니피그</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<style type="text/css">
-   body, body * {
-       font-family: 'Gowun Batang';
-   }
-   div.y_myinfo{
-       width: 1000px;
-       padding: 10px;
-       border-radius: 0.825rem;
-       border-top:0.25rem solid #5C732C !important;
-       box-shadow: 0 .15rem 1.0rem 0 rgba(58,59,69,.15)!important;
-       transition: box-shadow 0.1s ease;
-   }
-   h2 {
-       font-weight: bold;
-   }
-   .y_square {
-       margin-top:10px;
-       width: 1000px;
-       margin-bottom: 20px;
-       height: 100px;
-       border-radius: 15px;
-       box-shadow: 1px 1px 10px 0 rgba(72, 75, 108, .08);
-       border: solid 1px #e3e9ed;
-       background-color: #fff;
-       box-sizing: border-box;
-       position: relative; /* 수정: position 값을 relative로 변경 */
-       display: flex;
-       justify-content: space-between;
-   }
+    <style type="text/css">
+        body, body * {
+            font-family: 'Gowun Batang';
+        }
+        div.y_myinfo{
+            width: 1000px;
+            padding: 10px;
+            border-radius: 0.825rem;
+            border-top:0.25rem solid #5C732C !important;
+            box-shadow: 0 .15rem 1.0rem 0 rgba(58,59,69,.15)!important;
+            transition: box-shadow 0.1s ease;
+        }
+        h2 {
+            font-weight: bold;
+        }
+        .y_square {
+            margin-top:10px;
+            width: 1000px;
+            margin-bottom: 20px;
+            height: 100px;
+            border-radius: 15px;
+            box-shadow: 1px 1px 10px 0 rgba(72, 75, 108, .08);
+            border: solid 1px #e3e9ed;
+            background-color: #fff;
+            box-sizing: border-box;
+            position: relative; /* 수정: position 값을 relative로 변경 */
+            display: flex;
+            justify-content: space-between;
+        }
 
-   .y_square::before,
-   .y_square::after {
-       content: "";
-       position: absolute;
-       top: 25px;
-       bottom: 25px;
-       width: 1px;
-       background-color: #e3e9ed;
-   }
+        .y_square::before,
+        .y_square::after {
+            content: "";
+            position: absolute;
+            top: 25px;
+            bottom: 25px;
+            width: 1px;
+            background-color: #e3e9ed;
+        }
 
-   .y_square::before {
-       left: calc(33.33% - 0.5px);
-   }
+        .y_square::before {
+            left: calc(33.33% - 0.5px);
+        }
 
-   .y_square::after {
-       right: calc(33.33% - 0.5px);
-   }
+        .y_square::after {
+            right: calc(33.33% - 0.5px);
+        }
 
-   .y_content {
-       flex: 1;
-       display: flex;
-       align-items: center;
-       justify-content: center;
-       font-size: 18px;
-       color: #5c667b;
-   }
-   .y_content:hover .y_coup {
-       color: black;
-   }
-</style>
+        .y_content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #5c667b;
+        }
+        .y_content:hover .y_coup {
+            color: black;
+        }
+    </style>
 
 </head>
 <body>
@@ -123,7 +123,7 @@
                 <td>${dto.holiday}</td>
             </tr>
         </table>
-</div>
+    </div>
 </div>
 <div class="y_square">
     <div class="y_content">예약 총 ${totalCount} </div>
@@ -131,58 +131,58 @@
     <div class="y_content">내 가게 리뷰 ${reviewcount}</div>
 </div>
 
+<!-- The Modal -->
+<div style="width: 450px;">
+
     <!-- The Modal -->
-    <div style="width: 450px;">
+    <div class="modal fade" id="couponModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-        <!-- The Modal -->
-        <div class="modal fade" id="couponModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">쿠폰등록</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
 
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">쿠폰등록</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="coupon" class="form-label">할인율</label>
-                                <select class="form-select" id="coupon" name="number">
-                                    <option value="5">5%</option>
-                                    <option value="10">10%</option>
-                                    <option value="15">15%</option>
-                                    <option value="20">20%</option>
-                                    <option value="25">25%</option>
-                                    <option value="30">30%</option>
-                                    <option value="35">35%</option>
-                                    <option value="40">40%</option>
-                                </select>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="coupon" class="form-label">할인율</label>
+                            <select class="form-select" id="coupon" name="number">
+                                <option value="5">5%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                                <option value="20">20%</option>
+                                <option value="25">25%</option>
+                                <option value="30">30%</option>
+                                <option value="35">35%</option>
+                                <option value="40">40%</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">수량</span>
+                                <input type="text" class="form-control" id="quantity" name="max">
                             </div>
-                            <div class="mb-3">
-                                <div class="input-group">
-                                    <span class="input-group-text">수량</span>
-                                    <input type="text" class="form-control" id="quantity" name="max">
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label>유효기간</label>
-                                <input type="date" name="time" id="y_cdate"  class="form-control" style="width: 200px; display: inline-block;" >
-                                &nbsp;<input type="text" id="y_ctime" class="form-control" style="width:190px; display: inline-block;">
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="mb-3">
+                            <label>유효기간</label>
+                            <input type="date" name="time" id="y_cdate"  class="form-control" style="width: 200px; display: inline-block;" >
+                            &nbsp;<input type="text" id="y_ctime" class="form-control" style="width:190px; display: inline-block;">
+                        </div>
+                    </form>
+                </div>
 
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" style="background-color:#5C732C;" data-bs-dismiss="modal" onclick="applyCoupon()">등록</button>
-                    </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" style="background-color:#5C732C;" data-bs-dismiss="modal" onclick="applyCoupon()">등록</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <script>
     const timeInput2 = document.getElementById('y_ctime');
     const dateInput2 = document.getElementById('y_cdate');
@@ -193,9 +193,9 @@
     flatpickr(dateInput2, {
         minDate: "today", // 오늘 날짜를 최소 선택 가능 날짜로 설정
         onChange: function(selectedDates, dateStr, instance) {
-            if (selectedDates[0].toDateString() === now.toDateString()) {
+            if (selectedDates[0].toDateString() === now2.toDateString()) {
                 // 선택한 날짜가 오늘이라면, 현재 시간부터 선택 가능하도록 설정
-                timePicker2.set('minTime', now.getHours() + ':00');
+                timePicker2.set('minTime', now2.getHours() + ':00');
             } else {
                 // 선택한 날짜가 오늘이 아니라면, 어떤 시간이든 선택 가능하도록 설정
                 timePicker2.set('minTime', '00:00');
@@ -232,11 +232,11 @@
             data: jsondata2,
             contentType: 'application/json',
             dataType: 'text',
-            success: function(result) {
-                alert("쿠폰등록완료!!");
+            success: function (response) {
+                alert(response);
             },
-            error: function(request, status, error) {
-                alert('오류' + error);
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
             }
         });
     }
@@ -305,4 +305,3 @@
     </div>
 </div>
 </body>
-</html>

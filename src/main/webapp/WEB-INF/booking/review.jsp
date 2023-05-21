@@ -85,9 +85,9 @@
             data: { currentPage: currentPage },
             dataType: 'json',
             success: function(data) {
-                $('#totalCount').text(data.totalCount);
+                $('#reviewcount').text(data.reviewcount);
                 $('#reviewList').empty();
-                if (data.totalCount == 0) {
+                if (data.reviewcount == 0) {
                     $('#noReservationMessage').show();
                 } else {
                     $.each(data.list, function(index, dto) {
@@ -157,4 +157,4 @@
     });
 </script>
 </body>
-</html>
+<

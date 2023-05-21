@@ -205,7 +205,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="m_cover">
+                    <a href="/business" class="m_cover">
                         <span class="text-effect">끼니비지니스</span>
                     </a>
                 </li>
