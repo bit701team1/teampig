@@ -60,3 +60,32 @@ document.querySelector(".gallery").addEventListener("click", () => {
             [i].classList.remove("show-menu");
     }
 });
+
+/*스크롤*/
+document.addEventListener("DOMContentLoaded", function(event) {
+    var elements = document.querySelectorAll(".scroll-page");
+
+    function hideElement(element) {
+        element.classList.add("hide");
+    }
+
+    function revealElement(element) {
+        element.classList.remove("hide");
+    }
+
+    function handleScroll() {
+        elements.forEach(function(element) {
+            var elementTop = element.getBoundingClientRect().top;
+            var windowHeight = window.innerHeight;
+
+            if (elementTop < windowHeight * 0.8) {
+                revealElement(element);
+            } else {
+                hideElement(element);
+            }
+        });
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+});

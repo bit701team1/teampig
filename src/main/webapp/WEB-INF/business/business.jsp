@@ -186,7 +186,7 @@
     <header>
         <div id="logo">
             <a href="/">
-                <img src="./photo/logo4.png" alt="로고">
+                <img src="photo/business/businesslogo.png" alt="로고">
             </a>
         </div>
         <div id="highMenu">
@@ -286,7 +286,9 @@
             <br>
             점주님들을 위한
             <br>
-            다양한 비지니스 솔루션을 제공합니다.</h1>
+            다양한 비지니스
+            <br>
+            솔루션을 제공합니다.</h1>
     </div>
 
     <!-- 회색 영역 1 -->
@@ -303,7 +305,7 @@
                 <div class="mb_card__background" style="background-image: url(/photo/business/owner2.png)"></div>
                 <div class="mb_card__content">
                     <p class="mb_card__category">추천기능</p>
-                    <h3 class="mb_card__heading">나의 가게를 고객에게 자동추천</h3>
+                    <h3 class="mb_card__heading">취향맞는 고객과 나의 가게를 연결</h3>
                 </div>
             </a>
             <a class="mb_card" href="#">
@@ -312,16 +314,17 @@
                     <p class="mb_card__category">홍보기능</p>
                     <h3 class="mb_card__heading">인증된 맛집은 자동으로 등록</h3>
                 </div>
-                </li>
-                <a class="mb_card" href="#">
-                    <div class="mb_card__background" style="background-image: url(/photo/business/owner4.png)"></div>
-                    <div class="mb_card__content">
-                        <p class="mb_card__category">고객관리</p>
-                        <h3 class="mb_card__heading">홍보,예약 원스톱 고객관리</h3>
-                    </div>
-                </a>
-                <div>
+            </a>
+            <a class="mb_card" href="#">
+                <div class="mb_card__background" style="background-image: url(/photo/business/owner4.png)"></div>
+                <div class="mb_card__content">
+                    <p class="mb_card__category">고객관리</p>
+                    <h3 class="mb_card__heading">홍보, 예약 원스톱 고객관리</h3>
+                </div>
+            </a>
+        </div>
     </section>
+
 
     <!-- 텍스트 영역 3 -->
     <div id="mainTitle3">
@@ -396,9 +399,9 @@
             </ul>
             <div id="sns">
                 <ul>
-                    <li><a href="#"><img src="./photo/sns1.png"></a></li>
-                    <li><a href="#"><img src="./photo/sns2.png"></a></li>
-                    <li><a href="#"><img src="./photo/sns3.png"></a></li>
+                    <li><a href="#"><img src="./photo/business/sns1.png"></a></li>
+                    <li><a href="#"><img src="./photo/business/sns2.png"></a></li>
+                    <li><a href="#"><img src="./photo/business/sns3.png"></a></li>
                 </ul>
             </div>
         </div>
@@ -504,7 +507,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -625,7 +627,7 @@
         callbackHandle: true//callback 페이지가 분리되었을 경우 콜백 페이지에서는 콜백 처리를 바꿀 수있도록 설정
     });
 
-    naverLogin.init();//설정정보 초기화 연ㄷ동 준비
+    naverLogin.init();//설정정보 초기화 연동 준비
 
     //이 페이지가 정상적으로 다 로드되었을 때 해당 함수를 실행할 것.
 
@@ -667,7 +669,7 @@
 <script type="text/javascript">
     window.ityped.init(document.querySelector('.ityped'),{
         strings : [`지금 끼니피그의 가족이 되어주세요!`],
-        loop: false,
+        loop: true,
         typeSpeed:100,
     });
 </script>
