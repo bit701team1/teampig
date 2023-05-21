@@ -257,6 +257,9 @@
             position: absolute;
             left: 12px;
             height: 350px;
+
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
         }
 
         #sendprompt {

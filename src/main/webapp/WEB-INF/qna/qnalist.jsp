@@ -17,6 +17,14 @@
     <script src="/js/qnalist.js"></script>
     <script src="/js/qnafooter.js"></script>
 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cute+Font&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
     <style>
         body, body *{
 
@@ -246,7 +254,7 @@
                     </li>
                     <li>
                         <a href="/qna/list" class="m_cover">
-                            <span class="text-effect">질문게시판</span>
+                            <span class="text-effect" >질문게시판</span>
                         </a>
                     </li>
                     <li>
@@ -292,8 +300,8 @@
             </div>
             <div style="width: 1100px; height: 200px; float: left; text-align: center;">
                 <img class="j_qna_logoo" src="/photo/gguineapig01.png">
-                <h2 style="margin-top: 8px; ">질문게시판</h2>
-                <p>끼니피그 서비스 사용 중 궁금한 문의사항을 확인하실 수 있습니다</p>
+                <h2 style="margin-top: 8px;font-family: 'Song Myung', serif;">질문게시판</h2>
+                <p style="font-size:20px;font-family: 'Cute Font', cursive;">끼니피그 서비스 사용 중 궁금한 문의사항을 확인하실 수 있습니다</p>
             </div>
         </div>
 
@@ -336,16 +344,16 @@
                     <c:forEach var="dto" items="${adminlist}">
                         <c:if test="${dto.user_type==3}">
                             <ul class="j_alert_ul">
-                            <li class="j_admin_alert" style="margin: 0px; padding: 0px; left: 0px;">
+                            <li class="j_admin_alert" style="height:30px;">
                                 <h4 style="color: black; cursor: pointer; display: flex;">
-                                    <span style="max-width: 1000px; margin-left: 10px; color: red;" >[공지]</span>
+                                    <span style="max-width: 1000px; margin-left: 10px; color:rgba(247,34,82,1);font-weight: bold" >[공지]</span>
                                     <span style="text-overflow:ellipsis; overflow: hidden; white-space: nowrap;
-                                                             max-width: 500px; margin-left: 35px; ">
+                                                             max-width: 500px; margin-left: 35px; font-size:20px;font-weight: bold; ">
                                             ${dto.qna_subject}
                                     </span>
                                 </h4>
-                                <span style="margin-left: 9px;">by ${dto.writer}  |  <fmt:formatDate value="${dto.qna_writeday}" pattern="yyyy-MM-dd HH:mm"/> </span>
-                                <hr class="hr-13">
+                                <span style="margin-left: 9px;font-family: 'Cute Font', cursive;>by ${dto.writer}  |  <fmt:formatDate value="${dto.qna_writeday}" pattern="yyyy-MM-dd HH:mm"/></span>
+                                        <hr class="hr-13">
                             </li>
                         </c:if>
                         <li class="j_alert_content">
@@ -373,7 +381,7 @@
                         <ul class="j_qna_ul">
                             <li style="margin: 0px; padding: 0px; left: 0px;">
                                 <h5 style="color: black; display: flex; font-size: 1.5em;">
-                                <span style="max-width: 1000px; margin-left: 10px; color: rosybrown">Q${no}
+                                <span style="max-width: 1000px; margin-left: 20px; color: rosybrown">Q${no}
                                 <c:set var="no" value="${no-1}"/></span>
                                     <c:choose>
                                         <c:when test="${dto.qna_ispass == true}">
@@ -414,7 +422,7 @@
 
                                     </c:if>
                                 </h5>
-                                <span style="margin-left: 9px;">by ${dto.writer}  |  <fmt:formatDate value="${dto.qna_writeday}" pattern="yyyy-MM-dd HH:mm"/>  |
+                                <span style="margin-left: 9px;font-family:'Gamja Flower'">by ${dto.writer}  |  <fmt:formatDate value="${dto.qna_writeday}" pattern="yyyy-MM-dd HH:mm"/>  |
                             <c:if test="${dto.qna_ispass==true}">
                                 <i class="bi bi-lock-fill" style="font-size: 13px;"> 비밀 </i>
                             </c:if>
@@ -621,4 +629,4 @@
         });
     }
 </script>
-</bo
+</body>

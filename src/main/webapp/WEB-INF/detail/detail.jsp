@@ -598,7 +598,7 @@
                         s+='</td></table></div>';
                     })
 
-                    s+=`<div id="m_footer">
+                   /* s+=`<div id="m_footer">
                     <footer class="footer-section">
                         <div class="m_foottainer">
                             <div class="footer-cta pt-5 pb-5">
@@ -728,7 +728,7 @@
                         </div>
                     </footer>
             </div>
-        </div>`;
+        </div>`;*/
 
 
                     $("div.s_review").html(s);
@@ -1231,7 +1231,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="copyright-area">
+                        <div class="copyright-area" style="width: 1240px;">
                             <div class="m_foottainer">
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-6 text-center text-lg-left">
