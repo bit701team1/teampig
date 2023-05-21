@@ -563,8 +563,9 @@
     </div>
 </div>
 <div class="outputarea">
-    <div class="outputarea_sub">
-        <h3>AI 홍보글 작성</h3>
+    <div class="outputarea_sub" style="display: flex; align-items: center; top: 10px;" >
+        <img src="../photo/chatGPT.png" style="width: 50px">
+        <h3 style="margin-left: 10px;">AI 홍보글 작성</h3>
     </div>
     <form action="U_updateprompt" method="post" enctype="multipart/form-data">
         <div class="prompt" id="prompt">
