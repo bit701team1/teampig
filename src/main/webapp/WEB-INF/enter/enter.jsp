@@ -17,7 +17,7 @@
     <script src="/js/enter.js"> </script>
     <style>
         body, body * {
-            font-family: 'Jua';
+
             overflow: hidden;
         }
     </style>

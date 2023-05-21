@@ -703,7 +703,7 @@
         <div class="row">
             <div class="col-lg-12 text-center pt-5 pb-5">
                 <h1 id="menu-3">&nbsp;</h1>
-                <h2 class="scroll-page">끼니비지니스</h2>
+                <h2 class="scroll-page">당신의 맛집을 세계인과 나눠요!</h2>
 
             </div>
         </div>
@@ -711,27 +711,40 @@
         <div class="row pb-5 tools-wrapper">
 
             <div class="col-lg-2 col-md-2 col-sm-4">
-                <i class="fa-brands fa-facebook fa-bounce fa-5x" style="color: #5C732C;"></i>
+                <a href="https://ko-kr.facebook.com">
+                    <i class="fa-brands fa-facebook fa-bounce fa-5x" style="color: #5C732C;"></i>
+                </a>
             </div>
 
             <div class=" col-lg-2 col-md-2 col-sm-4">
-                <i class="fa-brands fa-twitter fa-bounce fa-5x" style="color: #5C732C;"></i>
+                <a href="https://twitter.com">
+                    <i class="fa-brands fa-twitter fa-bounce fa-5x" style="color: #5C732C;"></i>
+                </a>
             </div>
 
             <div class="col-lg-2 col-md-2 col-sm-4">
-                <i class="fa-brands fa-instagram fa-bounce fa-5x" style="color: #5C732C;"></i>
+                <a href="https://about.instagram.com/ko-kr">
+                    <i class="fa-brands fa-instagram fa-bounce fa-5x" style="color: #5C732C;"></i>
+                </a>
+
             </div>
 
             <div class="col-lg-2 col-md-2 col-sm-4">
-                <i class="fa-brands fa-tiktok fa-bounce fa-5x" style="color: #5C732C;"></i>
+                <a href="https://www.tiktok.com/ko-KR/">
+                    <i class="fa-brands fa-tiktok fa-bounce fa-5x" style="color: #5C732C;"></i>
+                </a>
             </div>
 
             <div class="col-lg-2 col-md-2 col-sm-4">
-                <i class="fa-brands fa-line fa-bounce fa-5x" style="color: #5C732C;"></i>
+                <a href="https://line.me/ko/">
+                    <i class="fa-brands fa-line fa-bounce fa-5x" style="color: #5C732C;"></i>
+                </a>
             </div>
 
             <div class="col-lg-2 col-md-2 col-sm-4">
-                <i class="fa-brands fa-youtube fa-bounce fa-5x" style="color: #5C732C;"></i>
+                <a href="https://youtube.com/@youtubekorea">
+                    <i class="fa-brands fa-youtube fa-bounce fa-5x" style="color: #5C732C;"></i>
+                </a>
             </div>
         </div>
 
@@ -746,7 +759,7 @@
         <div class="row">
             <div class="col-lg-12 pt-5 pb-5">
                 <h1 class="scroll-page text-center info">
-                    당신의 맛집을 세계인과 나눠요!
+                    세계인의 입맛을 사로잡은 우리동네 맛집
                 </h1>
             </div>
         </div>
@@ -941,7 +954,10 @@
 
 <script type="text/javascript">
     $(function(){
-        var scroll = new SmoothScroll('a[href*="#menu-1"],a[href*="#menu-2"],a[href*="#menu-3"],a[href*="#section-a"]');
+        var scroll = new SmoothScroll('a[href*="#menu-1"],a[href*="#menu-2"],a[href*="#menu-3"],a[href*="#section-a"]', {
+            speed: 2000,  // 움직임 속도를 더 빠르게 조정합니다. 숫자를 증가시킬수록 빨라집니다.
+            easing: 'easeInOutQuart'  // 움직임의 가속도와 감속도를 조정합니다. 'easeInOutQuart'는 느리게 시작하고 느리게 끝나는 움직임을 의미합니다.
+        });
     });
 </script>
 
@@ -968,8 +984,8 @@
 
 <script type="text/javascript">
     window.ityped.init(document.querySelector('.ityped'),{
-        strings : [`공공데이터를 활용한 맛집 검색`],
-        loop: true,
+        strings : [`끼니피그와 미식의 여정을 함께하세요`],
+        loop: false,
         typeSpeed:100,
     });
 </script>

@@ -145,23 +145,26 @@ button:focus {
 } */
 
 /*3. 페이지에 출력된 타이틀 글씨 영역입니다*/
-#mainTitle {
+#mainTitle h1{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: xx-large;
+    font-size: 400%;
     margin-top: 200px;
 }
 
 #mainTitle2 {
     float: right;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: xx-large;
-    margin-top: 200px;
 }
-#mainTitle3 {
+#mainTitle2 h1 {
+    text-align: right;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 400%;
+    margin-top: 50px;
+}
+#mainTitle3 h1 {
     /* float: right; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: xx-large;
-    margin-top: 400px;
+    font-size: 400%;
+    margin-top: 50px;
 }
 
 #mainTitle4-container {
@@ -315,13 +318,19 @@ button:focus {
     line-height: 150px;
 }
 #quick-icon1 {
-    background-image: url('/photo/icon1.jpg');
+    background-image: url('/photo/business/icon1.png');
+    background-position: center;
+    background-size: auto;
 }
 #quick-icon2 {
-    background-image: url('/photo/icon2.jpg');
+    background-image: url('/photo/business/icon2.png');
+    background-position: center;
+    background-size: auto;
 }
 #quick-icon3 {
-    background-image: url('/photo/icon3.jpg');
+    background-image: url('/photo/business/icon3.png');
+    background-position: center;
+    background-size: auto;
 }
 #links ul li a p {
     margin-top: 15px;

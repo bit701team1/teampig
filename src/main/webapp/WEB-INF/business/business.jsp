@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="css/business.css">
+    <link rel="stylesheet" href="css/section.css">
     <link rel="stylesheet" href="/css/login.css">
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
@@ -178,8 +179,8 @@
             });
         });
     });
-
 </script>
+
 <body>
 <div id="container">
     <header>
@@ -197,28 +198,26 @@
                 <c:choose>
                     <c:when test="${sessionScope.loginok=='yes'}">
                         <li><a href="#"   onclick="location.href='./logout'">로그아웃</a></li>
-
                     </c:when>
                     <c:otherwise>
                         <li><a href="#"  data-bs-toggle="modal" data-bs-target="#loginModal">로그인</a></li>
                     </c:otherwise>
-
                 </c:choose>
             </ul>
         </div>
 
         <nav>
             <ul id="topMenu">
-                <li><a href="#">끼니피그란 <span>▼</span></a>
+                <li><a href="#">일반사용자 <span>▼</span></a>
                     <ul>
-                        <li><a href="#">알고리즘</a></li>
-                        <li><a href="#">번역서비스</a></li>
+                        <li><a href="#">검색 엔진</a></li>
+                        <li><a href="#">리뷰 관리</a></li>
                     </ul>
                 </li>
-                <li><a href="#">끼니스토어 <span>▼</span></a>
+                <li><a href="#">기업사용자 <span>▼</span></a>
                     <ul>
                         <li><a href="#">광고서비스</a></li>
-                        <li><a href="#">리뷰관리</a></li>
+                        <li><a href="#">공공데이터</a></li>
                     </ul>
                 </li>
                 <li><a href="#">이용가이드</a></li>
@@ -239,35 +238,90 @@
 
     <!-- 텍스트 영역 1 -->
     <div id="mainTitle">
-        <h1>
-            끼니피그의
-            <br>
-            강력한 비즈니스 도구를 이용하여
-            <br>
-            서비스를 시작하세요</h1>
+        <h1>끼니피그는
+        <br>
+        공공데이터를 활용한
+        <br>
+        검증된 맛집 정보를 제공합니다.</h1>
     </div>
 
     <!-- 흰색 영역 1 -->
-    <div id="section1">
-        <a href="#"><img src="./photo/adver.png" class="photo1"></a>
-        <a href="#"><img src="./photo/review.png" class="photo1"></a>
-    </div>
+    <section class="mb_one-section">
+        <div class="mb_card-grid">
+            <a class="mb_card" href="#">
+                <div class="mb_card__background" style="background-image: url(/photo/business/user1.png)"></div>
+                <div class="mb_card__content">
+                    <p class="mb_card__category">맛집검색</p>
+                    <h3 class="mb_card__heading">나의 방문을 기억하는 끼니피그</h3>
+                </div>
+            </a>
+            <a class="mb_card" href="#">
+                <div class="mb_card__background" style="background-image: url(/photo/business/user2.png)"></div>
+                <div class="mb_card__content">
+                    <p class="mb_card__category">리뷰관리</p>
+                    <h3 class="mb_card__heading">나의 리뷰가 세계인의 기준으로</h3>
+                </div>
+            </a>
+            <a class="mb_card" href="#">
+                <div class="mb_card__background" style="background-image: url(/photo/business/user3.png)"></div>
+                <div class="mb_card__content">
+                    <p class="mb_card__category">검색기능</p>
+                    <h3 class="mb_card__heading">내가 원하는 다양한 조건검색</h3>
+                </div>
+                </li>
+                <a class="mb_card" href="#">
+                    <div class="mb_card__background" style="background-image: url(/photo/business/user4.png)"></div>
+                    <div class="mb_card__content">
+                        <p class="mb_card__category">인증맛집</p>
+                        <h3 class="mb_card__heading">공공데이터로 신뢰도 높은 정보제공</h3>
+                    </div>
+                </a>
+                <div>
+    </section>
 
     <!-- 텍스트 영역 2 -->
     <div id="mainTitle2">
         <h1>
             끼니피그는
             <br>
-            외국인 손님들을 위한
+            점주님들을 위한
             <br>
-            다양한 솔루션을 제공합니다.</h1>
+            다양한 비지니스 솔루션을 제공합니다.</h1>
     </div>
 
     <!-- 회색 영역 1 -->
-    <div id="section2">
-        <a href="#"><img src="./photo/ai.png" class="photo2"></a>
-        <a href="#"><img src="./photo/gpt.png" class="photo2"></a>
-    </div>
+    <section class="mb_one-section" style="clear: both;">
+        <div class="mb_card-grid">
+            <a class="mb_card" href="#">
+                <div class="mb_card__background" style="background-image: url(/photo/business/owner1.png)"></div>
+                <div class="mb_card__content">
+                    <p class="mb_card__category">Chat GPT</p>
+                    <h3 class="mb_card__heading">나의 가게를 세계인의 맛집으로</h3>
+                </div>
+            </a>
+            <a class="mb_card" href="#">
+                <div class="mb_card__background" style="background-image: url(/photo/business/owner2.png)"></div>
+                <div class="mb_card__content">
+                    <p class="mb_card__category">추천기능</p>
+                    <h3 class="mb_card__heading">나의 가게를 고객에게 자동추천</h3>
+                </div>
+            </a>
+            <a class="mb_card" href="#">
+                <div class="mb_card__background" style="background-image: url(/photo/business/owner3.png)"></div>
+                <div class="mb_card__content">
+                    <p class="mb_card__category">홍보기능</p>
+                    <h3 class="mb_card__heading">인증된 맛집은 자동으로 등록</h3>
+                </div>
+                </li>
+                <a class="mb_card" href="#">
+                    <div class="mb_card__background" style="background-image: url(/photo/business/owner4.png)"></div>
+                    <div class="mb_card__content">
+                        <p class="mb_card__category">고객관리</p>
+                        <h3 class="mb_card__heading">홍보,예약 원스톱 고객관리</h3>
+                    </div>
+                </a>
+                <div>
+    </section>
 
     <!-- 텍스트 영역 3 -->
     <div id="mainTitle3">
@@ -288,55 +342,41 @@
 
             <div id="notice" class="tabContent">
                 <!-- <h2>공지사항 내용입니다.</h2> -->
-                <ul>
-                    <li>고양시 - 청정바지락 칼국수</li>
-                    <li>과천시 - 야구장 농원</li>
-                    <li>광주시 - 고향매운탕</li>
-                    <li>김포시 - 풀잎속의생명</li>
-                    <li>남양주시 - 맷돌36 숫불갈비</li>
-                </ul>
+                <img src="/photo/business/businesslist.png">
             </div>
             <div id="gallery" class="tabContent">
                 <!-- <h2>갤러리 내용입니다.</h2> -->
-                <ul>
-                    <li><img src="./photo/image4.jpg"></li>
-                    <li><img src="./photo/image5.jpg"></li>
-                    <li><img src="./photo/image6.jpg"></li>
-                    <li><img src="./photo/image4.jpg"></li>
-                    <li><img src="./photo/image5.jpg"></li>
-                    <li><img src="./photo/image6.jpg"></li>
-                </ul>
+                <img src="/photo/business/businessreview.png" style="border-radius: 50px;">
             </div>
         </div>
 
         <div id="links">
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="#" >
                         <span id="quick-icon1"></span>
-                        <p>Map</p>
+                        <p>Chat GPT</p>
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <span id="quick-icon2"></span>
-                        <p>챗봇</p>
+                        <p>공공데이터</p>
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <span id="quick-icon3"></span>
-                        <p>예약시스템</p>
+                        <p>검색엔진</p>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
 
+
     <div id="mainTitle4-container">
-        <h2 id="mainTitle4">
-            지금 끼니피그의 가족이 되어주세요 !
-        </h2>
+        <h2><span class="ityped"></span></h2>
     </div>
 
     <div id="submit">
@@ -369,12 +409,14 @@
 </div>
 
 <div class="remote">
-    <button class="remote-btn" data-target="#mainTitle">비지니스</button>
-    <button class="remote-btn" data-target="#mainTitle2">솔루션</button>
-    <button class="remote-btn" data-target="#mainTitle3">파트너쉽</button>
+    <button class="remote-btn" data-target="#mainTitle">사용자</button>
+    <button class="remote-btn" data-target="#mainTitle2">사장님</button>
+    <button class="remote-btn" data-target="#mainTitle3">파트너</button>
 </div>
 
 <script src="js/slideshow.js"></script>
+
+
 <!-- The Modal -->
 <div class="modal fade" id="loginModal">
     <div class="modal-dialog" >
@@ -612,50 +654,22 @@
 
 <%--채널톡 위치--%>
 <script>
-    (function () {
-        var w = window;
-        if (w.ChannelIO) {
-            return w.console.error("ChannelIO script included twice.");
-        }
-        var ch = function () {
-            ch.c(arguments);
-        };
-        ch.q = [];
-        ch.c = function (args) {
-            ch.q.push(args);
-        };
-        w.ChannelIO = ch;
+    (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
 
-        function l() {
-            if (w.ChannelIOInitialized) {
-                return;
-            }
-            w.ChannelIOInitialized = true;
-            var s = document.createElement("script");
-            s.type = "text/javascript";
-            s.async = true;
-            s.src = "https://cdn.channel.io/plugin/ch-plugin-web.js";
-            var x = document.getElementsByTagName("script")[0];
-            if (x.parentNode) {
-                x.parentNode.insertBefore(s, x);
-            }
-        }
-
-        function checkScrollPosition() {
-            var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollPosition > 1200) {
-                l();
-                window.removeEventListener("scroll", checkScrollPosition);
-            }
-        }
-
-        window.addEventListener("scroll", checkScrollPosition);
-    })();
-
-    ChannelIO("boot", {
-        pluginKey: "b4df2af4-756d-46b8-b999-7ce37d50bfe2",
+    ChannelIO('boot', {
+        "pluginKey": "b4df2af4-756d-46b8-b999-7ce37d50bfe2"
     });
 </script>
 
+<%--타이핑 애니메이션 영역--%>
+<script src="https://unpkg.com/ityped@1.0.3/dist/index.min.js"></script>
+
+<script type="text/javascript">
+    window.ityped.init(document.querySelector('.ityped'),{
+        strings : [`지금 끼니피그의 가족이 되어주세요!`],
+        loop: false,
+        typeSpeed:100,
+    });
+</script>
 </body>
 </html>
