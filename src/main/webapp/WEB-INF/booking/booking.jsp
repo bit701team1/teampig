@@ -7,7 +7,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Insert title here</title>
+    <title>공공데이터 검색엔진 - 끼니피그</title>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap" rel="stylesheet">
@@ -63,7 +63,7 @@
 <body>
 <div class="y_coupon">
     <h2 h2 style="font-weight: bold;">쿠폰 관리</h2>
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal">예약하기</button>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal">쿠폰등록</button>
 <div style="width:450px;">
 
     <!-- The Modal -->
@@ -73,7 +73,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">예약하기</h4>
+                    <h4 class="modal-title">쿠폰등록</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 
@@ -101,7 +101,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                <button type="button" class="btn btn-success" style="background-color:#5C732C;" data-bs-dismiss="modal" onclick="allSave()">예약하기</button>
+                <button type="button" class="btn btn-success" style="background-color:#5C732C;" data-bs-dismiss="modal" onclick="allSave()">등록</button>
                 </div>
             </div>
         </div>

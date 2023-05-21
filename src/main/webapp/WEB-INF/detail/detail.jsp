@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <title>공공데이터 검색엔진 - 끼니피그</title>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
@@ -517,12 +517,12 @@
                             <img src="https://${imageUrl}/review/\${e.photoname}" class='s_headerphotolist'>`;
                             if(i==0)
                             {
-                                return false;//사진 5장만 띄우고 break
+                                return false; //사진 리뷰 당 핝장만 띄우기 break
                             }
                         })
-                        if(idx==6)
+                        if(idx==5)
                         {
-                            return false;//사진 리뷰 당 핝장만 띄우기 break
+                            return false;   //사진 5장만 띄우고 break
                         }
                     });
                     $("div.s_reviewphoto").html(s);
@@ -1278,9 +1278,9 @@
                             <%--                                <span>리뷰쓰기</span></button>--%>
                             <%--                            <button type=기"button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal"> <i class="bi bi-calendar-check-fill"></i>--%>
                             <%--                                <span>예약하기</span></button>--%>
-                            <div id="k_iconplace" class="s_btbt" style="width: 38px; height: 38px;"></div>
-                            <div class="s_btbt"><img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/pencil.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#reviewModal"><span style="font-size: 10px;"><b class="reviewpencil">리뷰쓰기</b></span></div>
-                            <div class="s_btbt"><img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/calendar.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#calendarModal"><span style="font-size: 10px;"><b class="reviewpencil">예약하기</b></span></div>
+                            <div id="k_iconplace" class="s_btbt" style="width: 38px;cursor: pointer; height: 38px;"></div>
+                            <div class="s_btbt"><img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/pencil.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#reviewModal"><span style="font-size: 10px;cursor: pointer"><b class="reviewpencil">리뷰쓰기</b></span></div>
+                            <div class="s_btbt"><img src="https://kr.object.ncloudstorage.com/pig701-bucket/wjstp/calendar.png" class="reviewpencil s_btn" style="height: 32px; width: 32px;" data-bs-toggle="modal" data-bs-target="#calendarModal"><span style="font-size: 10px;cursor: pointer"><b class="reviewpencil">예약하기</b></span></div>
 
                         </div>
 

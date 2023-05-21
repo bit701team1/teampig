@@ -73,7 +73,7 @@
                 success: function (res) {
                     if(res==1)
                     {
-                        window.location.href="realmain";
+                        window.location.href="/";
                     }else{
                         document.querySelector("#s_alert").html("아이디 또는 비밀번호가 일치하지 않습니다.");
                     }
@@ -626,8 +626,8 @@
 
 
 
-                            <div class="nav-items items1">
-                                <i class="fa-solid fa-house"><a href="http://localhost:9000/enter"></a></i>
+                            <div class="nav-items items1" onclick="location.href='business'">
+                                <i class="fa-solid fa-house"><a></a></i>
                             </div>
                             <div class="nav-items items2">
                                 <i class="fa-solid fa-location-dot"><a href="http://localhost:9000/search"></a></i>

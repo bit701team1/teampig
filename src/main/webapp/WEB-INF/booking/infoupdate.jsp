@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Insert title here</title>
+    <title>공공데이터 검색엔진 - 끼니피그</title>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap"
@@ -572,7 +572,7 @@
 ${dto.GPT_content}
             </textarea>
         </div>
-        <button type="submit" id="sendprompt" style="margin-right: 60px;">전송</button>
+        <button type="submit" id="sendprompt" style="margin-right: 60px;" onclick="location.href='/storepage'">수정</button>
     </form>
 </div>
 <!-- Modal -->

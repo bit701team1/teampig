@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Insert title here</title>
+    <title>공공데이터 검색엔진 - 끼니피그</title>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -119,6 +119,7 @@
                             success: function() {
                                 alert('예약이 취소되었습니다');
                                 info.event.remove(); // 이벤트 삭제
+                                loadReservations(1);
                             },
                             error: function() {
                                 alert('Failed to delete event');

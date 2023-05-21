@@ -119,7 +119,7 @@ public class LoginController {
     {
         System.out.println("test");
         //이메일확인되면 로그인되고, 세션에 넣어주기
-        session.setMaxInactiveInterval(60*5);//5분동안 세션 유지
+        session.setMaxInactiveInterval(60*60);//60분동안 세션 유지
         //회원정보 불러오기
         int user_idx=loginService.getUserIdxByEmail(email);
         LoginDto dto=loginService.getUserInfo(user_idx);

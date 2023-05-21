@@ -106,10 +106,10 @@
                 <td style="width: 100px; background: #F6F6F6;">주소  </td>
                 <td>${dto.REFINE_ROADNM_ADDR}</td>
             </tr>
-            <tr>
+         <%--   <tr>
                 <td style="width: 100px; background: #F6F6F6;"> 가게 포인트 </td>
                 <td>${dto.point}</td>
-            </tr>
+            </tr>--%>
             <tr>
                 <td style="width: 100px; background: #F6F6F6;"> 오픈 시간 </td>
                 <td>${dto.opentime}</td>
@@ -301,7 +301,7 @@
 <div class="custom-div">
     <h1>< AI가 출력해주는 홍보글 ></h1>
     <div class="custom-div2">
-        <p>${dto.GPT_content}</p>
+        <pre>${dto.GPT_content}</pre>
     </div>
 </div>
 </body>

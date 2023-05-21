@@ -153,10 +153,10 @@ public class WriteController {
         return "redirect:qna";
     }
     @GetMapping("/deletereview")//리뷰 삭제
-    @ResponseBody String delete(int review_idx)
+    String delete(int review_idx)
     {
         reviewService.deleteReview(review_idx);
-        return "redirect:review";
+        return "redirect:/mypage/review";
     }
     @GetMapping("/reviewajax")
     public @ResponseBody Map<String, Object> review2(@RequestParam(defaultValue = "1") int currentPage, HttpSession session) {
