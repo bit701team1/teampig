@@ -165,7 +165,66 @@
         .next:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
+        /*모달창*/
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
 
+        .modal-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            max-width: 800px;
+            height: auto;
+            max-height: 60vh;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .close {
+            color: inherit;
+            float: right;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 20px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 70%;
+
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90%;
+        }
         .prompt {
             display: flex;
         }
@@ -198,6 +257,9 @@
             position: absolute;
             left: 12px;
             height: 350px;
+
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
         }
 
         #sendprompt {
@@ -747,8 +809,9 @@
     </div>
 </div>
 <div class="outputarea">
-    <div class="outputarea_sub">
-        <h3>AI 홍보글 작성</h3>
+    <div class="outputarea_sub" style="display: flex; align-items: center; top: 10px;" >
+        <img src="../photo/chatGPT.png" style="width: 50px">
+        <h3 style="margin-left: 10px;">AI 홍보글 작성</h3>
     </div>
     <form action="U_updateprompt" method="post" enctype="multipart/form-data">
         <div class="prompt" id="prompt">
@@ -765,7 +828,7 @@
             <button id="closeButton" style="display: none;"onclick="closeModal()" class="close" >&times;</button>
             <div class="video-wrapper">
                 <video id="videoPlayer" controls>
-                    <source src="../ad/ad.mp4" type="video/mp4">
+                    <source src="../video/entersiteinfo.mp4" type="video/mp4">
                 </video>
             </div>
         </div>

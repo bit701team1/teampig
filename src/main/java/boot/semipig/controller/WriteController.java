@@ -11,6 +11,7 @@ import boot.semipig.service.*;
 import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,60 @@ public class WriteController {
     public NcpObjectStorageService storageService;
     public String bucketName = "pig701-bucket";
     List<String> photoNames=new ArrayList<>();
+
+    @GetMapping("/writeform")
+    public String writeform(Model model, HttpSession session) {
+
+        int user_idx = (int) session.getAttribute("loginidx");
+        System.out.println("user:"+user_idx);
+        OwnerpageDto dto = ownerpageService.getData(user_idx);
+
+        model.addAttribute("dto", dto);
+        model.addAttribute("user_idx", user_idx);
+        System.out.println("user:"+user_idx);
+        return "/main/ownerpage/writeform";
+    }
+
+    @RequestMapping(value="/insertinfo", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> insertOwner(OwnerpageDto dto, List<MultipartFile> upload) throws JSONException, IOException{
+        System.out.println("insertInfo");
+        // 데이터부터 DB에 저장
+        ownerpageService.insertOwner(dto);
+
+        // 추가
+        String openaiResult = ownerpageService.openai(dto.getUser_idx());
+        dto.setGPT_content(openaiResult);
+        ownerpageService.updatePrompt(dto);
+
+        if (upload != null) {
+            for (MultipartFile file : upload) {
+                // 스토리지에 업로드하기
+                String photoname = storageService.uploadFile(bucketName, "foodphoto", file);
+
+                // 업로드한 파일명을 DB에 저장
+                FoodPhotoDto fdto = new FoodPhotoDto();
+                fdto.setUser_idx(dto.getUser_idx());
+                fdto.setPhotoname(photoname);
+                ownerpageService.insertPhoto(fdto);
+            }
+        }
+
+//        System.out.println("user_idx "+ dto.getUser_idx());
+//        System.out.println("openairesult "+ openaiResult);
+
+
+        // Create a map to hold the response values
+        Map<String, Object> response = new HashMap<>();
+        response.put("user_idx", dto.getUser_idx());
+        response.put("openaiResult", openaiResult);
+
+        System.out.println("user_idx "+ response.get("user_idx"));
+        System.out.println("openairesult "+ response.get("openaiResult"));
+        // Return the response map as the response
+
+        return ResponseEntity.ok(response);
+    }
 
     @GetMapping("/form")
     public String coupon(Model model, HttpSession session) {
@@ -98,10 +153,10 @@ public class WriteController {
         return "redirect:qna";
     }
     @GetMapping("/deletereview")//리뷰 삭제
-    @ResponseBody String delete(int review_idx)
+    String delete(int review_idx)
     {
         reviewService.deleteReview(review_idx);
-        return "redirect:review";
+        return "redirect:/mypage/review";
     }
     @GetMapping("/reviewajax")
     public @ResponseBody Map<String, Object> review2(@RequestParam(defaultValue = "1") int currentPage, HttpSession session) {
@@ -236,6 +291,42 @@ public class WriteController {
 
         // Redirect to the writeform endpoint
         return "redirect:./infoupdate";
+    }
+
+    @PostMapping("/insertphoto")
+    @ResponseBody
+    public void insertphoto(OwnerpageDto dto, List<MultipartFile> upload)
+    {
+        if (upload != null) {
+            System.out.println("size:" + upload.size());
+            System.out.println("upload.get(0).getOriginalFilename()=" + upload.get(0).getOriginalFilename());
+            for (MultipartFile file : upload) {
+                //스토리지에 업로드하기
+                String photoname = storageService.uploadFile(bucketName, "foodphoto", file);
+                //업로드한 파일명을 DB에 저장
+                FoodPhotoDto fdto = new FoodPhotoDto();
+                fdto.setFood_idx(dto.getFood_idx());
+                fdto.setPhotoname(photoname);
+                ownerpageService.insertPhoto(fdto);
+            }
+        }
+        System.out.println("insert upload:"+upload);
+    }
+
+    @PostMapping("/upload")
+    @ResponseBody public void upload(List<MultipartFile> upload)
+    {
+        System.out.println("size:"+upload.size());
+        System.out.println("filename 0:"+upload.get(0).getOriginalFilename());
+
+        photoNames.clear();
+        for(MultipartFile file:upload) {
+            //스토리지에 업로드
+            String photoname = storageService.uploadFile(bucketName, "foodphoto", file);
+            System.out.println("name:"+photoname);
+            //업로드한 파일명을 DB에 저장
+            photoNames.add(photoname);
+        }
     }
     @PostMapping("/update")
     public String update(OwnerpageDto dto, List<MultipartFile> upload) throws JSONException, IOException {

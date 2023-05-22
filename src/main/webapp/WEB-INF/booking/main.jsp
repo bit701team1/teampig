@@ -1,82 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%> 
+         pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta id="ch-new-plugin-theme" name="theme-color" content="#686868">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <meta charset="utf-8">
+    <meta id="ch-new-plugin-theme" name="theme-color" content="#686868">
+    <title>공공데이터 검색엔진 - 끼니피그</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<style type="text/css">
-   body, body * {
-       font-family: 'Gowun Batang';
-   }
-   div.y_myinfo{
-       width: 1000px;
-       padding: 10px;
-       border-radius: 0.825rem;
-       border-top:0.25rem solid #5C732C !important;
-       box-shadow: 0 .15rem 1.0rem 0 rgba(58,59,69,.15)!important;
-       transition: box-shadow 0.1s ease;
-   }
-   h2 {
-       font-weight: bold;
-   }
-   .y_square {
-       margin-top:10px;
-       width: 1000px;
-       margin-bottom: 20px;
-       height: 100px;
-       border-radius: 15px;
-       box-shadow: 1px 1px 10px 0 rgba(72, 75, 108, .08);
-       border: solid 1px #e3e9ed;
-       background-color: #fff;
-       box-sizing: border-box;
-       position: relative; /* 수정: position 값을 relative로 변경 */
-       display: flex;
-       justify-content: space-between;
-   }
+    <style type="text/css">
+        body, body * {
+            font-family: 'Gowun Batang';
+        }
+        div.y_myinfo{
+            width: 1000px;
+            padding: 10px;
+            border-radius: 0.825rem;
+            border-top:0.25rem solid #5C732C !important;
+            box-shadow: 0 .15rem 1.0rem 0 rgba(58,59,69,.15)!important;
+            transition: box-shadow 0.1s ease;
+        }
+        h2 {
+            font-weight: bold;
+        }
+        .y_square {
+            margin-top:10px;
+            width: 1000px;
+            margin-bottom: 20px;
+            height: 100px;
+            border-radius: 15px;
+            box-shadow: 1px 1px 10px 0 rgba(72, 75, 108, .08);
+            border: solid 1px #e3e9ed;
+            background-color: #fff;
+            box-sizing: border-box;
+            position: relative; /* 수정: position 값을 relative로 변경 */
+            display: flex;
+            justify-content: space-between;
+        }
 
-   .y_square::before,
-   .y_square::after {
-       content: "";
-       position: absolute;
-       top: 25px;
-       bottom: 25px;
-       width: 1px;
-       background-color: #e3e9ed;
-   }
+        .y_square::before,
+        .y_square::after {
+            content: "";
+            position: absolute;
+            top: 25px;
+            bottom: 25px;
+            width: 1px;
+            background-color: #e3e9ed;
+        }
 
-   .y_square::before {
-       left: calc(33.33% - 0.5px);
-   }
+        .y_square::before {
+            left: calc(33.33% - 0.5px);
+        }
 
-   .y_square::after {
-       right: calc(33.33% - 0.5px);
-   }
+        .y_square::after {
+            right: calc(33.33% - 0.5px);
+        }
 
-   .y_content {
-       flex: 1;
-       display: flex;
-       align-items: center;
-       justify-content: center;
-       font-size: 18px;
-       color: #5c667b;
-   }
-   .y_content:hover .y_coup {
-       color: black;
-   }
-</style>
+        .y_content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #5c667b;
+        }
+        .y_content:hover .y_coup {
+            color: black;
+        }
+    </style>
 
 </head>
 <body>
@@ -106,10 +106,10 @@
                 <td style="width: 100px; background: #F6F6F6;">주소  </td>
                 <td>${dto.REFINE_ROADNM_ADDR}</td>
             </tr>
-            <tr>
+         <%--   <tr>
                 <td style="width: 100px; background: #F6F6F6;"> 가게 포인트 </td>
                 <td>${dto.point}</td>
-            </tr>
+            </tr>--%>
             <tr>
                 <td style="width: 100px; background: #F6F6F6;"> 오픈 시간 </td>
                 <td>${dto.opentime}</td>
@@ -123,7 +123,7 @@
                 <td>${dto.holiday}</td>
             </tr>
         </table>
-</div>
+    </div>
 </div>
 <div class="y_square">
     <div class="y_content">예약 총 ${totalCount} </div>
@@ -131,58 +131,58 @@
     <div class="y_content">내 가게 리뷰 ${reviewcount}</div>
 </div>
 
+<!-- The Modal -->
+<div style="width: 450px;">
+
     <!-- The Modal -->
-    <div style="width: 450px;">
+    <div class="modal fade" id="couponModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-        <!-- The Modal -->
-        <div class="modal fade" id="couponModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">쿠폰등록</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
 
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">쿠폰등록</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="coupon" class="form-label">할인율</label>
-                                <select class="form-select" id="coupon" name="number">
-                                    <option value="5">5%</option>
-                                    <option value="10">10%</option>
-                                    <option value="15">15%</option>
-                                    <option value="20">20%</option>
-                                    <option value="25">25%</option>
-                                    <option value="30">30%</option>
-                                    <option value="35">35%</option>
-                                    <option value="40">40%</option>
-                                </select>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="coupon" class="form-label">할인율</label>
+                            <select class="form-select" id="coupon" name="number">
+                                <option value="5">5%</option>
+                                <option value="10">10%</option>
+                                <option value="15">15%</option>
+                                <option value="20">20%</option>
+                                <option value="25">25%</option>
+                                <option value="30">30%</option>
+                                <option value="35">35%</option>
+                                <option value="40">40%</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text">수량</span>
+                                <input type="text" class="form-control" id="quantity" name="max">
                             </div>
-                            <div class="mb-3">
-                                <div class="input-group">
-                                    <span class="input-group-text">수량</span>
-                                    <input type="text" class="form-control" id="quantity" name="max">
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label>유효기간</label>
-                                <input type="date" name="time" id="y_cdate"  class="form-control" style="width: 200px; display: inline-block;" >
-                                &nbsp;<input type="text" id="y_ctime" class="form-control" style="width:190px; display: inline-block;">
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="mb-3">
+                            <label>유효기간</label>
+                            <input type="date" name="time" id="y_cdate"  class="form-control" style="width: 200px; display: inline-block;" >
+                            &nbsp;<input type="text" id="y_ctime" class="form-control" style="width:190px; display: inline-block;">
+                        </div>
+                    </form>
+                </div>
 
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" style="background-color:#5C732C;" data-bs-dismiss="modal" onclick="applyCoupon()">등록</button>
-                    </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" style="background-color:#5C732C;" data-bs-dismiss="modal" onclick="applyCoupon()">등록</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <script>
     const timeInput2 = document.getElementById('y_ctime');
     const dateInput2 = document.getElementById('y_cdate');
@@ -301,8 +301,7 @@
 <div class="custom-div">
     <h1>< AI가 출력해주는 홍보글 ></h1>
     <div class="custom-div2">
-        <p>${dto.GPT_content}</p>
+        <pre>${dto.GPT_content}</pre>
     </div>
 </div>
 </body>
-</html>

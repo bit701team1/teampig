@@ -13,8 +13,9 @@
                  GROUP BY a.food_idx
              ) AS t
                  LEFT JOIN (
-            SELECT user_idx, photoname
+            SELECT user_idx, MAX(photoname) AS photoname
             FROM food_photo
+            GROUP BY user_idx
         ) AS f ON t.user_idx = f.user_idx
         ORDER BY t.average DESC
             LIMIT #{startNum}, #{perPage}
@@ -34,7 +35,7 @@
             FROM food_photo
             WHERE user_idx IN (SELECT user_idx FROM food_list)
             GROUP BY user_idx
-        ) AS f ON t.user_idx = f.user_idx;
+        ) AS f ON t.user_idx = f.user_idx
     </select>
     <select id="getBookmarkList" parameterType="int" resultType="SearchDto">
         SELECT t.*, f.photoname
@@ -52,7 +53,7 @@
             FROM food_photo
             WHERE user_idx IN (SELECT user_idx FROM food_list)
             GROUP BY user_idx
-        ) AS f ON t.user_idx = f.user_idx;
+        ) AS f ON t.user_idx = f.user_idx
     </select>
     <select id="getPriceFood" parameterType="map" resultType="SearchDto">
         SELECT t.*, f.photoname
@@ -71,7 +72,7 @@
             FROM food_photo
             WHERE user_idx IN (SELECT user_idx FROM food_list)
             GROUP BY user_idx
-        ) AS f ON t.food_idx = f.user_idx;
+        ) AS f ON t.food_idx = f.user_idx
     </select>
 
     <select id="getSearchFood" parameterType="map" resultType="SearchDto">
@@ -91,7 +92,7 @@
             FROM food_photo
             WHERE user_idx IN (SELECT user_idx FROM food_list)
             GROUP BY user_idx
-        ) AS f ON t.user_idx = f.user_idx;
+        ) AS f ON t.user_idx = f.user_idx
     </select>
 
     <!--카운트를 위한 구간 -->

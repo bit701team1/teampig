@@ -128,7 +128,7 @@
                                     </c:if>
                                     <div style="display: none;" id="pwfield" >
                                         <input type="password"  class="form-control" name="qna_pass"
-                                               style="font-size: 15px;">
+                                               style="font-size: 15px;" placeholder="비밀번호를 입력해주세요">
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                         <div class="j_write_from j_subject_form" style="width: 100%;  margin: 10px auto;">
                             <div class="row" style="width: 50%; margin: 10px auto; ">
                                 <div style="float: left; width: 30%;  margin-top: 15px; margin-bottom: 10px; margin-left: 100px;">
-                                    <button type="submit" class="btn btn-outline-success btnclick" >글 저장</button>
+                                    <button type="submit" class="btn btn-outline-success btnclick" >글저장</button>
                                 </div>
                                 <div style="width: 30%; left: 0; margin-top: 15px; margin-bottom: 10px; margin-left: 5px;">
                                     <button type="button" class="btn btn-outline-success"

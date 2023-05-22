@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Insert title here</title>
+    <title>공공데이터 검색엔진 - 끼니피그</title>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap"
@@ -208,7 +208,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 90%;
+            height: 100%;
         }
 
         .prompt {
@@ -563,8 +563,9 @@
     </div>
 </div>
 <div class="outputarea">
-    <div class="outputarea_sub">
-        <h3>AI 홍보글 작성</h3>
+    <div class="outputarea_sub" style="display: flex; align-items: center; top: 10px;" >
+        <img src="../photo/chatGPT.png" style="width: 50px">
+        <h3 style="margin-left: 10px;">AI 홍보글 작성</h3>
     </div>
     <form action="U_updateprompt" method="post" enctype="multipart/form-data">
         <div class="prompt" id="prompt">
@@ -572,7 +573,7 @@
 ${dto.GPT_content}
             </textarea>
         </div>
-        <button type="submit" id="sendprompt" style="margin-right: 60px;">전송</button>
+        <button type="submit" id="sendprompt" style="margin-right: 60px;" onclick="location.href='/storepage'">수정</button>
     </form>
 </div>
 <!-- Modal -->

@@ -661,3 +661,15 @@ button {
 .btn-6 span:hover:after {
     width: 100%;
 }
+
+/*스크롤*/
+.scroll-page {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+.scroll-page.hide {
+    opacity: 0;
+    transform: translateY(60px);
+}

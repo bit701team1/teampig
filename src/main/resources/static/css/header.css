@@ -31,6 +31,10 @@ body {
     height: 64px;
     text-align: center;
 }
+.m_headerlogo-container img {
+    width: auto;
+    height: 64px;
+}
 
 .m_realheader .m_headerlogo-container .m_headerlogo-icon {
     display: inline-block;

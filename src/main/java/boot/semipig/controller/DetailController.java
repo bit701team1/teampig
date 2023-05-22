@@ -245,7 +245,6 @@ public class DetailController {
         List<DetailDto> list=new Vector<>();
         for(DetailDto dto:nlist)
         {
-            //급해서 food_idx를 user_idx로 대신함
             String photoname=detailService.nearbyStorephoto(dto.getFood_idx()).getPhotoname();
             if(photoname!=null)
             {
@@ -258,6 +257,8 @@ public class DetailController {
 
         return list;
     }
+
+
 
     //추가
     @PostMapping("/godetail")

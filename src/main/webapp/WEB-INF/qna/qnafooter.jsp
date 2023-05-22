@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-*********" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="static/css/footer.css">
     <style>
 
     </style>
@@ -21,7 +22,7 @@
 <body>
 <div id="m_footer">
     <footer class="footer-section">
-          <div class="copyright-area">
+        <div class="copyright-area">
             <div class="m_foottainer">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 text-center text-lg-left">

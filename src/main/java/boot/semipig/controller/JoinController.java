@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 @RequestMapping("/join")
@@ -31,7 +34,7 @@ public class JoinController {
     }
 
     @PostMapping("/insert")
-    public String insertUser(JoinDto dto, MultipartFile upload)
+    public String insertUser(JoinDto dto, MultipartFile upload, HttpSession session, HttpServletRequest request)
     {
         String filename="";
         //업로드를 한 경우에만 버킷에 이미지를 저장한다.(빈문자열이 아니면!)
@@ -43,6 +46,14 @@ public class JoinController {
         dto.setUser_photo(filename);
 
         joinService.insertUser(dto);
-        return "redirect:join";
+
+        String previousUrl = (String) session.getAttribute("previousUrl");
+        session.removeAttribute("previousUrl");
+        if (previousUrl != null && previousUrl != "http://localhost:9000/enter"&& previousUrl!="http://localhost:9000/enter?n_email=gsh4908@hanmir.com&n_name=%EA%B9%80%EC%84%B1%ED%95%99") {
+            return "redirect:" + previousUrl;
+        } else {
+            // 이전 페이지 URL이 없는 경우에 대한 처리 (예: 기본 페이지로 리다이렉트)
+            return "redirect:/business";
+        }
     }
 }

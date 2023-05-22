@@ -7,7 +7,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Insert title here</title>
+    <title>공공데이터 검색엔진 - 끼니피그</title>
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Do+Hyeon&family=Gothic+A1&family=Gowun+Batang&family=Hahmlet&family=Song+Myung&display=swap" rel="stylesheet">
@@ -63,7 +63,7 @@
 <body>
 <div class="y_coupon">
     <h2 h2 style="font-weight: bold;">쿠폰 관리</h2>
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#calendarModal">예약하기</button>
+
 <div style="width:450px;">
 
     <div class="y_couponlist" style="margin-top: 50px;">
