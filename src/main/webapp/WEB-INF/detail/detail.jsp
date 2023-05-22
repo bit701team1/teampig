@@ -522,7 +522,7 @@
                                 return false; //사진 리뷰 당 핝장만 띄우기 break
                             }
                         })
-                        if(idx==5)
+                        if(idx==4)
                         {
                             return false;   //사진 5장만 띄우고 break
                         }
@@ -1111,13 +1111,15 @@
                                     var number = "${cdto.number}";
                                     var time= "${cdto.time}";
                                     var max = "${cdto.max}";
+                                    var storename = "${dto.RESTRT_NM}";
                                     $.ajax({
                                         type: "POST",
                                         url: './max',
                                         data: { "user_idx": food_idx,
                                             "number":number,
                                             "time":time,
-                                            "max":max
+                                            "max":max,
+                                            "storename":storename,
                                         },
                                         success: function (response) {
                                             alert(response);

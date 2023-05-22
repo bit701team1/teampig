@@ -28,6 +28,10 @@ public class MyService implements ServiceInter {
         return serviceMapper.selectt(user_idx);
     }
     @Override
+    public List<couponlistDto> couponlist2(String user_id){
+        return serviceMapper.couponlist2(user_id);
+    }
+    @Override
     public void deletee(int num) {
         // TODO Auto-generated method stub
         serviceMapper.deletee(num);}

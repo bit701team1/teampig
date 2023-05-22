@@ -11,4 +11,5 @@ public class couponlistDto {
     private String time;
     private int user_idx;
     private String user_id;
+    private String storename;
 }

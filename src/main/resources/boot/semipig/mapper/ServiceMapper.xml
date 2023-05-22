@@ -59,12 +59,15 @@
         WHERE user_idx = #{user_idx} AND max > 0 and time > NOW()
     </update>
     <insert id="couponid" parameterType="couponlistDto">
-        insert into couponlist(number,time,user_idx,user_id) values(#{number},#{time},#{user_idx},#{user_id})
+        insert into couponlist(number,time,user_idx,user_id,storename) values(#{number},#{time},#{user_idx},#{user_id},#{storename})
     </insert>
     <select id="couponlist" parameterType="int" resultType="couponlistDto">
         select * from couponlist where user_idx=#{user_idx}
     </select>
     <select id="getCouponByUserIdx" parameterType="int" resultType="couponDto">
         select * from coupon where user_idx = #{user_idx} AND time > now()
+    </select>
+    <select id="couponlist2" resultType="couponlistDto">
+        select * from couponlist where user_id=#{user_id}
     </select>
 </mapper>

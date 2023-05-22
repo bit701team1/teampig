@@ -195,7 +195,8 @@
 <div class="m_realheader">
     <div class="m_realheader-container">
         <div class="m_headerlogo-container">
-            <img src="/photo/header/header.png" alt="로고출력">
+            <%--<img src="/photo/header/header.png" alt="로고출력">--%>
+                <img src="/photo/pastachul/chul01.png" alt="로고출력" style="width: 100%; border-radius: 100px;">
         </div>
         <div id="m_headertop-panel" class="m_headeraction-panel">
             <ul class="m_headermain-navigation">

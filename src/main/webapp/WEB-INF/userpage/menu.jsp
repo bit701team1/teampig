@@ -102,11 +102,14 @@
 
     <ul class="y_mainul">
         <li><span style="position: relative;">
-			<a href="${root}/userpage"><span class="y_txt"><i class="bi bi-card-list"></i>  작성글</span></a>
+         <a href="${root}/userpage"><span class="y_txt"><i class="bi bi-card-list"></i>  작성글</span></a>
             </span>
         </li>
         <li>
             <a href="${root}/userpage/wishlist"><span class="y_txt"><i class="bi bi-star"></i> 즐겨찾기</span></a>
+        </li>
+        <li>
+            <a href="${root}/userpage/coupon"><span class="y_txt"><i class="bi bi-box"></i> 나의 쿠폰 </span> </a>
         </li>
         <li>
             <a><span class="y_txt"><i class="bi bi-box-arrow-right"></i> 로그아웃</span></a>

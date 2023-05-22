@@ -563,8 +563,8 @@
     </div>
 </div>
 <div class="outputarea">
-    <div class="outputarea_sub" style="display: flex; align-items: center; top: 10px;" >
-        <img src="../photo/chatGPT.png" style="width: 50px">
+    <div class="outputarea_sub" style="display:flex ; align-items: center; top: 10px;" >
+        <img src="../photo/chatGPT.png" style="width: 40px">
         <h3 style="margin-left: 10px;">AI 홍보글 작성</h3>
     </div>
     <form action="U_updateprompt" method="post" enctype="multipart/form-data">
@@ -581,7 +581,7 @@ ${dto.GPT_content}
     <div class="modal-content">
         <button id="closeButton" style="display: none;" onclick="closeModal()" class="close">&times;</button>
         <div class="video-wrapper">
-            <video id="videoPlayer" loop autoplay>
+            <video id="videoPlayer" loop>
                 <source src="../video/entersiteinfo.mp4" type="video/mp4">
             </video>
         </div>

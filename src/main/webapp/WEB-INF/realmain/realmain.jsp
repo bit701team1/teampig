@@ -50,6 +50,9 @@
             justify-content: center;
             align-items: center;
         }
+        .card-text{
+            font-weight: bold;
+        }
     </style>
 </head>
 <c:set var="root" value="<%=request.getContextPath() %>"/>
@@ -94,7 +97,7 @@
                                  <div class="card mb-3 scroll-page">
                                     <img class="card-img-top" src="http://pujmemyrqkys17181384.cdn.ntruss.com/foodphoto/\${ele.photoname}?type=f&w=200&h=200&ttype=png" alt="맛집">
                                         <div class="card-body">
-                                            <h5 class="card-title">당신의 1순위 카테고리</h5>
+                                            <!--<h5 class="card-title">당신의 1순위 카테고리</h5>-->
                                             <p class="card-text">\${ele.restrt_NM}</p>
                                             <p class="card-type">#\${ele.food_type}</p>
                                             <div class="frame">
@@ -113,7 +116,7 @@
                                  <div class="card mb-3 scroll-page">
                                     <img class="card-img-top" src="http://pujmemyrqkys17181384.cdn.ntruss.com/foodphoto/\${ele.photoname}?type=f&w=200&h=200&ttype=png" alt="맛집">
                                         <div class="card-body">
-                                            <h5 class="card-title">당신의 2순위 카테고리</h5>
+                                            <!--<h5 class="card-title">당신의 2순위 카테고리</h5>-->
                                             <p class="card-text">\${ele.restrt_NM}</p>
                                             <p class="card-type">#\${ele.food_type}</p>
                                             <div class="frame">
@@ -671,7 +674,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 id="menu-1"><br>&nbsp;</h1>
-                <h2 class="text-center pb-3 text-black">추천맛집</h2>
+                <h2 class="text-center pb-3 text-black">당신만을 위한 맛집</h2>
             </div>
             <!-- 상단 컨텐츠 -->
             <div id="k_history_place"></div>

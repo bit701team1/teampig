@@ -9,6 +9,7 @@ public interface ServiceInter {
     public void insertt(ServiceDto dto);
     public List<ServiceDto> selectt(int user_idx);
     public void deletee(int num);
+    public List<couponlistDto> couponlist2(String user_id);
     couponDto getCouponByUserIdx(int user_idx);
     List<ServiceDto> getAll(int startNum, int perPage,int user_idx ,LocalDateTime currentDateTime);
     public int reviewcount (int food_idx);

@@ -393,3 +393,11 @@ background text
     margin: 10px;
     margin-left: 30px;
 }
+
+.cont_form_login > input::placeholder,
+.cont_form_sign_up > input::placeholder {
+    color: #757575;
+}
+
+.cont_form_sign_up > select::placeholder {
+    color: #757575;}

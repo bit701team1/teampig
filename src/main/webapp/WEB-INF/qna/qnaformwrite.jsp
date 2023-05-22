@@ -14,16 +14,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/qnawriteform.css" />
-    <link rel="stylesheet" href="/css/footer.css" />
+    <link rel="stylesheet" href="/css/qnafooter.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&family=Poor+Story&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="/js/qnawriteform.js"> </script>
     <script src="/js/qnafooter.js"></script>
     <script src="/js/header.js"></script>
     <style>
         body, body *{
-            font-family: 'Jua';
+            font-family: 'IBM Plex Sans KR';
+            /*font-family: 'Jua';*/
         }
         .j_qna_header{
             margin: 0 auto;
@@ -38,17 +40,12 @@
     </style>
 </head>
 <body style="overflow: auto;">
-<c:if test="${sessionScope.user_idx==null}">
-    <script>
-        alert("로그인 먼저 해주세요")
-    </script>
-</c:if>
 <header class="j_qna_header" style="height: 90px;">
     <%@ include file="../mainlayout/header.jsp" %>
 </header>
-<%--border: 2px solid red;--%>
+
 <section style="width: 100%;">
-    <div class="j_qna_write_box" style="margin: 0 auto; width: 1400px; border: 5px solid orange;">
+    <div class="j_qna_write_box" style="margin: 0 auto; width: 1400px;">
 
         <div class="qna_write_header text-center" style=" width: 100%; margin-top: 10px;">
             <img class="j_qna_logo" src="/photo/gguineapig01.png">
@@ -60,7 +57,7 @@
         <div class="hongbobox" style="width: 200px; height: 100%; margin-left: 45px; float: left">
             <section style="width: 95%; height: 100%; float: left; text-align: center; margin-left: 5px; margin-top: 20px;">
                 <div class="qna_banner_imgbox" style="height: 50%; width: 100%; white-space: nowrap; ">
-                    <img class="qna_banner_img" src="/photo/mangata01.jpg" style="height: 440px; width: 100%; border-radius: 10px; ">
+                    <img class="qna_banner_img" src="/photo/pastachul/mangata01.jpg" style="height: 440px; width: 100%; border-radius: 10px; ">
                 </div>
                 <div class="qna_banner_youtube" style="height: 100%; width: 100%; white-space: nowrap; margin-top: 40px;">
                     <iframe style="position: relative; transition: all 0.5s ease-in-out; margin-left: 0px; object-fit: cover;" width="100%;" height="100%;" src="https://www.youtube.com/embed/xlseZaiKsTY?autoplay=1&mute=1"
@@ -75,17 +72,17 @@
             </section>
         </div>
 
-        <div class="j_qna_writeboard" style="width: 1000px; height: 100%; margin-left: 300px;">
+        <div class="j_qna_writeboard" style="width: 1000px; height: 100%; margin-left: 300px; border: 1px solid whitesmoke; box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);">
             <section class="j_write_form">
                 <div style="width: 98%; margin: 10px auto">
-                    <div type="hidden" action="insert" method="post">
+                    <form action="insert" method="post">
                         <%-- hidden --%>
                         <input type="hidden" name="qna_idx" value="${qna_idx}">
                         <input type="hidden" name="qna_ref" value="${qna_ref}">
-                        <input type="hidden" name="qna_step" value="${qna_step}">
-                        <input type="hidden" name="qna_depth" value="${qna_depth}">
                         <input type="hidden" name="currentPage" value="${currentPage}">
                         <input type="hidden" name="is_pass" value="">
+                        <input type="hidden" name="user_idx" value ="${logindto.user_idx}" >
+                        <input type="hidden" name="user_type" value ="${logindto.user_type}" >
 
                         <%--      --%>
                         <div id="j_write_alert" style="text-align: center; margin-top: 30px;">
@@ -101,7 +98,7 @@
                                     작성자
                                 </label>
                                 <div style="width: 35%;  margin-left: 15px; margin-top: 15px; margin-bottom: 10px;">
-                                    <input type="text" class="form-control" name="writer" value="${sessionScope.id}" required="required" style="font-size: 20px; ">
+                                    <input type="text" class="form-control" name="writer" value="${logindto.user_name}" required="required" style="font-size: 20px; ">
                                 </div>
                             </div>
                             <hr class="hr-133">
@@ -119,32 +116,6 @@
                             <hr class="hr-133">
                         </div>
 
-                        <%--       지울부분 --%>
-                        <div class="j_write_from j_nickname_form" style=" width: 100%; margin: 10px auto; float: left;">
-                            <div class="row" style="width: 100%; margin: 10px auto; ">
-                                <label style="float: left; width: 15%; margin-left: 15px; margin-top: 10px; margin-bottom: 10px; font-size: 20px; line-height: 50px;">
-                                    유저타입
-                                </label>
-                                <div style="width: 35%;  margin-left: 15px; margin-top: 15px; margin-bottom: 10px;">
-                                    <input type="text" class="form-control" name="user_type" value ="${dto.user_type}" required="required" style="font-size: 20px; ">
-                                </div>
-                            </div>
-                            <hr class="hr-133">
-                        </div>
-
-                        <div class="j_write_from j_nickname_form" style=" width: 100%; margin: 10px auto; float: left;">
-                            <div class="row" style="width: 100%; margin: 10px auto; ">
-                                <label style="float: left; width: 15%; margin-left: 15px; margin-top: 10px; margin-bottom: 10px; font-size: 20px; line-height: 50px;">
-                                    유저인덱스
-                                </label>
-                                <div style="width: 35%;  margin-left: 15px; margin-top: 15px; margin-bottom: 10px;">
-                                    <input type="text" class="form-control" name="user_idx" value ="${dto.user_idx}" required="required" style="font-size: 20px; ">
-                                </div>
-                            </div>
-                            <hr class="hr-133">
-                        </div>
-
-                        <%--       지울부분 --%>
                         <div class="j_write_from j_open_form" style="width: 100%; margin: 10px auto;">
                             <div class="row" style="width: 100%; margin: 10px auto; ">
                                 <label style="float: left; width: 15%; margin-left: 15px; margin-top: 10px; margin-bottom: 10px; font-size: 20px; line-height: 30px;">
@@ -153,22 +124,23 @@
                                 <div style="width: 35%;  margin-left: 15px; margin-top: 15px; margin-bottom: 10px;">
                                     <input type="radio" id="is_pass_open" name="qna_ispass" value="false" checked>
                                     <label for="is_pass_open">누구나 보기</label>
-                                    <c:if test="${dto.user_type!=3 && sessionScope.user_type!=3}">
+                                    <c:if test="${logindto.user_type!=3 && logindto.user_type!=3}">
                                         <input type="radio" id="is_pass_close" name="qna_ispass" value="true">
                                         <label for="is_pass_close">나만 보기</label>
                                     </c:if>
                                     <div style="display: none;" id="pwfield" >
                                         <input type="password"  class="form-control" name="qna_pass"
-                                               style="font-size: 15px;">
+                                               style="font-size: 15px;" placeholder="비밀번호를 입력해주세요">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                            <hr class="hr-133">
+                        <hr class="hr-133">
 
                         <div class="j_write_from j_subject_form" style="width: 100%;  margin: 10px auto;">
                             <div class="row" style="width: 100%; margin: 10px auto; ">
-                                <textarea style="width: 80%; margin: 10px auto;  height: 200px;" name="qna_content" required  class="form-control"></textarea>
+                            <textarea style="width: 80%; margin: 10px auto;  height: 250px; text-align: center; font-size: 25px;" name="qna_content" required  class="form-control"
+                                      placeholder="무엇이든 물어보세요"></textarea>
                             </div>
                         </div>
                         <hr class="hr-133">
@@ -176,7 +148,7 @@
                         <div class="j_write_from j_subject_form" style="width: 100%;  margin: 10px auto;">
                             <div class="row" style="width: 50%; margin: 10px auto; ">
                                 <div style="float: left; width: 30%;  margin-top: 15px; margin-bottom: 10px; margin-left: 100px;">
-                                    <button type="submit" class="btn btn-outline-success btnclick" >글 저장</button>
+                                    <button type="submit" class="btn btn-outline-success btnclick" >글저장</button>
                                 </div>
                                 <div style="width: 30%; left: 0; margin-top: 15px; margin-bottom: 10px; margin-left: 5px;">
                                     <button type="button" class="btn btn-outline-success"
@@ -185,7 +157,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </form>
                     <hr class="hr-14">
                 </div>
             </section>

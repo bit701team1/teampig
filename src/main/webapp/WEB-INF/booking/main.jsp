@@ -293,15 +293,12 @@
         text-align: center;
         background-color: white;
     }
-    .custom-div p {
-        margin-bottom: 0;
-    }
 </style>
 
-<div class="custom-div">
-    <h1>< AI가 출력해주는 홍보글 ></h1>
+<div class="custom-div" >
+    <h1><img src="../photo/chatGPT.png" style="width: 40px">&nbsp;< AI가 출력해주는 홍보글 ></h1>
     <div class="custom-div2">
-        <pre>${dto.GPT_content}</pre>
+        <pre style="white-space: pre-wrap;">${dto.GPT_content}</pre>
     </div>
 </div>
 </body>

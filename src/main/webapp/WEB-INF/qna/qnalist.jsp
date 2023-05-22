@@ -24,10 +24,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Cute+Font&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Song+Myung&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&family=Poor+Story&display=swap" rel="stylesheet">
     <style>
         body, body *{
-
+            /*@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap');*/
+            font-family: 'IBM Plex Sans KR';
         }
         .j_qna_content{
             display: none;
@@ -300,8 +301,8 @@
             </div>
             <div style="width: 1100px; height: 200px; float: left; text-align: center;">
                 <img class="j_qna_logoo" src="/photo/gguineapig01.png">
-                <h2 style="margin-top: 8px;font-family: 'Song Myung', serif;">질문게시판</h2>
-                <p style="font-size:20px;font-family: 'Cute Font', cursive;">끼니피그 서비스 사용 중 궁금한 문의사항을 확인하실 수 있습니다</p>
+                <h2 style="margin-top: 8px;">질문게시판</h2>
+                <p style="font-size:20px;">끼니피그 서비스 사용 중 궁금한 문의사항을 확인하실 수 있습니다</p>
             </div>
         </div>
 
@@ -344,27 +345,27 @@
                     <c:forEach var="dto" items="${adminlist}">
                         <c:if test="${dto.user_type==3}">
                             <ul class="j_alert_ul">
-                            <li class="j_admin_alert" style="height:30px;">
-                                <h4 style="color: black; cursor: pointer; display: flex;">
-                                    <span style="max-width: 1000px; margin-left: 10px; color:rgba(247,34,82,1);font-weight: bold" >[공지]</span>
+                            <li class="j_admin_alert" style="margin: 0px; padding: 0px; left: 0px;">
+                                <h4 style="color: black; cursor: pointer; font-size: 1.4em;"><b>
+                                    <span style="max-width: 1000px; margin-left: 10px; color: red;" >[공지]</span>
                                     <span style="text-overflow:ellipsis; overflow: hidden; white-space: nowrap;
-                                                             max-width: 500px; margin-left: 35px; font-size:20px;font-weight: bold; ">
+                                                             max-width: 500px; margin-left: 35px; ">
                                             ${dto.qna_subject}
                                     </span>
-                                </h4>
-                                <span style="margin-left: 9px;font-family: 'Cute Font', cursive;>by ${dto.writer}  |  <fmt:formatDate value="${dto.qna_writeday}" pattern="yyyy-MM-dd HH:mm"/></span>
-                                        <hr class="hr-13">
+                                </b></h4>
+                                <span style="margin-left: 9px;">by ${dto.writer}  |  <fmt:formatDate value="${dto.qna_writeday}" pattern="yyyy-MM-dd HH:mm"/></span>
+                                <hr class="hr-13">
                             </li>
                         </c:if>
                         <li class="j_alert_content">
                             <div style="width: 5%; height: 100%;" >
                                 <img src="/photo/gguineapig02.png" style="width: 30px; height: 30px; margin-left: 10px;">
                             </div>
-                            <div style="width: 88%; height: 50%; margin: 0 auto; left: 20%; text-align: center;">
-                                <span style="font-size: 1.5em; margin-left: 15px; color: black;" class="line-break">${dto.qna_content}</span>
-                                <c:if test="${logindto.user_type==3}">
-                                    <i class="bi bi-trash2-fill admin_alertdel" qna_idx="${dto.qna_idx}"
-                                       style="cursor: pointer; margin-left: 20px;"></i>
+                            <div style="width: 88%; height: 50%; margin: 0 auto; left: 20%;">
+                                    <pre style="font-size: 1.1em; margin-left: 15px; color: black; text-align: center;"><b>${dto.qna_content}</b></pre>
+                                    <c:if test="${logindto.user_type==3}">
+                                            <i class="bi bi-trash2-fill admin_alertdel" qna_idx="${dto.qna_idx}"
+                                style="cursor: pointer; margin-left: 20px;"></i>
                                 </c:if>
                             </div>
                             <hr class="hr-133">
@@ -417,12 +418,12 @@
 
                                     <c:if test="${dto.getAnswerCount!=0}">
                                         <img src="/photo/gguineapig.png" style="width: 20px; height: 20px; margin-left: 28px; margin-top: 7px;">
-                                        <span style="font-size: 16px; margin-left: 8px; margin-top: 7px; font-family: 'Gamja Flower';">답변&nbsp;끼니
+                                        <span style="font-size: 16px; margin-left: 8px; margin-top: 7px;">답변&nbsp;끼니
                                     <span style="color: red; font-size: 11px;">[ ${dto.getAnswerCount} ]</span></span><br>
 
                                     </c:if>
                                 </h5>
-                                <span style="margin-left: 9px;font-family:'Gamja Flower'">by ${dto.writer}  |  <fmt:formatDate value="${dto.qna_writeday}" pattern="yyyy-MM-dd HH:mm"/>  |
+                                <span style="margin-left: 9px;">by ${dto.writer}  |  <fmt:formatDate value="${dto.qna_writeday}" pattern="yyyy-MM-dd HH:mm"/>  |
                             <c:if test="${dto.qna_ispass==true}">
                                 <i class="bi bi-lock-fill" style="font-size: 13px;"> 비밀 </i>
                             </c:if>

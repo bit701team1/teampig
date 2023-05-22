@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ServiceMapper {
 
     public void insertt(ServiceDto dto);
+    public List<couponlistDto> couponlist2(String user_id);
     public List<ServiceDto> selectt(int user_idx);
     public void deletee(int num);
     public List<ServiceDto> getAll(Map<String, Object> map);
