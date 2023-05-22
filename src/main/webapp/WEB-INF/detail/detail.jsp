@@ -1304,7 +1304,7 @@
                                     </tr>
                                 </table>
                             </div>
-
+                            <c:if test="${cdto.max > 0}">
                             <div style="width: 200px; height: 100px; margin-left: 300px; margin-top: 20px;" class="s_ct s_coupon"><div class="s_cpinfotop" style="margin-left: 35px;">${cdto.number}% 할인</div>
                                 <img src="../../save/couponimage.png" onclick="update()" style="cursor:pointer;width: 120px; height: 100px; margin-left: 10px;" class="s_couponimage"> 수량 ${cdto.max}<div class="s_cpinfobottom">
                                 <div class="countdown" id="countdown-" style="margin-top: 10px">
@@ -1312,7 +1312,7 @@
                                 <p class="countdown-timer-hours"  style="display: inline-block;">00</p>
                                 <p class="countdown-timer-minutes" style="display: inline-block;" >00</p>
                                 <p class="countdown-timer-seconds" style="display: inline-block;" >00</p>
-                            </div></div></div>
+                            </div></div></div>     </c:if>
                         </div>
                         <br>
                         ${dto.GPT_content}<br>
@@ -1478,9 +1478,6 @@
                 if (selectedDates[0].toDateString() === now.toDateString()) {
                     // 선택한 날짜가 오늘이라면, 현재 시간부터 선택 가능하도록 설정
                     timePicker.set('minTime', now.getHours() + ':00');
-                } else {
-                    // 선택한 날짜가 오늘이 아니라면, 어떤 시간이든 선택 가능하도록 설정
-                    timePicker.set('minTime', '00:00');
                 }
             },
         });

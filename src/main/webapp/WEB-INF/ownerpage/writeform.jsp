@@ -544,7 +544,7 @@
                     success: function (res) {
                         console.log("결과" + res); // 응답값 출력
                         // Redirect to the home page
-                        window.location.href = "http://localhost:9000/home2";
+                        window.location.href = "http://localhost:9000/storepage";
                         alert("prompt 전송 성공!!")
                     }
                 });

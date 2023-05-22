@@ -193,9 +193,9 @@
     flatpickr(dateInput2, {
         minDate: "today", // 오늘 날짜를 최소 선택 가능 날짜로 설정
         onChange: function(selectedDates, dateStr, instance) {
-            if (selectedDates[0].toDateString() === now.toDateString()) {
+            if (selectedDates[0].toDateString() === now2.toDateString()) {
                 // 선택한 날짜가 오늘이라면, 현재 시간부터 선택 가능하도록 설정
-                timePicker2.set('minTime', now.getHours() + ':00');
+                timePicker2.set('minTime', now2.getHours() + ':00');
             } else {
                 // 선택한 날짜가 오늘이 아니라면, 어떤 시간이든 선택 가능하도록 설정
                 timePicker2.set('minTime', '00:00');
@@ -232,11 +232,11 @@
             data: jsondata2,
             contentType: 'application/json',
             dataType: 'text',
-            success: function(result) {
-                alert("쿠폰등록완료!!");
+            success: function (response) {
+                alert(response);
             },
-            error: function(request, status, error) {
-                alert('오류' + error);
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
             }
         });
     }

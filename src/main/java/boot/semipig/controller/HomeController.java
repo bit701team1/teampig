@@ -12,6 +12,8 @@ import boot.semipig.service.MyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +33,7 @@ public class HomeController {
     @Autowired
     private LoginService loginService;
 
-    @GetMapping("/home2")
+    @GetMapping("/storepage")
     public String home1(Model model, HttpSession session) {
         int user_idx = (int) session.getAttribute("loginidx");
         int food_idx= myservice.getFoodIdx(user_idx);
@@ -54,7 +56,7 @@ public class HomeController {
     @RequestMapping(value = "/insertcoupon", method = {RequestMethod.GET, RequestMethod.POST})
     //  main은 getmapping이 없어서 따로 이렇게 해줘야함
     @ResponseBody
-    void insertcoupon(@RequestBody String jsondata2, HttpSession session) {
+    ResponseEntity<String> insertcoupon(@RequestBody String jsondata2, HttpSession session) {
         int user_idx = (int) session.getAttribute("loginidx");
         ObjectMapper mapper = new ObjectMapper();
         System.out.println(jsondata2);
@@ -62,13 +64,30 @@ public class HomeController {
             couponDto[] dtos = mapper.readValue(jsondata2, couponDto[].class);
             for (couponDto dto : dtos) {
                 // 데이터베이스에 예약 정보를 조회합니다.
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+                LocalDateTime dtoTime = LocalDateTime.parse(dto.getTime(), formatter);
+                LocalDateTime now = LocalDateTime.now();
+
+                List<couponDto> existingCoupons = myservice.couponall(user_idx);
+                for (couponDto existingCoupon : existingCoupons) {
+                    LocalDateTime existingCouponTime = LocalDateTime.parse(existingCoupon.getTime(), formatter);
+                    if (existingCouponTime.isAfter(now)) {  // 현재 시간보다 미래의 쿠폰이 있다면
+                        return new ResponseEntity<>("이미 쿠폰을 가지고 있습니다.", HttpStatus.CONFLICT);
+                    }
+                    else if(existingCouponTime.isBefore(now)) {
+                        dto.setUser_idx(user_idx);
+                        myservice.couponinsert(dto);
+                    }
+                }
                 dto.setUser_idx(user_idx);
                 myservice.couponinsert(dto);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            return new ResponseEntity<>("이미 쿠폰을 가지고 있습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        return new ResponseEntity<>("쿠폰 등록 완료!.", HttpStatus.OK);
     }
+
 }
 
 

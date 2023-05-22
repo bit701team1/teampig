@@ -46,7 +46,9 @@ public class WriteController {
         LoginDto dtos=loginService.getUserInfo(user_idx);
         List<couponDto> list2 = myservice.couponall(user_idx);
         int totalCount = myservice.getTotalCount(food_idx);
+        int reviewcount = myservice.reviewcount(food_idx);
         OwnerpageDto odto = ownerpageService.getData(3);
+        model.addAttribute("reviewcount",reviewcount);
         model.addAttribute("dto",odto);
         model.addAttribute("logindto", dtos);
         model.addAttribute("totalCount", totalCount);

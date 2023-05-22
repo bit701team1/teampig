@@ -110,7 +110,7 @@
                            success: function(response) {
                                console.log(response);
                                if (response == 1) {
-                                   window.location.href = "/home2";
+                                   window.location.href = "/storepage";
                                } else {
                                    window.location.href = "/mypage/writeform";
                                }
@@ -192,7 +192,7 @@
             <ul>
                 <li><a href="#">공지사항</a></li>
                 <li><a href="#">고객센터</a></li>
-<%--                <li><a href="${root}/home2" id="mypage">마이페이지</a></li>--%>
+<%--                <li><a href="${root}/storepage" id="mypage">마이페이지</a></li>--%>
                 <li><a href="#" id="mypage">마이페이지</a></li>
                 <c:choose>
                     <c:when test="${sessionScope.loginok=='yes'}">

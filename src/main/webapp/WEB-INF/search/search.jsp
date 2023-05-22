@@ -972,7 +972,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="m_cover">
+                    <a href="${root}/userpage" class="m_cover">
                         <span class="text-effect">마이페이지</span>
                     </a>
                 </li>
