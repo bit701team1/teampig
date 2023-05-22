@@ -323,7 +323,7 @@
         /*지저분하면 뺼 것*/
         .s_couponimage{
 
-            animation: vibration 0.1s infinite;
+            animation: vibration 0.2s infinite;
         }
         @keyframes vibration {
             from {
@@ -894,39 +894,6 @@
             })
         });
         //예약 관련
-        function allSave() {
-            var event = {
-                start: '',
-                food_idx: ''
-            };
-
-            event.start = document.getElementById('y_date').value + 'T' + document.getElementById('y_time').value;
-            event.food_idx = ${dto.food_idx}; // JavaScript에서 food_idx 값을 가져옴
-
-
-            var events = [event];
-
-            var jsondata = JSON.stringify(events);
-            console.log(jsondata);
-            savedata(jsondata);
-        }
-
-        function savedata(jsondata, food_idx) {
-            $.ajax({
-                type: 'POST',
-                url: './calendarinsert?food_idx=' + food_idx,
-                data: jsondata,
-                contentType: 'application/json',
-                dataType: 'text',
-                success: function(result) {
-                    console.log(jsondata);
-                    alert("예약완료!");
-                },
-                error: function(request, status, error) {
-                    alert('이미 예약된 시간입니다' + error);
-                }
-            });
-        }
 
         function allSave() {
             var event = {
@@ -1116,6 +1083,51 @@
                                             <p class="countdown-timer-minutes" style="display: inline-block;" >00</p>
                                             <p class="countdown-timer-seconds" style="display: inline-block;" >00</p>
                                         </div></div></div>     </c:if>
+                            <script>
+                                var time = "${cdto.time}";
+                                const endDate = new Date(time);
+                                const timeinterval = setInterval(() => {
+                                    const timeDiff = endDate.getTime() - Date.now();
+                                    // 남은 시간을 일, 시간, 분, 초 단위로 계산합니다.
+                                    const days = Math.floor(timeDiff/ (1000 * 60 * 60 * 24));
+                                    const hours= Math.floor((timeDiff% (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                                    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                                    const daysEl= document.querySelector("#countdown- .countdown-timer-days");
+                                    const hoursEl = document.querySelector("#countdown- .countdown-timer-hours");
+                                    const minutesEl = document.querySelector("#countdown- .countdown-timer-minutes");
+                                    const secondsEl = document.querySelector("#countdown- .countdown-timer-seconds");
+
+                                    daysEl.textContent = days + "일";
+                                    hoursEl.textContent = hours + "시간";
+                                    minutesEl.textContent = minutes+ "분";
+                                    secondsEl.textContent = seconds + "초";
+                                }, 1000);
+                            </script>
+                            <script>
+                                function update() {
+                                    var food_idx = ${dto.food_idx};
+                                    var number = "${cdto.number}";
+                                    var time= "${cdto.time}";
+                                    var max = "${cdto.max}";
+                                    $.ajax({
+                                        type: "POST",
+                                        url: './max',
+                                        data: { "user_idx": food_idx,
+                                            "number":number,
+                                            "time":time,
+                                            "max":max
+                                        },
+                                        success: function (response) {
+                                            alert(response);
+                                        },
+                                        error: function (xhr, status, error) {
+                                            alert(xhr.responseText);
+                                        }
+                                    });
+                                }
+                            </script>
                         </div>
                         <br>
                         ${dto.GPT_content}<br>
