@@ -163,7 +163,7 @@ public class DetailController {
         myservice.couponid(listDto); // 인서트 수행
 
         // 쿠폰을 가져갔을 때의 추가 로직 작성
-        return new ResponseEntity<>("쿠폰 등록 완료!.", HttpStatus.OK);
+        return new ResponseEntity<>("쿠폰 등록 완료!", HttpStatus.OK);
     }
 
     @GetMapping("/delete")//리뷰 삭제

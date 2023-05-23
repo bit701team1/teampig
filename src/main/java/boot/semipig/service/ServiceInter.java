@@ -10,9 +10,11 @@ public interface ServiceInter {
     public List<ServiceDto> selectt(int user_idx);
     public void deletee(int num);
     couponDto getCouponByUserIdx(int user_idx);
+    int Couponcount(String user_id);
     List<ServiceDto> getAll(int startNum, int perPage,int user_idx ,LocalDateTime currentDateTime);
     public int reviewcount (int food_idx);
     List<couponlistDto> couponlist(int user_idx);
+    public List<couponlistDto> couponlist2(String user_id);
     public int getFoodIdx(int user_idx);
 
     public void updatee(ServiceDto dto);
@@ -28,5 +30,6 @@ public interface ServiceInter {
     int ReservationCount(String start);
 
     public void deleteqna(int qna_idx);
+
 }
 

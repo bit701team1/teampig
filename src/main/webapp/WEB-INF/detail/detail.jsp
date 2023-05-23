@@ -598,137 +598,137 @@
                         s+='</td></table></div>';
                     })
 
-                   /* s+=`<div id="m_footer">
-                    <footer class="footer-section">
-                        <div class="m_foottainer">
-                            <div class="footer-cta pt-5 pb-5">
-                                <div class="row">
-                                    <div class="col-xl-4 col-md-4 mb-30">
-                                        <div class="single-cta">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            <div class="cta-text">
-                                                <h4>회사주소</h4>
-                                                <span>서울 강남구 강남대로94길 20 삼오빌딩 5-9층</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-md-4 mb-30">
-                                        <div class="single-cta">
-                                            <i class="fas fa-phone"></i>
-                                            <div class="cta-text">
-                                                <h4>전화번호</h4>
-                                                <span>0507-1414-9601</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-md-4 mb-30">
-                                        <div class="single-cta">
-                                            <i class="far fa-envelope-open"></i>
-                                            <div class="cta-text">
-                                                <h4>메일주소</h4>
-                                                <span>bitcamp701@naver.com</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="footer-content pt-5 pb-5">
-                                <div class="row">
-                                    <div class="col-xl-4 col-lg-4 mb-50">
-                                        <div class="footer-widget">
-                                            <div class="footer-logo">
-                                                <img src="photo/footer/cilogo.png" class="img-fluid" alt="logo">
-                                            </div>
-                                            <div class="footer-text">
-                                                <p>술 한잔 마셨습니다... 프로젝트가 미완성이어도 좋습니다. 하지만 '끼니 피그' 하나만 기억해 주세요. 진심을 다해 전합니다. 프로젝트가 별로일 수 있습니다. 밤낮으로 고민하고 코딩했습니다... 최선을 다했고, 열심히 했습니다. 저희 팀의 진심이 느껴지길 바랍니다. 고맙습니다...
-                                                </p>
-                                            </div>
-                                            <div class="footer-social-icon">
-                                                <span>서포터즈</span>
-                                                      <a href="https://data.gg.go.kr"><img src="photo/footer/ggd.png" class="ggd"></a>
-                                                      <a href="https://openai.com/blog/chatgpt"><img src="photo/footer/aigpt.png"></a>
-                                                      <a href="https://www.data.go.kr"><img src="photo/footer/publicdata.png"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
-                                        <div class="footer-widget">
-                                            <div class="footer-widget-heading">
-                                                <h3>전체서비스</h3>
-                                            </div>
-                                            <ul>
-                                                <li><a href="#">회사소개</a></li>
-                                                <li><a href="#">비지니스</a></li>
-                                                <li><a href="#">이용약관</a></li>
-                                                <li><a href="#">공지사항</a></li>
-                                                <li><a href="#">고객센터</a></li>
-                                                <li><a href="#">고객관리</a></li>
-                                                <li><a href="#">광고서비스운영</a></li>
-                                                <li><a href="#">문의내역</a></li>
-                                                <li><a href="#">개인정보처리방침</a></li>
-                                                <li><a href="#">채용공고</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xl-12">
-                                                <div id="slideShow">
-                                                    <div id="slides">
-                                                         <img src="photo/footer/banner1.png" alt="광고">
-                                                        <img src="photo/footer/banner5.png" alt="광고">
-                                                        <img src="photo/footer/banner3.png" alt="광고">
-                                                        <img src="photo/footer/banner4.png" alt="광고">
-                                                        <img src="photo/footer/banner2.png" alt="광고">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
-                                        <div class="footer-widget">
-                                            <div class="footer-widget-heading">
-                                                <h3>고객의 소리</h3>
-                                            </div>
-                                            <div class="footer-text mb-25">
-                                                <p>
-                                                    서비스 개선사항, 공공데이터 수정, 잘못된 정보 제보등 끼니피그에 다양한 고객들의 의견을 들려주세요.
-                                                </p>
-                                            </div>
-                                            <div class="subscribe-form">
-                                                <form action="#">
-                                                    <input type="text" placeholder="Email Address">
-                                                    <button><i class="fab fa-telegram-plane"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="copyright-area">
-                            <div class="m_foottainer">
-                                <div class="row">
-                                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
-                                        <div class="copyright-text">
-                                            <p>Copyright &copy; 2023, All Right Reserved <a href="main.jsp"><b>비트캠프 1조</b></a></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
-                                        <div class="footer-menu">
-                                            <ul>
-                                                <li><a href="#">입장페이지</a></li>
-                                                <li><a href="#">검색서비스</a></li>
-                                                <li><a href="#">마이페이지</a></li>
-                                                <li><a href="#">관리페이지</a></li>
-                                                <li><a href="#">비지니스</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-            </div>
-        </div>`;*/
+                    /* s+=`<div id="m_footer">
+                     <footer class="footer-section">
+                         <div class="m_foottainer">
+                             <div class="footer-cta pt-5 pb-5">
+                                 <div class="row">
+                                     <div class="col-xl-4 col-md-4 mb-30">
+                                         <div class="single-cta">
+                                             <i class="fas fa-map-marker-alt"></i>
+                                             <div class="cta-text">
+                                                 <h4>회사주소</h4>
+                                                 <span>서울 강남구 강남대로94길 20 삼오빌딩 5-9층</span>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-xl-4 col-md-4 mb-30">
+                                         <div class="single-cta">
+                                             <i class="fas fa-phone"></i>
+                                             <div class="cta-text">
+                                                 <h4>전화번호</h4>
+                                                 <span>0507-1414-9601</span>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-xl-4 col-md-4 mb-30">
+                                         <div class="single-cta">
+                                             <i class="far fa-envelope-open"></i>
+                                             <div class="cta-text">
+                                                 <h4>메일주소</h4>
+                                                 <span>bitcamp701@naver.com</span>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="footer-content pt-5 pb-5">
+                                 <div class="row">
+                                     <div class="col-xl-4 col-lg-4 mb-50">
+                                         <div class="footer-widget">
+                                             <div class="footer-logo">
+                                                 <img src="photo/footer/cilogo.png" class="img-fluid" alt="logo">
+                                             </div>
+                                             <div class="footer-text">
+                                                 <p>술 한잔 마셨습니다... 프로젝트가 미완성이어도 좋습니다. 하지만 '끼니 피그' 하나만 기억해 주세요. 진심을 다해 전합니다. 프로젝트가 별로일 수 있습니다. 밤낮으로 고민하고 코딩했습니다... 최선을 다했고, 열심히 했습니다. 저희 팀의 진심이 느껴지길 바랍니다. 고맙습니다...
+                                                 </p>
+                                             </div>
+                                             <div class="footer-social-icon">
+                                                 <span>서포터즈</span>
+                                                       <a href="https://data.gg.go.kr"><img src="photo/footer/ggd.png" class="ggd"></a>
+                                                       <a href="https://openai.com/blog/chatgpt"><img src="photo/footer/aigpt.png"></a>
+                                                       <a href="https://www.data.go.kr"><img src="photo/footer/publicdata.png"></a>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                                         <div class="footer-widget">
+                                             <div class="footer-widget-heading">
+                                                 <h3>전체서비스</h3>
+                                             </div>
+                                             <ul>
+                                                 <li><a href="#">회사소개</a></li>
+                                                 <li><a href="#">비지니스</a></li>
+                                                 <li><a href="#">이용약관</a></li>
+                                                 <li><a href="#">공지사항</a></li>
+                                                 <li><a href="#">고객센터</a></li>
+                                                 <li><a href="#">고객관리</a></li>
+                                                 <li><a href="#">광고서비스운영</a></li>
+                                                 <li><a href="#">문의내역</a></li>
+                                                 <li><a href="#">개인정보처리방침</a></li>
+                                                 <li><a href="#">채용공고</a></li>
+                                             </ul>
+                                         </div>
+                                         <div class="row">
+                                             <div class="col-xl-12">
+                                                 <div id="slideShow">
+                                                     <div id="slides">
+                                                          <img src="photo/footer/banner1.png" alt="광고">
+                                                         <img src="photo/footer/banner5.png" alt="광고">
+                                                         <img src="photo/footer/banner3.png" alt="광고">
+                                                         <img src="photo/footer/banner4.png" alt="광고">
+                                                         <img src="photo/footer/banner2.png" alt="광고">
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                                         <div class="footer-widget">
+                                             <div class="footer-widget-heading">
+                                                 <h3>고객의 소리</h3>
+                                             </div>
+                                             <div class="footer-text mb-25">
+                                                 <p>
+                                                     서비스 개선사항, 공공데이터 수정, 잘못된 정보 제보등 끼니피그에 다양한 고객들의 의견을 들려주세요.
+                                                 </p>
+                                             </div>
+                                             <div class="subscribe-form">
+                                                 <form action="#">
+                                                     <input type="text" placeholder="Email Address">
+                                                     <button><i class="fab fa-telegram-plane"></i></button>
+                                                 </form>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="copyright-area">
+                             <div class="m_foottainer">
+                                 <div class="row">
+                                     <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                                         <div class="copyright-text">
+                                             <p>Copyright &copy; 2023, All Right Reserved <a href="main.jsp"><b>비트캠프 1조</b></a></p>
+                                         </div>
+                                     </div>
+                                     <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                                         <div class="footer-menu">
+                                             <ul>
+                                                 <li><a href="#">입장페이지</a></li>
+                                                 <li><a href="#">검색서비스</a></li>
+                                                 <li><a href="#">마이페이지</a></li>
+                                                 <li><a href="#">관리페이지</a></li>
+                                                 <li><a href="#">비지니스</a></li>
+                                             </ul>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </footer>
+             </div>
+         </div>`;*/
 
 
                     $("div.s_review").html(s);
@@ -1111,13 +1111,15 @@
                                     var number = "${cdto.number}";
                                     var time= "${cdto.time}";
                                     var max = "${cdto.max}";
+                                    var storename = "${dto.RESTRT_NM}";
                                     $.ajax({
                                         type: "POST",
                                         url: './max',
                                         data: { "user_idx": food_idx,
                                             "number":number,
                                             "time":time,
-                                            "max":max
+                                            "max":max,
+                                            "storename":storename,
                                         },
                                         success: function (response) {
                                             alert(response);
@@ -1275,7 +1277,7 @@
                 </div>
             </div>
         </div>
-<%--        챗봇--%>
+        <%--        챗봇--%>
         <script>
             (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
 
@@ -1468,4 +1470,234 @@
                                 <input type="checkbox" name="rating" id="u_rating3" value="3" class="u_rate_radio" title="3점" >
                                 <label for="u_rating3"></label>
                                 <input type="checkbox" name="rating" id="u_rating4" value="4" class="u_rate_radio" title="4점">
-                               
+                                <label for="u_rating4"></label>
+                                <input type="checkbox" name="rating" id="u_rating5" value="5" class="u_rate_radio" title="5점">
+                                <label for="u_rating5"></label>
+                            </div>
+                        </div>
+
+                        <div class="u_review_contents">
+            <textarea rows="10" class="u_review_textarea form-control"
+                      placeholder="${sessionScope.loginid}님, 주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!
+            " id="u_reviewtext" ></textarea>
+                        </div>
+                        <div><input type="file" multiple="multiple" class="form-control" name="upload" id="u_myfile"></div>
+                        <div>
+                            <div class="s_photosqure">
+                                <img src="" style="width: 100px; height: 100px;" id="s_u_photosqure">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success s_updatebtn" data-bs-dismiss="modal" >수정하기</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div style="width: 450px;">
+        <!--review modal-->
+        <!-- The Modal -->
+        <div class="modal fade" id="reviewModal">
+            <div class="modal-dialog" style="width: 500px;">
+                <div class="modal-content" style="width: 500px;">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">리뷰 쓰기</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="wrap">
+                            <div><b class="reviewformrestrt_nm s_fontcolorapply">${dto.RESTRT_NM}</b><span>에 대한 솔직한 리뷰를 써주세요.</span></div>
+                            <form  method="post" action="insertreview" enctype="multipart/form-data">
+
+                                <input type="hidden" id="user_idx" value="${sessionScope.loginidx}">
+                                <input type="hidden" id="food_idx" value="${dto.food_idx}">
+                                <input type="hidden" class="review_score" id="score" value="0">
+                                <div class="review_rating">
+
+                                    <div class="rating">
+                                        <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
+                                        <input type="checkbox" name="rating" id="rating1" value="1" class="rate_radio" title="1점">
+                                        <label for="rating1"></label>
+                                        <input type="checkbox" name="rating" id="rating2" value="2" class="rate_radio" title="2점">
+                                        <label for="rating2"></label>
+                                        <input type="checkbox" name="rating" id="rating3" value="3" class="rate_radio" title="3점" >
+                                        <label for="rating3"></label>
+                                        <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio" title="4점">
+                                        <label for="rating4"></label>
+                                        <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
+                                        <label for="rating5"></label>
+                                    </div>
+                                </div>
+
+                                <div class="review_contents">
+            <textarea rows="10" class="review_textarea form-control"
+                      placeholder="${sessionScope.loginid}님, 주문하신 메뉴는 어떠셨나요? 식당의 분위기와 서비스도 궁금해요!
+            " id="reviewtext"></textarea>
+                                </div>
+                                <div><input type="file" multiple="multiple" class="form-control" name="upload" id="myfile"></div>
+                                <div>
+                                    <div class="s_photosqure">
+                                        <img src="" style="width: 100px; height: 100px;" id="s_photosqure">
+                                    </div>
+                                </div>
+
+
+
+                            </form>
+
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success s_reviewsave" data-bs-dismiss="modal" >리뷰저장</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="js/footer.js"></script>
+
+<script type="text/javascript">
+    $("#myfile").change(function(){
+        console.log("1:"+$(this)[0].files.length);
+        console.log("2:"+$(this)[0].files[0]);
+        //정규표현식
+        var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+        var f=$(this)[0].files[0];//현재 선택한 파일
+        if(!f.type.match(reg)){
+            alert("확장자가 이미지파일이 아닙니다");
+            return;
+        }
+        if($(this)[0].files[0]){
+            var reader=new FileReader();
+            reader.onload=function(e){
+                $("#s_photosqure").attr("src",e.target.result);
+            }
+            reader.readAsDataURL($(this)[0].files[0]);
+        }
+    });
+    $("#u_myfile").change(function(){
+        console.log("1:"+$(this)[0].files.length);
+        console.log("2:"+$(this)[0].files[0]);
+        //정규표현식
+        var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+        var f=$(this)[0].files[0];//현재 선택한 파일
+        if(!f.type.match(reg)){
+            alert("확장자가 이미지파일이 아닙니다");
+            return;
+        }
+        if($(this)[0].files[0]){
+            var reader=new FileReader();
+            reader.onload=function(e){
+                $("#s_u_photosqure").attr("src",e.target.result);
+            }
+            reader.readAsDataURL($(this)[0].files[0]);
+        }
+    });
+</script>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .s_review{
+        position: relative;
+        margin-top: 10px;
+    }
+    #s_cont{
+        margin: 0 auto;
+        width: 1200px;
+        max-width: 100%; /* 추가 */
+    }
+
+    header{
+        width: 100%;
+        height: 100px;
+        /*background-color: brown;*/
+    }
+
+    #s_logo{
+        float: left;
+        width: 250px;
+        height: 100px;
+        /*background-color: yellowgreen;*/
+    }
+
+    nav{
+        float: right;
+        width: 900px;
+        height: 100px;
+        /*background-color: aqua;*/
+    }
+
+    #s_infolist {
+        /* overflow: hidden; 클리어(Clear) 처리 */
+        position: absolute;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+    }
+    .s_detail{
+        position: absolute;
+    }
+    #s_storelist {
+        float: left;
+        display: inline-block;
+        width: 60%;
+        height: 300px;
+        position:absolute;
+        margin-top: 7px;
+        /*background-color: lightblue;*/
+    }
+
+    #s_around {
+        float: right;
+        display: inline-block;
+        position: relative;
+        margin-top: 0px;
+        width: 40%;
+        height: 300px;
+        /*background-color: lightgray;*/
+    }
+
+
+
+    #s_photolist{
+        width: 100%;
+        height: 300px;
+    }
+
+    #s_photos{
+        width: 1200px;
+        height: 100%;
+        /*background-color: beige;*/
+    }
+
+
+    footer{
+        /*position: absolute;*/
+        width: 100%;
+        height: 100px;
+        /*background-color: chocolate;*/
+    }
+
+</style>
+
+</body>
+</html>

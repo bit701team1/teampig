@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 
@@ -53,8 +54,8 @@ public class HomeController {
         return "/main";
     }
 
+
     @RequestMapping(value = "/insertcoupon", method = {RequestMethod.GET, RequestMethod.POST})
-    //  main은 getmapping이 없어서 따로 이렇게 해줘야함
     @ResponseBody
     ResponseEntity<String> insertcoupon(@RequestBody String jsondata2, HttpSession session) {
         int user_idx = (int) session.getAttribute("loginidx");
@@ -64,29 +65,29 @@ public class HomeController {
             couponDto[] dtos = mapper.readValue(jsondata2, couponDto[].class);
             for (couponDto dto : dtos) {
                 // 데이터베이스에 예약 정보를 조회합니다.
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-                LocalDateTime dtoTime = LocalDateTime.parse(dto.getTime(), formatter);
+                dto.setUser_idx(user_idx);
+                        // 현재 시간을 가져옵니다.
                 LocalDateTime now = LocalDateTime.now();
 
-                List<couponDto> existingCoupons = myservice.couponall(user_idx);
-                for (couponDto existingCoupon : existingCoupons) {
-                    LocalDateTime existingCouponTime = LocalDateTime.parse(existingCoupon.getTime(), formatter);
-                    if (existingCouponTime.isAfter(now)) {  // 현재 시간보다 미래의 쿠폰이 있다면
-                        return new ResponseEntity<>("이미 쿠폰을 가지고 있습니다.", HttpStatus.CONFLICT);
-                    }
-                    else if(existingCouponTime.isBefore(now)) {
-                        dto.setUser_idx(user_idx);
-                        myservice.couponinsert(dto);
-                    }
+                // 쿠폰의 유효기간을 LocalDateTime으로 변환합니다.
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+                LocalDateTime couponExpiration =  LocalDateTime.parse(dto.getTime().replace(' ', 'T'),formatter);
+
+                // 쿠폰의 유효기간이 지나지 않았는지 확인합니다.
+                if (now.isBefore(couponExpiration) || now.isEqual(couponExpiration)) {
+                    myservice.couponinsert(dto);
+                } else {
+                    return new ResponseEntity<>("쿠폰의 유효기간이 지났습니다.", HttpStatus.BAD_REQUEST);
                 }
-                dto.setUser_idx(user_idx);
-                myservice.couponinsert(dto);
             }
+
         } catch (Exception e) {
-            return new ResponseEntity<>("이미 쿠폰을 가지고 있습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
+            e.printStackTrace();
+            return new ResponseEntity<>("쿠폰 등록에 실패했습니다: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>("쿠폰 등록 완료!.", HttpStatus.OK);
+        return new ResponseEntity<>("쿠폰 등록 완료!", HttpStatus.OK);
     }
+
 
 }
 

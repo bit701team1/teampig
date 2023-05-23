@@ -1,9 +1,6 @@
 package boot.semipig.controller;
 
-import boot.semipig.dto.DetailDto;
-import boot.semipig.dto.LoginDto;
-import boot.semipig.dto.ReviewDto;
-import boot.semipig.dto.SearchDto;
+import boot.semipig.dto.*;
 import boot.semipig.mapper.ServiceMapper;
 import boot.semipig.service.LoginService;
 import boot.semipig.service.MyService;
@@ -46,15 +43,32 @@ public class UserPageController {
     }
 
     @GetMapping("/myuserpage/myreview")
-    public String myreview(){
+    public String myreview(HttpSession session, Model model){
+        int user_idx = (int) session.getAttribute("loginidx");
+
+        String user_name = userpageService.getNameByIdx(user_idx);
+        model.addAttribute("user_name",user_name);
         return "/myuserpage/userpage/myreview";
     }
     @GetMapping("/userpage/wishlist")
-    public  String wishlist(){
+    public  String wishlist(HttpSession session, Model model){
+        int user_idx = (int) session.getAttribute("loginidx");
+
+        String user_name = userpageService.getNameByIdx(user_idx);
+        model.addAttribute("user_name",user_name);
         return "/myuserpage/userpage/wishlist";
     }
 
-
+    @GetMapping("/userpage/coupon")
+    public String coupon(HttpSession session, Model model){
+        int user_idx = (int) session.getAttribute("loginidx");
+        String user_id = (String) session.getAttribute("loginid");
+        String user_name = userpageService.getNameByIdx(user_idx);
+        List<couponlistDto> list = myservice.couponlist2(user_id);
+        model.addAttribute("user_name",user_name);
+        model.addAttribute("list",list);
+        return "/myuserpage/userpage/coupon";
+    }
     @GetMapping("/bookmarklist")
     @ResponseBody
     public Map<String, Object>  bookmarklist(int user_idx,@RequestParam(defaultValue = "1") int currentPage){

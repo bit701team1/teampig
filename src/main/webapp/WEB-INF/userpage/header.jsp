@@ -18,7 +18,7 @@
        font-family: 'Gowun Batang';
    }
 
-   div #y_menu{
+   div#y_menu{
      position: relative;
      margin: auto;
      top: 1px;
@@ -35,6 +35,7 @@
      font-weight: bold;
      margin-left: 30px;
    }
+
 </style>
 
 </head>
