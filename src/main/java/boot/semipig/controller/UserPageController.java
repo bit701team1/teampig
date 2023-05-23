@@ -53,12 +53,10 @@ public class UserPageController {
     @GetMapping("/userpage/wishlist")
     public  String wishlist(HttpSession session, Model model){
         int user_idx = (int) session.getAttribute("loginidx");
-
         String user_name = userpageService.getNameByIdx(user_idx);
         model.addAttribute("user_name",user_name);
         return "/myuserpage/userpage/wishlist";
     }
-
     @GetMapping("/userpage/coupon")
     public String coupon(HttpSession session, Model model){
         int user_idx = (int) session.getAttribute("loginidx");

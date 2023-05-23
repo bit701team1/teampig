@@ -522,7 +522,7 @@
                                 return false; //사진 리뷰 당 핝장만 띄우기 break
                             }
                         })
-                        if(idx==5)
+                        if(idx==4)
                         {
                             return false;   //사진 5장만 띄우고 break
                         }

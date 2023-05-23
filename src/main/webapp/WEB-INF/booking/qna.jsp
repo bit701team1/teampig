@@ -53,7 +53,7 @@
 <h2 h2 style="font-weight: bold;">나의 QnA</h2>
 <div class="y_qnalist">
     <table class="table" style="width: 800px; margin: auto;">
-        <caption align="top"><h4><b>qna 목록</b></h4></caption>
+        <caption align="top"><h4><b>QnA 목록</b></h4></caption>
         <thead>
         <tr>
             <th style="width: 20px">번호</th>

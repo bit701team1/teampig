@@ -290,6 +290,10 @@
             margin-left: 10px;
             font-size: 15px ;
         }
+        #map{
+            /*border: 1px solid #4CAF50;*/
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
     </style>
     <%
         int currentPage = 1;
@@ -1005,9 +1009,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/header.js"></script>
 <%--라인--%>
-<div id="#m_container">
-    <span style="display: inline-flex;align-items: center;">
-        <div id="map" class="mapinclude" style="width:800px; height:400px;"></div>
+<div id="m_container">
+    <span style="display: inline-flex; align-items: center;">
+        <div id="map" class="mapinclude" style="width: 800px; height: 400px;"></div>
         <div class="k_buttonarea">
             <div class="button raised btn_condition ajax-button" list_type="type_1">
                 <div class="center" fit>평점순</div>
@@ -1044,8 +1048,7 @@
         </div>
     </span>
 </div>
-<div class="s_list" style="width: 1200px;margin: 0 auto;"></div>
-</div>
+<div class="s_list" style="width: 1200px; margin: 0 auto;"></div>
 <script>
     (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
 

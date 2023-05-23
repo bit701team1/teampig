@@ -102,7 +102,7 @@
 
     <ul class="y_mainul">
         <li><span style="position: relative;">
-			<a href="${root}/userpage"><span class="y_txt"><i class="bi bi-card-list"></i>  작성글</span></a>
+         <a href="${root}/userpage"><span class="y_txt"><i class="bi bi-card-list"></i>  작성글</span></a>
             </span>
         </li>
         <li>

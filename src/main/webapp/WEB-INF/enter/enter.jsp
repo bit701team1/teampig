@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Jua&family=Lobster&family=Nanum+Pen+Script&family=Single+Day&display=swap"
           rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&family=Poor+Story&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="/css/enter.css" />
@@ -27,7 +28,7 @@
 
     <style>
         body, body * {
-            font-family: 'Jua';
+            font-family: 'IBM Plex Sans KR';
         }
         .clear:after{
             content:"";
@@ -162,7 +163,7 @@
             <%--            <div style="width: 50%; margin-left: 710px; height: 100%; float: left">--%>
             <%--                <img id="bg_r_img" src="/photo/pastachul/j_enter_oner_0.jpg" style="width: 100%; height: 100%; right: 25%; ">--%>
             <%--            </div>--%>
-            <button type="button" class="btn btn-secondary btn-sm j_enter_welcome_btn" data-bs-toggle="modal" data-bs-target="#loginModal">Welcome GGuineapig</button>
+            <button type="button" class="btn btn-secondary btn-sm j_enter_welcome_btn" data-bs-toggle="modal" data-bs-target="#loginModal"><b>Welcome GGuineapig</b></button>
 
         </div>
     </div>
@@ -195,7 +196,6 @@
                                         <div class="col_md_sign_up">
                                             <div class="cont_ba_opcitiy">
                                                 <h2>SIGN UP</h2>
-
 
                                                 <p>계정이 없으신가요?</p>
 
@@ -398,7 +398,4 @@
         }
     </script>
     </script>
-
 </section>
-
-
