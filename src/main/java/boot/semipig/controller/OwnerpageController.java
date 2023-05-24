@@ -4,18 +4,18 @@ import boot.semipig.dto.FoodPhotoDto;
 
 import boot.semipig.dto.OwnerpageDto;
 
-import boot.semipig.mapper.OwnerpageMapper;
+/*import boot.semipig.mapper.OwnerpageMapper;*/
 import boot.semipig.service.OwnerpageService;
 import naver.cloud.NcpObjectStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
-import org.springframework.http.ResponseEntity;
+/*import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.http.ResponseEntity;*/
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
+/*import org.springframework.web.servlet.ModelAndView;*/
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
