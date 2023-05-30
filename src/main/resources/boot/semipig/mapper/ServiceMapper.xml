@@ -14,10 +14,10 @@
         select * from calendar where start >= #{currentDateTime} and food_idx=#{user_idx} ORDER BY start ASC LIMIT #{startNum}, #{perPage}
     </select>
     <update id="updatee" parameterType="ServiceDto">
-    update calendar set start=#{start} where num=#{num}
-</update>
+        update calendar set start=#{start} where num=#{num}
+    </update>
     <select id="detail" resultType="ServiceDto">
-    select * from calendar where num=#{num}
+        select * from calendar where num=#{num}
     </select>
     <select id="getFoodIdx" resultType="int" parameterType="int">
         select food_idx
@@ -27,7 +27,7 @@
         where b.user_idx=#{user_idx}
     </select>
     <select id="couponall" resultType="couponDto">
-    select * from coupon where user_idx=#{user_idx} order by num desc
+        select * from coupon where user_idx=#{user_idx} order by num desc
     </select>
     <insert id="couponinsert" parameterType="couponDto">
         insert into coupon(number,time,user_idx,max) values(#{number},#{time},#{user_idx},#{max})
@@ -44,7 +44,7 @@
     <select id="qnalist" parameterType="Map" resultType="qnaDto">
         select * from qna where user_idx=#{user_idx} ORDER BY qna_idx desc LIMIT #{startNum}, #{perPage}
     </select>
-    <select id="reviewlist" resultType="ReviewDto"  parameterType="Map">
+    <select id="reviewlist" resultType="ReviewDto">
         select * from review where food_idx=#{food_idx} ORDER BY review_idx desc LIMIT #{startNum}, #{perPage}
     </select>
     <select id="ReservationCount" resultType="int" parameterType="string">
@@ -63,9 +63,6 @@
     </insert>
     <select id="couponlist" parameterType="int" resultType="couponlistDto">
         select * from couponlist where user_idx=#{user_idx}
-    </select>
-    <select id="couponlist2" resultType="couponlistDto">
-        select * from couponlist where user_id=#{user_id}
     </select>
     <select id="getCouponByUserIdx" parameterType="int" resultType="couponDto">
         select * from coupon where user_idx = #{user_idx} AND time > now()

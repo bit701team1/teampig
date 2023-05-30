@@ -41,15 +41,12 @@ public class MyService implements ServiceInter {
         map.put("startNum", startNum);
         map.put("perPage", perPage);
         map.put("user_idx",user_idx);
-         map.put("currentDateTime", currentDateTime);
+        map.put("currentDateTime", currentDateTime);
         return serviceMapper.getAll(map);
     }
     @Override
     public couponDto getCouponByUserIdx(int user_idx) {
         return serviceMapper.getCouponByUserIdx(user_idx);
-    }
-    public int Couponcount(String user_id) {
-        return serviceMapper.Couponcount(user_id);
     }
     @Override
     public int getFoodIdx(int user_idx) {
@@ -58,10 +55,6 @@ public class MyService implements ServiceInter {
     @Override
     public List<couponlistDto> couponlist(int user_idx){
         return  serviceMapper.couponlist(user_idx);
-    }
-    @Override
-    public List<couponlistDto> couponlist2(String user_id){
-        return serviceMapper.couponlist2(user_id);
     }
     @Override
     public void deleteqna(int qna_idx) {
