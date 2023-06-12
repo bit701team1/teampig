@@ -4,12 +4,6 @@
  맛집 추천 및 검색 사이트입니다. 
  
 ***
-
-##  :hourglass:  개발 기간
- 2023.4.27  ~  2023.5.22
- 
-***
-
 ## :computer: 개발 환경
 <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">  <img src="https://img.shields.io/badge/apachemaven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white">
 <img src="https://img.shields.io/badge/java-40AEF0?style=for-the-badge&logo=java&logoColor=white">
@@ -20,6 +14,13 @@
 <img src="https://img.shields.io/badge/navercloud-03C75A?style=for-the-badge&logo=naver&logoColor=white">
 
 ***
+
+##  :hourglass:  개발 기간
+ 2023.4.27  ~  2023.5.22
+ 
+***
+
+
 
 ## :smiley: 멤버 구성
 |이름|기능|
